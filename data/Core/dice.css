@@ -1,0 +1,195 @@
+.die_result_block
+{
+	position: relative;
+	padding: 20px;
+	padding-bottom: 0px;
+}
+
+.die_title
+{
+	background-color: aliceblue;
+}
+
+.die_sub_result
+{
+	display: inline-block;
+}
+
+.die_reject
+{
+	text-decoration: line-through;
+	color: gray;
+}
+
+.die_total
+{
+	height: 54px;
+	padding-top: 10px;
+	text-align: center;
+	margin-right: 12px;
+	margin-bottom: 12px;
+	display: inline-block;
+	font-size: 32pt;
+}
+.die_total:before { content: "= "; }
+
+.die_final_total
+{
+	padding-left: 12px;
+	padding-right: 12px;
+	font-size: 32px;
+}
+
+.dCard + .die_final_total
+{
+	display: none;
+}
+
+.die_op
+{
+	height: 64px;
+	text-align: center;
+	margin-right: 12px;
+	display: inline-block;
+	font-size: 32px;
+}
+
+.die_constant
+{
+	width: 64px;
+	height: 64px;
+	text-align: center;
+	margin-right: 12px;
+	display: inline-block;
+	font-size: 32px;
+}
+
+.die_roll
+{
+	display: inline-block;
+	position: relative;
+	font-size: 32px;
+	font-weight: bold;
+	font-color: black;
+	width: 64px;
+	height: 50px;
+	padding-top: 14px;
+	text-align: center;
+	margin-right: 12px;
+	margin-bottom: 12px;
+	background-image: url(style/dX.png);
+}
+
+.dCard
+{
+	width: 44px;
+	border: 1px solid black;
+	background-image: url();
+}
+.dCardH, .dCardD, .dCardR
+{
+	color: red;
+}
+.dCardH:before,
+.dCardD:before,
+.dCardS:before,
+.dCardC:before,
+.dCardH:after,
+.dCardD:after,
+.dCardS:after,
+.dCardC:after
+{
+	position:absolute;
+}
+
+.dCardH:before,
+.dCardD:before,
+.dCardS:before,
+.dCardC:before
+{
+	top: 2px;
+	left: 0px;
+}
+
+.dCardH:after,
+.dCardD:after,
+.dCardS:after,
+.dCardC:after
+{
+	bottom: 2px;
+	right: 0px;
+}
+
+.dCardH:before, .dCardH:after
+{
+	content: url("style/heart.png");
+}
+.dCardD:before, .dCardD:after
+{
+	content: url("style/diamond.png");
+}
+.dCardS:before, .dCardS:after
+{
+	content: url("style/spade.png");
+}
+.dCardC:before, .dCardC:after
+{
+	content: url("style/club.png");
+}
+
+.dF
+{
+	background-image: url(style/d6.png);
+}
+
+.dU
+{
+	background-image: url(style/dX.png);
+}
+
+.d4
+{
+	background-image: url(style/d4.png);
+}
+
+.d6
+{
+	background-image: url(style/d6.png);
+}
+
+.d8
+{
+	background-image: url(style/d8.png);
+}
+
+.d10
+{
+	background-image: url(style/d10.png);
+}
+
+.d12
+{
+	background-image: url(style/d12.png);
+}
+
+.d20
+{
+	background-image: url(style/d20.png);
+}
+
+.die_ace
+{
+	background-color: gold;
+}
+
+.die_ace:after
+{
+	content: ">>";
+	font-size: 20;
+	position: absolute;
+	top: 18;
+	left: 55;
+	width: 20px;
+	z-index: 10;
+}
+

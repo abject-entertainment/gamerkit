@@ -1,0 +1,90 @@
+
+#col_stats .value, #stats .value { margin-top: 1px; }
+
+#col_stats { width: 320px; }
+#col_info { width: 320px; margin-left: 10px;}
+
+#col_wealth { width: 185px; vertical-align:top; margin-right: 3px; }
+#col_token { width: 128px; vertical-aligh:top; margin-bottom: 5px; }
+
+#Health .value_edit { width: 80%; }
+
+.specialize_button
+{
+	display: inline-block;
+	width: 32px;
+	height: 16px;
+	background-color: aliceblue;
+	border: 1px solid black;
+	margin-left: 3px;
+	margin-right: 3px;
+	font-size: 8pt;
+	text-align: center;
+	padding-top: 3px;
+}
+
+#Skills .column_header { font-size: 10pt; }
+#Skills .skill_listitem { border-top: 1px solid grey; }
+#Skills #name_container
+ { width: 100%; }
+#Skills #name
+ { width: 252px; }
+#Skills .base_column_header
+ { margin-left: 96px; width: 54px; text-align: center; }
+#Skills #base_container
+ { width: 54px; text-align: center; }
+#Skills .ranks_column_header,
+#Skills #ranks_container
+ { width: 46px; }
+#Skills .ranks_container_line_value
+ { text-align: center; }
+#Skills .rating_column_header,
+#Skills #rating_container
+ { width: 46px; text-align: center; }
+#Skills .average_column_header,
+#Skills #average_container
+ { width: 46px; text-align: center; }
+ 
+#Skills #specs { padding-bottom: 4px; }
+#Skills #specs #name_container { width: 150px; }
+#Skills #specs #name { width: 98%; }
+#Skills #specs #name_value { text-align: right; font-style: italic; }
+#Skills #specs #skill_container { display: none; }
+#Skills #specs #ranks_container { width: 46px; }
+#Skills #specs #rating_container { width: 46px; }
+#Skills #specs #average_container { width: 46px; margin-right: 4px; }
+
+.skill_listitem[gtselected="true"] .specialization_listitem,
+.skill_listitem[gtselected="true"] .specialization_listitem INPUT[type="text"]
+{ background-color: white; }
+
+.weapon_lethal_tag { border: 1px solid black; width: 24px; height: 24px; }
+
+#Weapons #name_container
+ { width: 100%; padding-top: 2px; padding-bottom: 2px; margin-top: 4px; }
+#Weapons #name_container,
+#Weapons .name_container_line_value
+ { background-color: lightgray; }
+#Weapons #name { width: 290px; }
+#Weapons #lethal_container { display: none; }
+#Weapons .damage_column_header
+ { margin-left: 46px; width: 65px; text-align: center; }
+#Weapons #damage_container
+ { margin-left: 18px; width: 65px; text-align: center; }
+#Weapons .damage_container_line_value { text-align: center; }
+#Weapons .modifier_column_header,
+#Weapons #modifier_container
+ { width: 65px; text-align: center; }
+#Weapons .modifier_container_line_value { text-align: center; }
+#Weapons .attack_column_header,
+#Weapons #attack_container
+ { width: 65px; text-align: center; }
+#Weapons .attack_container_line_value { text-align: center; }
+#Weapons .average_column_header,
+#Weapons #average_container
+ { width: 65px; text-align: center; }
+#Weapons .average_container_line_value { text-align: center; }
+ 
+#Weapons .list_item_expand,
+#Weapons .list_item_collapse
+{ float: none; margin-left: 8px; margin-top: 2px; margin-bottom: -2px; }

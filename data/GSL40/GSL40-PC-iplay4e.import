@@ -1,0 +1,295 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:template match="/">
+		<html>
+		<script type="text/javascript">
+function GetValue(node)
+{
+	if (node)
+	{
+		if (node.nodeName == "DIV" ||
+			node.nodeName == "SPAN" ||
+			node.nodeName == "TEXTAREA")
+		{
+			return node.innerHTML;
+		}
+		else if (node.nodeName == "SELECT")
+		{
+			return node.value;
+		}
+		else if (node.nodeName == "INPUT")
+		{
+			if (node.type == "checkbox")
+				return node.checked?"true":false;
+			else
+				return node.value;
+		}
+	}
+	else return "[[empty]]";
+}
+function GetTextValue(varname)
+{
+	var node = document.getElementById(varname);
+	return GetValue(node);
+}
+function GetTextValueArray(varname, index)
+{
+	var nodeArray = document.getElementsByName(varname);
+	if (nodeArray)
+	{
+		if (index >= 0)
+		{
+			
+			if (index &lt; nodeArray.length)
+			{
+				return GetValue(nodeArray[index]);
+			}
+		}
+	}
+	
+	return "[[outofbounds]]";
+}
+		</script>
+		<body>
+		<xsl:apply-templates select="Character" />
+		</body>
+		</html>
+	</xsl:template>
+	
+	<xsl:template match="Character">
+		<div>
+			<div id="Name"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+			<xsl:apply-templates />
+			<div id="AP">1</div>
+		</div>
+	</xsl:template>
+	
+	<xsl:template match="Description">
+		<div id="Age"><xsl:value-of disable-output-escaping="yes" select="@age" /></div>
+		<div id="Height"><xsl:value-of disable-output-escaping="yes" select="@height" /></div>
+		<div id="Weight"><xsl:value-of disable-output-escaping="yes" select="@weight" /></div>
+		<xsl:apply-templates select="Notes|Appearance|Traits|Companions" />
+	</xsl:template>
+	
+	<xsl:template match="Notes">
+		<div id="Notes"><xsl:value-of disable-output-escaping="yes" select="." /></div>
+	</xsl:template>
+	<xsl:template match="Appearance">
+		<div id="Appearance"><xsl:value-of disable-output-escaping="yes" select="." /></div>
+	</xsl:template>
+	<xsl:template match="Traits">
+		<div id="Personality"><xsl:value-of disable-output-escaping="yes" select="." /></div>
+	</xsl:template>
+	<xsl:template match="Companions">
+		<div id="Allies"><xsl:value-of disable-output-escaping="yes" select="." /></div>
+	</xsl:template>
+	
+	<xsl:template match="Build">
+		<div id="Align"><xsl:value-of disable-output-escaping="yes" select="@alignment" /></div>
+		<div id="Level"><xsl:value-of disable-output-escaping="yes" select="@level" /></div>
+		<div id="Size"><xsl:value-of disable-output-escaping="yes" select="@size" /></div>
+		<div id="XP"><xsl:value-of disable-output-escaping="yes" select="@experience" /></div>
+		<xsl:apply-templates match="Race|Class|ParagonPath|EpicDestiny" />
+	</xsl:template>
+	<xsl:template match="Race">
+		<div id="Race"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+		<div id="RaceFeatures">
+			<xsl:for-each select="./Feature">
+				<div name="RaceFeatures"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+			</xsl:for-each>
+		</div>
+	</xsl:template>
+	<xsl:template match="Class">
+		<div id="Class"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+		<div id="ClassFeatures">
+			<xsl:for-each select="./Feature">
+				<div name="ClassFeatures"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+			</xsl:for-each>
+		</div>
+	</xsl:template>
+	<xsl:template match="ParagonPath">
+		<div id="Paragon"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+		<div id="ParagonFeatures">
+			<xsl:for-each select="./Feature">
+				<div name="ParagonFeatures"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+			</xsl:for-each>
+		</div>
+	</xsl:template>
+	<xsl:template match="EpicDestiny">
+		<div id="Epic"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+		<div id="EpicFeatures">
+			<xsl:for-each select="./Feature">
+				<div name="EpicFeatures"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+			</xsl:for-each>
+		</div>
+	</xsl:template>
+	
+	<xsl:template match="Health">
+		<xsl:apply-templates match="MaxHitPoints|MaxSurges" />
+	</xsl:template>
+	<xsl:template match="MaxHitPoints">
+		<div id="MaxHP"><xsl:value-of disable-output-escaping="yes" select="@value" /></div>
+	</xsl:template>
+	<xsl:template match="MaxSurges">
+		<div id="Surges"><xsl:value-of disable-output-escaping="yes" select="@value" /></div>
+	</xsl:template>
+	
+	<xsl:template match="Movement">
+		<xsl:apply-templates match="Speed|Initiative" />
+	</xsl:template>
+	<xsl:template match="Speed">
+		<div id="Speed"><xsl:value-of disable-output-escaping="yes" select="@value" /></div>
+	</xsl:template>
+	<xsl:template match="Initiative">
+		<div id="Init"><xsl:value-of disable-output-escaping="yes" select="@value" /></div>
+	</xsl:template>
+	
+	<xsl:template match="Defenses">
+		<xsl:apply-templates match="Defense" />
+	</xsl:template>
+	<xsl:template match="Defense">
+		<xsl:element name="div">
+			<xsl:attribute name="id"><xsl:value-of select="@abbreviation" /></xsl:attribute>
+			<xsl:value-of disable-output-escaping="yes" select="@value" />
+		</xsl:element>
+	</xsl:template>
+	
+	<xsl:template match="Skills">
+		<div id="Skills">
+			<xsl:for-each select="Skill">
+				<div>
+					<div name="Skills_name"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+					<div name="Skills_bonus"><xsl:value-of disable-output-escaping="yes" select="@value" /></div>
+					<div name="Skills_trained"><xsl:value-of select="@trained" /></div>
+					<xsl:if test="./Factor[@abbreviation='Str mod']">
+						<div name="Skills_attribute">Str</div>
+					</xsl:if>
+					<xsl:if test="./Factor[@abbreviation='Dex mod']">
+						<div name="Skills_attribute">Dex</div>
+					</xsl:if>
+					<xsl:if test="./Factor[@abbreviation='Con mod']">
+						<div name="Skills_attribute">Con</div>
+					</xsl:if>
+					<xsl:if test="./Factor[@abbreviation='Int mod']">
+						<div name="Skills_attribute">Int</div>
+					</xsl:if>
+					<xsl:if test="./Factor[@abbreviation='Wis mod']">
+						<div name="Skills_attribute">Wis</div>
+					</xsl:if>
+					<xsl:if test="./Factor[@abbreviation='Cha mod']">
+						<div name="Skills_attribute">Cha</div>
+					</xsl:if>
+				</div>
+			</xsl:for-each>
+		</div>
+	</xsl:template>
+	
+	<xsl:template match="AbilityScores">
+		<xsl:for-each select="AbilityScore">
+			<xsl:element name="div">
+				<xsl:attribute name="id"><xsl:value-of select="@abbreviation" /></xsl:attribute>
+				<xsl:value-of select="@value" />
+			</xsl:element>
+		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template match="Powers">
+		<div id="Powers">
+			<xsl:apply-templates match="Power" />
+		</div>
+	</xsl:template>
+	<xsl:template match="Power">
+		<div>
+			<div name="Powers_name"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+			<div name="Powers_keywords"></div>
+			<div name="Powers_use-type">
+				<xsl:if test="@powerusage='At-Will'">AtWill</xsl:if>
+				<xsl:if test="@powerusage='Encounter'">Encounter</xsl:if>
+				<xsl:if test="@powerusage='Daily'">Daily</xsl:if>
+			</div>
+			<div name="Powers_action-type">
+				<xsl:if test="@actiontype='Free Action'">Free</xsl:if>
+				<xsl:if test="@actiontype='Immediate Reaction'">Interrupt</xsl:if>
+				<xsl:if test="@actiontype='Minor Action'">Minor</xsl:if>
+				<xsl:if test="@actiontype='Move Action'">Move</xsl:if>
+				<xsl:if test="@actiontype='Standard Action'">Standard</xsl:if>
+			</div>
+			<div name="Powers_category">
+				<xsl:choose><xsl:when test="Damage">Attack</xsl:when><xsl:otherwise>Utility</xsl:otherwise></xsl:choose>
+			</div>
+			<div name="Powers_target"></div>
+			<div name="Powers_range"></div>
+			<div name="Powers_effect"><xsl:for-each select="Weapon"><xsl:value-of select="@name" />: <xsl:value-of select="@attackstat" /> vs. <xsl:value-of select="@defense" />, Damage: <xsl:value-of select="Damage/@value" />.\n</xsl:for-each></div>
+			<div name="Powers_used">false</div>
+		</div>
+	</xsl:template>
+	
+	<xsl:template match="Feats">
+		<div id="Feats">
+			<xsl:for-each select="Feat">
+				<div name="Feats"><xsl:value-of select="@name" /></div>
+			</xsl:for-each>
+		</div>
+	</xsl:template>
+	
+	<xsl:template match="Loot">
+		<xsl:call-template name="Equipment" />
+		<xsl:call-template name="MagicItems" />
+		<xsl:call-template name="Rituals" />
+	</xsl:template>
+	<xsl:template name="Equipment">
+		<div id="Equipment">
+			<xsl:for-each select="Item">
+				<xsl:if test="@type!='Magic Item' and @type!='Ritual' and not(Enhancement)">
+					<div name="Equipment"><xsl:value-of disable-output-escaping="yes" select="@name" /><xsl:if test="@count>1"> (<xsl:value-of select="@count" />)</xsl:if></div>
+				</xsl:if>
+			</xsl:for-each>
+		</div>
+	</xsl:template>
+	<xsl:template name="MagicItems">
+		<div id="MagicItems">
+			<xsl:for-each select="Item">
+				<xsl:if test="(@type='Magic Item' or Enhancement) and @type!='Ritual'">
+					<div name="MagicItems"><xsl:value-of disable-output-escaping="yes" select="@name" /><xsl:if test="Enhancement">, <xsl:value-of select="Enhancement/@name" /></xsl:if><xsl:if test="@count>1"> (<xsl:value-of select="@count" />)</xsl:if></div>
+				</xsl:if>
+			</xsl:for-each>
+		</div>
+	</xsl:template>
+	<xsl:template name="Rituals">
+		<div id="Rituals">
+			<xsl:for-each select="Item">
+				<xsl:if test="@type='Ritual'">
+					<div name="Rituals"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+				</xsl:if>
+			</xsl:for-each>
+		</div>
+	</xsl:template>
+	
+	<xsl:template match="Item">
+	</xsl:template>
+	
+	<xsl:template match="Languages">
+		<div id="Languages">
+			<xsl:for-each select="Language">
+				<div name="Languages"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+			</xsl:for-each>
+		</div>
+	</xsl:template>
+	
+	<xsl:template match="Proficiencies">
+		<div id="Proficiencies">
+			<xsl:apply-templates match="WeaponProficiencies" />
+			<xsl:apply-templates match="ArmorProficiencies" />
+			<xsl:apply-templates match="ShieldProficiencies" />
+		</div>
+	</xsl:template>
+	<xsl:template match="WeaponProficiencies|ArmorProficiencies|ShieldProficiencies">
+		<xsl:for-each select="ProficiencyGroup">
+			<div name="Proficiencies"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+		</xsl:for-each>
+		<xsl:for-each select="Proficiency">
+			<div name="Proficiencies"><xsl:value-of disable-output-escaping="yes" select="@name" /></div>
+		</xsl:for-each>
+	</xsl:template>
+	
+</xsl:stylesheet>

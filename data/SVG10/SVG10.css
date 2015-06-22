@@ -1,0 +1,115 @@
+#cols #left,
+#cols #right { width: 320px; }
+#cols #right { margin-left: 20px; }
+
+
+#vitals #col_tok_ipad,
+#vitals #col_tok_iphone,
+#secondary #Token
+{
+	width: 128px;
+	padding: 10px;
+}
+
+#vitals #col_vitals_ipad
+{
+	width: 512px;
+}
+
+#Wounds, #Fatigue
+{
+	margin-bottom: 2px;
+}
+
+#Charisma_label, #Pace_label, #Parry_label, #Toughness_label, #Bennies_label
+{
+	margin-bottom: 2px;
+}
+
+#stats #primary
+{
+	display: inline-block;
+	width: 148px;
+	vertical-align: top;
+}
+
+#stats #secondary
+{
+	display: inline-block;
+	width: 148px;
+	margin-left: 20px;
+	vertical-align: top;
+}
+
+#Weapons #name_container
+{
+	background-color: #444;
+	color: white;
+	padding: 2px;
+	width: 314px;
+}
+#Weapons #name_label
+{ 
+	width: 60px;
+	color: white;
+	font-size: 10pt;
+	border: 0px solid black;
+}
+#Weapons #name_value
+{
+	background-color: #444;
+	color: white;
+	font-size: 12pt;
+	width: 280px;
+}
+
+#Weapons #range_container,
+#Weapons #rof_container,
+#Weapons #ap_container,
+#Weapons #wt_container
+{ width: 33%; }
+
+#Weapons #damage_container,
+{ width: 66%; }
+
+#Weapons #notes_container
+{ width: 100%; }
+
+#Powers #name_container
+{
+	background-color: #444;
+	color: white;
+	padding: 2px;
+	width: 314px;
+}
+#Powers #name_label
+{ 
+	width: 60px;
+	color: white;
+	font-size: 10pt;
+	border: 0px solid black;
+}
+#Powers #name_value
+{
+	background-color: #444;
+	color: white;
+	font-size: 12pt;
+	width: 280px;
+}
+
+#Powers #cost_container,
+#Powers #range_container,
+#Powers #duration_container
+{ width: 33%; }
+
+#Powers #trapping_container,
+#Powers #effect_container
+{ width: 100%; }
+
+#Skills .name_column_header,
+#Skills #name_container
+{ width: 210px; }
+
+#Skills .rank_column_header,
+#Skills #rank_container
+{ width: 80px; }

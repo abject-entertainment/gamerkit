@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:template match="/">
+<html>
+	<head>
+		<meta name = "viewport" content = "initial-scale = 1.0, user-scalable = no" />
+		<meta name = "viewport" content = "width = device-width" />
+        <link rel="stylesheet" type="text/css" href="../Systems/core.css" />
+        <link rel="stylesheet" type="text/css" href="../Sheets/OGL35.css" />
+		<style>
+BODY, TD, LI, INPUT
+{
+	font-family: sans-serif;
+	font-size: 10pt;
+	margin: 0px;
+	border: 0px solid black;
+}
+		</style>
+	</head>
+	<body style="width: 320px">
+		<script type="text/javascript" src="../Systems/charsheet.js" />
+        <script type="text/javascript">
+			<xsl:call-template name="js_boilerplate" />
+			
+            block_plain("vitals");
+                line();
+                    attribute("Name", "Character Name", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Name']" />", "line_2");
+                    attribute("Player", "Player Name", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Player']" />", "line_2");
+                endline();
+                line();
+					attribute("Race", "Race", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Race']" />", "line_2");
+					attribute("Gender", "Gender", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Gender']" />", "line_4");
+					stored_attributes["Size"] = attribute("Size", "Size", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Size']" />", "line_4");
+				endline();
+				line();
+					attribute("Levels", "Class Levels", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Levels']" />", "line_1");
+					attribute("XP", "XP", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='XP']" />", "line_1");
+				endline();
+			endblock();
+			block_pages("pages");
+				page_stats();
+				page_combat();
+				page_skills();
+				page_loot();
+				page_notes();
+			var pages = endblock();
+			
+			pages.select_tab(0);
+			
+			AddDieRollList([
+				<xsl:apply-templates select="character/attribute[@name='DieRolls']" />
+			]);
+
+			// debug tests
+			if (debug)
+			{
+				var tests = [
+					"Name",
+					"Feats[1]",
+					"SpellCap4.level",
+					"Skills[0].bonus",
+					"Levels[9].class"
+					];
+					
+				for (i = 0; i &lt; tests.length; ++i)
+				{
+					dbgOut.writeln("!! " + tests[i] + " == " + GetAttributeValue(tests[i]));
+				}
+			}
+		</script>
+	</body>
+</html>
+	</xsl:template>
+	
+	<xsl:include href="../Sheets/OGL35-PC.xslt" />
+</xsl:stylesheet>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>dice</key>
+	<dict>
+		<key>notation</key>
+		<string>3d6</string>
+		<key>quickCount</key>
+		<integer>2</integer>
+		<key>quickSides</key>
+		<integer>2</integer>
+		<key>results</key>
+		<string>3d6: 3, 1, 6, Total: 10</string>
+	</dict>
+	<key>version</key>
+	<integer>0</integer>
+</dict>
+</plist>

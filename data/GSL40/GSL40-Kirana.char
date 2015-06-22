@@ -1,0 +1,353 @@
+<character system="GSL40" display-name="Kirana" type="PC">
+	<attribute name="Player"></attribute>
+	<attribute name="Name">Kirana</attribute>
+	<attribute name="Level">3</attribute>
+	<attribute name="Class">Bard</attribute>
+	<attribute name="Paragon"></attribute>
+	<attribute name="Epic"></attribute>
+	<attribute name="XP">2250</attribute>
+	<attribute name="Race">Half-Elf</attribute>
+	<attribute name="Size">Medium</attribute>
+	<attribute name="Age"></attribute>
+	<attribute name="Gender"></attribute>
+	<attribute name="Height"></attribute>
+	<attribute name="Weight"></attribute>
+	<attribute name="Align">Unaligned</attribute>
+	<attribute name="Deity"></attribute>
+	<attribute name="Company"></attribute>
+	<attribute name="Str">10</attribute>
+	<attribute name="Dex">10</attribute>
+	<attribute name="Con">13</attribute>
+	<attribute name="Int">14</attribute>
+	<attribute name="Wis">8</attribute>
+	<attribute name="Cha">20</attribute>
+	<attribute name="AC">18</attribute>
+	<attribute name="Fort">13</attribute>
+	<attribute name="Ref">15</attribute>
+	<attribute name="Will">18</attribute>
+	<attribute name="Init">1</attribute>
+	<attribute name="Speed">5</attribute>
+	<attribute name="AP">1</attribute>
+	<attribute name="MaxHP">35</attribute>
+	<attribute name="CurHP"></attribute>
+	<attribute name="TempHP"></attribute>
+	<attribute name="Surges">8</attribute>
+	<attribute name="CurSurges"></attribute>
+	<attribute name="SecondWind">false</attribute>
+	<attribute name="DeathSave"></attribute>
+	<attribute name="SaveMods"></attribute>
+	<attribute name="Resist"></attribute>
+	<attribute name="Conditions"></attribute>
+	<attribute name="RaceFeatures">
+		<item>Dilettante</item>
+		<item>Dual Heritage</item>
+		<item>Group Diplomacy</item>
+	</attribute>
+	<attribute name="ClassFeatures">
+		<item>Bardic Training</item>
+		<item>Bardic Virtue</item>
+		<item>Virtue of Cunning</item>
+		<item>Majestic Word</item>
+		<item>Multiclass Versatility</item>
+		<item>Skill Versatility</item>
+		<item>Song of Rest</item>
+		<item>Words of Friendship</item>
+	</attribute>
+	<attribute name="ParagonFeatures">
+	</attribute>
+	<attribute name="EpicFeatures">
+	</attribute>
+	<attribute name="Languages">
+		<item>Common</item>
+		<item>Elven</item>
+		<item>Deep Speech</item>
+	</attribute>
+	<attribute name="Feats">
+		<item>Ritual Caster</item>
+		<item>Improved Majestic Word</item>
+		<item>Implement Expertise (wand)</item>
+	</attribute>
+	<attribute name="Skills">
+		<item>
+			<name>Acrobatics</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Dex</attribute>
+		</item>
+		<item>
+			<name>Arcana</name>
+			<bonus>8</bonus>
+			<trained>true</trained>
+			<attribute>Int</attribute>
+		</item>
+		<item>
+			<name>Athletics</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Str</attribute>
+		</item>
+		<item>
+			<name>Bluff</name>
+			<bonus>11</bonus>
+			<trained>true</trained>
+			<attribute>Cha</attribute>
+		</item>
+		<item>
+			<name>Diplomacy</name>
+			<bonus>13</bonus>
+			<trained>true</trained>
+			<attribute>Cha</attribute>
+		</item>
+		<item>
+			<name>Dungeoneering</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Wis</attribute>
+		</item>
+		<item>
+			<name>Endurance</name>
+			<bonus>2</bonus>
+			<trained>false</trained>
+			<attribute>Con</attribute>
+		</item>
+		<item>
+			<name>Heal</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Wis</attribute>
+		</item>
+		<item>
+			<name>History</name>
+			<bonus>4</bonus>
+			<trained>false</trained>
+			<attribute>Int</attribute>
+		</item>
+		<item>
+			<name>Insight</name>
+			<bonus>3</bonus>
+			<trained>false</trained>
+			<attribute>Wis</attribute>
+		</item>
+		<item>
+			<name>Intimidate</name>
+			<bonus>7</bonus>
+			<trained>false</trained>
+			<attribute>Cha</attribute>
+		</item>
+		<item>
+			<name>Nature</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Wis</attribute>
+		</item>
+		<item>
+			<name>Perception</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Wis</attribute>
+		</item>
+		<item>
+			<name>Religion</name>
+			<bonus>8</bonus>
+			<trained>true</trained>
+			<attribute>Int</attribute>
+		</item>
+		<item>
+			<name>Stealth</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Dex</attribute>
+		</item>
+		<item>
+			<name>Streetwise</name>
+			<bonus>11</bonus>
+			<trained>true</trained>
+			<attribute>Cha</attribute>
+		</item>
+		<item>
+			<name>Thievery</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Dex</attribute>
+		</item>
+	</attribute>
+	<attribute name="Powers">
+		<item>
+			<name>Melee Basic Attack</name>
+			<keywords></keywords>
+			<use-type>AtWill</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Longsword: Strength vs. AC, Damage: 1d8.\n</effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Ranged Basic Attack</name>
+			<keywords></keywords>
+			<use-type>AtWill</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Hellish Rebuke</name>
+			<keywords></keywords>
+			<use-type>AtWill</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>War Song Strike</name>
+			<keywords></keywords>
+			<use-type>AtWill</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Longsword: Charisma vs. AC, Damage: 1d8+5.\n</effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Guiding Strike</name>
+			<keywords></keywords>
+			<use-type>AtWill</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Longsword: Charisma vs. AC, Damage: 1d8+5.\n</effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Ray of Frost</name>
+			<keywords></keywords>
+			<use-type>AtWill</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Majestic Word</name>
+			<keywords></keywords>
+			<use-type>Encounter</use-type>
+			<action-type>Minor</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Words of Friendship</name>
+			<keywords></keywords>
+			<use-type>Encounter</use-type>
+			<action-type>Minor</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Blunder</name>
+			<keywords></keywords>
+			<use-type>Encounter</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Implement, Wand: Charisma vs. Will, Damage: 1d6+5.\nMaster's Wand of Ray of Frost +1: Charisma vs. Will, Damage: 1d6+6.\n</effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Dissonant Strain</name>
+			<keywords></keywords>
+			<use-type>Encounter</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Implement, Wand: Charisma vs. Will, Damage: 2d6+5.\nMaster's Wand of Ray of Frost +1: Charisma vs. Will, Damage: 2d6+6.\n</effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Second Wind</name>
+			<keywords></keywords>
+			<use-type>Encounter</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Action Point</name>
+			<keywords></keywords>
+			<use-type>Encounter</use-type>
+			<action-type>Free</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Verse of Triumph</name>
+			<keywords></keywords>
+			<use-type>Daily</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Longsword: Charisma vs. AC, Damage: 2d8+5.\n</effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Hunter's Tune</name>
+			<keywords></keywords>
+			<use-type>Daily</use-type>
+			<action-type>Minor</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+	</attribute>
+	<attribute name="MagicItems">
+		<item>Amulet of Resolution +1</item>
+		<item>Chainmail, Armor of Exploits +1</item>
+		<item>Master's Wand of Ray of Frost +1</item>
+	</attribute>
+	<attribute name="MIUsed"></attribute>
+	<attribute name="Rituals">
+	</attribute>
+	<attribute name="Allies"></attribute>
+	<attribute name="Equipment">
+		<item>Implement, Wand</item>
+		<item>Adventurer's Kit</item>
+		<item>Longsword</item>
+		<item>Light Shield</item>
+		<item>Chainmail</item>
+		<item>Ritual Book</item>
+	</attribute>
+	<attribute name="Personality"></attribute>
+	<attribute name="Appearance"></attribute>
+	<attribute name="Background"></attribute>
+	<attribute name="Wealth"></attribute>
+	<attribute name="Notes"></attribute>
+	<attribute name="Token">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</attribute>
+</character>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:template match="/">
+<html>
+	<head>
+		<meta name = "viewport" content = "initial-scale = 1.0, user-scalable = no" />
+        <link rel="stylesheet" type="text/css" href="../Systems/ui.css" />
+        <link rel="stylesheet" type="text/css" href="../Systems/dice.css" />
+        <link rel="stylesheet" type="text/css" href="../Systems/core.css" />
+        <link rel="stylesheet" type="text/css" href="../Sheets/SVG10.css" />
+		<style>
+BODY, TD, LI, INPUT
+{
+	font-family: sans-serif;
+	font-size: 10pt;
+	margin: 0px;
+	border: 0px solid black;
+}
+		</style>
+		<script type="text/javascript">
+format = "ipad";
+		</script>
+	</head>
+	<body>
+		<script type="text/javascript" src="../Systems/animate.js" />
+		<script type="text/javascript" src="../Systems/ui.js" />
+		<script type="text/javascript" src="../Systems/dice.js" />
+		<script type="text/javascript" src="../Systems/charsheet.js" />
+        <script type="text/javascript">
+			<xsl:call-template name="js_boilerplate" />
+
+			vitals_header();
+			block_columns("cols");
+				block_column("left");
+					block_pages("pages");
+						page_skills();
+						page_notes();
+					var pages = endblock();
+					
+					pages.select_tab(0);
+				endblock();
+				block_column("right");
+					block_pages("pages2");
+						page_loot();
+						block_page("dice", "Dice");
+							AddDieRollList([
+								<xsl:apply-templates select="character/attribute[@name='DieRolls']" />
+							]);
+						endblock();
+					pages = endblock();
+					
+					pages.select_tab(0);
+				endblock();
+			endblock(); // tab_holder
+			
+			// debug tests
+			if (debug)
+			{
+				var tests = [
+					"Name",
+					"Feats[1]",
+					"SpellCap4.level",
+					"Skills[0].bonus",
+					"Levels[9].class"
+					];
+					
+				for (i = 0; i &lt; tests.length; ++i)
+				{
+					dbgOut.writeln("!! " + tests[i] + " == " + GetAttributeValue(tests[i]));
+				}
+			}
+		</script>
+	</body>
+</html>
+	</xsl:template>
+	
+	<xsl:include href="../Sheets/SVG10-PC.xslt" />
+</xsl:stylesheet>

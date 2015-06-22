@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:template match="/">
+		<html>
+			<head>
+				<meta name = "viewport" content = "initial-scale = 1.0, user-scalable = no" />
+				<link rel="stylesheet" type="text/css" href="../Systems/core.css" />
+				<link rel="stylesheet" type="text/css" href="../Sheets/HEX10.css" />
+			</head>
+			<body style="width: 650px">
+				<script type="text/javascript" src="../Systems/charsheet.js" />
+				<script type="text/javascript">
+					<xsl:call-template name="js_boilerplate" />
+					
+					block_plain("vitals");
+						attribute("Name", "Character Name", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Name']" />", "line_2");
+						attribute("Style", "Style", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Style']" />", "line_4");
+						attribute("Health", "Health", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Health']" />", "line_4").appendChild(
+							cached_attributes["MaxHealth"] = attribute("MaxHealth", null, TYPE_label, "", "line_5"));
+						attribute("Archetype", "Archetype", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Archetype']" />", "line_2");
+						attribute("Motivation", "Motivation", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Motivation']" />", "line_2");
+					endblock();
+					
+					block_columns("columns");
+						block_column("col_stats");
+							page_stats();
+						endblock();
+						block_column("col_info");
+							page_info();
+						endblock();
+					endblock();
+					
+					add_specs();
+				</script>
+			</body>
+		</html>
+	</xsl:template>
+	
+	<xsl:include href="../Sheets/HEX10-PC.xslt" />
+</xsl:stylesheet>

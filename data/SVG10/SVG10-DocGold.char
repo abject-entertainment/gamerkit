@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+
+
+<character system="SVG10" type="PC">
+	<attribute name="Name"><![CDATA[Doc Gold]]></attribute>
+	<attribute name="Player"><![CDATA[]]></attribute>
+	<attribute name="Origin"><![CDATA[]]></attribute>
+	<attribute name="Rating"><![CDATA[Seasoned (25 XP)]]></attribute>
+	<attribute name="Destination"><![CDATA[]]></attribute>
+	<attribute name="Agility"><![CDATA[6]]></attribute>
+	<attribute name="Smarts"><![CDATA[10]]></attribute>
+	<attribute name="Strength"><![CDATA[6]]></attribute>
+	<attribute name="Spirit"><![CDATA[6]]></attribute>
+	<attribute name="Vigor"><![CDATA[6]]></attribute>
+	<attribute name="Charisma"><![CDATA[0]]></attribute>
+	<attribute name="Pace"><![CDATA[6]]></attribute>
+	<attribute name="Parry"><![CDATA[4]]></attribute>
+	<attribute name="Toughness"><![CDATA[5]]></attribute>
+	<attribute name="Fatigue"><![CDATA[]]></attribute>
+	<attribute name="Wounds"><![CDATA[]]></attribute>
+	<attribute name="PowerPoints"><![CDATA[20]]></attribute>
+	<attribute name="Bennies"><![CDATA[3]]></attribute>
+	<attribute name="Hindrances">
+		<item><![CDATA[Curious]]></item>
+		<item><![CDATA[Doubting Thomas]]></item>
+		<item><![CDATA[Stubborn]]></item>
+	</attribute>
+	<attribute name="Edges">
+		<item><![CDATA[Arcane Background (Weird Science)]]></item>
+		<item><![CDATA[New Power (bolt)]]></item>
+		<item><![CDATA[Power Points x2]]></item>
+	</attribute>
+	<attribute name="Equipment">
+		<item><![CDATA[Doc Gold's Amazing Wonder Tonic]]></item>
+		<item><![CDATA[Electromagnetic Dischargement Apparatus]]></item>
+		<item><![CDATA[Tool Kit]]></item>
+	</attribute>
+	<attribute name="ArmorHead"><![CDATA[]]></attribute>
+	<attribute name="ArmorTorso"><![CDATA[]]></attribute>
+	<attribute name="ArmorArms"><![CDATA[]]></attribute>
+	<attribute name="ArmorLegs"><![CDATA[]]></attribute>
+	<attribute name="WTCarried"><![CDATA[]]></attribute>
+	<attribute name="WTLimit"><![CDATA[]]></attribute>
+	<attribute name="WTPenalty"><![CDATA[]]></attribute>
+	<attribute name="Skills">
+		<item>
+			<name><![CDATA[Fighting]]></name>
+			<rank><![CDATA[4]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Guts]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Healing]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Investigation]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Knowledge (Science)]]></name>
+			<rank><![CDATA[10]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Notice]]></name>
+			<rank><![CDATA[8]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Repair]]></name>
+			<rank><![CDATA[8]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Shooting]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+	</attribute>
+	<attribute name="Powers">
+		<item>
+			<name><![CDATA[Bolt]]></name>
+			<trapping><![CDATA[Electromagnetic Dischargement Apparatus]]></trapping>
+			<cost><![CDATA[1-6]]></cost>
+			<range><![CDATA[12/24/48]]></range>
+			<effect><![CDATA[Cost 1 per bolt for 2d6, 2 per bolt for 3d6, 3 bolts max.]]></effect>
+			<duration><![CDATA[Instant]]></duration>
+		</item>
+		<item>
+			<name><![CDATA[Heal]]></name>
+			<trapping><![CDATA[Doc Gold's Amazing Wonder Tonic]]></trapping>
+			<cost><![CDATA[3]]></cost>
+			<range><![CDATA[Touch]]></range>
+			<effect><![CDATA[Roll is -1 per wound of the target.  Success heals 1 wound, raise heals 2.\nCan cure poison or disease if used within 10 minutes of the event.]]></effect>
+			<duration><![CDATA[Instant]]></duration>
+		</item>
+	</attribute>
+	<attribute name="Weapons">
+	</attribute>
+	<attribute name="Injuries"><![CDATA[]]></attribute>
+	<attribute name="Wealth"><![CDATA[]]></attribute>
+	<attribute name="Description"><![CDATA[]]></attribute>
+	<attribute name="Personality"><![CDATA[]]></attribute>
+	<attribute name="Background"><![CDATA[Buck contacted Doc Gold a few years back when he was looking for a suit that could venture into the depths (to find the lost city of Atlantis). The English inventor hasn’t been able to perfect that invention yet, but he’s working on it. In the meantime, the two have struck up a working relationship. Doc Gold accompanies Buck on some of his expeditions and whips up his miraculous Wonder Tonic (healing salves), and gets a share of the loot to further fund his research. Doc Gold is anxious to field test his latest gizmo—the Electromagnetic Dischargement Apparatus. Buck annoys the hell out of the scientist by constantly calling it a “lightning gun.”]]></attribute>
+	<attribute name="Notes"><![CDATA[Languages: English, German, Latin, Mayan, Tibetan]]></attribute>
+	<attribute name="DieRolls">
+		<item>
+			<name><![CDATA[Bolt]]></name>
+			<roll><![CDATA[2da6]]></roll>
+		</item>
+		<item>
+			<name><![CDATA[Charged Bolt]]></name>
+			<roll><![CDATA[3da6]]></roll>
+		</item>
+	</attribute>
+	<attribute name="Token"><![CDATA[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]]></attribute>
+</character>

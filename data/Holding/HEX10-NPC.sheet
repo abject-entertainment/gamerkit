@@ -1,0 +1,1003 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:template match="/">
+<html>
+	<head>
+		<meta name = "viewport" content = "initial-scale = 1.0, user-scalable = no" />
+		<meta name = "viewport" content = "width = device-width" />
+		<style type="text/css">
+html, body, td, input {
+	border: 0;
+	font-family: sans-serif;
+	font-size: 10pt;
+}
+td {
+	padding: 0;
+	vertical-align: top;
+}
+table {
+	border-collapse: collapse;
+}
+
+.block1
+{
+	display: block;
+	width: 3.2in;
+}
+.block2
+{
+	display: inline-block;
+	width: 1.58in;
+}
+.attr_left, .attr_right 
+{
+	display: inline-block;
+	width: 1.58in;
+	text-align: right;
+}
+.attr_entry
+{
+	display: inline-block;
+	width:0.5in;
+	text-align: left;
+}
+SPAN.attr_entry 
+{
+	margin-top:2px;
+	margin-bottom:2px;
+}
+
+.page
+{
+	position:relative;
+	top:5px;
+	width:3.2in;
+}
+
+.section
+{
+	border: 0px solid black;
+	width: 3.2in;
+	margin-bottom: 0.15in;
+}
+.section_head
+{
+	background-color: black;
+	color: white;
+	text-align: left;
+	width: 100%;
+	position: relative;
+}
+.field_add
+{
+	display: inline-block;
+	position: absolute;
+	top: -0.03in;
+	right: 0.05in;
+	color: white;
+	font-weight: bold;
+}
+.list
+{
+}
+.section_field
+{
+	position: relative;
+	vertical-align:middle;
+}
+.list_item
+{
+	width: 2.98in;;
+}
+.field_delete
+{
+	display: inline-block;
+	width: 0.2in;
+	float: right;
+	text-align: center;
+	border: 1 solid grey;
+}
+
+.skill_name
+{
+	width: 2.76in;
+	display: inline-block;
+}
+.skill_base_label
+{
+	width: 0.5in;
+	display: inline-block;
+	text-align: center;
+}
+.skill_base
+{
+	width: 0.5in;
+	display: inline-block;
+	text-align:center;
+}
+.skill_attrib
+{
+	width: 0.5in;
+	display: inline-block;
+	position: absolute;
+	left: -2.0in;
+}
+.skill_ranks
+{
+	display: inline-block;
+	text-align:center;
+	width: 0.5in;
+}
+.skill_total
+{
+	display: inline-block;
+	text-align: center;
+	width:0.45in;
+}
+.skill_average
+{
+	width: 0.45in;
+	display: inline-block;
+	text-align:center;
+}
+.skill_spec
+{
+	width: 1.0in;
+	display: inline-block;
+}
+.spec_indent
+{
+	width: 0.25in;
+	display: inline-block;
+}
+.spec_name
+{
+	width: 1.25in;
+	font-style: italic;
+}
+
+.ulabel {
+	font-size: 6pt;
+	color: grey;
+	border-top: 1px solid grey;
+}
+.toggle_button
+{
+	font-family:monospace;
+}
+
+.weapon_toggle { width: 1.0in; display: inline-block; font-weight: bold; text-align: left; }
+.weapon_name { width: 100%; }
+.weapon_name_label { width: 1.0in; display: inline-block; }
+.weapon_rating { width: 0.5in; display: inline-block; text-align: center; }
+.weapon_size { width: 0.5in; display: inline-block; text-align: center; }
+.weapon_attack_label { width: 0.5in; display: inline-block; text-align: center; }
+.weapon_attack { width: 0.3in; display: inline-block; text-align: center; }
+.weapon_average_label { width: 0.5in; display: inline-block; text-align: center; }
+.weapon_average { width: 0.3in; display: inline-block; text-align: center; }
+.weapon_damage { width: 0.3in; display: inline-block; text-align: center; }
+.weapon_lethal { width: 0.2in; display: inline-block; border: 1px solid grey; text-align: center; }
+.weapon_info_label { width: 0.6in; display: inline-block; text-align: right; }
+.weapon_range, .weapon_capacity, .weapon_rate, .weapon_speed, .weapon_weight, .weapon_ammo
+{ width: 1.0in; }
+.weapon_notes { width: 100%; }
+
+.wealth_header
+{
+	background-color: black;
+	color: white;
+	text-align: left;
+	width: 1.8in;
+}
+.wealth_box
+{
+	width: 1.8in;
+}
+
+#Token {
+	width: 128px;
+	height: 128px;
+	margin-left: 5px;
+	margin-bottom: 1px;
+	display: block;
+	float: right;
+}
+		</style>
+		<script type="text/javascript">
+function GetValue(node)
+{
+	if (node)
+	{
+		if (node.nodeName == "DIV" ||
+			node.nodeName == "SPAN" ||
+			node.nodeName == "TEXTAREA")
+		{
+			return node.innerHTML;
+		}
+		else if (node.nodeName == "SELECT")
+		{
+			return node.value;
+		}
+		else if (node.nodeName == "INPUT")
+		{
+			if (node.type == "checkbox")
+				return node.checked?"true":false;
+			else
+				return node.value;
+		}
+	}
+	else return "[[empty]]";
+}
+function GetTextValue(varname)
+{
+	var node = document.getElementById(varname);
+	return GetValue(node);
+}
+function GetTextValueArray(varname, index)
+{
+	var nodeArray = document.getElementsByName(varname);
+	if (nodeArray &amp;&amp; index &gt;= 0 &amp;&amp; index &lt; nodeArray.length)
+		return GetValue(nodeArray[index]);
+	else return "[[outofbounds]]";
+}
+function SetTextValue(varname, txt)
+{
+	var node = document.getElementById(varname);
+	if (node)
+	{
+		if (node.nodeName == "DIV" ||
+			node.nodeName == "SPAN" ||
+			node.nodeName == "TEXTAREA")
+		{
+			node.innerHTML = txt;
+		}
+		else if (node.nodeName == "INPUT")
+		{
+			if (node.type == "checkbox")
+				node.checked = (txt == "true");
+			else
+				node.value = txt;
+		}
+	}
+}
+function SetImageData(varname, data)
+{
+	var node = document.getElementById(varname);
+	if (node)
+	{
+		node.setAttribute("src", "data:img/jpeg;base64," + data); 
+	}
+}
+function toggle_visible(block, button)
+{
+	if (block)
+	{
+		if (block.style.display=="none")
+		{
+			block.style.display="block";
+			if (button) button.innerHTML = "[-]";
+		}
+		else
+		{
+			block.style.display="none";
+			if (button) button.innerHTML = "[+]";
+		}
+	}
+}
+function add_field_to_section(section, sectionName, value)
+{
+	if (section)
+	{
+		section.innerHTML += 
+			"&lt;div class=\"section_field\"&gt;" +
+				"&lt;input type=\"text\" class=\"list_item\" name=\"" + sectionName + "\" value=\"" + value + "\" /&gt;" + 
+				"&lt;div class=\"field_delete\" onclick=\"javascript:remove_field(this.parentNode)\"&gt;X&lt;/div&gt;" + 
+			"&lt;/div&gt;";
+		if (window.event)
+		{
+			if (window.event.stopPropagation)
+				window.event.stopPropagation();
+			else
+				window.event.cancelBubble = true;
+		}
+	}
+}
+function UpdatePowerColor(selectNode, containerNode)
+{
+	containerNode.className = "power_" + selectNode.value;
+	
+	children = containerNode.firstChild;
+	
+	while (children)
+	{
+		if (children.nodeName == "INPUT" &amp;&amp; children.type == "checkbox")
+			children.style.display = ((selectNode.value == "AtWill")?"none":"inline");
+			
+		children = children.nextSibling;
+	}
+}
+function remove_field(child)
+{
+	if (child)
+		child.parentNode.removeChild(child);
+}
+		</script>
+	</head>
+	<body width="320"><div style="width: 3.2in;">
+		<div class="block1">
+			<div class="ulabel">Name</div>
+			<input class="" type="text" id="Name" value="" style="width:100%" />
+		</div>
+		<a href="gamerstoolkit://chooseToken"><img id="Token" src="" alt="Click to Select Token" /></a>
+		<div class="block2">
+			<div class="ulabel">Archetype</div>
+			<input class="" type="text" id="Archetype" style="width:100%" />
+		</div>
+		<div class="block2">
+			<div class="ulabel">Motivation</div>
+			<input class="" type="text" id="Motivation" style="width:100%" />
+		</div>
+		<div class="block2">
+			<div class="ulabel">Style</div>
+			<input class="" type="text" id="Style" style="width:100%" />
+		</div>
+		<div class="block2">
+			<div class="ulabel">Health</div>
+			<input class="" type="text" id="Health" style="width:80%" />/ <span id="MaxHealth"></span>
+		</div>
+		<br />
+		
+		<div class="page" id="page_stats">
+			<script>
+function updateSecondaries()
+{
+	var bdy = document.getElementById("Body"); bdy = (bdy?parseInt(bdy.value):0);
+	var cha = document.getElementById("Charisma"); cha = (cha?parseInt(cha.value):0);
+	var dex = document.getElementById("Dexterity"); dex = (dex?parseInt(dex.value):0);
+	var int = document.getElementById("Intelligence"); int = (int?parseInt(int.value):0);
+	var str = document.getElementById("Strength"); str = (str?parseInt(str.value):0);
+	var wlp = document.getElementById("Willpower"); wlp = (wlp?parseInt(wlp.value):0);
+	var siz = document.getElementById("Size"); siz = (siz?parseInt(siz.value):0);
+	
+	if (bdy==NaN) bdy = 0;
+	if (cha==NaN) cha = 0;
+	if (dex==NaN) dex = 0;
+	if (int==NaN) int = 0;
+	if (str==NaN) str = 0;
+	if (wlp==NaN) wlp = 0;
+	if (siz==NaN) siz = 0;
+	
+	var ini = document.getElementById("Initiative");
+	var mov = document.getElementById("Move");
+	var def = document.getElementById("Defense");
+	var per = document.getElementById("Perception");
+	var stn = document.getElementById("Stun");
+	var hlt = document.getElementById("MaxHealth");
+
+	if (mov)
+		mov.innerText = str + dex;
+	if (per)
+		per.innerText = int + wlp;
+	if (ini)
+		ini.innerText = str + dex;
+	if (def)
+		def.innerText = bdy + dex - siz;
+	if (stn)
+		stn.innerText = bdy;
+	if (hlt)
+		hlt.innerText = bdy + wlp + siz;
+}
+			</script>
+			<div class="section">
+				<div class="section_head" onclick="javascript:toggle_visible(primary_attribs,false)">Primary Attributes</div>
+				<div class="list" id="primary_attribs">
+					<span class="attr_left">Body: <input type="tel" class="attr_entry" id="Body" onblur="updateSecondaries()" /></span>
+					<span class="attr_right">Charisma: <input type="tel" class="attr_entry" id="Charisma" onblur="updateSecondaries()" /></span><br />
+					<span class="attr_left">Dexterity: <input type="tel" class="attr_entry" id="Dexterity" onblur="updateSecondaries()" /></span>
+					<span class="attr_right">Intelligence: <input type="tel" class="attr_entry" id="Intelligence" onblur="updateSecondaries()" /></span><br />
+					<span class="attr_left">Strength: <input type="tel" class="attr_entry" id="Strength" onblur="updateSecondaries()" /></span>
+					<span class="attr_right">Willpower: <input type="tel" class="attr_entry" id="Willpower" onblur="updateSecondaries()" /></span>
+				</div>
+			</div>
+			<div class="section">
+				<div class="section_head" onclick="javascript:toggle_visible(secondary_attribs,false)">Secondary Attributes</div>
+				<div class="list" id="secondary_attribs">
+					<span class="attr_left">Size: <input type="tel" class="attr_entry" id="Size" onblur="updateSecondaries()" /></span>
+					<span class="attr_right">Initiative: <span class="attr_entry" id="Initiative"></span></span><br />
+					<span class="attr_left">Move: <span class="attr_entry" id="Move"></span></span>
+					<span class="attr_right">Defense: <span class="attr_entry" id="Defense"></span></span><br />
+					<span class="attr_left">Perception: <span class="attr_entry" id="Perception"></span></span>
+					<span class="attr_right">Stun: <span class="attr_entry" id="Stun"></span></span>
+				</div>
+			</div>
+			<div class="section">
+				<script>
+function Skill(skillName, skillAttrib, skillRanks)
+{
+	this.node = document.createElement("div");
+	this.node.className = "section_field";
+	this.node.skillObj = this;
+	
+	// name
+	var childNode = document.createElement("input");
+	childNode.className = "skill_name";
+	childNode.name = "Skills_name";
+	childNode.type = "text";
+	childNode.setAttribute("onblur", "this.parentNode.skillObj.name = this.value;");
+	this.node.appendChild(childNode);
+	this._name = childNode;
+	
+	// delete
+	childNode = document.createElement("div");
+	childNode.className = "field_delete";
+	childNode.setAttribute("onclick", "remove_field(this.parentNode); this.parentNode.skillObj.node = 0;");
+	childNode.innerText = "X";
+	this.node.appendChild(childNode);
+	
+	// specialize
+	childNode = document.createElement("div");
+	childNode.className = "field_delete";
+	childNode.setAttribute("onclick", "this.parentNode.skillObj.addSpec('',1)");
+	childNode.innerText = "S";
+	this.node.appendChild(childNode);
+
+	// buffer
+	childNode = document.createElement("div");
+	childNode.className = "skill_spec";
+	childNode.innerText = " ";
+	this.node.appendChild(childNode);
+	
+	// base
+	childNode = document.createElement("div");
+	childNode.className = "skill_base";
+	childNode.setAttribute("onclick", "this.nextSibling.focus();");
+	this.node.appendChild(childNode);
+	this._base = childNode;
+	
+	// attribute
+	childNode = document.createElement("select");
+	childNode.className = "skill_attrib";
+	childNode.name = "Skills_attribute";
+	childNode.setAttribute("onchange", "this.parentNode.skillObj.updateNode()");
+		var option = document.createElement("option");
+		option.value = "Body";
+		option.innerText = "Body";
+		childNode.appendChild(option);
+		
+		option = document.createElement("option");
+		option.value = "Dexterity";
+		option.innerText = "Dexterity";
+		childNode.appendChild(option);
+		
+		option = document.createElement("option");
+		option.value = "Strength";
+		option.innerText = "Strength";
+		childNode.appendChild(option);
+		
+		option = document.createElement("option");
+		option.value = "Charisma";
+		option.innerText = "Charisma";
+		childNode.appendChild(option);
+		
+		option = document.createElement("option");
+		option.value = "Intelligence";
+		option.innerText = "Intelligence";
+		childNode.appendChild(option);
+		
+		option = document.createElement("option");
+		option.value = "Willpower";
+		option.innerText = "Willpower";
+		childNode.appendChild(option);
+	this.node.appendChild(childNode);
+	this._attribute = childNode;
+	
+	// ranks
+	var childNode = document.createElement("input");
+	childNode.className = "skill_ranks";
+	childNode.name = "Skills_ranks";
+	childNode.type = "text";
+	childNode.setAttribute("onblur", "this.parentNode.skillObj.updateNode()");
+	this.node.appendChild(childNode);
+	this._ranks = childNode;
+
+	// total
+	childNode = document.createElement("div");
+	childNode.className = "skill_total";
+	this.node.appendChild(childNode);
+	this._total = childNode;
+
+	// average
+	childNode = document.createElement("div");
+	childNode.className = "skill_average";
+	this.node.appendChild(childNode);
+	this._average = childNode;
+	
+	this._name.value = skillName;
+	this._attribute.value = skillAttrib;
+	this._ranks.value = skillRanks;
+	
+	this._specs = new Array();
+	
+	this.base = function () {
+		var node = document.getElementById(this._attribute.value);
+		if (node &amp;&amp; node.nodeName == "INPUT") return parseInt(node.value);
+		return 0;
+	}
+	this.total = function () {
+		return this.base() + parseInt(this._ranks.value);
+	}
+	this.average = function () {
+		var half = this.total() / 2;
+		var flr = Math.floor(half);
+		if (half != flr) return "(" + flr + "+)";
+		return "(" + flr + ")";
+	}
+	this.updateNode = function () {
+		this._base.innerHTML = this.base();
+		this._total.innerHTML = this.total();
+		this._average.innerHTML = this.average();
+		for (i = 0; i &lt; this._specs.length; ++i)
+		{
+			this._specs[i].updateNode();
+		}
+	}
+	this.addSpec = function (specName, ranks) {
+		var specObj = new SkillSpec(specName, this, ranks);
+		this._specs[this._specs.length] = specObj;
+		this.node.appendChild(specObj.node);
+		specObj.updateNode();
+	}
+}
+function add_skill_to_section(section, sectionName, skillObj)
+{
+	if (!skillObj)
+	{
+		skillObj = new Skill("","Strength","1");
+	}
+	
+	if (section)
+	{
+		section.appendChild(skillObj.node);
+		
+		skillObj.updateNode();
+		
+		if (window.event)
+		{
+			if (window.event.stopPropagation)
+				window.event.stopPropagation();
+			else
+				window.event.cancelBubble = true;
+		}
+	}
+}
+function SkillSpec(specName, skillObj, specRanks)
+{
+	this.node = document.createElement("div");
+	this.node.className = "section_field";
+	this.node.specObj = this;
+	this.skillParent = skillObj;
+
+	// indent
+	var childNode = document.createElement("div");
+	childNode.className = "spec_indent";
+	childNode.innerHTML = " ";
+	this.node.appendChild(childNode);
+	
+	// name
+	var childNode = document.createElement("input");
+	childNode.className = "spec_name";
+	childNode.name = "Specializations_name";
+	childNode.type = "text";
+	childNode.setAttribute("onblur", "this.parentNode.specObj.name = this.value;");
+	this.node.appendChild(childNode);
+	this._name = childNode;
+	
+	// skill
+	childNode = document.createElement("input");
+	childNode.type = "hidden";
+	childNode.name = "Specializations_skill";
+	this.node.appendChild(childNode);
+	this._skill = childNode;
+	
+	// ranks
+	var childNode = document.createElement("input");
+	childNode.className = "skill_ranks";
+	childNode.name = "Specializations_ranks";
+	childNode.type = "text";
+	childNode.setAttribute("onblur", "this.parentNode.specObj.updateNode()");
+	this.node.appendChild(childNode);
+	this._ranks = childNode;
+
+	// total
+	childNode = document.createElement("div");
+	childNode.className = "skill_total";
+	this.node.appendChild(childNode);
+	this._total = childNode;
+
+	// average
+	childNode = document.createElement("div");
+	childNode.className = "skill_average";
+	this.node.appendChild(childNode);
+	this._average = childNode;
+
+	// delete
+	childNode = document.createElement("div");
+	childNode.className = "field_delete";
+	childNode.setAttribute("onclick", "this.parentNode.specObj.removeMe()");
+	childNode.innerText = "X";
+	this.node.appendChild(childNode);
+
+	this._name.value = specName;
+	this._skill.value = skillObj._name.value;
+	this._ranks.value = specRanks;
+	
+	this.total = function () {
+		return this.skillParent.total() + parseInt(this._ranks.value);
+	}
+	this.average = function () {
+		var half = this.total() / 2;
+		var flr = Math.floor(half);
+		if (half != flr) return "(" + flr + "+)";
+		return "(" + flr + ")";
+	}
+	this.updateNode = function () {
+		this._skill.value = this.skillParent._name.value;
+		this._total.innerHTML = this.total();
+		this._average.innerHTML = this.average();
+	}
+	this.removeMe = function () {
+		for (i = 0; i &lt; this.skillParent._specs.length; ++i)
+		{
+			if (this.skillParent._specs[i] == this)
+			{
+				this.skillParent._specs.splice(i,1);
+				break;
+			}
+		}
+		
+		remove_field(this.node);
+		this.node = 0;
+	}
+}
+				</script>
+				<div class="section_head" onclick="javascript:toggle_visible(skill_list,false)"><span class="skill_name">Skills</span><div class="skill_spec"> </div><span class="skill_base_label">Base</span><span class="skill_ranks">Levels</span><span class="skill_total">Rating</span><span class="skill_average">Avg.</span><div class="field_add" onclick="javascript:add_skill_to_section(skill_list, 'Skills', false)">+</div></div>
+				<div class="list" id="skill_list">
+				</div>
+			</div>
+			<div class="section">
+				<div class="section_head" onclick="javascript:toggle_visible(talent_list,false)">Talents<div class="field_add" onclick="javascript:add_field_to_section(talent_list, 'Talents', '')">+</div></div>
+				<div class="list" id="talent_list">
+				</div>
+			</div>
+			<div class="section">
+				<div class="section_head" onclick="javascript:toggle_visible(resource_list,false)">Resources<div class="field_add" onclick="javascript:add_field_to_section(resource_list, 'Resources', '')">+</div></div>
+				<div class="list" id="resource_list">
+				</div>
+			</div>
+			<div class="section">
+				<div class="section_head" onclick="javascript:toggle_visible(flaw_list,false)">Flaws<div class="field_add" onclick="javascript:add_field_to_section(flaw_list, 'Flaws', '')">+</div></div>
+				<div class="list" id="flaw_list">
+				</div>
+			</div>
+			<div class="section">
+				<script>
+function Weapon(wName, wLethal, wDamage, wModifier, wAttack, wRange, wCapacity, wRate, wSpeed, wWeight, wAmmo, wNotes)
+{
+	this.name = wName;
+	this.lethal = (wLethal == "true");
+	this.damage = parseInt(wDamage);
+	this.modifier = parseInt(wModifier);
+	this.attack = parseInt(wAttack);
+	this.range = wRange;
+	this.capacity = wCapacity;
+	this.rate = wRate;
+	this.speed = wSpeed;
+	this.weight = wWeight;
+	this.ammo = wAmmo;
+	this.notes = wNotes;
+	this.node = false;
+	
+	this.rating = function () {
+		return this.damage + " " + (this.lethal?"L":"N");
+	}
+	this.total = function () {
+		return this.attack + " " + (this.lethal?"L":"N");
+	}
+	this.average = function () {
+		var half = this.attack / 2;
+		var flr = Math.floor(half);
+		return "(" + flr + ((half==flr)?"":"+") + ")";
+	}
+	this.updateNode = function () {
+		if (this.node)
+		{
+			this.node.innerHTML = "";
+			
+			// name
+			var childNode = document.createElement("input");
+			childNode.type = "text";
+			childNode.className = "weapon_name";
+			childNode.name = "Weapons_name";
+			childNode.value = this.name;
+			childNode.setAttribute("onblur", "this.parentNode.weaponObj.name = this.value");
+			this.node.appendChild(childNode);
+			
+			childNode = document.createElement("span");
+			childNode.className = "weapon_toggle";
+			childNode.innerText = "[+]";
+			childNode.setAttribute("onclick", "toggle_visible(this.parentNode.lastChild, this)");
+			this.node.appendChild(childNode);
+			
+			childNode = document.createElement("input");
+			childNode.type = "hidden";
+			childNode.name = "Weapons_lethal";
+			childNode.value = this.lethal?"true":"false";
+			this.node.appendChild(childNode);
+			
+			// damage
+			childNode = document.createElement("input");
+			childNode.type = "text";
+			childNode.className = "weapon_damage";
+			childNode.name = "Weapons_damage";
+			childNode.value = this.damage;
+			childNode.setAttribute("onblur", "this.parentNode.weaponObj.damage = parseInt(this.value); this.parentNode.weaponObj.updateNode()");
+			this.node.appendChild(childNode);
+			
+			childNode = document.createElement("span");
+			childNode.className = "weapon_lethal";
+			childNode.innerText = (this.lethal?"L":"N");
+			childNode.setAttribute("onclick", "this.parentNode.weaponObj.lethal = !this.parentNode.weaponObj.lethal; this.parentNode.weaponObj.updateNode()");
+			this.node.appendChild(childNode);
+			
+			// modifier
+			childNode = document.createElement("input");
+			childNode.type = "text";
+			childNode.className = "weapon_size";
+			childNode.name = "Weapons_modifier";
+			childNode.value = this.modifier;
+			childNode.setAttribute("onblur", "this.parentNode.weaponObj.modifier = parseInt(this.value); this.parentNode.weaponObj.updateNode()");
+			this.node.appendChild(childNode);
+
+			// attack
+			childNode = document.createElement("input");
+			childNode.type = "text";
+			childNode.className = "weapon_attack";
+			childNode.name = "Weapons_attack";
+			childNode.value = this.attack;
+			childNode.setAttribute("onblur", "this.parentNode.weaponObj.attack = parseInt(this.value); this.parentNode.weaponObj.updateNode()");
+			this.node.appendChild(childNode);
+
+			childNode = document.createElement("span");
+			childNode.className = "weapon_lethal";
+			childNode.innerText = (this.lethal?"L":"N");
+			childNode.setAttribute("onclick", "this.parentNode.weaponObj.lethal = !this.parentNode.weaponObj.lethal; this.parentNode.weaponObj.updateNode()");
+			this.node.appendChild(childNode);
+
+			// average
+			childNode = document.createElement("div");
+			childNode.className = "weapon_average";
+			childNode.innerHTML = this.average();
+			this.node.appendChild(childNode);
+
+			childNode = document.createElement("span");
+			childNode.className = "weapon_lethal";
+			childNode.innerText = (this.lethal?"L":"N");
+			childNode.setAttribute("onclick", "this.parentNode.weaponObj.lethal = !this.parentNode.weaponObj.lethal; this.parentNode.weaponObj.updateNode()");
+			this.node.appendChild(childNode);
+			
+			// extended info
+			childNode = document.createElement("div");
+			childNode.className = "weapon_info";
+			childNode.style.display = "none";
+				// range
+				var innerNode = document.createElement("span");
+				innerNode.className="weapon_info_label";
+				innerNode.innerText= "Range:";
+				childNode.appendChild(innerNode);
+				innerNode = document.createElement("input");
+				innerNode.type = "text";
+				innerNode.className = "weapon_range";
+				innerNode.name = "Weapons_range";
+				innerNode.value = this.range;
+				innerNode.setAttribute("onblur", "this.parentNode.parentNode.weaponObj.range = this.value");
+				childNode.appendChild(innerNode);
+				
+				// capacity
+				innerNode = document.createElement("span");
+				innerNode.className="weapon_info_label";
+				innerNode.innerText= "Capacity:";
+				childNode.appendChild(innerNode);
+				innerNode = document.createElement("input");
+				innerNode.type = "text";
+				innerNode.className = "weapon_capacity";
+				innerNode.name = "Weapons_capacity";
+				innerNode.value = this.capacity;
+				innerNode.setAttribute("onblur", "this.parentNode.parentNode.weaponObj.capacity = this.value");
+				childNode.appendChild(innerNode);
+				
+				// rate
+				var innerNode = document.createElement("span");
+				innerNode.className="weapon_info_label";
+				innerNode.innerText= "Rate:";
+				childNode.appendChild(innerNode);
+				innerNode = document.createElement("input");
+				innerNode.type = "text";
+				innerNode.className = "weapon_rate";
+				innerNode.name = "Weapons_rate";
+				innerNode.value = this.rate;
+				innerNode.setAttribute("onblur", "this.parentNode.parentNode.weaponObj.rate = this.value");
+				childNode.appendChild(innerNode);
+				
+				// speed
+				var innerNode = document.createElement("span");
+				innerNode.className="weapon_info_label";
+				innerNode.innerText= "Speed:";
+				childNode.appendChild(innerNode);
+				innerNode = document.createElement("input");
+				innerNode.type = "text";
+				innerNode.className = "weapon_speed";
+				innerNode.name = "Weapons_speed";
+				innerNode.value = this.speed;
+				innerNode.setAttribute("onblur", "this.parentNode.parentNode.weaponObj.speed = this.value");
+				childNode.appendChild(innerNode);
+				
+				// weight
+				var innerNode = document.createElement("span");
+				innerNode.className="weapon_info_label";
+				innerNode.innerText= "Weight:";
+				childNode.appendChild(innerNode);
+				innerNode = document.createElement("input");
+				innerNode.type = "text";
+				innerNode.className = "weapon_weight";
+				innerNode.name = "Weapons_weight";
+				innerNode.value = this.weight;
+				innerNode.setAttribute("onblur", "this.parentNode.parentNode.weaponObj.weight = this.value");
+				childNode.appendChild(innerNode);
+				
+				// ammo
+				var innerNode = document.createElement("span");
+				innerNode.className="weapon_info_label";
+				innerNode.innerText= "Ammo:";
+				childNode.appendChild(innerNode);
+				innerNode = document.createElement("input");
+				innerNode.type = "text";
+				innerNode.className = "weapon_ammo";
+				innerNode.name = "Weapons_ammo";
+				innerNode.value = this.ammo;
+				innerNode.setAttribute("onblur", "this.parentNode.parentNode.weaponObj.ammo = this.value");
+				childNode.appendChild(innerNode);
+				
+				// notes
+				var innerNode = document.createElement("span");
+				innerNode.className="weapon_notes";
+				innerNode.innerText= "Notes:";
+				childNode.appendChild(innerNode);
+				innerNode = document.createElement("textarea");
+				innerNode.setAttribute("rows", "3");
+				innerNode.className = "weapon_notes";
+				innerNode.name = "Weapons_notes";
+				innerNode.innerText = this.notes;
+				innerNode.setAttribute("onblur", "this.parentNode.parentNode.weaponObj.notes = this.value");
+				childNode.appendChild(innerNode);
+			this.node.appendChild(childNode);
+		}
+	}
+}
+function add_weapon_to_section(section, sectionName, weaponObj)
+{
+	if (!weaponObj)
+	{
+		weaponObj = new Weapon("", "true", "0", "0", "0", "", "", "", "", "", "", "");
+	}
+	
+	if (section)
+	{
+		var newNode = document.createElement("div");
+		newNode.className = "section_field";
+		weaponObj.node = newNode;
+		newNode.weaponObj = weaponObj;
+		section.appendChild(newNode);
+		
+		weaponObj.updateNode();
+
+		if (window.event)
+		{
+			if (window.event.stopPropagation)
+				window.event.stopPropagation();
+			else
+				window.event.cancelBubble = true;
+		}
+	}
+}
+				</script>
+				<div class="section_head" onclick="javascript:toggle_visible(weapon_list,false)"><span class="weapon_name_label">Weapons</span><span class="weapon_rating">Rating</span><span class="weapon_size">Size</span><span class="weapon_attack_label">Attack</span><span class="weapon_average_label">Average</span><div class="field_add" onclick="javascript:add_weapon_to_section(weapon_list, 'Weapons', false)">+</div></div>
+				<div class="list" id="weapon_list">
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+var idx = 0;
+<xsl:apply-templates select="character/attribute" />
+
+updateSecondaries();
+		</script>
+	</div></body>
+</html>
+	</xsl:template>
+
+	<xsl:template match="attribute[@name='Skills']">
+var skillObj;
+		<xsl:for-each select="item">
+skillObj = new Skill(
+	"<xsl:value-of select="name" />", 
+	"<xsl:value-of select="attribute" />", 
+	"<xsl:value-of select="ranks" />");
+add_skill_to_section(skill_list, "Skills", skillObj);
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='Specializations']">
+var skillListNode = document.getElementById("skill_list");
+var skillNode;
+		<xsl:for-each select="item">
+skillNode = skillListNode.firstChild;
+while (skillNode)
+{
+	if (skillNode.skillObj &amp;&amp; skillNode.skillObj._name.value == "<xsl:value-of select="skill" />")
+	{
+		skillNode.skillObj.addSpec("<xsl:value-of select="name" />", parseInt("<xsl:value-of select="ranks" />"));
+		break;
+	}
+	skillNode = skillNode.nextSibling;
+}
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='Weapons']">
+var weaponObj;
+		<xsl:for-each select="item">
+weaponObj = new Weapon(
+	"<xsl:value-of select="name" />",
+	"<xsl:value-of select="lethal" />",
+	"<xsl:value-of select="damage" />",
+	"<xsl:value-of select="modifier" />",
+	"<xsl:value-of select="attack" />",
+	"<xsl:value-of select="range" />",
+	"<xsl:value-of select="capacity" />",
+	"<xsl:value-of select="rate" />",
+	"<xsl:value-of select="speed" />",
+	"<xsl:value-of select="weight" />",
+	"<xsl:value-of select="ammo" />",
+	"<xsl:value-of select="notes" />");
+add_weapon_to_section(weapon_list, "Weapons", weaponObj);
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='Talents']">
+		<xsl:for-each select="item">
+add_field_to_section(talent_list, "Talents", "<xsl:value-of select="." />");
+		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template match="attribute[@name='Resources']">
+		<xsl:for-each select="item">
+add_field_to_section(resource_list, "Resources", "<xsl:value-of select="." />");
+		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template match="attribute[@name='Flaws']">
+		<xsl:for-each select="item">
+add_field_to_section(flaw_list, "Flaws", "<xsl:value-of select="." />");
+		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template match="attribute[@name='Token']">
+var TokenData = "<xsl:value-of select="." />";
+SetImageData("Token", TokenData);
+	</xsl:template>
+
+	<!-- Default non-array attributes -->
+	<xsl:template match="attribute">
+SetTextValue("<xsl:value-of select="./@name" />", "<xsl:value-of disable-output-escaping="no" select="." />");
+	</xsl:template>
+</xsl:stylesheet>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>SVG10</string>
+		<string>Play one of the most exciting and cinematic generic RPGs available!  Pinnacle Entertainment Group's Savage Worlds RPG is now officially supported in Gamers' Toolkit.</string>
+		<string>Savage Worlds</string>
+		<string>system</string>
+		<integer>1</integer>
+	</array>
+	<string>Systems/SVG10.rules</string>
+	<string>Sheets/SVG10-PC-FULL.sheet</string>
+	<string>Sheets/SVG10-PC-FULL.pad.sheet</string>
+	<string>Sheets/SVG10-PC.xslt</string>
+	<string>Sheets/SVG10.css</string>
+	<string>Characters/SVG10-BuckSavage.char</string>
+	<string>Characters/SVG10-VirginiaDare.char</string>
+	<string>Characters/SVG10-DannyDare.char</string>
+	<string>Characters/SVG10-DocGold.char</string>
+	<string>Characters/SVG10-KatorTheApeBoy.char</string>
+	<string>Characters/SVG10-Buck.token</string>
+	<string>Characters/SVG10-Virginia.token</string>
+	<string>Characters/SVG10-Danny.token</string>
+	<string>Characters/SVG10-Dock.token</string>
+	<string>Characters/SVG10-Kator.token</string>
+</array>
+</plist>

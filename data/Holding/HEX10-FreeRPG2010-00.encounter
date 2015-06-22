@@ -1,0 +1,13 @@
+<encounter name="The Hook">
+	<p>To set the adventure, read or paraphrase the following to the players:</p>
+	
+	<boxtext>The world-famous physicist Dr. Lazlo Horvath has invited you along with
+	other distinguished guests and the press to a gala event at the Museum of Natural
+	History in New York City to unveil his latest invention.  In his invitation,
+	the brilliant but eccentric scientist wrote "I have built the prototype of a 
+	device I believe will cure all mankind's ills: starvation, disease, and war will
+	become ghosts of the past!"  On a beautiful spring evening, you will be witness
+	to one of the most amazing discoveries in mankind's history.</boxtext>
+	
+	<next name="Scene 1: &quot;We Will Change the World Forever!&quot;" file="HEX10-FreeRPG2010-01.encounter" />
+</encounter>

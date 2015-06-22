@@ -1,0 +1,214 @@
+#Levels #class_value
+{ width: 80px; }
+#Levels #level_value
+{ width: 25px; }
+#Levels .remove_button
+{ margin-right: 24px; }
+#Levels .Level_listitem
+{ display: inline; }
+
+#cols #left,
+#cols #right { width: 320px; }
+#cols #right { margin-left: 20px; }
+
+/* stats - Stats tab */
+#stats_attribs { width: 150px; margin-left: 10px; margin-bottom: 4px; }
+#stats { padding: 4px; }
+#stats .stats_attribs_line 
+{ 
+	width: 150px; 
+	margin-left: 10px;
+}
+#stats .stats_attribs_line .attribute
+{ width: 66%; vertical-align: middle; }
+#stats .stats_attribs_line_value
+{
+	width: 50%;
+	text-align: center;
+	margin-top: 2px;
+}
+#stats .stats_attribs_line_label
+{
+	width: 46%;
+	text-align: center;
+	background-color: black;
+	color: white;
+	font-size: 10pt;
+	height: 18px;
+	padding: 2px;
+}
+#stats .attribute[id$="Bonus"]
+{ width: 33%; text-align: center; vertical-align: middle; }
+#stats #Init { width: 150px; }
+#stats #Init_label { width: 64%; }
+#stats #Init_value { width: 33% }
+
+#stats_tok { float: right; margin-right: 10px; margin-bottom: 10px; }
+
+
+/* combat - Combat tab */
+
+#combat #BAB .label
+{
+	font-size: 14pt;
+	border: 0px solid black;
+	color: black;
+	width: 175px;
+}
+#combat #BAB .value_edit
+{ font-size: 14pt; }
+#BAB_value
+{ width: 140px; }
+
+#Attacks .label,
+#Armor .label
+{
+	color: black;
+	border: 0px solid black;
+}
+#Attacks #name_container
+{
+	background-color: darkgrey;
+	color: white;
+	padding: 2px;
+	width: 314px;
+}
+#Attacks #name_label
+{ 
+	width: 60px;
+	color: white;
+	font-size: 10pt;
+}
+#Attacks #name_value
+{ width: 215px; }
+
+#Attacks #bonus_container,
+#Attacks #damage_container,
+#Attacks #critical_container
+{ width: 32%; }
+
+#Attacks #bonus_label,
+#Attacks #damage_label,
+#Attacks #critical_label
+{ width: 40px; text-align: right; }
+
+#Attacks #bonus_value,
+#Attacks #damage_value,
+#Attacks #critical_value
+{ width: 60px; border-bottom: 1px solid grey; }
+
+#Attacks #range_container,
+#Attacks #type_container,
+#Attacks #ammo-type_container,
+#Attacks #ammo-cnt_container
+{ width: 49%; }
+
+#Attacks #range_label,
+#Attacks #type_label,
+#Attacks #ammo-type_label,
+#Attacks #ammo-count_label
+{ width: 40px; text-align: right; }
+
+#Attacks #range_value,
+#Attacks #type_value,
+#Attacks #ammo-type_value,
+#Attacks #ammo-count_value
+{ width: 110px; border-bottom: 1px solid grey; }
+
+#Attacks #notes_container
+{ width: 100%; }
+
+#Attacks #notes_value
+{ width: 100%; height: 40px; }
+
+#Attacks .remove_button,
+#Armor .remove_button
+{ position: relative; left: 280px; margin: 2px; }
+
+#Attacks .remove_button:before,
+#Armor .remove_button:before
+{ content: "Delete"; position: relative; left: -50px; }
+
+#Armor #name_container
+{
+	background-color: darkgrey;
+	color: white;
+	padding: 2px;
+	width: 314px;
+}
+
+#Armor #name_label
+{
+	width: 80px;
+	color: white;
+	font-size: 10pt;
+}
+#Armor #name_value
+{ width: 195px; }
+
+#Armor #type_container,
+#Armor #ac-bonus_container,
+#Armor #max-dex_container,
+#Armor #check-penalty_container,
+#Armor #spell-fail_container,
+#Armor #weight_container
+{ width: 49%; }
+
+#Armor #type_label,
+#Armor #ac-bonus_label,
+#Armor #max-dex_label,
+#Armor #check-penalty_label,
+#Armor #spell-fail_label,
+#Armor #weight_label
+{ width: 60px; text-align: right; }
+
+#Armor #type_value,
+#Armor #ac-bonus_value,
+#Armor #max-dex_value,
+#Armor #check-penalty_value,
+#Armor #spell-fail_value,
+#Armor #weight_value
+{ width: 90px; border-bottom: 1px solid grey; }
+
+#Armor #properties_label
+{ width: 65px; }
+#Armor #properties_value
+{ width: 250px; border-bottom: 1px solid grey; }
+
+/* skills - Abilities tab */
+#Skills .class-skill_column_header,
+#Skills #class-skill_value { width: 45px; }
+#Skills .name_column_header,
+#Skills #name_value { width: 120px; }
+#Skills .bonus_column_header,
+#Skills #bonus_value { width: 50px; }
+#Skills .attribute_column_header,
+#Skills #attribute_value { width: 70px; }
+
+#SpellCaps_content { text-align: center; }
+#SpellCaps .known_column_header,
+#SpellCaps .save-dc_column_header,
+#SpellCaps .level_column_header,
+#SpellCaps .per-day_column_header,
+#SpellCaps .bonus_column_header
+{
+	width: 60px;
+	margin-left: 1px;
+	margin-right: 1px;
+}
+#SpellCaps #known_value,
+#SpellCaps #save-dc_value,
+#SpellCaps #level_value,
+#SpellCaps #per-day_value,
+#SpellCaps #bonus_value
+{
+	border-bottom: 1px solid gray;
+	width: 60px;
+	margin-left: 1px;
+	margin-right: 1px;
+	text-align: center;
+}
+#SpellCaps #level_value { border-bottom: 0px solid white; }
+#SpellCaps .remove_button { display: none; }
+#SpellCap9 { margin-bottom: 4px; }
+

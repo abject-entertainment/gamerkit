@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<character system="OGL35" display-name="Abjectus" type="PC">
+	<attribute name="Name">Abjectus</attribute>
+	<attribute name="Player"></attribute>
+	<attribute name="Levels">Fighter 7</attribute>
+	<attribute name="Str">16</attribute>
+	<attribute name="Con">12</attribute>
+	<attribute name="Dex">16</attribute>
+	<attribute name="Int">13</attribute>
+	<attribute name="Wis">8</attribute>
+	<attribute name="Cha">10</attribute>
+	<attribute name="Align">NG</attribute>
+	<attribute name="Race">Human</attribute>
+	<attribute name="XP"></attribute>
+	<attribute name="Size">Medium</attribute>
+	<attribute name="Age">28</attribute>
+	<attribute name="Gender">Male</attribute>
+	<attribute name="Height">6' 2\"</attribute>
+	<attribute name="Weight">192lbs.</attribute>
+	<attribute name="Deity"></attribute>
+	<attribute name="Homeland"></attribute>
+	<attribute name="Eyes">Brown</attribute>
+	<attribute name="Hair">Black</attribute>
+	<attribute name="Skin"></attribute>
+	<attribute name="AC">20</attribute>
+	<attribute name="Fort">+6</attribute>
+	<attribute name="Ref">+5</attribute>
+	<attribute name="Will">+1</attribute>
+	<attribute name="Init">+7</attribute>
+	<attribute name="Touch">13</attribute>
+	<attribute name="FlatFooted">17</attribute>
+	<attribute name="Speed">20 ft.</attribute>
+	<attribute name="BAB">+7</attribute>
+	<attribute name="MaxHP">50</attribute>
+	<attribute name="CurHP">50</attribute>
+	<attribute name="NonlethalDamage"></attribute>
+	<attribute name="DmgReduction"></attribute>
+	<attribute name="Conditions"></attribute>
+	<attribute name="Specials">
+	</attribute>
+	<attribute name="Languages">
+		<item>Common</item>
+		<item>Goblinoid</item>
+	</attribute>
+	<attribute name="Feats">
+		<item>Big Game Hunter</item>
+		<item>Combat Expertise</item>
+		<item>Improved Initiative</item>
+		<item>Power Attack</item>
+		<item>Two-Weapon Defense</item>
+		<item>Two-Weapon Fighting</item>
+		<item>Weapon Focus (longsword)</item>
+		<item>Weapon Focus (short sword)</item>
+		<item>Weapon Specialization (longsword)</item>
+	</attribute>
+	<attribute name="Skills">
+		<item>
+			<name>Climb</name>
+			<bonus>+10</bonus>
+			<attribute>Str</attribute>
+			<class-skill>true</class-skill>
+		</item>
+		<item>
+			<name>Intimidate</name>
+			<bonus>+10</bonus>
+			<attribute>Cha</attribute>
+			<class-skill>true</class-skill>
+		</item>
+		<item>
+			<name>Ride</name>
+			<bonus>+13</bonus>
+			<attribute>Dex</attribute>
+			<class-skill>true</class-skill>
+		</item>
+		<item>
+			<name>Swim</name>
+			<bonus>+7</bonus>
+			<attribute>Str</attribute>
+			<class-skill>true</class-skill>
+		</item>
+	</attribute>
+	<attribute name="Attacks">
+		<item>
+			<name>+1 Frost longsword</name>
+			<bonus>+10/+5</bonus>
+			<damage>1d8+6</damage>
+			<critical>19-20 plus 1d6 cold</critical>
+			<range></range>
+			<type>Slash/Pierce</type>
+			<notes></notes>
+			<ammo-type></ammo-type>
+			<ammo-count></ammo-count>
+		</item>
+		<item>
+			<name>+1 short sword</name>
+			<bonus>+10</bonus>
+			<damage>1d6+2</damage>
+			<critical>19-20 x2</critical>
+			<range></range>
+			<type>Slash/Pierce</type>
+			<notes></notes>
+			<ammo-type></ammo-type>
+			<ammo-count></ammo-count>
+		</item>
+		<item>
+			<name>Masterwork composite longbow</name>
+			<bonus>+11/+6</bonus>
+			<damage>1d8+3</damage>
+			<critical>x3</critical>
+			<range></range>
+			<type></type>
+			<notes></notes>
+			<ammo-type>Arrow</ammo-type>
+			<ammo-count>20</ammo-count>
+		</item>
+	</attribute>
+	<attribute name="Armor">
+		<item>
+			<name>+1 breastplate</name>
+			<type>plate</type>
+			<ac-bonus>+6</ac-bonus>
+			<max-dex>+3</max-dex>
+			<check-penalty>-4</check-penalty>
+			<spell-fail>25%</spell-fail>
+			<weight>30lb.</weight>
+			<properties></properties>
+		</item>
+	</attribute>
+	<attribute name="Spells">
+	</attribute>
+	<attribute name="SpellSave"></attribute>
+	<attribute name="SpellCap0">
+		<known></known>
+		<save-dc></save-dc>
+		<per-day></per-day>
+		<bonus></bonus>
+	</attribute>
+	<attribute name="SpellCap1">
+		<known></known>
+		<save-dc></save-dc>
+		<per-day></per-day>
+		<bonus></bonus>
+	</attribute>
+	<attribute name="SpellCap2">
+		<known></known>
+		<save-dc></save-dc>
+		<per-day></per-day>
+		<bonus></bonus>
+	</attribute>
+	<attribute name="SpellCap3">
+		<known></known>
+		<save-dc></save-dc>
+		<per-day></per-day>
+		<bonus></bonus>
+	</attribute>
+	<attribute name="SpellCap4">
+		<known></known>
+		<save-dc></save-dc>
+		<per-day></per-day>
+		<bonus></bonus>
+	</attribute>
+	<attribute name="SpellCap5">
+		<known></known>
+		<save-dc></save-dc>
+		<per-day></per-day>
+		<bonus></bonus>
+	</attribute>
+	<attribute name="SpellCap6">
+		<known></known>
+		<save-dc></save-dc>
+		<per-day></per-day>
+		<bonus></bonus>
+	</attribute>
+	<attribute name="SpellCap7">
+		<known></known>
+		<save-dc></save-dc>
+		<per-day></per-day>
+		<bonus></bonus>
+	</attribute>
+	<attribute name="SpellCap8">
+		<known></known>
+		<save-dc></save-dc>
+		<per-day></per-day>
+		<bonus></bonus>
+	</attribute>
+	<attribute name="SpellCap9">
+		<known></known>
+		<save-dc></save-dc>
+		<per-day></per-day>
+		<bonus></bonus>
+	</attribute>
+	<attribute name="Equipment">
+		<item>Alchemist's fire x2</item>
+		<item>Elixir of fire breath</item>
+		<item>Potion of bear's endurance</item>
+		<item>potion of cure moderate wounds x3</item>
+		<item>Silver dagger</item>
+		<item>Gauntlets of ogre power</item>
+		<item>backpack</item>
+		<item>Rations x6</item>
+		<item>50 ft. Silken rope</item>
+	</attribute>
+	<attribute name="Personality"></attribute>
+	<attribute name="Appearance"></attribute>
+	<attribute name="Background"></attribute>
+	<attribute name="Wealth">30pp, 17gp</attribute>
+	<attribute name="Notes"></attribute>
+	<attribute name="Token">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</attribute>
+</character>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module name="A Nightmare at the Museum">
+	<credits>
+		<credit title="Written by:" name="Tom Cadorette" />
+		<credit title="Developed by:" name="Jeff Combos, Shawn Hilton, and M. Sechin Tower" />
+		<credit title="Concept and Design:" name="Jeff Combos" />
+		<credit title="Lead Editor:" name="Jodi Black" />
+		<credit title="Graphics and Layout:" name="Jeff Combos &amp; Ginormous Industries, LLC" />
+		<credit title="Interior Art:" name="Stephen Daniele and Jeff Slemons" />
+		<credit title="Pterosaur Wrangler:" name="Shawn Hilton" />
+	</credits>
+	
+	<summary>
+		<p>In 1936, a scientist's invention goes haywire at New York's Museum of 
+		Natural History, threatening to destroy the city.  The characters must 
+		battle monsters from Earth's prehistoric past, defeat nefarious Nazi agents, 
+		and close a rip in the fabric of space itself in order to save the Big Apple.</p>
+	</summary>
+	
+	<scene name="The Hook" file="HEX10-FreeRPG2010-00.encounter" />	
+	<scene name="Scene 1: &quot;We Will Change the World Forever!&quot;" file="HEX10-FreeRPG2010-01.encounter" />
+	<scene name="Scene 2: Chaos! Gunplay! Dinosaurs?!" file="HEX10-FreeRPG2010-02.encounter" />
+</module>

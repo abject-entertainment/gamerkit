@@ -1,0 +1,21 @@
+<encounter name="&quot;We Will Change the World Forever!&quot;">
+	<previous name="Scene 1: &quot;We Will Change the World Forever!&quot;" file="HEX10-FreeRPG2010-01.encounter" />
+
+	<boxtext>Dr. Horvath stands upon a raised stage...</boxtext>
+	
+	<boxtext>Among the spectators are the Mayor of New York,...</boxtext>
+
+	<p>Give the characters time to...</p>
+
+	<boxtext>Horvath steps up to a podium...</boxtext>
+
+	<boxtext>With a flourish, Horvath drops...</boxtext>
+
+	<beat>BOOM!</beat>
+
+	<boxtext>Just as Horvath prepares...</boxtext>
+
+	<p>The woman is <character name="Katya Sieben">Katya Sieben</character>...</p>
+
+	<next name="Scene 2: Chaos! Gunplay! Dinosaurs?!" file="HEX10-FreeRPG2010-02.encounter" />
+</encounter>

@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:template match="/module">
+<html>
+	<head>
+		<meta name = "viewport" content = "initial-scale = 1.0, user-scalable = no" />
+		<meta name = "viewport" content = "width = device-width" />
+		<style type="text/css">
+#content {
+	width: 320px;
+}
+
+#credits {
+	position: relative;
+	display: block;
+}
+.credit {
+}
+.credit-title {
+	width: 160px;
+	font-size: 10pt;
+	font-family: sans-serif;
+	text-align: right;
+	vertical-align: top;
+}
+.credit-name {
+	width: 160px;
+	font-size: 10pt;
+	font-family: sans-serif;
+	text-align: left;
+	vertical-align: top;
+}
+
+#summary {
+	width: 100%;
+}
+.summary-block {
+	width: 100%;
+	font-size: 10pt;
+	font-family: sans-serif;
+	border: 0pt solid black;
+	line-height: 1.0;
+	padding: 2px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	white-space: pre-line;
+}
+		</style>
+		<script lang="javascript">
+function editInput(node, type)
+{ // change to an input node with type text
+	if (node)
+	{
+		var parentNode = node.parentNode;
+		if (parentNode)
+		{
+			var editNode = document.createElement("INPUT");
+			editNode.type = type;
+			editNode.className = node.className;
+			editNode.value = node.innerHTML;
+			parentNode.replaceChild(editNode, node);
+		}
+	}
+}
+function editText(node, addButton)
+{ // change to a textarea node
+	if (node)
+	{
+		var parentNode = node.parentNode;
+		if (parentNode)
+		{
+			var editNode = document.createElement("TEXTAREA");
+//			editNode.setAttribute("onkeydown", "editKeypress(event, this)");
+			editNode.setAttribute("onkeydown", "checkSize(this)");
+			editNode.setAttribute("onblur", "saveEdit(this)");
+			editNode.className = node.className;
+			editNode.innerHTML = node.innerHTML;
+			editNode.replacementNode = node;
+			parentNode.replaceChild(editNode, node);
+			checkSize(editNode);
+			editNode.focus();
+		}
+	}
+}
+function unEdit(node, newValue)
+{
+	if (node)
+	{
+		var parentNode = node.parentNode;
+		if (parentNode)
+		{
+			var textNode = node.replacementNode;
+			node.setAttribute("onblur", ""); // prevent recursion.
+			textNode.innerHTML = newValue;
+			if (newValue == "")
+				parentNode.removeChild(node);
+			else
+				parentNode.replaceChild(textNode, node);
+		}
+	}
+}
+function cancelEdit(node)
+{
+	unEdit(node.editNode, node.editNode.replacementNode.innerHTML);
+	node.editControlBlock.parentNode.removeChild(node.editControlBlock);
+}
+function saveEdit(node)
+{
+	if (node.nodeName == "INPUT" ||
+		node.nodeName == "TEXTAREA")
+	{
+		unEdit(node, node.value);
+	}
+	else
+	{
+		unEdit(node, node.innerHTML);
+	}
+}
+function appendEdit(node)
+{
+	var newBlock = node.cloneNode(false);
+	newBlock.innerHTML = "";
+	if (node.nextSibling)
+		node.parentNode.insertBefore(newBlock, node.nextSibling);
+	else
+		node.parentNode.appendChild(newBlock);
+	editText(newBlock);
+}
+function checkSize(node)
+{
+	var rowHeight = node.offsetHeight / node.rows;
+	if (node.offsetHeight &lt; node.scrollHeight)
+	{
+		node.rows = Math.floor((node.scrollHeight + (rowHeight-1)) / rowHeight);
+	}
+}
+function editKeypress(event, node)
+{
+	if (event)
+	{
+		if (event.keyCode == 13)
+		{
+			
+			var textNode = node.replacementNode;
+			saveEdit(node);
+			appendEdit(textNode);
+
+			event.stopPropagation();
+		}
+		else if (event.keyCode == 8)
+		{
+			if (node.value.selectionStart == node.value.selectionEnd &amp;&amp;
+				node.value.selectionStart == 0)
+			{
+				var txt = node.innerHTML;
+				var prev = node.previousSibling;
+				if (prev)
+				{
+					saveEdit(node);
+					prev.innerHTML = prev.innerHTML + txt;
+					editText(prev);
+				}
+			}
+		}
+	}
+	else	
+	{
+		checkSize(node);
+	}
+}
+function addCreditLine(node)
+{
+	var newLine = document.createElement("TR");
+	newLine.className = "credit";
+	newLine.innerHTML = "<td class='credit-title'><div class='credit-title' onclick='editText(this,true)'></div></td>" +
+		"<td class='credit-name'><div class='credit-name' onclick='editText(this,true)'></div></td>";
+	node.parentNode.insertBefore(newLine, node);
+}
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<h1 id="title"><xsl:value-of select="@name" disable-output-escaping="yes" /></h1>
+			<xsl:apply-templates select="credits" />
+			<h2 id="summary-label">Summary</h2>
+			<xsl:apply-templates select="summary" />
+			<h2 id="scenes-label">Scenes:</h2>
+			<ul id="scenes">
+				<xsl:apply-templates select="scene" />
+			</ul>
+		</div>
+	</body>
+</html>
+	</xsl:template>
+
+	<xsl:template match="credits">
+		<table id="credits">
+			<xsl:for-each select="credit">
+				<tr class="credit">
+					<td class="credit-title"><div class="credit-title" onclick="editText(this,true)"><xsl:value-of select="@title" disable-output-escaping="yes" /></div></td>
+					<td class="credit-name"><div class="credit-name" onclick="editText(this,true)"><xsl:value-of select="@name" disable-output-escaping="yes" /></div></td>
+				</tr>
+			</xsl:for-each>
+			<tr><td colspan="2" id="credit-add-line" onclick="addCreditLine(this)">[ + ]</td></tr>
+		</table>
+	</xsl:template>
+	
+	<xsl:template match="summary">
+		<div id="summary">
+			<xsl:for-each select="p">
+				<div class="summary-block" onclick="editText(this,true)"><xsl:value-of select="." disable-output-escaping="yes" /></div>
+			</xsl:for-each>
+		</div>
+	</xsl:template>
+	
+	<xsl:template match="scene">
+		<li class="scene">
+			<xsl:element name="a">
+				<xsl:attribute name="href">gamerstoolkit://openEncounter?file=<xsl:value-of select="@file" /></xsl:attribute>
+				<xsl:value-of select="@name" disable-output-escaping="yes" />
+			</xsl:element>
+		</li>
+	</xsl:template>
+</xsl:stylesheet>

@@ -1,0 +1,342 @@
+
+BODY, TD, LI, INPUT
+{
+	font-family: sans-serif;
+	font-size: 12pt;
+	margin: 0px;
+	border: 0px solid black;
+}
+
+BODY
+{
+	margin-top: 60px;
+}
+
+H1
+{
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 24pt;
+}
+
+#debug_text
+{
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	width: 320px;
+	font-family: monospace;
+	white-space: pre-wrap;
+	border: 2px solid red;
+}
+
+#debug_input
+{
+	width: 100%;
+	border: 1px solid black;
+}
+
+#debug_output
+{
+	height: 300px;
+	overflow: auto;
+}
+
+.block_plain
+{
+}
+
+.block_columns
+{
+	vertical-align: top;
+}
+
+.block_column
+{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.block_table
+{
+}
+
+.block_list
+{
+}
+
+.column_header
+{
+	display: inline-block;
+}
+
+.columns_item
+{
+	display: inline-block;
+}
+
+.inline_list
+{
+	display: inline-block;
+}
+
+.inline_item
+{
+	display: inline-block;
+}
+
+.list_collapse
+{
+	width: 24px;
+	height: 24px;
+	background-image: url("style/collapse24.png");
+	float: right;
+	display: inline-block;
+}
+.list_expand
+{
+	width: 24px;
+	height: 24px;
+	background-image: url("style/expand24.png");
+	float: right;
+	display: none;
+}
+.list_item_collapse
+{
+	width: 16px;
+	height: 16px;
+	background-image: url("style/collapse16.png");
+	float: right;
+	display: inline-block;
+}
+.list_item_expand
+{
+	width: 16px;
+	height: 16px;
+	background-image: url("style/expand16.png");
+	float: right;
+	display: none;
+}
+
+
+
+#s_container { width: 90%; }
+#s_value { width: 100%; }
+
+.block_pages { margin-top: 10px; }
+.block_page
+{
+	border-left: 1 solid black;
+	border-right: 1 solid black;
+	border-bottom: 1 solid black;
+	padding-top: 5px;
+	display: none;
+}
+
+.page_tab
+{
+	display: inline-block;
+}
+
+.plain_line
+{
+}
+
+.attribute
+{
+	display: inline-block;
+	width: 100%;
+}
+
+.label,
+.list_inline .list_label
+{
+	width: 98%;
+	color: grey;
+	border-top: 1px solid grey;
+	display: inline-block;
+	text-align: left;
+	float: left;
+	font-size: 8pt;
+}
+
+.value,
+.value_edit,
+.value_select
+{
+	width: 98%;
+	display: inline-block;
+}
+
+.value { padding-left: 4px; }
+
+.token_image
+{
+	width: 128px;
+	height: 128px;
+}
+
+.attribute.line_1,
+.inline_item.line_1
+{ width: 100%; }
+.attribute.line_2,
+.inline_item.line_2
+{ width: 49.5%; }
+.attribute.line_3,
+.inline_item.line_3
+{ width: 33%; }
+.attribute.line_4,
+.inline_item.line_4
+{ width: 24.5%; }
+.attribute.line_5,
+.inline_item.line_5
+{ width: 19.5%; }
+.attribute.line_6,
+.inline_item.line_6
+{ width: 16.5%; }
+.attribute.line_8,
+.inline_item.line_8
+{ width: 12.25%; }
+.attribute.line_10,
+.inline_item.line_10
+{ width: 9.9%; }
+
+
+.attribute.line_p10,
+.inline_item.line_p10
+{ width: 9.5% }
+.attribute.line_p20,
+.inline_item.line_p20
+{ width: 19.5% }
+.attribute.line_p25,
+.inline_item.line_p25
+{ width: 24.5% }
+.attribute.line_p33,
+.inline_item.line_p33
+{ width: 33% }
+.attribute.line_p40,
+.inline_item.line_p40
+{ width: 39.5% }
+.attribute.line_p50,
+.inline_item.line_p50
+{ width: 49.5% }
+.attribute.line_p66,
+.inline_item.line_p66
+{ width: 66% }
+.attribute.line_p75,
+.inline_item.line_p75
+{ width: 74.5% }
+.attribute.line_p80,
+.inline_item.line_p80
+{ width: 79.5% }
+.attribute.line_p90,
+.inline_item.line_p90
+{ width: 89.5% }
+
+.page_tab
+{
+	text-align: center;
+	margin-left: 0px;
+	height: 20px;
+	padding-top: 4px;
+}
+.tab_inactive:before
+{
+	content: url("style/tableft.png");
+	float: left;
+	position: relative;
+	top: -4px;
+}
+.tab_inactive:after
+{
+	content: url("style/tabright.png");
+	float: right;
+	position: relative;
+	top: -4px;
+}
+.tab_inactive { background-image: url("style/tabbg.png"); }
+.tab_active:before
+{
+	content: url("style/atableft.png");
+	float: left;
+	position: relative;
+	top: -4px;
+}
+.tab_active:after
+{
+	content: url("style/atabright.png");
+	float: right;
+	position: relative;
+	top: -4px;
+}
+.tab_active { background-image: url("style/atabbg.png"); }
+
+.text_area
+{
+	width: 100%;
+	height: 100px;
+	display: block;
+}
+
+.block_list.list_rows
+{
+	padding-bottom: 25px;
+}
+.list_rows .list_label,
+.label.major_section
+{
+	width: 100%;
+	font-size: 14pt;
+	height: 24px;
+	color: white;
+	background-color: black;
+	text-align: center;
+}
+.list_rows .add_button
+{
+	width: 100%;
+	height: 24px;
+	display: block;
+	float: right;
+	background-image: url("style/addbtn_bottom.png");
+}
+.list_inline .add_button
+{
+	width: 16px;
+	height: 16px;
+	background-image: url("style/addbtn16.png");
+	display: inline-block;
+	margin-left: 8px;
+}
+.remove_button
+{
+	width: 16px;
+	height: 16px;
+	background-image: url("style/rembtn16.png");
+	display: inline-block;
+	margin-right: 8px;
+	position: relative;
+	left: 8px;
+	top: 2px;
+}
+
+.slider_tick
+{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	margin-right: 4px;
+}
+.slider_tick[tick_state="on"]
+{ background-image: url("style/tickon16.png"); }
+.slider_tick[tick_state="off"]
+{ background-image: url("style/tickoff16.png"); }
+
+DIV[gtselected="true"],
+DIV[gtselected="true"] INPUT[type="text"]
+{ background-color: lightblue; }
+
+#DieRolls #name_container,
+#DieRolls .name_column_header { width: 45%; }
+#DieRolls #roll_container,
+#DieRolls .roll_column_header { width: 45%; }

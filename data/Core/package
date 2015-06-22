@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   Core-SUPPORT.package
+   RPG Toolkit
+
+   Created by Ben Taggart on 7/6/10.
+   Copyright 2010 Abject Entertainment. All rights reserved.
+-->
+<plist version="1.0">
+    <array>
+		<array>
+			<string>Core</string>
+			<string>Shared content files.  This package is necessary for the proper functionality of the application.</string>
+			<string>Core files</string>
+			<string>support</string>
+			<integer>2</integer>
+		</array>
+		
+		<string>Systems/charsheet.js</string>
+		<string>Systems/core.css</string>
+		<string>Systems/style/*</string>
+		<string>Systems/start.html</string>
+		<string>Systems/start-ipad.html</string>
+		<string>Systems/ui.js</string>
+		<string>Systems/ui.css</string>
+		<string>Systems/dice.js</string>
+		<string>Systems/dice.css</string>
+		<string>Systems/animate.js</string>
+	</array>
+</plist>

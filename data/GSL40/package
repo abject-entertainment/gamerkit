@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>GSL40</string>
+		<string>Support for content compatible with the 4th edition Game System License as defined by Wizards of the Coast. Art by Chris Madden.</string>
+		<string>4th Edition Fantasy System Support</string>
+		<string>system</string>
+		<integer>4</integer>
+	</array>
+	<string>Systems/GSL40.rules</string>
+	<string>Systems/GSL40-PC-iplay4e.import</string>
+	<string>Systems/GSL40-PC-dnd4e.import</string>
+	<string>Sheets/GSL40.xslt</string>
+	<string>Sheets/GSL40-PC-FULL.sheet</string>
+	<string>Sheets/GSL40-PC-FULL.pad.sheet</string>
+	<string>Sheets/GSL40.css</string>
+	<string>Characters/GSL40-Abjectus.char</string>
+	<string>Characters/GSL40-Kirana.char</string>
+	<string>Characters/GSL40-Hammerthorn.char</string>
+	<string>Characters/GSL40-Infaledill.char</string>
+	<string>Characters/GSL40-Korth.char</string>
+	<string>Media/GSL40-Abjectus.token</string>
+	<string>Media/GSL40-Kirana.token</string>
+	<string>Media/GSL40-Elf.token</string>
+	<string>Media/GSL40-Dwarf.token</string>
+	<string>Media/GSL40-HalfOrc.token</string>
+</array>
+</plist>

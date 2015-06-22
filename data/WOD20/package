@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   WOD20-SUPPORT.package
+   RPG Toolkit
+
+   Created by Ben Taggart on 7/6/10.
+   Copyright 2010 Abject Entertainment. All rights reserved.
+-->
+<plist version="1.0">
+    <array>
+		<array>
+			<string>WOD20</string>
+			<string>World of Darkness System support.</string>
+			<string>World of Darkness</string>
+			<string>system</string>
+		</array>
+		<string>Systems/WOD20.rules</string>
+		<string>Characters/WOD20-MaxSampler-0.char</string>
+		<string>Sheets/WOD20-PC-QUICK.sheet</string>
+		<string>Sheets/WOD20-PC-FULL.sheet</string>
+    </array>
+</plist>

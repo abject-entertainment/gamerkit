@@ -1,0 +1,113 @@
+<character system="WOD20" display-name="Max Sampler" type="PC">
+	<attribute name="Name">Max Sampler</attribute>
+	<attribute name="Player">You</attribute>
+	<attribute name="Level">1</attribute>
+	<attribute name="Align">Good</attribute>
+	<attribute name="Race">Human</attribute>
+	<attribute name="Class">Fighter</attribute>
+	<attribute name="Str">15</attribute>
+	<attribute name="Dex">14</attribute>
+	<attribute name="Con">13</attribute>
+	<attribute name="Int">12</attribute>
+	<attribute name="Wis">10</attribute>
+	<attribute name="Cha">8</attribute>
+	<!-- vitals -->
+	<attribute name="Player"></attribute>
+	<attribute name="Name">Max Sampler</attribute>
+	<attribute name="Level">1</attribute>
+	<attribute name="Class">Fighter</attribute>
+	<attribute name="Paragon"></attribute>
+	<attribute name="Epic"></attribute>
+	<attribute name="XP">0</attribute>
+	<attribute name="Race">Human</attribute>
+	<attribute name="Size">M</attribute>
+	<attribute name="Age">19</attribute>
+	<attribute name="Gender">M</attribute>
+	<attribute name="Height">6' 2\"</attribute>
+	<attribute name="Weight">186 lbs.</attribute>
+	<attribute name="Align">G</attribute>
+	<attribute name="Deity"></attribute>
+	<attribute name="Company"></attribute>
+	
+	<!-- ability scores -->
+	<attribute name="Str">15</attribute>
+	<attribute name="Dex">14</attribute>
+	<attribute name="Con">13</attribute>
+	<attribute name="Int">12</attribute>
+	<attribute name="Wis">10</attribute>
+	<attribute name="Cha">8</attribute>
+	
+	<!-- defenses -->
+	<attribute name="AC">18</attribute>
+	<attribute name="Fort">16</attribute>
+	<attribute name="Ref">12</attribute>
+	<attribute name="Will">10</attribute>
+	
+	<!-- other stats -->
+	<attribute name="Init">+1</attribute>
+	<attribute name="Speed">6</attribute>
+	<attribute name="AP">1</attribute>
+	<attribute name="MaxHP">32</attribute>
+	<attribute name="CurHP">32</attribute>
+	<attribute name="Surges">7</attribute>
+	<attribute name="CurSurges">7</attribute>
+	<attribute name="SecondWind">false</attribute>
+	<attribute name="DeathSave">0</attribute>
+	<attribute name="RaceFeatures">
+		<item>Human feature 1</item>
+		<item>Human feature 2</item>
+	</attribute>
+	<attribute name="ClassFeatures">
+		<item>Fighter feature 1</item>
+		<item>Fighter feature 2</item>
+	</attribute>
+	<attribute name="ParagonFeatures">
+	</attribute>
+	<attribute name="EpicFeatures">
+	</attribute>
+	<attribute name="Languages">
+	</attribute>
+	
+	<!-- abilities -->
+	<attribute name="Feats">
+		<item>Feat 1</item>
+		<item>Feat 2</item>
+		<item>Feat 3</item>
+	</attribute>
+	<attribute name="Skills">
+		<item>
+			<name>Skill</name>
+			<trained>true</trained>
+			<attribute>str</attribute>
+		</item>
+	</attribute>
+	<attribute name="Attacks">
+	</attribute>
+	<attribute name="Powers">
+	</attribute>
+	<attribute name="MagicItems">
+		<item>Bag of Holding</item>
+	</attribute>
+	<attribute name="MIUsed">0</attribute>
+	<attribute name="Rituals">
+		<item>Raise Dead</item>
+		<item>Gate</item>
+	</attribute>
+	<attribute name="Allies">
+		<item>
+			<name>Gus</name>
+			<notes>Gus is a dog.</notes>
+		</item>
+	</attribute>
+	
+	<!-- characteristics -->
+	<attribute name="Equipment">
+		<item>Sword</item>
+		<item>Belt</item>
+	</attribute>
+	<attribute name="Personality">Nice</attribute>
+	<attribute name="Appearance">Handsome</attribute>
+	<attribute name="Background">Stuff</attribute>
+	<attribute name="Wealth">20 gp.</attribute>
+	<attribute name="Notes"></attribute>
+</character>

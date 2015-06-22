@@ -1,0 +1,232 @@
+<ruleset name="WOD20" display-name="World of Darkness">
+	<datasets>
+		<dataset name="skill">
+			<data name="name" type="string" default="Skill" />
+			<data name="trained" type="bool" default="false" />
+			<data name="attribute" type="option">
+				<option value="str" />
+				<option value="dex" />
+				<option value="con" />
+				<option value="int" />
+				<option value="wis" />
+				<option value="cha" />
+			</data>
+		</dataset>
+		<dataset name="attack">
+			<data name="weapon" type="string" />
+			<data name="defense" type="option">
+				<option value="AC" />
+				<option value="Fort" />
+				<option value="Ref" />
+				<option value="Will" />
+			</data>
+			<data name="bonus" type="+int" />
+		</dataset>
+		<dataset name="power">
+		</dataset>
+		<dataset name="ally">
+			<data name="Name" type="string" />
+			<data name="Notes" type="string" />
+		</dataset>
+	</datasets>
+	
+	<attributes>
+		<attribute name="Name" display-name="Name" value-type="string" />
+		<attribute name="Player" display-name="Player Name" value-type="string" />
+		<attribute name="Level" display-name="Level" value-type="int" />
+		<attribute name="Str" display-name="Str" value-type="int" />
+		<attribute name="Con" display-name="Con" value-type="int" />
+		<attribute name="Dex" display-name="Dex" value-type="int" />
+		<attribute name="Int" display-name="Int" value-type="int" />
+		<attribute name="Wis" display-name="Wis" value-type="int" />
+		<attribute name="Cha" display-name="Cha" value-type="int" />
+		<attribute name="Align" display-name="Alignment" value-type="option">
+			<option name="LG" value="Lawful Good" />
+			<option name="G" value="Good" />
+			<option name="Un" value="Unaligned" />
+			<option name="E" value="Evil" />
+			<option name="CE" vlaue="Chaotic Evil" />
+		</attribute>
+		<attribute name="Race" display-name="Race" value-type="option...">
+			<option name="Dragonborn" display-name="Dragonborn" />
+			<option name="Dwarf" display-name="Dwarf" />
+			<option name="Eladrin" display-name="Eladrin" />
+			<option name="Elf" display-name="Elf" />
+			<option name="Gnome" display-name="Gnome" />
+			<option name="Half-Elf" display-name="Half-Elf" />
+			<option name="Half-Orc" display-name="Half-Orc" />
+			<option name="Halfling" display-name="Halfling" />
+			<option name="Human" display-name="Human" />
+			<option name="Tiefling" display-name="Tiefling" />
+		</attribute>
+		<attribute name="Class" display-name="Class" value-type="option...">
+			<option name="Barbarian" display-name="Barbarian" />
+			<option name="Bard" display-name="Bard" />
+			<option name="Cleric" display-name="Cleric" />
+			<option name="Druid" display-name="Druid" />
+			<option name="Fighter" display-name="Fighter" />
+			<option name="Paladin" display-name="Paladin" />
+			<option name="Ranger" display-name="Ranger" />
+			<option name="Rogue" display-name="Rogue" />
+			<option name="Sorcerer" display-name="Sorcerer" />
+			<option name="Warlock" display-name="Warlock" />
+			<option name="Warlord" display-name="Warlord" />
+			<option name="Wizard" display-name="Wizard" />
+		</attribute>
+		<attribute name="Paragon" display-name="Paragon Path" value-type="string" />
+		<attribute name="Epic" display-name="Epic Destiny" value-type="string" />
+		<attribute name="XP" display-name="Experience Points" value-type="int" />
+		<attribute name="Size" display-name="Size" value-type="option">
+			<option name="D" display-name="Diminutive" />
+			<option name="T" display-name="Tiny" />
+			<option name="S" display-name="Small" />
+			<option name="M" display-name="Medium" />
+			<option name="L" display-name="Large" />
+			<option name="H" display-name="Huge" />
+			<option name="G" display-name="Gargantuan" />
+			<option name="C" display-name="Colossal" />
+		</attribute>
+		<attribute name="Age" display-name="Age" value-type="int" />
+		<attribute name="Gender" display-name="Gender" value-type="option...">
+			<option name="M" display-name="Male" />
+			<option name="F" display-name="Female" />
+		</attribute>
+		<attribute name="Height" display-name="Height" value-type="string" />
+		<attribute name="Weight" display-name="Weight" value-type="string" />
+		<attribute name="Deity" display-name="Deity" value-type="string" />
+		<attribute name="Company" display-name="Adventuring Company or Other Affiliation" value-type="string" />
+		<attribute name="AC" display-name="Armor Class" value-type="int" />
+		<attribute name="Fort" display-name="Fortitude" value-type="int" />
+		<attribute name="Ref" display-name="Reflex" value-type="int" />
+		<attribute name="Will" display-name="Willpower" value-type="int" />
+		<attribute name="Init" display-name="Initiative" value-type="+int" />
+		<attribute name="Speed" display-name="Speed" value-type="int" />
+		<attribute name="AP" display-name="Action Points" value-type="int" />
+		<attribute name="MaxHP" display-name="Max Hit Points" value-type="int" />
+		<attribute name="CurHP" display-name="Current Hit Points" value-type="int" />
+		<attribute name="Surges" display-name="Healing Surges per Day" value-type="int" />
+		<attribute name="CurSurges" display-name="Healing Surges Remaining" value-type="int" />
+		<attribute name="SecondWind" display-name="Second Wind Used" value-type="bool" />
+		<attribute name="DeathSave" display-name="Death Saving Throw Failures" value-type="int" />
+		<attribute name="RaceFeatures" display-name="Race Features" value-type="list(string)" />
+		<attribute name="ClassFeatures" display-name="Class Features" value-type="list(string)" />
+		<attribute name="ParagonFeatures" display-name="Paragon Path Features" value-type="list(string)" />
+		<attribute name="EpicFeatures" display-name="Epic Destiny Features" value-type="list(string)" />
+		<attribute name="Languages" display-name="Languages Known" value-type="list(string)" />
+		<attribute name="Feats" display-name="Feats" value-type="list(string)" />
+		<attribute name="Skills" display-name="Skills" value-type="list(skill)" />
+		<attribute name="Attacks" display-name="Basic Attacks" value-type="list(attack)" />
+		<attribute name="Powers" display-name="Powers" value-type="list(power)" />
+		<attribute name="MagicItems" display-name="Magic Items" value-type="list(string)" />
+		<attribute name="MIUsed" display-name="Daily Item Powers Used" value-type="int" />
+		<attribute name="Rituals" display-name="Rituals" value-type="list(string)" />
+		<attribute name="Allies" display-name="Companions and Allies" value-type="list(ally)" />
+		<attribute name="Equipment" display-name="Other Equipment" value-type="list(string)" />
+		<attribute name="Personality" display-name="Personality Traits" value-type="string" />
+		<attribute name="Appearance" display-name="Mannerisms and Appearance" value-type="string" />
+		<attribute name="Background" display-name="Character Background" value-type="string" />
+		<attribute name="Wealth" display-name="Coins and Other Wealth" value-type="string" />
+		<attribute name="Notes" display-name="Session and Campaign Notes" value-type="string" />
+	</attributes>
+	
+	<character-types>
+		<character-type name="PC" display-name="PC" sort-as="pc">
+			<!-- vitals -->
+			<attribute name="Player" />
+			<attribute name="Name" />
+			<attribute name="Level" />
+			<attribute name="Class" />
+			<attribute name="Paragon" />
+			<attribute name="Epic" />
+			<attribute name="XP" />
+			<attribute name="Race" />
+			<attribute name="Size" />
+			<attribute name="Age" />
+			<attribute name="Gender" />
+			<attribute name="Height" />
+			<attribute name="Weight" />
+			<attribute name="Align" />
+			<attribute name="Deity" />
+			<attribute name="Company" />
+			
+			<!-- ability scores -->
+			<attribute name="Str" />
+			<attribute name="Dex" />
+			<attribute name="Con" />
+			<attribute name="Int" />
+			<attribute name="Wis" />
+			<attribute name="Cha" />
+			
+			<!-- defenses -->
+			<attribute name="AC" />
+			<attribute name="Fort" />
+			<attribute name="Ref" />
+			<attribute name="Will" />
+			
+			<!-- other stats -->
+			<attribute name="Init" />
+			<attribute name="Speed" />
+			<attribute name="AP" />
+			<attribute name="MaxHP" />
+			<attribute name="CurHP" />
+			<attribute name="Surges" />
+			<attribute name="CurSurges" />
+			<attribute name="SecondWind" />
+			<attribute name="DeathSave" />
+			<attribute name="RaceFeatures" />
+			<attribute name="ClassFeatures" />
+			<attribute name="ParagonFeatures" />
+			<attribute name="EpicFeatures" />
+			<attribute name="Languages" />
+			
+			<!-- abilities -->
+			<attribute name="Feats" />
+			<attribute name="Skills" />
+			<attribute name="Attacks" />
+			<attribute name="Powers" />
+			<attribute name="MagicItems" />
+			<attribute name="MIUsed" />
+			<attribute name="Rituals" />
+			<attribute name="Allies" />
+			
+			<!-- characteristics -->
+			<attribute name="Equipment" />
+			<attribute name="Personality" />
+			<attribute name="Appearance" />
+			<attribute name="Background" />
+			<attribute name="Wealth" />
+			<attribute name="Notes" />
+		</character-type>
+		
+		<character-type name="NPC" display-name="NPC" sort-as="npc">
+			<attribute name="Name" />
+			<attribute name="Level" />
+			<attribute name="Align" />
+			<attribute name="Race" />
+			<attribute name="Class" />
+			<attribute name="Str" />
+			<attribute name="Dex" />
+			<attribute name="Con" />
+			<attribute name="Int" />
+			<attribute name="Wis" />
+			<attribute name="Cha" />
+		</character-type>
+		
+		<character-type name="Monster" display-name="Monster" sort-as="monster">
+		</character-type>
+		
+		<character-type name="Minion" display-name="Minion" sort-as="monster">
+		</character-type>
+	</character-types>
+	
+	<character-sheets>
+		<character-sheet name="PC-FULL" type="PC" display-name="Full Sheet" file="WOD20-PC-FULL.sheet" 
+			use-for-create="true" use-for-edit="true" />
+		<character-sheet name="PC-QUICK" type="PC" display-name="Quick Reference" file="WOD20-PC-QUICK.sheet" 
+			use-for-tracking="true" />
+	</character-sheets>
+
+	<encounter-elements>
+		<encounter-element name="encelem" display-name="Not sure what goes here" />
+	</encounter-elements>
+</ruleset>

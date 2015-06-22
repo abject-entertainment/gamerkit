@@ -1,0 +1,25 @@
+<encounter name="Chaos! Gunplay! Dinosaurs?!">
+	<previous name="Scene 2: Chaos! Gunplay! Dinosaurs?!" file="HEX10-FreeRPG2010-02.encounter" />
+
+	<p>Call for an Initiative roll and get ready for action</p>
+	<beat>Combat Turn 1</beat>
+	<p>The panicked crowd rushes for the doors, complicating any actions this turn.</p>
+	<element type="reflexive-action">
+		<rolls choose="any">
+			<skill name="Athletics" />
+			<attribute name="Dexterity" />
+			<skill name="Streetwise" modifier="-2" />
+		</rolls>
+		<results>
+			<result value="0">1 N damage, -2 dice penalty to your character's actions this turn.</result>
+			<result value="1">-2 dice penalty to your character's actions this turn.</result>
+			<result value="2">-1 penalty to your character's actions this turn.</result>
+			<result>Your character has sidestepped the panicked crowd and may act normally.</result>
+		</results>
+		<followup>
+			<p>After the players have rolled to see how their characters dealt with the crowd, 
+			proceed in the normal initiative sequence....</p>
+		</followup>
+	</element>
+	<character count="5" name="Nazi Agents" />
+</encounter>

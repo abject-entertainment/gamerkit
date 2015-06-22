@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+
+<character system="SVG10" type="PC">
+	<attribute name="Name"><![CDATA[Kator the Ape Boy]]></attribute>
+	<attribute name="Player"><![CDATA[]]></attribute>
+	<attribute name="Origin"><![CDATA[]]></attribute>
+	<attribute name="Rating"><![CDATA[Seasoned (25 XP)]]></attribute>
+	<attribute name="Destination"><![CDATA[]]></attribute>
+	<attribute name="Agility"><![CDATA[8]]></attribute>
+	<attribute name="Smarts"><![CDATA[6]]></attribute>
+	<attribute name="Strength"><![CDATA[6]]></attribute>
+	<attribute name="Spirit"><![CDATA[8]]></attribute>
+	<attribute name="Vigor"><![CDATA[8]]></attribute>
+	<attribute name="Charisma"><![CDATA[-2]]></attribute>
+	<attribute name="Pace"><![CDATA[6]]></attribute>
+	<attribute name="Parry"><![CDATA[8]]></attribute>
+	<attribute name="Toughness"><![CDATA[6]]></attribute>
+	<attribute name="Fatigue"><![CDATA[]]></attribute>
+	<attribute name="Wounds"><![CDATA[]]></attribute>
+	<attribute name="PowerPoints"><![CDATA[]]></attribute>
+	<attribute name="Bennies"><![CDATA[3]]></attribute>
+	<attribute name="Hindrances">
+		<item><![CDATA[Clueless]]></item>
+		<item><![CDATA[Illiterate]]></item>
+		<item><![CDATA[Outsider]]></item>
+	</attribute>
+	<attribute name="Edges">
+		<item><![CDATA[Acrobat]]></item>
+		<item><![CDATA[Sweep]]></item>
+		<item><![CDATA[Woodsman]]></item>
+	</attribute>
+	<attribute name="Equipment">
+		<item><![CDATA[Loin cloth]]></item>
+		<item><![CDATA[Pouch of goodies (like nuts & grub worms)]]></item>
+	</attribute>
+	<attribute name="ArmorHead"><![CDATA[]]></attribute>
+	<attribute name="ArmorTorso"><![CDATA[]]></attribute>
+	<attribute name="ArmorArms"><![CDATA[]]></attribute>
+	<attribute name="ArmorLegs"><![CDATA[]]></attribute>
+	<attribute name="WTCarried"><![CDATA[]]></attribute>
+	<attribute name="WTLimit"><![CDATA[]]></attribute>
+	<attribute name="WTPenalty"><![CDATA[]]></attribute>
+	<attribute name="Skills">
+		<item>
+			<name><![CDATA[Fighting]]></name>
+			<rank><![CDATA[8]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Guts]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Notice]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Survival]]></name>
+			<rank><![CDATA[8]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Stealth]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Swimming]]></name>
+			<rank><![CDATA[4]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Throwing]]></name>
+			<rank><![CDATA[4]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Tracking]]></name>
+			<rank><![CDATA[8]]></rank>
+		</item>
+	</attribute>
+	<attribute name="Powers">
+	</attribute>
+	<attribute name="Weapons">
+		<item>
+			<name><![CDATA[Spear]]></name>
+			<range><![CDATA[2]]></range>
+			<rof><![CDATA[]]></rof>
+			<damage><![CDATA[1da[Strength]+1da6]]></damage>
+			<ap><![CDATA[]]></ap>
+			<wt><![CDATA[]]></wt>
+			<notes><![CDATA[Parry +1]]></notes>
+		</item>
+	</attribute>
+	<attribute name="Injuries"><![CDATA[]]></attribute>
+	<attribute name="Wealth"><![CDATA[]]></attribute>
+	<attribute name="Description"><![CDATA[]]></attribute>
+	<attribute name="Personality"><![CDATA[]]></attribute>
+	<attribute name="Background"><![CDATA[Buck and the crew discovered Kator on a trip deep into darkest Africa less than six months ago. Incredibly, Kator seems to have been orphaned in the jungle and raised by apes! He is incredibly tough and strong, and quite intelligent as well, though his lack of education makes him seem savage and ignorant. He speaks broken English now—“Kator want candy bar!”—and has only begun to learn to write his name. He’s quite eager for combat and ruthless when he wins. The Law of the Jungle frequently conflicts with the Dares’ more “civilized” ways. Kator loves Virginia and often fights with Buck over his jealousy. Virginia loves Kator in a motherly way, but the mixed signals confuse the unsophisticated ape boy.]]></attribute>
+	<attribute name="Notes"><![CDATA[Languages: English, Ape, Swahili]]></attribute>
+	<attribute name="DieRolls">
+	</attribute>
+	<attribute name="Token"><![CDATA[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]]></attribute>
+</character>

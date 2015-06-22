@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:template match="/">
+<html>
+	<head>
+		<style type="text/css">
+body {
+	font-family: sans-serif;
+	font-size: 10pt;
+}
+input {
+	border: 0;
+	font-family: sans-serif;
+	font-size: 10pt;
+}
+td {
+	border: 0;
+	font-family: sans-serif;
+	font-size: 10pt;
+}
+.stats {
+	border: 1px solid black;
+}
+.slabel {
+	text-align: right;
+}
+.stat {
+	text-align: center;
+}
+.bonus {
+	text-align: center;
+	width: 40px;
+}
+		</style>
+		<script type="text/javascript">
+function GetTextValue(varname)
+{
+	var node = document.getElementById(varname);
+	if (node) return node.value;
+	else return "[[empty]]";
+}
+function SetTextValue(varname, txt)
+{
+	var node = document.getElementById(varname);
+	if (node) node.value = txt;
+}
+		</script>
+	</head>
+	<body width="320">
+		<div class="vitals">
+			QUICK SHEET<br />
+			Name: <input type="text" id="Name" value="" /><br />
+			Player: <input type="text" id="Player" value="" /><br />
+		</div>
+		<table class="stats">
+			<tr><td class="slabel">STR</td><td><input type="text" id="Str" class="stat" value="" size="3" /></td><td class="bonus"><span id="StrBonus" class="bonus"></span></td></tr>
+			<tr><td class="slabel">DEX</td><td><input type="text" id="Dex" class="stat" value="" size="3" /></td><td class="bonus"><span id="DexBonus" class="bonus"></span></td></tr>
+			<tr><td class="slabel">CON</td><td><input type="text" id="Con" class="stat" value="" size="3" /></td><td class="bonus"><span id="ConBonus" class="bonus"></span></td></tr>
+			<tr><td class="slabel">INT</td><td><input type="text" id="Int" class="stat" value="" size="3" /></td><td class="bonus"><span id="IntBonus" class="bonus"></span></td></tr>
+			<tr><td class="slabel">WIS</td><td><input type="text" id="Wis" class="stat" value="" size="3" /></td><td class="bonus"><span id="WisBonus" class="bonus"></span></td></tr>
+			<tr><td class="slabel">CHA</td><td><input type="text" id="Cha" class="stat" value="" size="3" /></td><td class="bonus"><span id="ChaBonus" class="bonus"></span></td></tr>
+		</table>
+		<script type="text/javascript">
+var idx = 0;
+<xsl:apply-templates select="character/attribute" />
+var __StrBonus = Math.floor(parseInt(__Str) / 2 - 5);
+document.getElementById("StrBonus").innerHTML = ((__StrBonus >= 0)?"+":"") + __StrBonus;
+var __DexBonus = Math.floor(parseInt(__Dex) / 2 - 5);
+document.getElementById("DexBonus").innerHTML = ((__DexBonus >= 0)?"+":"") + __DexBonus;
+var __ConBonus = Math.floor(parseInt(__Con) / 2 - 5);
+document.getElementById("ConBonus").innerHTML = ((__ConBonus >= 0)?"+":"") + __ConBonus;
+var __IntBonus = Math.floor(parseInt(__Int) / 2 - 5);
+document.getElementById("IntBonus").innerHTML = ((__IntBonus >= 0)?"+":"") + __IntBonus;
+var __WisBonus = Math.floor(parseInt(__Wis) / 2 - 5);
+document.getElementById("WisBonus").innerHTML = ((__WisBonus >= 0)?"+":"") + __WisBonus;
+var __ChaBonus = Math.floor(parseInt(__Cha) / 2 - 5);
+document.getElementById("ChaBonus").innerHTML = ((__ChaBonus >= 0)?"+":"") + __ChaBonus;
+		</script>
+	</body>
+</html>
+	</xsl:template>
+
+	<xsl:template match="attribute[@name='RaceFeatures']">
+var __RaceFeatures = new Array();
+		<xsl:for-each select="item">
+idx = 0; __RaceFeatures[idx++] = "<xsl:value-of select="." />";
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='ClassFeatures']">
+var __ClassFeatures = new Array();
+		<xsl:for-each select="item">
+idx = 0; __ClassFeatures[idx++] = "<xsl:value-of select="." />";
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='ParagonFeatures']">
+var __ParagonFeatures = new Array();
+		<xsl:for-each select="item">
+idx = 0; __ParagonFeatures[idx++] = "<xsl:value-of select="." />";
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='EpicFeatures']">
+var __EpicFeatures = new Array();
+		<xsl:for-each select="item">
+idx = 0; __EpicFeatures[idx++] = "<xsl:value-of select="." />";
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='Languages']">
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='Feats']">
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='Skills']">
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='Attacks']">
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='Powers']">
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='MagicItems']">
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='Rituals']">
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='Allies']">
+	</xsl:template>
+	
+	<xsl:template match="attribute[@name='Equipment']">
+	</xsl:template>
+	
+	<!-- Default non-array attributes -->
+	<xsl:template match="attribute">
+var __<xsl:value-of select="./@name" /> = "<xsl:value-of select="." />";
+SetTextValue("<xsl:value-of select="./@name" />", "<xsl:value-of disable-output-escaping="no" select="." />");
+	</xsl:template>
+</xsl:stylesheet>

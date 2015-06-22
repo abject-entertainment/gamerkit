@@ -1,0 +1,1277 @@
+
+<Character action-points-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_Action Points&apos;, {autoValue:1, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" action-points-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_Action Points&apos;, {autoValue:-1, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" key="agdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA" milestone-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.milestone();" name="Drizzt Do&apos;Urden" safe-key="agdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA">
+	<Description age="89" height="5&apos;4&quot;" weight="130">
+		<Notes>Read more about Drizzt at http://ww2.wizards.com/books/Wizards/guides/FRNovelsGuide.pdf</Notes>
+		<Appearance>Drizzt presents a calm, stoic, quiet exterior. Though physically small, he cuts an intimidating figure dressed mostly in black, with a hunter green cloak. His brilliant, snow-white hair is kept long and straight, and his jet-black skin is surprisingly free of scars. But what most people notice first are his penetrating, violet eyes, unusual for a drow.</Appearance>
+		<Traits>Drizzt is a very serious, outwardly even dour man, whose dark sense of humor is generally only revealed to those closest to him. Though some may feel he&#8217;s over-compensating for the reputation of his fellow drow, Drizzt&#8217;s sense of honor and justice can not be questioned.</Traits>
+		<Companions>Drizzt has numerous powerful friends and associates throughout the North, but it&#8217;s the Companions of the Hall to whom he is forever linked: the dwarf king Bruenor Battlehammer taught him about honor and family. The barbarian Wulfgar showed him the ways of the tundra and the heart of a true warrior. A halfling rogue named Regis brought out his sense of humor and showed him that it&#8217;s all right to enjoy the simple pleasures of life. And Catti-brie taught him the meaning of love.</Companions>
+	</Description>
+
+<!-- Build element: always present
+
+Required attributes: alignment, experience, level, name, powersource, role, size, tier, vision
+
+The name attribute is the build name if one was selected in the Character Builder, or the class name otherwise.
+
+Control attributes:
+
+ExperiencePoints: assign to at least one HTML element that should dynamically display current XP.
+
+experience-prompt-script: javascript to execute to prompt the user for XP to add.
+
+Children:
+
+Race element: always present
+
+Required attributes: name, url
+
+Children:
+
+Feature elements: one per race feature
+
+Required attributes: name, description
+
+Class element: always present
+
+Required attributes: name, url
+
+Children: as Race element
+
+ParagonPath element: present if of sufficient level
+
+Required attributes: name, url
+
+Children: as Race element
+
+EpicDestiny element: present if of sufficient level
+
+Required attributes: name, url
+
+Children: as Race element -->
+
+	<Build alignment="Good" experience="209999" experience-prompt-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;Experience Points&apos;, {requireInt:1, text:&apos;How many XP should be added?&apos;, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" level="21" name="Two-Blade Ranger" powersource="Martial" role="Striker" size="Medium" tier="Epic" vision="Darkvision">
+		<Race name="Drow" url="http://www.wizards.com/dndinsider/compendium/race.aspx?id=16">
+			<Feature description="Meditate aware 4 hours instead of sleep." name="Trance (Drow)" />
+			<Feature description="Use either cloud of darkness or darkfire once per encounter." name="Lolthtouched" />
+			<Feature description="Use WIS for Darkfire" name="Darkfire Wisdom" />
+			<Feature description="Your origin is fey, not natural" name="Fey Origin" />
+			<Feature description="" name="Intimidate Bonus" />
+			<Feature description="" name="Stealth Bonus" />
+		</Race>
+		<Class name="Ranger" url="http://www.wizards.com/dndinsider/compendium/class.aspx?id=5">
+			<Feature description="Choose Archer Fighting Style or Two-Blade Fighting Style." name="Fighting Style" />
+			<Feature description="Wield one-handed weapon as off-hand weapon; gain Toughness as a bonus feat." name="Two-Blade Fighting Style" />
+			<Feature description="Minor action, designate nearest enemy you see as quarry; deal extra damage to quarry once per round." name="Hunter&apos;s Quarry" />
+			<Feature description="If no allies are closer to target than you, get +1 on ranged attacks against that target." name="Prime Shot" />
+		</Class>
+		<ParagonPath name="Blade Dancer" url="http://www.wizards.com/dndinsider/compendium/paragonpath.aspx?id=171">
+			<Feature description="Spend action point to make melee basic attacks with primary and offhand weapon; add Wis mod to damage" name="Dual-Blade Action" />
+			<Feature description="If using two melee weapons and you hit twice on your turn, gain +2 to AC and Reflex unti start of your next turn." name="Dancing Defense" />
+			<Feature description="With two melee weapons, gain +1 to melee damage rolls and AC" name="Cutting Steps" />
+		</ParagonPath>
+		<EpicDestiny name="Redeemed Drow" url="http://www.wizards.com/dndinsider/compendium/epicdestiny.aspx?id=213">
+			<Feature description="Spend a healing surge when you reduce a demon or spider creature to 0 hp." name="Sacred Duty" />
+		</EpicDestiny>
+	</Build>
+	
+<!-- Health element: always present
+
+Control attributes:
+
+short-rest-script: javascript to execute when the user wants to take a short rest.
+
+extended-rest-script: javascript to execute when the user wants to take an extended rest.
+
+tempHP-display-class: assign to at least one HTML element that should dynamically display temp HP.
+
+tempHP-prompt-script: javascript to execute to prompt the user for a new temp HP value.
+
+tempHP-bar-class: assign to all HTML elements that should have width set in proportion to current tempHP/max HP.
+
+death-saves-display-class: assign to at least one HTML element that should dynamically display current HP.
+
+death-saves-add-script: javascript to execute to add a death save.
+
+death-saves-subtract-script: javascript to execute to subtract a death save.
+
+conditions-display-class: assign to at least on HTML element that should dynamically contain a div per condition.
+
+conditions-prompt-script: javascript to execute to prompt the user to enter a new condition.
+
+CUR_ConditionsDelete: will be dynamically assigned to each condition div in conditions-display-class elements.
+
+Not necessary to assign to any elements, but should probably be styled with css in your XSL.
+
+Child elements:
+
+MaxHitPoints: always present
+
+Required attributes: value
+
+Control attributes:
+
+CUR_HitPoints: assign to at least one HTML element that should dynamically display current HP.
+
+CUR_HitPointsBar: assign to all HTML elements that should have width set in proportion to current/max HP.
+
+CUR_HitPointsDying: assign to all HTML elements that should only be displayed if the character is dying.
+
+damage-prompt-script: javascript to execute to prompt the user for hit points of damage taken.
+
+heal-prompt-script: javascript to execute to prompt the user for hit points healed.
+
+Children:
+
+Factor elements: one for each factor contributing to the value.
+
+Required attributes: name, modifier
+
+Optional attributes: abbreviation, multiplier, multiplied
+
+The "multiplier" and "multiplied" are only present if math was performed to get the modifier.
+
+BloodiedValue: always present
+
+Required attributes: value
+
+Children: as MaxHitPoints
+
+MaxSurges: always present
+
+Required attributes: value
+
+Control attributes:
+
+CUR_Surges: assign to at least one HTML element that should dynamically display current surges.
+
+CUR_SurgesBar: assign to all HTML elements that should have width set in proportion to current/max surges.
+
+add-script: javascript to execute to add a surge.
+
+subtract-script: javascript to execute to subtract a surge.
+
+Children: as MaxHitPoints
+
+SurgeValue: always present
+
+Required attributes: value
+
+Control attributes:
+
+toHitPoints-script: javascript to execute when the surge value should be added to hit points.
+
+Children: as MaxHitPoints -->
+
+	<Health conditions-display-class="CUR_Conditions" conditions-prompt-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_Conditions&apos;, {text:&apos;Enter text for the condition&apos;});" death-saves-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_Death Saves&apos;, {autoValue:1, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" death-saves-display-class="CUR_DeathSaves" death-saves-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_Death Saves&apos;, {autoValue:-1, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" extended-rest-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.extendedRest();" short-rest-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.shortRest();" tempHP-bar-class="CUR_TempHPBar" tempHP-display-class="CUR_TempHP" tempHP-prompt-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_TempHP&apos;, {requireInt:1, min:0, text:&apos;Set to how many temporary HP?&apos; });">
+		<MaxHitPoints damage-prompt-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.damagePrompt();" heal-prompt-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_HitPoints&apos;, {requireInt:1, min:1, text:&apos;How many HP should be added?&apos;, calculateChange: function(oldVal, newVal) { return Math.max(0,oldVal) + newVal; } });" value="142">
+			<Factor abbreviation="Con" modifier="+15" name="Constitution" />
+			<Factor abbreviation="Ranger 1" modifier="+12" name="Level 1 Ranger" />
+			<Factor modifier="+5" name="Toughness" />
+			<Factor abbreviation="Ranger 21" modifier="+100" multiplied="5" multiplier="20" name="Level 21 Ranger" />
+		</MaxHitPoints>
+		<BloodiedValue value="71">
+			<Factor abbreviation="1/2 HP" modifier="+71" multiplied="142" multiplier=".5" name="Half Hit Points" />
+		</BloodiedValue>
+		<MaxSurges add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_Surges&apos;, {autoValue:1, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_Surges&apos;, {autoValue:-1, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" value="8">
+			<Factor modifier="+6" name="Ranger" />
+			<Factor abbreviation="Con mod" modifier="+2" name="Constitution modifier" />
+		</MaxSurges>
+		<SurgeValue toHitPoints-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.surgeValueToHitPoints(35);" value="35">
+			<Factor abbreviation="1/4 HP" modifier="+35" multiplied="142" multiplier=".25" name="Quarter Hit Points" />
+		</SurgeValue>
+	</Health>
+
+<!-- Movement element: always present
+
+Children:
+
+Speed element: always present
+
+Required attributes: value
+
+Children:
+
+Factor elements: one for each factor contributing to the value.
+
+Required attributes: name, modifier
+
+Optional attributes: abbreviation, multiplier, multiplied
+
+The "multiplier" and "multiplied" are only present if math was performed to get the modifier.
+
+Initiative element: always present
+
+Required attributes:
+
+value: number to display
+
+dice-class: use in conjunction with "Roller" to make an initiative roller element.
+
+Children:
+
+Factor elements: one for each factor contributing to the value.
+
+Required attributes: name, modifier
+
+Optional attributes: abbreviation, multiplier, multiplied
+
+The "multiplier" and "multiplied" are only present if math was performed to get the modifier. -->
+
+	<Movement>
+		<Speed value="7">
+			<Factor modifier="+6" name="Drow" />
+			<Factor modifier="-1" name="Finemail" />
+			<Factor modifier="+2" name="Boots of Speed (epic tier)" />
+		</Speed>
+		<Initiative dice-class="dice1d20plus17Initiative" value="17">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+0" name="Initiative Misc" />
+			<Factor abbreviation="Dex mod" modifier="+7" name="Dexterity modifier" />
+		</Initiative>
+	</Movement>
+
+<!-- Defenses element: always present
+
+Children:
+
+Condition elements: present if one or more conditions affect all defenses
+
+Required attributes: name
+
+Defense elements: four Defense elements are always present.
+
+Required attributes: value, abbreviation, name (name is "ArmorClass", "Fortitude", "Reflex" or "Will")
+
+Children:
+
+Factor elements: one for each factor contributing to the value.
+
+Required attributes: name, modifier
+
+Optional attributes: abbreviation, multiplier, multiplied
+
+The "multiplier" and "multiplied" are only present if math was performed to get the modifier.
+
+Condition elements: present if one or more conditions affect this defense
+
+Required attributes: name -->
+
+	<Defenses>
+		<Defense abbreviation="AC" name="Armor Class" value="33">
+			<Factor modifier="+10" name="Constant" />
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+7" name="Finemail" />
+			<Factor modifier="+5" name="Agile Armor +5" />
+			<Condition name="+1 with DUAL-WIELDING: - Cutting Steps" />
+			<Condition name="+7 without armor: heavy - Dexterity modifier" />
+		</Defense>
+		<Defense abbreviation="Fort" name="Fortitude" value="27">
+			<Factor modifier="+10" name="Constant" />
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+1" name="Ranger" />
+			<Factor abbreviation="Str mod" modifier="+6" name="Strength modifier" />
+		</Defense>
+		<Defense abbreviation="Ref" name="Reflex" value="28">
+			<Factor modifier="+10" name="Constant" />
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+1" name="Ranger" />
+			<Factor abbreviation="Dex mod" modifier="+7" name="Dexterity modifier" />
+		</Defense>
+		<Defense abbreviation="Will" name="Will" value="23">
+			<Factor modifier="+10" name="Constant" />
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor abbreviation="Wis mod" modifier="+3" name="Wisdom modifier" />
+		</Defense>
+	</Defenses>
+
+<!-- PassiveSkills element: always present
+
+Children:
+
+PassiveSkill elements: two PassiveSkill elements are always present
+
+Required attributes: value, name (name is "Perception" or "Insight")
+
+Children:
+
+Factor elements: one for each factor contributing to the value.
+
+Required attributes: name, modifier
+
+Optional attributes: abbreviation, multiplier, multiplied
+
+The "multiplier" and "multiplied" are only present if math was performed to get the modifier. -->
+
+	<PassiveSkills>
+		<PassiveSkill name="Perception" value="30">
+			<Factor modifier="+20" name="Perception" />
+			<Factor modifier="+10" name="Constant" />
+		</PassiveSkill>
+		<PassiveSkill name="Insight" value="23">
+			<Factor modifier="+13" name="Insight" />
+			<Factor modifier="+10" name="Constant" />
+		</PassiveSkill>
+	</PassiveSkills>
+	
+<!-- Skills element: always present
+
+Children:
+
+Skill elements: one for each skill defined by the Character Builder
+
+Required attributes:
+
+name: name of the skill
+
+value: numeric display value
+
+dice-class: Use in conjunction with "Roller" to create a skill roller element.
+
+url: Compendium URL for the skill
+
+trained: "true" or "false"
+
+armorpenaltyapplies: "true" or "false"
+
+Children:
+
+Factor elements: one for each factor contributing to the value.
+
+Required attributes: name, modifier
+
+Optional attributes: abbreviation, multiplier, multiplied
+
+The "multiplier" and "multiplied" are only present if math was performed to get the modifier. -->
+
+	<Skills>
+		<Skill armorpenaltyapplies="true" dice-class="dice1d20plus21Acrobatics" name="Acrobatics" trained="true" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=1" value="21">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+5" name="Trained" />
+			<Factor modifier="+0" name="Acrobatics Misc" />
+			<Factor modifier="-1" name="Armor Penalty" />
+			<Factor abbreviation="Dex mod" modifier="+7" name="Dexterity modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="false" dice-class="dice1d20plus12Arcana" name="Arcana" trained="false" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=2" value="12">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+0" name="Arcana Misc" />
+			<Factor abbreviation="Int mod" modifier="+2" name="Intelligence modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="true" dice-class="dice1d20plus15Athletics" name="Athletics" trained="false" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=27" value="15">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+0" name="Athletics Misc" />
+			<Factor modifier="-1" name="Armor Penalty" />
+			<Factor abbreviation="Str mod" modifier="+6" name="Strength modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="false" dice-class="dice1d20plus11Bluff" name="Bluff" trained="false" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=3" value="11">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+0" name="Bluff Misc" />
+			<Factor abbreviation="Cha mod" modifier="+1" name="Charisma modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="false" dice-class="dice1d20plus11Diplomacy" name="Diplomacy" trained="false" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=6" value="11">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+0" name="Diplomacy Misc" />
+			<Factor abbreviation="Cha mod" modifier="+1" name="Charisma modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="false" dice-class="dice1d20plus20Dungeoneering" name="Dungeoneering" trained="true" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=7" value="20">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+5" name="Trained" />
+			<Factor modifier="+2" name="Dungeoneering Misc" />
+			<Factor abbreviation="Wis mod" modifier="+3" name="Wisdom modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="true" dice-class="dice1d20plus11Endurance" name="Endurance" trained="false" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=8" value="11">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+0" name="Endurance Misc" />
+			<Factor modifier="-1" name="Armor Penalty" />
+			<Factor abbreviation="Con mod" modifier="+2" name="Constitution modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="false" dice-class="dice1d20plus13Heal" name="Heal" trained="false" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=9" value="13">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+0" name="Heal Misc" />
+			<Factor abbreviation="Wis mod" modifier="+3" name="Wisdom modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="false" dice-class="dice1d20plus12History" name="History" trained="false" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=11" value="12">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+0" name="History Misc" />
+			<Factor abbreviation="Int mod" modifier="+2" name="Intelligence modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="false" dice-class="dice1d20plus13Insight" name="Insight" trained="false" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=13" value="13">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+0" name="Insight Misc" />
+			<Factor abbreviation="Wis mod" modifier="+3" name="Wisdom modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="false" dice-class="dice1d20plus13Intimidate" name="Intimidate" trained="false" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=14" value="13">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+2" name="Intimidate Misc" />
+			<Factor abbreviation="Cha mod" modifier="+1" name="Charisma modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="false" dice-class="dice1d20plus18Nature" name="Nature" trained="true" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=16" value="18">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+5" name="Trained" />
+			<Factor modifier="+0" name="Nature Misc" />
+			<Factor abbreviation="Wis mod" modifier="+3" name="Wisdom modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="false" dice-class="dice1d20plus20Perception" name="Perception" trained="true" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=17" value="20">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+5" name="Trained" />
+			<Factor modifier="+2" name="Perception Misc" />
+			<Factor abbreviation="Wis mod" modifier="+3" name="Wisdom modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="false" dice-class="dice1d20plus12Religion" name="Religion" trained="false" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=18" value="12">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+0" name="Religion Misc" />
+			<Factor abbreviation="Int mod" modifier="+2" name="Intelligence modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="true" dice-class="dice1d20plus23Stealth" name="Stealth" trained="true" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=20" value="23">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+5" name="Trained" />
+			<Factor modifier="+2" name="Stealth Misc" />
+			<Factor modifier="-1" name="Armor Penalty" />
+			<Factor abbreviation="Dex mod" modifier="+7" name="Dexterity modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="false" dice-class="dice1d20plus11Streetwise" name="Streetwise" trained="false" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=21" value="11">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+0" name="Streetwise Misc" />
+			<Factor abbreviation="Cha mod" modifier="+1" name="Charisma modifier" />
+		</Skill>
+		<Skill armorpenaltyapplies="true" dice-class="dice1d20plus16Thievery" name="Thievery" trained="false" url="http://www.wizards.com/dndinsider/compendium/skill.aspx?id=23" value="16">
+			<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+			<Factor modifier="+0" name="Thievery Misc" />
+			<Factor modifier="-1" name="Armor Penalty" />
+			<Factor abbreviation="Dex mod" modifier="+7" name="Dexterity modifier" />
+		</Skill>
+	</Skills>
+	
+<!-- AbilityScores element: always present
+
+Children:
+
+AbilityScore elements: six AbilityScore elements are always present.
+
+Required attributes: value, abbreviation, name ("Strength", etc...)
+
+Children:
+
+AbilityModifier element: always present
+
+Required attributes:
+
+modifier: base modifier
+
+rollmodifier: (includes 1/2 level)
+
+dice-class: use in conjunction with "Roller" to build an ability check roller element.
+
+Factor elements: one for each factor contributing to the value.
+
+Required attributes: name, modifier
+
+Optional attributes: abbreviation, multiplier, multiplied
+
+The "multiplier" and "multiplied" are only present if math was performed to get the modifier. -->
+
+	<AbilityScores>
+		<AbilityScore abbreviation="Str" name="Strength" value="22">
+			<Factor modifier="+16" name="Starting" />
+			<Factor modifier="+1" name="Level 4" />
+			<Factor modifier="+1" name="Level 8" />
+			<Factor modifier="+1" name="Level 11" />
+			<Factor modifier="+1" name="Level 14" />
+			<Factor modifier="+1" name="Level 18" />
+			<Factor modifier="+1" name="Level 21" />
+			<AbilityModifier dice-class="dice1d20plus16Strength" modifier="+6" rollmodifier="+16" />
+		</AbilityScore>
+		<AbilityScore abbreviation="Con" name="Constitution" value="15">
+			<Factor modifier="+13" name="Starting" />
+			<Factor modifier="+1" name="Level 11" />
+			<Factor modifier="+1" name="Level 21" />
+			<AbilityModifier dice-class="dice1d20plus12Constitution" modifier="+2" rollmodifier="+12" />
+		</AbilityScore>
+		<AbilityScore abbreviation="Dex" name="Dexterity" value="24">
+			<Factor modifier="+16" name="Starting" />
+			<Factor modifier="+2" name="Drow" />
+			<Factor modifier="+1" name="Level 4" />
+			<Factor modifier="+1" name="Level 8" />
+			<Factor modifier="+1" name="Level 11" />
+			<Factor modifier="+1" name="Level 14" />
+			<Factor modifier="+1" name="Level 18" />
+			<Factor modifier="+1" name="Level 21" />
+			<AbilityModifier dice-class="dice1d20plus17Dexterity" modifier="+7" rollmodifier="+17" />
+		</AbilityScore>
+		<AbilityScore abbreviation="Int" name="Intelligence" value="15">
+			<Factor modifier="+13" name="Starting" />
+			<Factor modifier="+1" name="Level 11" />
+			<Factor modifier="+1" name="Level 21" />
+			<AbilityModifier dice-class="dice1d20plus12Intelligence" modifier="+2" rollmodifier="+12" />
+		</AbilityScore>
+		<AbilityScore abbreviation="Wis" name="Wisdom" value="17">
+			<Factor modifier="+15" name="Starting" />
+			<Factor modifier="+1" name="Level 11" />
+			<Factor modifier="+1" name="Level 21" />
+			<AbilityModifier dice-class="dice1d20plus13Wisdom" modifier="+3" rollmodifier="+13" />
+		</AbilityScore>
+		<AbilityScore abbreviation="Cha" name="Charisma" value="13">
+			<Factor modifier="+9" name="Starting" />
+			<Factor modifier="+2" name="Drow" />
+			<Factor modifier="+1" name="Level 11" />
+			<Factor modifier="+1" name="Level 21" />
+			<AbilityModifier dice-class="dice1d20plus11Charisma" modifier="+1" rollmodifier="+11" />
+		</AbilityScore>
+	</AbilityScores>
+	
+<!-- Powers element: always present
+
+Child elements:
+
+Power elements: one per power
+
+Required attributes: name, url, powerusage, actiontype
+
+Control attributes: only present for Encounter and Daily powers.
+
+display-class: assign to all HTML elements that should have classname "Used" added
+
+when the power is used, and classname "Used" removed when the power is un-used.
+
+use-script: javascript to execute when the user marks a power used or unused.
+
+Child Elements:
+
+Condition elements: one per condition that affects all weapons.
+
+Required attributes: name
+
+Weapon elements: one per weapon that is legal for use with the power.
+
+Required attributes: name, url, attackstat, defense
+
+Child elements:
+
+Condition elements: one per condition that affects all weapons.
+
+Required attributes: name
+
+AttackBonus element: always present
+
+Required attributes:
+
+value: value to display
+
+dice-class: use in conjunction with "Roller" to make an attack roller element.
+
+Child elements:
+
+Factor elements: one per factor contributing to the value
+
+Required attributes: name, modifier
+
+Optional attributes: abbreviation, multiplier, multiplied
+
+The "multiplier" and "multiplied" are only present if math was performed to get the modifier.
+
+Damage element: always present
+
+Required attributes:
+
+value: value to display
+
+dice-class: use in conjunction with "Roller" to make a damage roller element.
+
+Optional attributes: type (e.g. lightning)
+
+Child elements:
+
+Factor elements: one per factor contributing to the value
+
+Required attributes: name, modifier
+
+Optional attributes: abbreviation, multiplier, multiplied
+
+The "multiplier" and "multiplied" are only present if math was performed to get the modifier. -->
+
+	<Powers>
+		<Power actiontype="Standard Action" name="Melee Basic Attack" packagename="" packageurl="" powerusage="At-Will" url="http://www.wizards.com/dndinsider/compendium/glossary.aspx?id=426">
+			<Condition name="+3d8 to damage once per round (Hunter&apos;s Quarry) - ?" />
+			<Condition name="+2 to damage rolls against creatures with the spider keyword - Drow Heretic" />
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1978&amp;ftype=1" name="Twinkle" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus13Damage" value="2d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=697&amp;ftype=1" name="Icingdeath" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus13Damage" value="2d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=731&amp;ftype=1" name="Magic Dagger +2" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=3&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus21Attack" value="21">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+3" name="proficiency bonus" />
+					<Factor modifier="+2" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d4plus8Damage" value="2d4+8">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+2" name="enhancement bonus" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC" name="Unarmed" weaponurl="">
+				<AttackBonus dice-class="dice1d20plus16Attack" value="16">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+				</AttackBonus>
+				<Damage dice-class="dice2d4plus6Damage" value="2d4+6">
+					<Factor modifier="+6" name="Strength modifier" />
+				</Damage>
+			</Weapon>
+		</Power>
+		<Power actiontype="Standard Action" name="Ranged Basic Attack" packagename="" packageurl="" powerusage="At-Will" url="http://www.wizards.com/dndinsider/compendium/glossary.aspx?id=426">
+			<Condition name="+3d8 to damage once per round (Hunter&apos;s Quarry) - ?" />
+			<Condition name="+2 to damage rolls against creatures with the spider keyword - Drow Heretic" />
+			<Weapon attackstat="Dexterity" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=731&amp;ftype=1" name="Magic Dagger +2" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=3&amp;ftype=3">
+				<Condition name="+1 to attack rolls if none of your allies are closer to the target - Prime Shot" />
+				<AttackBonus dice-class="dice1d20plus22Attack" value="22">
+					<Factor modifier="+7" name="Dexterity modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+3" name="proficiency bonus" />
+					<Factor modifier="+2" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d4plus9Damage" value="2d4+9">
+					<Factor modifier="+7" name="Dexterity modifier" />
+					<Factor modifier="+2" name="enhancement bonus" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Dexterity" defense="AC" name="Unarmed" weaponurl="">
+				<AttackBonus dice-class="dice1d20plus17Attack" value="17">
+					<Factor modifier="+7" name="Dexterity modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+				</AttackBonus>
+				<Damage dice-class="dice2d4plus7Damage" value="2d4+7">
+					<Factor modifier="+7" name="Dexterity modifier" />
+				</Damage>
+			</Weapon>
+		</Power>
+		<Power actiontype="Minor Action" name="Hunter&apos;s Quarry" packagename="Ranger" packageurl="http://www.wizards.com/dndinsider/compendium/class.aspx?id=5" powerusage="At-Will" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=5598" />
+		<Power actiontype="Standard Action" name="Twin Strike" packagename="" packageurl="" powerusage="At-Will" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=87">
+			<Condition name="+3d8 to damage once per round (Hunter&apos;s Quarry) - ?" />
+			<Condition name="+2 to damage rolls against creatures with the spider keyword - Drow Heretic" />
+			<Weapon attackstat="Strength" defense="AC (melee; main weapon and off-hand weapon) or Dexterity vs. AC (ranged), two attacks" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1978&amp;ftype=1" name="Twinkle" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus7Damage" value="2d8+7">
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC (melee; main weapon and off-hand weapon) or Dexterity vs. AC (ranged), two attacks" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=697&amp;ftype=1" name="Icingdeath" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus7Damage" value="2d8+7">
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Dexterity" defense="AC (ranged), two attacks" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=731&amp;ftype=1" name="Magic Dagger +2" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=3&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus22Attack" value="22">
+					<Factor modifier="+7" name="Dexterity modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+3" name="proficiency bonus" />
+					<Factor modifier="+2" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d4plus2Damage" value="2d4+2">
+					<Factor modifier="+2" name="enhancement bonus" />
+				</Damage>
+			</Weapon>
+		</Power>
+		<Power actiontype="Standard Action" name="Circling Strike" packagename="" packageurl="" powerusage="At-Will" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=4368">
+			<Condition name="+3d8 to damage once per round (Hunter&apos;s Quarry) - ?" />
+			<Condition name="+2 to damage rolls against creatures with the spider keyword - Drow Heretic" />
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1978&amp;ftype=1" name="Twinkle" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus13Damage" value="2d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=697&amp;ftype=1" name="Icingdeath" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus13Damage" value="2d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=731&amp;ftype=1" name="Magic Dagger +2" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=3&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus21Attack" value="21">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+3" name="proficiency bonus" />
+					<Factor modifier="+2" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d4plus8Damage" value="2d4+8">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+2" name="enhancement bonus" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC" name="Unarmed" weaponurl="">
+				<AttackBonus dice-class="dice1d20plus16Attack" value="16">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+				</AttackBonus>
+				<Damage dice-class="dice2d4plus6Damage" value="2d4+6">
+					<Factor modifier="+6" name="Strength modifier" />
+				</Damage>
+			</Weapon>
+		</Power>
+		<Power actiontype="Minor Action" display-class="USAGE_CloudofDarkness" name="Cloud of Darkness" packagename="" packageurl="" powerusage="Encounter" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=2473" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_CloudofDarkness&apos;, {isBoolean:1});" />
+		<Power actiontype="Minor Action" display-class="USAGE_Darkfire" name="Darkfire" packagename="" packageurl="" powerusage="Encounter" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=1831" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_Darkfire&apos;, {isBoolean:1});">
+			<Weapon attackstat="Wisdom" defense="Reflex, or Charisma +4 vs. Reflex
+
+			Increase to +6 bonus at 11th level and +8 bonus at 21st level." name="Unarmed" weaponurl="">
+				<AttackBonus dice-class="dice1d20plus17Attack" value="17">
+					<Factor modifier="+4" name="power modifier" />
+					<Factor modifier="+3" name="Wisdom modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+				</AttackBonus>
+				<Damage dice-class="diceDamage" value="" />
+			</Weapon>
+		</Power>
+		<Power actiontype="Immediate Reaction" display-class="USAGE_UnbalancingParry" name="Unbalancing Parry" packagename="" packageurl="" powerusage="Encounter" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=923" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_UnbalancingParry&apos;, {isBoolean:1});" />
+		<Power actiontype="Move Action" display-class="USAGE_SerpentineDodge" name="Serpentine Dodge" packagename="" packageurl="" powerusage="Encounter" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=4400" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_SerpentineDodge&apos;, {isBoolean:1});" />
+		<Power actiontype="Standard Action" display-class="USAGE_SweepingWhirlwind" name="Sweeping Whirlwind" packagename="" packageurl="" powerusage="Encounter" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=1418" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_SweepingWhirlwind&apos;, {isBoolean:1});">
+			<Condition name="+3d8 to damage once per round (Hunter&apos;s Quarry) - ?" />
+			<Condition name="+2 to damage rolls against creatures with the spider keyword - Drow Heretic" />
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1978&amp;ftype=1" name="Twinkle" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice1d8plus13Damage" value="1d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=697&amp;ftype=1" name="Icingdeath" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice1d8plus13Damage" value="1d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+		</Power>
+		<Power actiontype="Immediate Interrupt" display-class="USAGE_Cross-BodyParry" name="Cross-Body Parry" packagename="" packageurl="" powerusage="Encounter" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=4685" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_Cross-BodyParry&apos;, {isBoolean:1});">
+			<Condition name="+3d8 to damage once per round (Hunter&apos;s Quarry) - ?" />
+			<Condition name="+2 to damage rolls against creatures with the spider keyword - Drow Heretic" />
+			<Weapon attackstat="Strength" defense="Reflex (main weapon and off-hand weapon), two attacks" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1978&amp;ftype=1" name="Twinkle" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice1d8plus7Damage" value="1d8+7">
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="Reflex (main weapon and off-hand weapon), two attacks" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=697&amp;ftype=1" name="Icingdeath" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice1d8plus7Damage" value="1d8+7">
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+		</Power>
+		<Power actiontype="Minor Action" display-class="USAGE_Off-HandDiversion" name="Off-Hand Diversion" packagename="" packageurl="" powerusage="Encounter" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=4420" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_Off-HandDiversion&apos;, {isBoolean:1});">
+			<Condition name="+3d8 to damage once per round (Hunter&apos;s Quarry) - ?" />
+			<Condition name="+2 to damage rolls against creatures with the spider keyword - Drow Heretic" />
+			<Weapon attackstat="Strength" defense="AC (off-hand weapon)" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1978&amp;ftype=1" name="Twinkle" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice1d8plus13Damage" value="1d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC (off-hand weapon)" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=697&amp;ftype=1" name="Icingdeath" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice1d8plus13Damage" value="1d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+		</Power>
+		<Power actiontype="Standard Action" display-class="USAGE_BladeandFang" name="Blade and Fang" packagename="" packageurl="" powerusage="Encounter" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=4432" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_BladeandFang&apos;, {isBoolean:1});">
+			<Condition name="+3d8 to damage once per round (Hunter&apos;s Quarry) - ?" />
+			<Condition name="+2 to damage rolls against creatures with the spider keyword - Drow Heretic" />
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1978&amp;ftype=1" name="Twinkle" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus13Damage" value="2d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=697&amp;ftype=1" name="Icingdeath" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus13Damage" value="2d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=731&amp;ftype=1" name="Magic Dagger +2" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=3&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus21Attack" value="21">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+3" name="proficiency bonus" />
+					<Factor modifier="+2" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d4plus8Damage" value="2d4+8">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+2" name="enhancement bonus" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC" name="Unarmed" weaponurl="">
+				<AttackBonus dice-class="dice1d20plus16Attack" value="16">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+				</AttackBonus>
+				<Damage dice-class="dice2d4plus6Damage" value="2d4+6">
+					<Factor modifier="+6" name="Strength modifier" />
+				</Damage>
+			</Weapon>
+		</Power>
+		<Power actiontype="Standard Action" display-class="USAGE_SecondWind" name="Second Wind" packagename="" packageurl="" powerusage="Encounter" url="http://www.wizards.com/dndinsider/compendium/glossary.aspx?id=334" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_SecondWind&apos;, { isBoolean:1, useRequires: function() { return CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.namesToVariables[&apos;CUR_Surges&apos;].get() &gt; 0; }, noUseMessage: &apos;Second Wind requires a healing surge, and you have none.&apos; });" />
+		<Power actiontype="Free Action" display-class="USAGE_ActionPoint" name="Action Point" packagename="" packageurl="" powerusage="Encounter" url="http://www.wizards.com/dndinsider/compendium/glossary.aspx?id=177" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_ActionPoint&apos;, {isBoolean:1});" />
+		<Power actiontype="Standard Action" display-class="USAGE_SwirlingLeavesofSteel" name="Swirling Leaves of Steel" packagename="" packageurl="" powerusage="Daily" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=714" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_SwirlingLeavesofSteel&apos;, {isBoolean:1});">
+			<Condition name="+3d8 to damage once per round (Hunter&apos;s Quarry) - ?" />
+			<Condition name="+2 to damage rolls against creatures with the spider keyword - Drow Heretic" />
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1978&amp;ftype=1" name="Twinkle" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus13Damage" value="2d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=697&amp;ftype=1" name="Icingdeath" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus13Damage" value="2d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+		</Power>
+		<Power actiontype="Minor Action" display-class="USAGE_UndauntedStride" name="Undaunted Stride" packagename="" packageurl="" powerusage="Daily" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=718" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_UndauntedStride&apos;, {isBoolean:1});" />
+		<Power actiontype="Move Action" display-class="USAGE_MisleadingBladework" name="Misleading Bladework" packagename="" packageurl="" powerusage="Daily" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=4686" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_MisleadingBladework&apos;, {isBoolean:1});" />
+		<Power actiontype="Standard Action" display-class="USAGE_BladeDance" name="Blade Dance" packagename="" packageurl="" powerusage="Daily" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=4687" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_BladeDance&apos;, {isBoolean:1});">
+			<Condition name="+3d8 to damage once per round (Hunter&apos;s Quarry) - ?" />
+			<Condition name="+2 to damage rolls against creatures with the spider keyword - Drow Heretic" />
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1978&amp;ftype=1" name="Twinkle" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus13Damage" value="2d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=697&amp;ftype=1" name="Icingdeath" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus13Damage" value="2d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+		</Power>
+		<Power actiontype="Standard Action" display-class="USAGE_BladeCascade" name="Blade Cascade" packagename="" packageurl="" powerusage="Daily" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=57" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_BladeCascade&apos;, {isBoolean:1});">
+			<Condition name="+3d8 to damage once per round (Hunter&apos;s Quarry) - ?" />
+			<Condition name="+2 to damage rolls against creatures with the spider keyword - Drow Heretic" />
+			<Weapon attackstat="Strength" defense="AC. Alternate main and off-hand weapon attacks until you miss or until you make five attacks .As soon as an attack misses, this power ends." enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1978&amp;ftype=1" name="Twinkle" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus13Damage" value="2d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC. Alternate main and off-hand weapon attacks until you miss or until you make five attacks .As soon as an attack misses, this power ends." enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=697&amp;ftype=1" name="Icingdeath" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice2d8plus13Damage" value="2d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+		</Power>
+		<Power actiontype="Minor Action" display-class="USAGE_Longstrider" name="Longstrider" packagename="" packageurl="" powerusage="Daily" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=39" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_Longstrider&apos;, {isBoolean:1});" />
+		<Power actiontype="Standard Action" display-class="USAGE_ThreefoldAssault" name="Threefold Assault" packagename="" packageurl="" powerusage="Daily" url="http://www.wizards.com/dndinsider/compendium/power.aspx?id=4442" use-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;USAGE_ThreefoldAssault&apos;, {isBoolean:1});">
+			<Condition name="+3d8 to damage once per round (Hunter&apos;s Quarry) - ?" />
+			<Condition name="+2 to damage rolls against creatures with the spider keyword - Drow Heretic" />
+			<Weapon attackstat="Strength" defense="AC, three attacks (at least one attack with each weapon)" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1978&amp;ftype=1" name="Twinkle" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice1d8plus13Damage" value="1d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+			<Weapon attackstat="Strength" defense="AC, three attacks (at least one attack with each weapon)" enhancementurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=697&amp;ftype=1" name="Icingdeath" weaponurl="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+				<AttackBonus dice-class="dice1d20plus23Attack" value="23">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor abbreviation="1/2 Level" modifier="+10" name="Half Level" />
+					<Factor modifier="+2" name="proficiency bonus" />
+					<Factor modifier="+5" name="enhancement bonus" />
+				</AttackBonus>
+				<Damage dice-class="dice1d8plus13Damage" value="1d8+13">
+					<Factor modifier="+6" name="Strength modifier" />
+					<Factor modifier="+5" name="enhancement bonus" />
+					<Factor modifier="+1" name="bonus - Two-Weapon Fighting" />
+					<Factor modifier="+1" name="bonus - Cutting Steps" />
+				</Damage>
+			</Weapon>
+		</Power>
+	</Powers>
+	
+<!-- Feats element: always present
+
+Children:
+
+Feat elements: one for each Feat the character has.
+
+Required attributes: name, url, description -->
+
+	<Feats>
+		<Feat description="Gain 5 additional hit points per tier" name="Toughness" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=171" />
+		<Feat description="Shift as a free action after scoring a critical hit" name="Agile Hunter" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=280" />
+		<Feat description="Hunter&apos;s Quarry damage dice increase to d8s" name="Lethal Hunter" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=273" />
+		<Feat description="Training with chainmail armor" name="Armor Proficiency (Chainmail)" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=111" />
+		<Feat description="+1 damage while holding a melee weapon in each hand" name="Two-Weapon Fighting" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=173" />
+		<Feat description="Learn three new languages" name="Linguist" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=150" />
+		<Feat description="No combat advantage when surprised, +2 to Perception" name="Alertness" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=109" />
+		<Feat description="+2 damage against spiders" name="Drow Heretic" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=934" />
+		<Feat description="Roll twice for Perception checks" name="Preternatural Senses" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=859" />
+		<Feat description="Use at-will power with opportunity attack" name="Heavy Blade Opportunity" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=314" />
+		<Feat description="Critical hit with main weapon grants free attack with off-hand weapon" name="Two-Weapon Opening" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=349" />
+		<Feat description="Wielding two weapons against foe granting combat advantage, primary weapon gains the brutal 1 property" name="Two-Weapon Ambush" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=956" />
+		<Feat description="Deal Dex modifier damage on miss" name="Scimitar Dance" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=256" />
+		<Feat description="Adjacent creatures aren&apos;t concealed or invisible to you" name="Blind-Fight" url="http://www.wizards.com/dndinsider/compendium/feat.aspx?id=119" />
+	</Feats>
+
+<!-- Loot element: always present
+
+Required attributes:
+
+carried-ad, carried-pp, carried-gp, carried-sp, carried-cp: number of each type of coin carried.
+
+stored-ad, stored-pp, stored-gp, stored-sp, stored-cp: number of each type of coin stored.
+
+carried-ad-display-class, carried-pp-display-class, carried-gp-display-class, carried-sp-display-class, carried-cp-display-class:
+
+assign to at least one HTML element each to dynamically display number of each coin type carried.
+
+stored-ad-display-class, stored-pp-display-class, stored-gp-display-class, stored-sp-display-class, stored-cp-display-class:
+
+assign to at least one HTML element each to dynamically display number of each coin type stored.
+
+Control attributes:
+
+daily-use-display-class: assign to at least one HTML element that should dynamically display remaining daily magic item uses.
+
+daily-use-add-script: javascript to execute when the user triggers a daily item power.
+
+daily-use-subtract-script: javascript to execute when the user regains a daily item power.
+
+carried-ad-add-script, carried-pp-add-script, carried-gp-add-script, carried-sp-add-script, carried-cp-add-script:
+
+javascript to execute to ask the user how many coins of a given type to add to those carried.
+
+carried-ad-subtract-script, carried-pp-subtract-script, carried-gp-subtract-script, carried-sp-subtract-script, carried-cp-subtract-script:
+
+javascript to execute to ask the user how many coins of a given type to subtract from those carried.
+
+stored-ad-add-script, stored-pp-add-script, stored-gp-add-script, stored-sp-add-script, stored-cp-add-script:
+
+javascript to execute to ask the user how many coins of a given type to add to those stored.
+
+stored-ad-subtract-script, stored-pp-subtract-script, stored-gp-subtract-script, stored-sp-subtract-script, stored-cp-subtract-script:
+
+javascript to execute to ask the user how many coins of a given type to subtract from those stored.
+
+Child elements:
+
+Item elements: one for each item.
+
+Required attributes: count, equippedcount, name, type, url
+
+Do not have expectations about values in the type attribute (e.g. Weapon, Armor) or you will miss something.
+
+Child elements:
+
+Enhancement element: only present if the parent element has an enhancement.
+
+Require attributes: name, url -->
+
+	<Loot carried-ad="0" carried-ad-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_carriedad&apos;, {min:1, requireInt:1, text:&apos;How many Astral Diamonds should be added?&apos;, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" carried-ad-display-class="CUR_carriedad" carried-ad-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_carriedad&apos;, {min:1, requireInt:1, text:&apos;How many ad should be subtracted?&apos;, calculateChange: function(oldVal, newVal) { return oldVal - newVal; } });" carried-cp="0" carried-cp-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_carriedcp&apos;, {min:1, requireInt:1, text:&apos;How many Copper Pieces should be added?&apos;, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" carried-cp-display-class="CUR_carriedcp" carried-cp-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_carriedcp&apos;, {min:1, requireInt:1, text:&apos;How many cp should be subtracted?&apos;, calculateChange: function(oldVal, newVal) { return oldVal - newVal; } });" carried-gp="100" carried-gp-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_carriedgp&apos;, {min:1, requireInt:1, text:&apos;How many Gold Pieces should be added?&apos;, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" carried-gp-display-class="CUR_carriedgp" carried-gp-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_carriedgp&apos;, {min:1, requireInt:1, text:&apos;How many gp should be subtracted?&apos;, calculateChange: function(oldVal, newVal) { return oldVal - newVal; } });" carried-pp="0" carried-pp-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_carriedpp&apos;, {min:1, requireInt:1, text:&apos;How many Platinum Pieces should be added?&apos;, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" carried-pp-display-class="CUR_carriedpp" carried-pp-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_carriedpp&apos;, {min:1, requireInt:1, text:&apos;How many pp should be subtracted?&apos;, calculateChange: function(oldVal, newVal) { return oldVal - newVal; } });" carried-sp="0" carried-sp-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_carriedsp&apos;, {min:1, requireInt:1, text:&apos;How many Silver Pieces should be added?&apos;, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" carried-sp-display-class="CUR_carriedsp" carried-sp-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_carriedsp&apos;, {min:1, requireInt:1, text:&apos;How many sp should be subtracted?&apos;, calculateChange: function(oldVal, newVal) { return oldVal - newVal; } });" daily-use-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_DailyUses&apos;, {autoValue:1, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" daily-use-display-class="CUR_DailyUses" daily-use-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_DailyUses&apos;, {autoValue:-1, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" stored-ad="0" stored-ad-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_storedad&apos;, {min:1, requireInt:1, text:&apos;How many Astral Diamonds should be added?&apos;, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" stored-ad-display-class="CUR_storedad" stored-ad-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_storedad&apos;, {min:1, requireInt:1, text:&apos;How many ad should be subtracted?&apos;, calculateChange: function(oldVal, newVal) { return oldVal - newVal; } });" stored-cp="0" stored-cp-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_storedcp&apos;, {min:1, requireInt:1, text:&apos;How many Copper Pieces should be added?&apos;, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" stored-cp-display-class="CUR_storedcp" stored-cp-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_storedcp&apos;, {min:1, requireInt:1, text:&apos;How many cp should be subtracted?&apos;, calculateChange: function(oldVal, newVal) { return oldVal - newVal; } });" stored-gp="0" stored-gp-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_storedgp&apos;, {min:1, requireInt:1, text:&apos;How many Gold Pieces should be added?&apos;, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" stored-gp-display-class="CUR_storedgp" stored-gp-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_storedgp&apos;, {min:1, requireInt:1, text:&apos;How many gp should be subtracted?&apos;, calculateChange: function(oldVal, newVal) { return oldVal - newVal; } });" stored-pp="0" stored-pp-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_storedpp&apos;, {min:1, requireInt:1, text:&apos;How many Platinum Pieces should be added?&apos;, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" stored-pp-display-class="CUR_storedpp" stored-pp-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_storedpp&apos;, {min:1, requireInt:1, text:&apos;How many pp should be subtracted?&apos;, calculateChange: function(oldVal, newVal) { return oldVal - newVal; } });" stored-sp="0" stored-sp-add-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_storedsp&apos;, {min:1, requireInt:1, text:&apos;How many Silver Pieces should be added?&apos;, calculateChange: function(oldVal, newVal) { return oldVal + newVal; } });" stored-sp-display-class="CUR_storedsp" stored-sp-subtract-script="CHARACTERagdpcGxheTRlchQLEgtDaGFyYWN0ZXJWMhjHlPEBDA.triggerVariable(&apos;CUR_storedsp&apos;, {min:1, requireInt:1, text:&apos;How many sp should be subtracted?&apos;, calculateChange: function(oldVal, newVal) { return oldVal - newVal; } });">
+		<Item count="1" equippedcount="1" name="Scimitar" type="Weapon" url="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+			<Enhancement name="Frost Weapon +5" url="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=697&amp;ftype=1" />
+		</Item>
+		<Item count="1" equippedcount="1" name="Boots of Speed (epic tier)" type="Magic Item" url="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=3312&amp;ftype=1" />
+		<Item count="1" equippedcount="1" name="Scimitar" type="Weapon" url="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=18&amp;ftype=3">
+			<Enhancement name="Brilliant Energy Weapon +5" url="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1978&amp;ftype=1" />
+		</Item>
+		<Item count="1" equippedcount="1" name="Finemail" type="Armor" url="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=34&amp;ftype=2">
+			<Enhancement name="Agile Armor +5" url="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=1437&amp;ftype=1" />
+		</Item>
+		<Item count="1" equippedcount="0" name="Holy Symbol" type="Gear" url="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=27&amp;ftype=4" />
+		<Item count="1" equippedcount="0" name="Hat of Disguise (heroic tier)" type="Magic Item" url="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=3467&amp;ftype=1" />
+		<Item count="3" equippedcount="0" name="Dagger" type="Weapon" url="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=3&amp;ftype=3">
+			<Enhancement name="Magic Weapon +2" url="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=731&amp;ftype=1" />
+		</Item>
+		<Item count="1" equippedcount="0" name="Golden Lion (paragon tier)" type="Magic Item" url="http://www.wizards.com/dndinsider/compendium/item.aspx?fid=3910&amp;ftype=1" />
+	</Loot>
+	
+<!-- Languages element: always present
+
+Children:
+
+Language elements: one for each language
+
+Required attributes: name -->
+
+	<Languages>
+		<Language name="Common" />
+		<Language name="Elven" />
+		<Language name="Dwarven" />
+		<Language name="Secret Language" />
+		<Language name="Goblin" />
+	</Languages>
+	
+<!-- Proficiencies element: always present
+
+Children:
+
+ArmorProficiencies element: may be absent if the character has no armor proficiences.
+
+Children:
+
+Proficiency elements: one for each armor proficiency
+
+Required attributes: name, source
+
+ShieldProficiencies element: may be absent if the character has no shield proficiences.
+
+Children:
+
+Proficiency elements: one for each shield proficiency
+
+Required attributes: name, source
+
+WeaponProficiencies element: may be absent if the character has no weapon proficiences.
+
+Children:
+
+Proficiency elements: one for each weapon proficiency that isn't in a group.
+
+Required attributes: name, source
+
+ProficiencyGroup elements: one for each group of weapon proficiencie (e.g. "simple melee")
+
+Required attributes: name, source
+
+Children:
+
+Proficiency elements: one for each weapon proficiency in the group
+
+Required attributes: name, source -->
+
+	<Proficiencies>
+		<WeaponProficiencies>
+			<ProficiencyGroup name="Simple Melee" source="Ranger">
+				<Proficiency name="Club" source="Ranger" />
+				<Proficiency name="Dagger" source="Ranger" />
+				<Proficiency name="Javelin" source="Ranger" />
+				<Proficiency name="Mace" source="Ranger" />
+				<Proficiency name="Sickle" source="Ranger" />
+				<Proficiency name="Spear" source="Ranger" />
+				<Proficiency name="Greatclub" source="Ranger" />
+				<Proficiency name="Morningstar" source="Ranger" />
+				<Proficiency name="Quarterstaff" source="Ranger" />
+				<Proficiency name="Scythe" source="Ranger" />
+				<Proficiency name="Spiked gauntlet" source="Ranger" />
+				<Proficiency name="Claw fighter claw" source="Ranger" />
+				<Proficiency name="Climbing claw" source="Ranger" />
+			</ProficiencyGroup>
+			<ProficiencyGroup name="Military Melee" source="Ranger">
+				<Proficiency name="Battleaxe" source="Ranger" />
+				<Proficiency name="Handaxe" source="Ranger" />
+				<Proficiency name="Flail" source="Ranger" />
+				<Proficiency name="Throwing hammer" source="Ranger" />
+				<Proficiency name="Warhammer" source="Ranger" />
+				<Proficiency name="War pick" source="Ranger" />
+				<Proficiency name="Scimitar" source="Ranger" />
+				<Proficiency name="Longsword" source="Ranger" />
+				<Proficiency name="Short sword" source="Ranger" />
+				<Proficiency name="Greataxe" source="Ranger" />
+				<Proficiency name="Heavy flail" source="Ranger" />
+				<Proficiency name="Glaive" source="Ranger" />
+				<Proficiency name="Halberd" source="Ranger" />
+				<Proficiency name="Maul" source="Ranger" />
+				<Proficiency name="Longspear" source="Ranger" />
+				<Proficiency name="Greatsword" source="Ranger" />
+				<Proficiency name="Falchion" source="Ranger" />
+				<Proficiency name="Broadsword" source="Ranger" />
+				<Proficiency name="Khopesh" source="Ranger" />
+				<Proficiency name="Light war pick" source="Ranger" />
+				<Proficiency name="Scourge" source="Ranger" />
+				<Proficiency name="Trident" source="Ranger" />
+				<Proficiency name="Heavy war pick" source="Ranger" />
+				<Proficiency name="Feral armor claw" source="Ranger" />
+			</ProficiencyGroup>
+			<ProficiencyGroup name="Simple Ranged" source="Ranger">
+				<Proficiency name="Hand crossbow" source="Ranger" />
+				<Proficiency name="Sling" source="Ranger" />
+				<Proficiency name="Crossbow" source="Ranger" />
+				<Proficiency name="Repeating crossbow" source="Ranger" />
+			</ProficiencyGroup>
+			<ProficiencyGroup name="Military Ranged" source="Ranger">
+				<Proficiency name="Shortbow" source="Ranger" />
+				<Proficiency name="Longbow" source="Ranger" />
+			</ProficiencyGroup>
+		</WeaponProficiencies>
+		<ArmorProficiencies>
+			<Proficiency name="Chainmail" source="Armor Proficiency (Chainmail)" />
+			<Proficiency name="Cloth" source="Ranger" />
+			<Proficiency name="Leather" source="Ranger" />
+			<Proficiency name="Hide" source="Ranger" />
+		</ArmorProficiencies>
+		<ShieldProficiencies />
+	</Proficiencies>
+</Character>

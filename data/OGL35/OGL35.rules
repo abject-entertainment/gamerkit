@@ -1,0 +1,218 @@
+<ruleset name="OGL35" display-name="OGL 3.5">
+	<datasets>
+		<dataset name="skill">
+			<data name="name" value-type="string" default="Skill" />
+			<data name="bonus" value-type="int" />
+			<data name="attribute" value-type="option">
+				<option value="Str" />
+				<option value="Dex" />
+				<option value="Con" />
+				<option value="Int" />
+				<option value="Wis" />
+				<option value="Cha" />
+			</data>
+			<data name="class-skill" value-type="bool" />
+		</dataset>
+		<dataset name="attack">
+			<data name="name" value-type="string" />
+			<data name="bonus" value-type="int" />
+			<data name="damage" value-type="string" />
+			<data name="critical" value-type="string" />
+			<data name="range" value-type="string" />
+			<data name="type" value-type="string" />
+			<data name="notes" value-type="string" />
+			<data name="ammo-type" value-type="string" />
+			<data name="ammo-count" value-type="int" />
+		</dataset>
+		<dataset name="protection">
+			<data name="name" value-type="string" />
+			<data name="type" value-type="string" />
+			<data name="ac-bonus" value-type="string" />
+			<data name="max-dex" value-type="string" />
+			<data name="check-penalty" value-type="string" />
+			<data name="spell-fail" value-type="string" />
+			<data name="weight" value-type="string" />
+			<data name="properties" value-type="string" />
+		</dataset>
+		<dataset name="spell">
+			<data name="name" value-type="string" />
+			<data name="level" value-type="int" />
+		</dataset>
+		<dataset name="spell-cap">
+			<data name="known" value-type="int" />
+			<data name="save-dc" value-type="int" />
+			<data name="per-day" value-type="int" />
+			<data name="bonus" value-type="int" />
+		</dataset>
+		<dataset name="roll">
+			<data name="name" value-type="string" />
+			<data name="roll" value-type="string" />
+		</dataset>
+	</datasets>
+	
+	<attributes>
+		<attribute name="Name" display-name="Name" value-type="string" />
+		<attribute name="Player" display-name="Player Name" value-type="string" />
+		<attribute name="Levels" display-name="Class Levels" value-type="string" />
+		<attribute name="Str" display-name="Str" value-type="int" />
+		<attribute name="Con" display-name="Con" value-type="int" />
+		<attribute name="Dex" display-name="Dex" value-type="int" />
+		<attribute name="Int" display-name="Int" value-type="int" />
+		<attribute name="Wis" display-name="Wis" value-type="int" />
+		<attribute name="Cha" display-name="Cha" value-type="int" />
+		 <attribute name="Align" display-name="Alignment" value-type="option">
+			<option name="LG" value="Lawful Good" />
+			<option name="NG" value="Neutral Good" />
+			<option name="CG" value="Chaotic Good" />
+			<option name="LN" value="Lawful Neutral" />
+			<option name="NN" value="True Neutral" />
+			<option name="CN" value="Chaotic Neutral" />
+			<option name="LE" value="Lawful Evil" />
+			<option name="NE" value="Neutral Evil" />
+			<option name="CE" vlaue="Chaotic Evil" />
+		</attribute>
+		<attribute name="Race" display-name="Race" value-type="string" />
+		 <attribute name="XP" display-name="Experience Points" value-type="int" />
+		<attribute name="Size" display-name="Size" value-type="option">
+			<option name="D" display-name="Diminutive" />
+			<option name="T" display-name="Tiny" />
+			<option name="S" display-name="Small" />
+			<option name="M" display-name="Medium" />
+			<option name="L" display-name="Large" />
+			<option name="H" display-name="Huge" />
+			<option name="G" display-name="Gargantuan" />
+			<option name="C" display-name="Colossal" />
+		</attribute>
+		 <attribute name="Age" display-name="Age" value-type="int" />
+		<attribute name="Gender" display-name="Gender" value-type="option...">
+			<option name="M" display-name="Male" />
+			<option name="F" display-name="Female" />
+		</attribute>
+		 <attribute name="Height" display-name="Height" value-type="string" />
+		 <attribute name="Weight" display-name="Weight" value-type="string" />
+		 <attribute name="Deity" display-name="Deity" value-type="string" />
+		 <attribute name="Homeland" display-name="Homeland" value-type="string" />
+		 <attribute name="Eyes" display-name="Eyes" value-type="string" />
+		 <attribute name="Hair" display-name="Hair" value-type="string" />
+		 <attribute name="Skin" display-name="Skin" value-type="string" />
+		<attribute name="AC" display-name="Armor Class" value-type="int" />
+		<attribute name="Fort" display-name="Fortitude" value-type="int" />
+		<attribute name="Ref" display-name="Reflex" value-type="int" />
+		<attribute name="Will" display-name="Willpower" value-type="int" />
+		<attribute name="Init" display-name="Initiative" value-type="int" />
+		<attribute name="Touch" display-name="Touch" value-type="int" />
+		<attribute name="FlatFooted" display-name="Flat-Footed" value-type="int" />
+		 <attribute name="Speed" display-name="Speed" value-type="int" />
+		<attribute name="BAB" display-name="Base Attack Bonus" value-type="+int" />
+		<attribute name="MaxHP" display-name="Max Hit Points" value-type="int" />
+		<attribute name="CurHP" display-name="Current Hit Points" value-type="int" />
+		<attribute name="NonlethalDamage" display-name="Nonlethal Damage" value-type="int" />
+		<attribute name="DmgReduction" display-name="Damage Reduction" value-type="string" />
+		<attribute name="Conditions" display-name="Current Conditions and Effects" value-type="string" />
+		<attribute name="Specials" display-name="Special Abilities" value-type="list(string)" />
+		<attribute name="Languages" display-name="Languages Known" value-type="list(string)" />
+		<attribute name="Feats" display-name="Feats" value-type="list(string)" />
+		<attribute name="Skills" display-name="Skills" value-type="list(skill)" />
+		<attribute name="Attacks" display-name="Attacks" value-type="list(attack)" />
+		 <attribute name="Armor" display-name="Armor/Protective Items" value-type="list(protection)" />
+		 <attribute name="Spells" display-name="Spells" value-type="list(string)" />
+		 <attribute name="SpellSave" display-name="Spell Save" value-type="int" />
+		 <attribute name="SpellCap0" display-name="Spell Capability, Level 0" value-type="spell-cap" />
+		 <attribute name="SpellCap1" display-name="Spell Capability, Level 1" value-type="spell-cap" />
+		 <attribute name="SpellCap2" display-name="Spell Capability, Level 2" value-type="spell-cap" />
+		 <attribute name="SpellCap3" display-name="Spell Capability, Level 3" value-type="spell-cap" />
+		 <attribute name="SpellCap4" display-name="Spell Capability, Level 4" value-type="spell-cap" />
+		 <attribute name="SpellCap5" display-name="Spell Capability, Level 5" value-type="spell-cap" />
+		 <attribute name="SpellCap6" display-name="Spell Capability, Level 6" value-type="spell-cap" />
+		 <attribute name="SpellCap7" display-name="Spell Capability, Level 7" value-type="spell-cap" />
+		 <attribute name="SpellCap8" display-name="Spell Capability, Level 8" value-type="spell-cap" />
+		 <attribute name="SpellCap9" display-name="Spell Capability, Level 9" value-type="spell-cap" />
+		<attribute name="Equipment" display-name="Other Equipment" value-type="list(string)" />
+		<attribute name="Personality" display-name="Personality Traits" value-type="string" />
+		<attribute name="Appearance" display-name="Mannerisms and Appearance" value-type="string" />
+		<attribute name="Background" display-name="Character Background" value-type="string" />
+		<attribute name="Wealth" display-name="Coins and Other Wealth" value-type="string" />
+		<attribute name="Notes" display-name="Session and Campaign Notes" value-type="string" />
+		<attribute name="DieRolls" display-name="Common Die Rolls" value-type="list(roll)" />
+	</attributes>
+	
+	<character-types>
+		<character-type name="PC" display-name="PC" sort-as="pc">
+			<attribute name="Name" />
+			<attribute name="Player" />
+			<attribute name="Levels" />
+			<attribute name="Str" />
+			<attribute name="Con" />
+			<attribute name="Dex" />
+			<attribute name="Int" />
+			<attribute name="Wis" />
+			<attribute name="Cha" />
+			<attribute name="Align" />
+			<attribute name="Race" />
+			<attribute name="XP" />
+			<attribute name="Size" />
+			<attribute name="Age" />
+			<attribute name="Gender" />
+			<attribute name="Height" />
+			<attribute name="Weight" />
+			<attribute name="Deity" />
+			<attribute name="Homeland" />
+			<attribute name="Eyes" />
+			<attribute name="Hair" />
+			<attribute name="Skin" />
+			<attribute name="AC" />
+			<attribute name="Fort" />
+			<attribute name="Ref" />
+			<attribute name="Will" />
+			<attribute name="Init" />
+			<attribute name="Touch" />
+			<attribute name="FlatFooted" />
+			<attribute name="Speed" />
+			<attribute name="BAB" />
+			<attribute name="MaxHP" />
+			<attribute name="CurHP" />
+			<attribute name="NonlethalDamage" />
+			<attribute name="DmgReduction" />
+			<attribute name="Conditions" />
+			<attribute name="Specials" />
+			<attribute name="Languages" />
+			<attribute name="Feats" />
+			<attribute name="Skills" />
+			<attribute name="Attacks" />
+			<attribute name="Armor" />
+			<attribute name="Spells" />
+			<attribute name="SpellSave" />
+			<attribute name="SpellCap0" />
+			<attribute name="SpellCap1" />
+			<attribute name="SpellCap2" />
+			<attribute name="SpellCap3" />
+			<attribute name="SpellCap4" />
+			<attribute name="SpellCap5" />
+			<attribute name="SpellCap6" />
+			<attribute name="SpellCap7" />
+			<attribute name="SpellCap8" />
+			<attribute name="SpellCap9" />
+			<attribute name="Equipment" />
+			<attribute name="Personality" />
+			<attribute name="Appearance" />
+			<attribute name="Background" />
+			<attribute name="Wealth" />
+			<attribute name="Notes" />
+			<attribute name="DieRolls" />
+		</character-type>
+	</character-types>
+	
+	<character-sheets>
+		<character-sheet name="PC-FULL" type="PC" display-name="Full Sheet" use-for-create="true" use-for-edit="true">
+			<file ref="OGL35-PC-FULL.sheet" platform="iphone" />
+			<file ref="OGL35-PC-FULL.pad.sheet" platform="ipad" />
+		</character-sheet>
+	</character-sheets>
+
+	<imports>
+	</imports>
+	
+	<encounter-elements>
+		<encounter-element name="encelem" display-name="Not sure what goes here" />
+	</encounter-elements>
+</ruleset>

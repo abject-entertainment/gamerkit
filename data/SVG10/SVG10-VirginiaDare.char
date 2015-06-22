@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+
+
+<character system="SVG10" type="PC">
+	<attribute name="Name"><![CDATA[Virginia Dare]]></attribute>
+	<attribute name="Player"><![CDATA[]]></attribute>
+	<attribute name="Origin"><![CDATA[]]></attribute>
+	<attribute name="Rating"><![CDATA[Seasoned (25 XP)]]></attribute>
+	<attribute name="Destination"><![CDATA[]]></attribute>
+	<attribute name="Agility"><![CDATA[8]]></attribute>
+	<attribute name="Smarts"><![CDATA[8]]></attribute>
+	<attribute name="Strength"><![CDATA[8]]></attribute>
+	<attribute name="Spirit"><![CDATA[6]]></attribute>
+	<attribute name="Vigor"><![CDATA[6]]></attribute>
+	<attribute name="Charisma"><![CDATA[+2]]></attribute>
+	<attribute name="Pace"><![CDATA[6]]></attribute>
+	<attribute name="Parry"><![CDATA[5]]></attribute>
+	<attribute name="Toughness"><![CDATA[5]]></attribute>
+	<attribute name="Fatigue"><![CDATA[]]></attribute>
+	<attribute name="Wounds"><![CDATA[]]></attribute>
+	<attribute name="PowerPoints"><![CDATA[]]></attribute>
+	<attribute name="Bennies"><![CDATA[3]]></attribute>
+	<attribute name="Hindrances">
+		<item><![CDATA[Curious]]></item>
+		<item><![CDATA[Loyal]]></item>
+		<item><![CDATA[Stubborn]]></item>
+	</attribute>
+	<attribute name="Edges">
+		<item><![CDATA[Alertness]]></item>
+		<item><![CDATA[Attractive]]></item>
+		<item><![CDATA[Danger Sense]]></item>
+	</attribute>
+	<attribute name="Equipment">
+		<item><![CDATA[2 spare clips for Colt 1911]]></item>
+	</attribute>
+	<attribute name="ArmorHead"><![CDATA[]]></attribute>
+	<attribute name="ArmorTorso"><![CDATA[]]></attribute>
+	<attribute name="ArmorArms"><![CDATA[]]></attribute>
+	<attribute name="ArmorLegs"><![CDATA[]]></attribute>
+	<attribute name="WTCarried"><![CDATA[]]></attribute>
+	<attribute name="WTLimit"><![CDATA[]]></attribute>
+	<attribute name="WTPenalty"><![CDATA[]]></attribute>
+	<attribute name="Skills">
+		<item>
+			<name><![CDATA[Boating]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Climb]]></name>
+			<rank><![CDATA[4]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Fighting]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Guts]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Intimidation]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Investigation]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Notice]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Persuasion]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Shooting]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+		<item>
+			<name><![CDATA[Stealth]]></name>
+			<rank><![CDATA[6]]></rank>
+		</item>
+	</attribute>
+	<attribute name="Powers">
+	</attribute>
+	<attribute name="Weapons">
+		<item>
+			<name><![CDATA[Large Knife]]></name>
+			<range><![CDATA[1]]></range>
+			<rof><![CDATA[]]></rof>
+			<damage><![CDATA[1da[Strength]+1da4]]></damage>
+			<ap><![CDATA[]]></ap>
+			<wt><![CDATA[]]></wt>
+			<notes><![CDATA[]]></notes>
+		</item>
+		<item>
+			<name><![CDATA[Colt 1911]]></name>
+			<range><![CDATA[12/24/48]]></range>
+			<rof><![CDATA[1]]></rof>
+			<damage><![CDATA[2da6+1]]></damage>
+			<ap><![CDATA[1]]></ap>
+			<wt><![CDATA[]]></wt>
+			<notes><![CDATA[7 shots, semi-auto]]></notes>
+		</item>
+	</attribute>
+	<attribute name="Injuries"><![CDATA[]]></attribute>
+	<attribute name="Wealth"><![CDATA[]]></attribute>
+	<attribute name="Description"><![CDATA[]]></attribute>
+	<attribute name="Personality"><![CDATA[]]></attribute>
+	<attribute name="Background"><![CDATA[Virginia’s parents raised her to be a dancer, but her tomboyish nature often got the better of her. More than one boy who was too forward with her received a broken nose. By the age of 21, the bored socialite was jolted out of her boring life when her brother, Danny Dare, went missing during a visit to Cairo. Not only did she find him, but they became embroiled in an incredible fight against an ancient mummy, and ever since she has become a renowned tomb raider.Virginia met Buck Savage during this same adventure, and formed a lovehate relationship with him. The two know they’re destined to be together, but their stubborn natures have so far kept them from cementing the deal.]]></attribute>
+	<attribute name="Notes"><![CDATA[Languages: English, Arabic, French, Russian]]></attribute>
+	<attribute name="DieRolls">
+	</attribute>
+	<attribute name="Token"><![CDATA[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]]></attribute>
+</character>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   HEX10-SUPPORT.package
+   RPG Toolkit
+
+   Created by Ben Taggart on 7/6/10.
+   Copyright 2010 Abject Entertainment. All rights reserved.
+-->
+<plist version="1.0">
+    <array>
+		<array>
+			<string>HEX10</string>
+			<string>Official support for the Hollow Earth Expedition RPG System.  This package also includes sample characters and tokens.</string>
+			<string>Hollow Earth Expedition</string>
+			<string>system</string>
+			<integer>3</integer>
+		</array>
+		
+		<string>Systems/HEX10.rules</string>
+		
+		<string>Characters/HEX10-DyingMoneyman-0.char</string>
+		<string>Characters/HEX10-FieldBiologist-0.char</string>
+		<string>Characters/HEX10-FortuneHunter-0.char</string>
+		<string>Characters/HEX10-ImperiledActress-0.char</string>
+		<string>Characters/HEX10-IntrepidReporter-0.char</string>
+		<string>Characters/HEX10-BigGameHunter-0.char</string>
+		
+		<string>Media/HEX10-Academic.token</string>
+		<string>Media/HEX10-Adventurer.token</string>
+		<string>Media/HEX10-Celebrity.token</string>
+		<string>Media/HEX10-Hunter.token</string>
+		<string>Media/HEX10-Missionary.token</string>
+		<string>Media/HEX10-Moneyman.token</string>
+		<string>Media/HEX10-Reporter.token</string>
+		<string>Media/HEX10-Scientist.token</string>
+		<string>Media/HEX10-Survivor.token</string>
+		<string>Media/HEX10-Explorer.token</string>
+		
+		<string>Sheets/HEX10-PC.xslt</string>
+		<string>Sheets/HEX10.css</string>
+		<string>Sheets/HEX10-PC.sheet</string>
+		<string>Sheets/HEX10-PC.pad.sheet</string>
+	</array>
+</plist>
