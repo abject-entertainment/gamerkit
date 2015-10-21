@@ -164,12 +164,14 @@ void doRoll(int count, int sides, int drop, bool bDropLow, int rerollMin, int re
 	// parse notation
 	NSString *nStr = self.notation.text;
 	
-	self.results.text = [self doNotationRoll:nStr andSaveInPrefs:YES];
+	self.results.text = [DiceView doNotationRoll:nStr andSaveInPrefs:YES];
 
 	[self.notation resignFirstResponder];
 }
 
-- (NSString*)doNotationRoll:(NSString *)nStr andSaveInPrefs:(BOOL)save
++ (NSString*)doNotationRoll:(NSString *)notation
+{ return [DiceView doNotationRoll:notation andSaveInPrefs:NO]; }
++ (NSString*)doNotationRoll:(NSString *)nStr andSaveInPrefs:(BOOL)save
 {
 	NSMutableString *resultsStr = [NSMutableString stringWithCapacity:48];
 	
@@ -284,8 +286,8 @@ void doRoll(int count, int sides, int drop, bool bDropLow, int rerollMin, int re
 	if (save)
 	{
 		NSMutableDictionary *prefs = [NSMutableDictionary dictionaryWithDictionary:[[DataManager getDataManager] getUserProperty:@"dice"]];
-		[prefs setValue:self.notation.text forKey:@"notation"];
-		[prefs setValue:self.results.text forKey:@"results"];
+		[prefs setValue:nStr forKey:@"notation"];
+		[prefs setValue:resultsStr forKey:@"results"];
 		[[DataManager getDataManager] setUserProperty:@"dice" value:prefs];
 	}
 	

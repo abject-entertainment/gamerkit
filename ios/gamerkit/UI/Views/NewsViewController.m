@@ -9,6 +9,8 @@
 #import "NewsViewController.h"
 #import "DataManager.h"
 
+extern BOOL bPad;
+
 @interface NewsViewController ()
 
 @end
@@ -20,11 +22,27 @@
 	
 	if (self.content)
 	{
-		DataManager *dm = [DataManager getDataManager];
-		
-		NSString *startPage = [dm.docsPath stringByAppendingPathComponent:(@"Systems/start-ipad.html")];
-		[self.content loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:startPage]]];
+		[self goHome:self];
 	}
+}
+
+- (IBAction)goHome:(id)sender
+{
+	DataManager *dm = [DataManager getDataManager];
+	
+	NSString *newsPage = nil;
+	if (bPad)
+		newsPage = @"Systems/start-ipad.html";
+	else
+		newsPage = @"Systems/start.html";
+	
+	NSString *startPage = [dm.docsPath stringByAppendingPathComponent:newsPage];
+	[self.content loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:startPage]]];
+}
+
+- (IBAction)goToFeedback:(id)sender
+{
+#warning <<AE>> Implement feeback here.
 }
 
 - (void)didReceiveMemoryWarning {

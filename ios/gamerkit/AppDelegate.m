@@ -15,19 +15,13 @@ NSString *feedbackStats = nil;
 
 AppDelegate *s_delegate = nil;
 
-@interface AppDelegate () <UISplitViewControllerDelegate>
+@interface AppDelegate ()
 {
-	UISplitViewController *_splitVC;
 }
 
 @end
 
 @implementation AppDelegate
-
-+ (UISplitViewController*)splitView
-{
-	return s_delegate->_splitVC;
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	
@@ -48,16 +42,6 @@ AppDelegate *s_delegate = nil;
 	feedbackStats = [NSString stringWithFormat:@"GTv%@-%@-%@", versionStr, dev.model, dev.systemVersion];
 	
 	// Override point for customization after application launch.
-	_splitVC = (UISplitViewController *)self.window.rootViewController;
-
-	_splitVC.delegate = self;
-	_splitVC.presentsWithGesture = NO;
-	
-	if (dev.userInterfaceIdiom == UIUserInterfaceIdiomPhone)
-	{
-		_splitVC.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
-		//[_splitVC showDetailViewController:[_splitVC.viewControllers lastObject] sender:self];
-	}
 	
 	return YES;
 }
@@ -84,23 +68,6 @@ AppDelegate *s_delegate = nil;
 	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)application:(UIApplication *)application didChangeStatusBarOrientation:(UIInterfaceOrientation)oldStatusBarOrientation {
-	UIDevice *dev = [UIDevice currentDevice];
-	if (dev.userInterfaceIdiom == UIUserInterfaceIdiomPad &&
-		UIDeviceOrientationIsLandscape(dev.orientation))
-	{
-		_splitVC.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
-	}
-	else
-	{
-		_splitVC.preferredDisplayMode = UISplitViewControllerDisplayModeAutomatic;
-	}
-}
-
 #pragma mark - Split view
-
-- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-	return NO;
-}
 
 @end

@@ -20,11 +20,10 @@
 @class GriddedView;
 
 @interface MapsController : UICollectionViewController
-<UIImagePickerControllerDelegate, UINavigationControllerDelegate,
+<UIImagePickerControllerDelegate,
 ModalPickerDelegate, SharedContentDoneDelegate, UIScrollViewDelegate, UITextFieldDelegate> {
 	NSMutableArray *maps;
 	Map *currentMap;
-	NSObject<MapSelectionDelegate> *_selectionDelegate;
 
 	UIPopoverController *popover;
 	UIViewController *cachedVC;
@@ -32,20 +31,15 @@ ModalPickerDelegate, SharedContentDoneDelegate, UIScrollViewDelegate, UITextFiel
 	UIBarButtonItem *cachedButton;
 }
 
-@property (nonatomic, readonly) IBOutlet UITableView *mapList;
+@property (nonatomic) IBOutlet UITableView *mapList;
 
-@property (nonatomic, readonly) IBOutlet UIViewController *mapDetail;
-@property (nonatomic, readonly) IBOutlet GriddedView *mapGrid;
-@property (nonatomic, readonly) IBOutlet UITextField *mapName;
-@property (nonatomic, readonly) IBOutlet UIBarButtonItem *shareButton;
-@property (nonatomic, readonly) IBOutlet UIBarButtonItem *doneButton;
-@property (nonatomic, readonly) IBOutlet UIImagePickerController *photoLibrary;
+@property (nonatomic) IBOutlet UIViewController *mapDetail;
+@property (nonatomic) IBOutlet GriddedView *mapGrid;
+@property (nonatomic) IBOutlet UITextField *mapName;
+@property (nonatomic) IBOutlet UIBarButtonItem *shareButton;
+@property (nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (nonatomic) IBOutlet UIImagePickerController *photoLibrary;
 
-@property (nonatomic, readonly) NSObject<MapSelectionDelegate> *selectionDelegate;
-@property (nonatomic, assign) id doneTarget;
-@property (nonatomic) SEL doneAction;
-
-- (IBAction)done:(id)sender;
 - (IBAction)newMap:(id)sender;
 - (IBAction)detailDone;
 - (IBAction)pickImage:(id)sender;

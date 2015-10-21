@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "PageViewController.h"
+#import "TokenListController.h"
 
 @class Character;
 
-@interface CharacterViewController : PageViewController
+@interface CharacterViewController : UIViewController <TokenSelectionDelegate, UIWebViewDelegate>
 
+@property (nonatomic, strong) IBOutlet UIWebView* content;
 @property (nonatomic, strong) IBOutlet UIBarItem* titleText;
 
 @property (readonly) Character *character;
 - (void)setCharacter:(Character*)character;
+
+- (IBAction)roll:(id)sender;
 
 @end

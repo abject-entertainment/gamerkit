@@ -24,6 +24,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;
 
-- (NSString*)doNotationRoll:(NSString*)notation andSaveInPrefs:(BOOL)save;
++ (NSString*)doNotationRoll:(NSString*)notation;
++ (NSString*)doNotationRoll:(NSString*)notation andSaveInPrefs:(BOOL)save;
 
 @end

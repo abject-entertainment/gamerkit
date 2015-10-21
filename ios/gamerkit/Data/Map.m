@@ -49,8 +49,8 @@
 {
 	if (!bFullyLoaded && self.path)
 	{
-		[self initWithFileAtPath:self.path fully:YES];
-		 bFullyLoaded = YES;
+		Map *_self = [self initWithFileAtPath:self.path fully:YES];
+		_self->bFullyLoaded = YES;
 	}
 }
 

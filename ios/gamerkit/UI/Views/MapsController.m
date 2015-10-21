@@ -10,20 +10,13 @@
 #import "AppDelegate.h"
 #import "GriddedView.h"
 #import "DataManager.h"
+#import "MapCell.h"
 
 @implementation MapsController
-@synthesize mapList;
-@synthesize mapDetail, mapGrid, mapName, shareButton, photoLibrary;
-@synthesize doneButton, doneTarget, doneAction;
 
-- (NSObject<MapSelectionDelegate>*)selectionDelegate { return _selectionDelegate; }
-- (void)setSelectionDelegate:(NSObject <MapSelectionDelegate>*)selDel
-{ _selectionDelegate = selDel; if (mapList) [mapList reloadData]; }
-
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+    if (self = [super initWithCoder:aDecoder])
 	{
 		// load map xml files.
 		NSFileManager *fm = [NSFileManager defaultManager];
@@ -53,44 +46,11 @@
     return self;
 }
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-*/
-
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return YES; // bPad || (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-
 - (void)formatMapImage:(UIImage*)img
 {
-	if (mapGrid)
+	if (_mapGrid)
 	{
-		mapGrid.image = img;
+		_mapGrid.image = img;
 	}
 }
 
@@ -98,9 +58,9 @@
 {
 	if (currentMap == nil) return;
 	
-	currentMap.name = mapName.text;
-	currentMap.gridOffset = mapGrid.gridOffset;
-	currentMap.gridScale = mapGrid.gridScale;
+	currentMap.name = _mapName.text;
+	currentMap.gridOffset = _mapGrid.gridOffset;
+	currentMap.gridScale = _mapGrid.gridScale;
 	
 	[currentMap writeToFile];
 	
@@ -112,31 +72,11 @@
 	
 	currentMap = nil;
 	
-	if (mapList)
-		[mapList reloadData];
+	if (_mapList)
+		[_mapList reloadData];
 	
 	[self formatMapImage:nil];
-	mapName.text = @"New Map";
-	
-	/*
-	if (cachedVC)
-	{
-		AppDelegate *app = [RPG_ToolkitAppDelegate sharedApp];
-		if (app && app.tabBarController)
-		{
-			app.tabBarController.delegate = cachedDel;
-			cachedDel = nil;
-			
-			if (app.splitViewController)
-				[app.splitViewController setViewControllers:[NSArray arrayWithObjects:[app.splitViewController.viewControllers objectAtIndex:0], cachedVC, nil]];
-			cachedVC = nil;
-		}
-	}
-	else
-	{
-		[self dismissViewControllerAnimated:YES completion:NULL];
-	}
-	*/
+	_mapName.text = @"New Map";
 }
 
 - (IBAction)newMap:(id)sender
@@ -152,10 +92,10 @@
 
 - (IBAction)pickImage:(id)sender
 {
-	if (photoLibrary == nil)
+	if (_photoLibrary == nil)
 	{
-		photoLibrary = [[UIImagePickerController alloc] init];
-		photoLibrary.delegate = self;
+		_photoLibrary = [[UIImagePickerController alloc] init];
+		_photoLibrary.delegate = self;
 	}
 	
 	/*if (bPad)
@@ -171,8 +111,8 @@
 	}
 	else if (self.presentedViewController == mapDetail && photoLibrary) */
 	{
-		photoLibrary.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-		[mapDetail presentViewController:photoLibrary animated:YES completion:NULL];
+		_photoLibrary.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+		[_mapDetail presentViewController:_photoLibrary animated:YES completion:NULL];
 	}
 }
 
@@ -189,7 +129,7 @@
 			[currentMap startSharing:currentMap.name];
 		}
 		
-		if (shareButton)
+		if (_shareButton)
 		{
 			((UIBarButtonItem*)sender).title = [currentMap isShared]?@"Stop Sharing":@"Share";
 		}
@@ -200,129 +140,65 @@
 {
 	if (![maps containsObject:map])
 		[maps addObject:map];
-	if (mapList) [mapList reloadData];
+	if (_mapList) [_mapList reloadData];
 }
 
 - (void)showMapDetail
 {
-	/*
-	RPG_ToolkitAppDelegate *app = [RPG_ToolkitAppDelegate sharedApp];
-	if (app && app.splitViewController)
+}
+
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (indexPath.row < maps.count)
 	{
-		if (app.tabBarController && app.tabBarController.delegate != self)
+		Map *m = [maps objectAtIndex:indexPath.row];
+		MapCell *cell = (MapCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"Map" forIndexPath:indexPath];
+	
+		if (cell && m)
 		{
-			cachedDel = app.tabBarController.delegate;
-			app.tabBarController.delegate = self;
+			cell.name.text = m.name;
+			cell.image.image = m.miniImage;
 		}
-		if (cachedVC == nil)
-		{
-			cachedVC = [app.splitViewController.viewControllers objectAtIndex:1];
-			[app.splitViewController setViewControllers:[NSArray arrayWithObjects:[app.splitViewController.viewControllers objectAtIndex:0], mapDetail, nil]];
-		}
+		
+		return cell;
 	}
 	else
 	{
-		mapDetail.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-		[self presentViewController:mapDetail animated:YES completion:NULL];
+		UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"NewMap" forIndexPath:indexPath];
+		return cell;
 	}
-	*/
 }
 
-- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MapCell"];
-	if (cell == nil)
-	{
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MapCell"];
-	}
-	
-	if (cell != nil)
-	{
-		NSUInteger idx[2];
-		[indexPath getIndexes: idx];
-		
-		if (idx[0] == 0 && idx[1] < maps.count)
-		{
-			Map *m = [maps objectAtIndex:idx[1]];
-			if (m)
-			{
-				cell.textLabel.text = m.name;
-				cell.imageView.image = m.miniImage;
-				if (_selectionDelegate)
-				{
-					cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-					if ([cell.accessoryView isKindOfClass:[UIButton class]])
-					{
-						[(UIButton*)cell.accessoryView addTarget:self 
-														  action:@selector(disclosureTapped:event:) 
-												forControlEvents:UIControlEventTouchUpInside];
-					}
-				}
-				else
-				{
-					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-				}
-			}
-			else 
-			{
-				cell.textLabel.text = @"error";
-				cell.accessoryType = UITableViewCellAccessoryNone;
-			}
-			
-		}
-	}
-	
-	return cell;
+	return maps.count + 1;
 }
 
-- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-	return maps.count;
+	return 1;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (cachedVC)
+	if (indexPath.row < maps.count)
 	{
-		[self detailDone];
-	}
-	
-	NSUInteger idx[2];
-	[indexPath getIndexes: idx];
-	
-	if (idx[0] == 0 && idx[1] < maps.count)
-	{
-		Map *m = [maps objectAtIndex:idx[1]];
-		if (_selectionDelegate)
-		{
-			[_selectionDelegate mapSelected:m];
-			self.selectionDelegate = nil;
-		}
-		else if (m && mapDetail)
+		Map *m = [maps objectAtIndex:indexPath.row];
+		if (m && _mapDetail)
 		{
 			currentMap = m;
 			[currentMap fullyLoad];
 			[self formatMapImage:m.image];
-			if (mapGrid)
+			if (_mapGrid)
 			{
-				mapGrid.gridOffset = m.gridOffset;
-				mapGrid.gridScale = m.gridScale;
+				_mapGrid.gridOffset = m.gridOffset;
+				_mapGrid.gridScale = m.gridScale;
 			}
-			if (mapName) mapName.text = m.name;
-			if (shareButton) shareButton.title = [m isShared]?@"Stop Sharing":@"Share";
+			if (_mapName) _mapName.text = m.name;
+			if (_shareButton) _shareButton.title = [m isShared]?@"Stop Sharing":@"Share";
 
 			[self showMapDetail];
 		}
-	}
-}
-
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-{
-	if (viewController != mapDetail)
-	{
-		[cachedDel tabBarController:tabBarController didSelectViewController:viewController];
-		
-		[self detailDone];
 	}
 }
 
@@ -338,15 +214,16 @@
 	}
 	else
 	{
-		[mapDetail dismissViewControllerAnimated:YES completion:NULL];
+		[_mapDetail dismissViewControllerAnimated:YES completion:NULL];
 	}
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-	[mapDetail dismissViewControllerAnimated:YES completion:NULL];
+	[_mapDetail dismissViewControllerAnimated:YES completion:NULL];
 }
 
+/*
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (editingStyle == UITableViewCellEditingStyleDelete)
@@ -372,6 +249,7 @@
 	
 	[tableView reloadData];
 }
+*/
 
 - (BOOL)modalPicker:(ModalPicker*)picker donePicking:(NSArray*)results
 {
@@ -396,8 +274,8 @@
 	}
 	else if ([result caseInsensitiveCompare:@"Create New"] == NSOrderedSame)
 	{
-		if (mapName) mapName.text = @"New Map";
-		if (mapDetail)
+		if (_mapName) _mapName.text = @"New Map";
+		if (_mapDetail)
 		{
 			currentMap = [[Map alloc] init];
 			[self showMapDetail];
@@ -418,19 +296,19 @@
 {
 	if (self.presentedViewController && [self.presentedViewController isKindOfClass:[SharedContentController class]])
 		[self dismissViewControllerAnimated:YES completion:NULL];
-	if (mapList) [mapList reloadData];
+	if (_mapList) [_mapList reloadData];
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
-	return mapGrid;
+	return _mapGrid;
 }
 
 - (IBAction)toggleEditGrid:(id)sender
 {
-	if (mapGrid && [sender isKindOfClass:[UISwitch class]])
+	if (_mapGrid && [sender isKindOfClass:[UISwitch class]])
 	{
-		mapGrid.drawGrid = [sender isOn];
+		_mapGrid.drawGrid = [sender isOn];
 	}
 }
 
@@ -438,25 +316,6 @@
 {
 	[textField resignFirstResponder];
 	return YES;
-}
-
-- (void)done:(id)sender
-{
-	if (cachedVC)
-		[self detailDone];
-	
-	if (_selectionDelegate)
-	{
-		[_selectionDelegate mapSelected:nil];
-		self.selectionDelegate = nil;
-	}
-	else
-	{
-		if (doneTarget && doneAction && [doneTarget respondsToSelector:doneAction])
-		{
-			[doneTarget performSelector:doneAction withObject:sender];
-		}
-	}
 }
 
 @end

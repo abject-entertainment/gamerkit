@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "ModalPicker.h"
 #import "SharedContentController.h"
+#import "TokenListController.h"
 
 @class Token;
 
-@interface TokenController : UIViewController <UITextFieldDelegate>
+@interface TokenEditController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
-@property (nonatomic, strong) IBOutlet UITextField *tokenName;
+@property (nonatomic, weak) id<TokenSelectionDelegate> selectionDelegate;
 
 - (IBAction)openPhotoLibrary;
 

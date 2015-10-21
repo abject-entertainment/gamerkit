@@ -10,7 +10,7 @@
 
 @class Character;
 
-@interface CharacterCell : UITableViewCell
+@interface CharacterCell : UICollectionViewCell
 
 @property (nonatomic,weak) IBOutlet UILabel *name;
 @property (nonatomic,weak) IBOutlet UIImageView *token;

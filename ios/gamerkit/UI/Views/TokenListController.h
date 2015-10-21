@@ -10,8 +10,16 @@
 
 @class Token;
 
+@protocol TokenSelectionDelegate
+- (void)tokenWasSelected:(Token*)token;
+@optional
+- (void)tokenSelectionWasCancelled;
+@end
+
+
 @interface TokenListController : UICollectionViewController
 
++ (void)selectTokenForDelegate:(UIViewController<TokenSelectionDelegate>*)tokenSelectionDelegate;
 - (void)addToken:(Token *)token;
 
 @end

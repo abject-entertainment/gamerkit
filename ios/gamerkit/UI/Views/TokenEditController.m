@@ -6,18 +6,18 @@
 //  Copyright 2010 Abject Entertainment. All rights reserved.
 //
 
-#import "TokenController.h"
+#import "TokenEditController.h"
 #import "Token.h"
 #import "DataManager.h"
-#import "TokenListController.h"
+#import "DismissSegue.h"
 
-@interface TokenController()
+@interface TokenEditController()
 {
 	Token *_token;
 }
 @end
 
-@implementation TokenController
+@implementation TokenEditController
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
@@ -28,12 +28,6 @@
     return self;
 }
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,29 +35,7 @@
 	if (_token)
 	{
 		_imageView.image = _token.image;
-		_tokenName.text = _token.name;
 	}
-}
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (void)setToken:(Token *)token
@@ -73,7 +45,6 @@
 	if (_imageView)
 	{
 		_imageView.image = _token.image;
-		_tokenName.text = _token.name;
 	}
 }
 
@@ -245,16 +216,19 @@ const float tokenSize = 128.0f;
 
 - (IBAction)save
 {
-	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Save" message:@"Save all changes? This cannot be undone." preferredStyle:UIAlertControllerStyleAlert];
-	
-	[alert addAction:[UIAlertAction actionWithTitle:@"Yes, Save" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-		_token.name = _tokenName.text;
+	if (_token == nil)
+	{
+		_token = [[Token alloc] initWithImage:_imageView.image];
+		if ([self.presentingViewController isKindOfClass:[TokenListController class]])
+		{
+			[(TokenListController*)self.presentingViewController addToken:_token];
+		}
+	}
+	else
+	{
 		_token.image = _imageView.image;
-		[_token writeToFile];
-	}]];
-	[alert addAction:[UIAlertAction actionWithTitle:@"No, Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}]];
-	
-	[self presentViewController:alert animated:YES completion:nil];
+	}
+	[_token writeToFile];
 }
 
 - (IBAction)revert
@@ -262,7 +236,6 @@ const float tokenSize = 128.0f;
 	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Revert" message:@"Revert to last saved version? This cannot be undone." preferredStyle:UIAlertControllerStyleAlert];
 	
 	[alert addAction:[UIAlertAction actionWithTitle:@"Yes, Revert" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-		_tokenName.text = _token.name;
 		_imageView.image = _token.image;
 	}]];
 	[alert addAction:[UIAlertAction actionWithTitle:@"No, Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}]];

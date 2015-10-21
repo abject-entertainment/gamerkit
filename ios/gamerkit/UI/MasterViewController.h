@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Components/TabSelectionView.h"
 
 @interface MasterViewController : UITabBarController
 

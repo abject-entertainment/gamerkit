@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabSelectionView"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJt-Kw-brM" customClass="TabButton">
+                    <rect key="frame" x="19" y="3" width="54" height="54"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="54" id="1xb-tI-1Pq"/>
+                        <constraint firstAttribute="height" constant="54" id="iOP-AS-hYY"/>
+                    </constraints>
+                    <state key="normal" title="N" backgroundImage="buttonPlaceholder"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="tabName" value="news"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tabClick:" destination="-1" eventType="touchUpInside" id="8Ob-dc-t52"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqX-cG-Esc" customClass="TabButton">
+                    <rect key="frame" x="76" y="3" width="54" height="54"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="54" id="7ZV-vG-ZVO"/>
+                        <constraint firstAttribute="height" constant="54" id="vGa-In-aL8"/>
+                    </constraints>
+                    <state key="normal" title="D" backgroundImage="buttonPlaceholder"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="tabName" value="dice"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tabClick:" destination="-1" eventType="touchUpInside" id="1OM-mS-Waf"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4kc-ql-QnO" customClass="TabButton">
+                    <rect key="frame" x="190" y="3" width="54" height="54"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="p08-v2-Yr5"/>
+                        <constraint firstAttribute="width" constant="54" id="vag-ge-brs"/>
+                    </constraints>
+                    <state key="normal" title="M" backgroundImage="buttonPlaceholder"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="tabName" value="maps"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tabClick:" destination="-1" eventType="touchUpInside" id="BM7-fS-JD0"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0OE-uQ-0TY" customClass="TabButton">
+                    <rect key="frame" x="247" y="3" width="54" height="54"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="f1w-lf-uev"/>
+                        <constraint firstAttribute="width" constant="54" id="oXD-gF-xOJ"/>
+                    </constraints>
+                    <state key="normal" title="$" backgroundImage="buttonPlaceholder"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="tabName" value="shop"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tabClick:" destination="-1" eventType="touchUpInside" id="6Dl-ZM-r5o"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haX-kB-lTc" customClass="TabButton">
+                    <rect key="frame" x="133" y="3" width="54" height="54"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="54" id="Y9Z-w6-Xhw"/>
+                        <constraint firstAttribute="height" constant="54" id="kkC-Nw-nHZ"/>
+                    </constraints>
+                    <state key="normal" title="C" backgroundImage="buttonPlaceholder"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="tabName" value="characters"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tabClick:" destination="-1" eventType="touchUpInside" id="NBW-fV-nhY"/>
+                    </connections>
+                </button>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="0OE-uQ-0TY" firstAttribute="leading" secondItem="4kc-ql-QnO" secondAttribute="trailing" constant="3" id="BXH-09-W42"/>
+                <constraint firstAttribute="bottom" secondItem="4kc-ql-QnO" secondAttribute="bottom" constant="3" id="F5z-BF-L3P"/>
+                <constraint firstItem="haX-kB-lTc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Hp0-Iw-6rD"/>
+                <constraint firstItem="4kc-ql-QnO" firstAttribute="leading" secondItem="haX-kB-lTc" secondAttribute="trailing" constant="3" id="RUF-B9-2ge"/>
+                <constraint firstAttribute="bottom" secondItem="qJt-Kw-brM" secondAttribute="bottom" constant="3" id="Xoj-W7-CcR"/>
+                <constraint firstAttribute="bottom" secondItem="nqX-cG-Esc" secondAttribute="bottom" constant="3" id="deg-bh-N1q"/>
+                <constraint firstItem="haX-kB-lTc" firstAttribute="leading" secondItem="nqX-cG-Esc" secondAttribute="trailing" constant="3" id="gY0-DE-IFE"/>
+                <constraint firstItem="nqX-cG-Esc" firstAttribute="leading" secondItem="qJt-Kw-brM" secondAttribute="trailing" constant="3" id="mwM-LI-CbR"/>
+                <constraint firstAttribute="bottom" secondItem="0OE-uQ-0TY" secondAttribute="bottom" constant="3" id="sVJ-YO-fng"/>
+                <constraint firstAttribute="bottom" secondItem="haX-kB-lTc" secondAttribute="bottom" constant="3" id="xva-oY-i0R"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="104.5" y="371"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="buttonPlaceholder" width="64" height="64"/>
+    </resources>
+</document>

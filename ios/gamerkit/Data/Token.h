@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ShareableContent.h"
 
-#define miniSize 64
+#define miniSize 128
 
 @interface Token : ShareableContent
 @property (nonatomic) NSString* name;
@@ -18,11 +18,12 @@
 @property (nonatomic, readonly) NSString* file;
 
 - (id)initWithFileAtPath:(NSString*)path fully:(BOOL)fullLoad;
-- (id)initWithImage:(UIImage*)img andName:(NSString*)name;
+- (id)initWithImage:(UIImage*)img;
 
 - (void)writeToFile;
 
 - (NSData*)dataForSharing;
+- (NSString*)imageDataBase64;
 + (NSString*)contentType;
 - (id)initWithSharedData:(NSData*)data;
 

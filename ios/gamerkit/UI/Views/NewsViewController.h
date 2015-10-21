@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "PageViewController.h"
 
-@interface NewsViewController : PageViewController
+@interface NewsViewController : UIViewController <UIWebViewDelegate>
 
+@property (nonatomic, strong) IBOutlet UIWebView *content;
+
+- (IBAction)goHome:(id)sender;
+- (IBAction)goToFeedback:(id)sender;
 
 @end

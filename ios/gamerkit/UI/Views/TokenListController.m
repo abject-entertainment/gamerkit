@@ -9,18 +9,34 @@
 #import "TokenListController.h"
 #import "DataManager.h"
 #import "Token.h"
-#import "TokenController.h"
+#import "TokenEditController.h"
 #import "TokenCell.h"
+#import "DismissSegue.h"
 
 @interface TokenListController ()
 {
 	NSMutableArray *_tokens;
 	UILongPressGestureRecognizer *_editRecognizer;
+	UIViewController<TokenSelectionDelegate> *_selectionDelegate;
 }
 
 @end
 
 @implementation TokenListController
+
++ (void)selectTokenForDelegate:(UIViewController<TokenSelectionDelegate> *)tokenSelectionDelegate
+{
+	UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+	if (sb)
+	{
+		TokenListController *tlc = [sb instantiateViewControllerWithIdentifier:@"TokenList"];
+		if (tlc)
+		{
+			tlc->_selectionDelegate = tokenSelectionDelegate;
+			[tokenSelectionDelegate presentViewController:tlc animated:YES completion:nil];
+		}
+	}
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,20 +72,15 @@
 	_editRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showEditMenu)];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+	if ([segue isKindOfClass:[DismissSegue class]])
+	{
+		if (_selectionDelegate && [_selectionDelegate respondsToSelector:@selector(tokenSelectionWasCancelled)])
+		{
+			[_selectionDelegate tokenSelectionWasCancelled];
+		}
+	}
 }
-*/
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -101,7 +112,8 @@
 	{
 		Token *token = [_tokens objectAtIndex:indexPath.row];
 		TokenCell *tcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Token" forIndexPath:indexPath];
-		[tcell.image setImage:token.miniImage];
+		[token fullyLoad];
+		[tcell.image setImage:token.image];
 		cell = tcell;
 	}
 	else
@@ -112,14 +124,17 @@
     return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
-
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
+- (UICollectionReusableView*)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(nonnull NSIndexPath *)indexPath
+{
+	if ([kind compare:UICollectionElementKindSectionHeader] == NSOrderedSame)
+	{
+		return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"TokenCancelHeader" forIndexPath:indexPath];
+	}
+	else
+	{
+		return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"TokenCancelFooter" forIndexPath:indexPath];
+	}
 }
-*/
 
 // Uncomment this method to specify if the specified item should be selected
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -128,12 +143,21 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	if ([self.parentViewController isKindOfClass:[UINavigationController class]])
+	UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+	if (cell && [cell isKindOfClass:[TokenCell class]])
 	{
-		UINavigationController *nc = (UINavigationController*)self.parentViewController;
-		TokenController *tc = [self.storyboard instantiateViewControllerWithIdentifier:@"TokenView"];
-		[tc setToken: [_tokens objectAtIndex:indexPath.row]];
-		[nc pushViewController:tc animated:YES];
+		[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+		if (_selectionDelegate)
+		{
+			Token *token = [_tokens objectAtIndex:indexPath.row];
+			[_selectionDelegate tokenWasSelected:token];
+			_selectionDelegate = nil;
+		}
+	}
+	else
+	{
+		TokenEditController *tc = [self.storyboard instantiateViewControllerWithIdentifier:@"TokenEditView"];
+		[self presentViewController:tc animated:YES completion:nil];
 	}
 }
 

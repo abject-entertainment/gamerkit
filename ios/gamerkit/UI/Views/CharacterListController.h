@@ -10,7 +10,7 @@
 #import "ModalPicker.h"
 #import "SharedContentController.h"
 #import "MessageUI/MFMailComposeViewController.h"
-#import "TokenController.h"
+#import "TokenEditController.h"
 
 @class Character;
 @class Import;
@@ -24,7 +24,7 @@ typedef enum _CharacterPickTarget {
 	CP_MAX
 } CharacterPickTarget;
 
-@interface CharacterListController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface CharacterListController : UICollectionViewController <UICollectionViewDelegate, UICollectionViewDataSource> {
 	NSArray *systemKeys;
 }
 

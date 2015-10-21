@@ -9,21 +9,19 @@
 #import "MasterViewController.h"
 
 @interface MasterViewController ()
-
-@property NSMutableArray *objects;
+{
+}
 @end
 
 @implementation MasterViewController
 
 - (void)awakeFromNib {
 	[super awakeFromNib];
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-	    self.preferredContentSize = CGSizeMake(320.0, 600.0);
-	}
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	self.tabBar.barTintColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,10 +30,37 @@
 }
 
 #pragma mark - Segues
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+/*
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if (segue.destinationViewController && segue.destinationViewController.view)
+	{
+		if (_visibleVC)
+		{
+			[_visibleVC.view removeFromSuperview];
+			[_visibleVC removeFromParentViewController];
+		}
+		
+		[self addChildViewController: segue.destinationViewController];
+		UIView *view = segue.destinationViewController.view;
+		view.frame = self.view.frame;
+		[self.view insertSubview:view atIndex:0];
+	}
 }
 
-#pragma mark - Table View
 
+- (void)tabSelectionView: (TabSelectionView*)view didSelectTab:(NSString *)tab
+{
+	@try {
+		[self performSegueWithIdentifier:tab sender:self];
+	}
+	@catch (NSException *exception) {
+		// no segue with that tab name.  IMPLEMENT IT.
+		NSLog(@"Implement segue id \"%@\" on main menu!!", tab);
+		NSLog(@"Exception: %@", exception.debugDescription);
+	}
+	@finally {
+	}
+}
+*/
 @end

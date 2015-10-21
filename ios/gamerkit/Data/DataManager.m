@@ -29,7 +29,7 @@ extern NSString *packageString;
 	{ 
 		self.tag=nil;
 		self.name=nil;
-		self.description=nil;
+		self.descr=nil;
 		self.packageURL=nil;
 		self.storeProduct=nil;
 		self.installedVersion=-1;
@@ -240,7 +240,7 @@ void ConfirmDirectory(NSFileManager *fm, NSString *dir)
 							}
 							else if (strcasecmp((const char *)subElem->name, "description") == 0)
 							{
-								pdata.description = [NSString stringWithUTF8String:(const char *)subElem->children->content];
+								pdata.descr = [NSString stringWithUTF8String:(const char *)subElem->children->content];
 							}
 							else if (strcasecmp((const char *)subElem->name, "package-url") == 0)
 							{
@@ -988,7 +988,7 @@ void ConfirmDirectory(NSFileManager *fm, NSString *dir)
 		if ([pickerContainer isKindOfClass:[UIPopoverController class]])
 			[(UIPopoverController*)pickerContainer dismissPopoverAnimated:YES];
 		else
-			[pickerContainer dismissModalViewControllerAnimated:YES];
+			[pickerContainer dismissViewControllerAnimated:YES completion:nil];
 		pickerContainer = nil;
 	}
 	

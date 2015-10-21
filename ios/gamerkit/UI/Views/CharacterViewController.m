@@ -8,12 +8,16 @@
 
 #import "CharacterViewController.h"
 #import "Character.h"
-#import "PagesController.h"
+#import "CharacterListController.h"
+#import "DismissSegue.h"
+#import "Token.h"
+#import "DiceView.h"
 
 @interface CharacterViewController ()
 {
 	Character *_character;
 	BOOL _loaded;
+	NSString *_cachedRollNotation;
 }
 
 @end
@@ -34,16 +38,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (void)setCharacter:(Character *)character {
 	_character = character;
 	if (_loaded)
@@ -55,72 +49,68 @@
 	}
 }
 
+- (NSDictionary*)parseURLQueryString:(NSString*)q
+{
+	NSArray *parts = [q componentsSeparatedByString:@"&"];
+	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:parts.count];
+	
+	for (NSString* part in parts) {
+		NSArray *pair = [part componentsSeparatedByString:@"="];
+		
+		if (pair.count > 1)
+		{
+			id obj = [params objectForKey:pair[0]];
+			if ([obj isKindOfClass:[NSMutableArray class]])
+			{
+				[(NSMutableArray*)obj addObject:pair[1]];
+			}
+			else if (obj)
+			{
+				[params setObject:[NSMutableArray arrayWithObjects:obj, pair[1], nil] forKey:pair[0]];
+			}
+			else
+			{
+				[params setObject:pair[1] forKey:pair[0]];
+			}
+		}
+	}
+	return params;
+}
+
 - (BOOL)webView:(UIWebView *)inWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
 	BOOL result = YES;
 	if ([request.URL.scheme caseInsensitiveCompare:@"gamerstoolkit"] == NSOrderedSame)
 	{
-		NSArray *params = nil;
-		NSMutableArray *paramValues = nil;
-		NSString *method = [NSString stringWithFormat:@"%@:", request.URL.host];
-		if (request.URL.query)
-		{
-			params = [request.URL.query componentsSeparatedByString:@"&"];
-			if (params.count > 0) paramValues = [NSMutableArray arrayWithCapacity:params.count];
-			
-			for (int i = 0; i < params.count; ++i)
-			{
-				NSString *param = [params objectAtIndex:i];
-				NSUInteger split = [param rangeOfString:@"="].location;
-				if (split != NSNotFound)
-				{
-					[paramValues addObject:[param substringFromIndex:split+1]];
-				}
-			}
-		}
-		
+		NSString *method = request.URL.host;
+		NSDictionary *params = [self parseURLQueryString:request.URL.query];
+
 		if ([method caseInsensitiveCompare:@"chooseToken"] == NSOrderedSame)
 		{
 			// choose token
+			[TokenListController selectTokenForDelegate:self];
+		}
+		else if ([method caseInsensitiveCompare:@"prepDieRoll"] == NSOrderedSame)
+		{
+			NSString *notation = [params objectForKey:@"notation"];
+			if (notation)
+			{
+				_cachedRollNotation = notation;
+			}
+		}
+		else if ([method caseInsensitiveCompare:@"dieRoll"] == NSOrderedSame)
+		{
+			NSString *notation = [params objectForKey:@"notation"];
+			if (notation)
+			{
+				NSString *result = [DiceView doNotationRoll:notation];
+				[self displayRollResult:result];
+			}
 		}
 		else
 		{
 			NSLog(@"Unrecognized method invocation: '%@'", method);
 		}
-		/*
-		SEL sel = NSSelectorFromString(selector);
-		NSMethodSignature *msig = [targetObj methodSignatureForSelector:sel];
-		if (msig)
-		{
-			NSInvocation *inv = [NSInvocation invocationWithMethodSignature:msig];
-			[inv setTarget:targetObj];
-			[inv setSelector:sel];
-			[inv setArgument:&self atIndex:2];
-			for (int i = 0; i < paramValues.count; ++i)
-			{
-				id param = [paramValues objectAtIndex:i];
-				[inv setArgument:&param atIndex:i+3];
-			}
-			[inv invoke];
-			
-			if ([msig methodReturnLength] == sizeof(id))
-			{
-				id retVal = nil;
-				[inv getReturnValue:&retVal];
-				
-				if (retVal != nil)
-				{
-					if ([retVal isKindOfClass:[NSString class]])
-					{
-						[self.content loadHTMLString:retVal baseURL:nil];
-					}
-					else if ([retVal isKindOfClass:[NSURL class]])
-					{
-						[self.content loadRequest:[NSURLRequest requestWithURL:retVal]];
-					}
-				}
-			}
-		} */
 		
 		result = NO;
 	}
@@ -137,6 +127,49 @@
 	}
 	
 	return result;
+}
+
+- (IBAction)roll:(id)sender
+{
+	if (_cachedRollNotation)
+	{
+		[self displayRollResult:[DiceView doNotationRoll:_cachedRollNotation]];
+	}
+}
+
+- (void)displayRollResult:(NSString*)result
+{
+	UIAlertController *av = [UIAlertController alertControllerWithTitle:@"DiceRoll" message:[NSString stringWithFormat:@"Result: %@", result] preferredStyle:UIAlertControllerStyleAlert];
+	[self presentViewController:av animated:YES completion:nil];
+}
+
+- (void)tokenWasSelected:(Token *)token
+{
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Change Token" message:@"Are you sure you want to change this character's token?" preferredStyle:UIAlertControllerStyleAlert];
+	[alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+		
+	}]];
+	[alert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+		[_content stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"SetImageData(\"Token\", \"%@\");", [token imageDataBase64]]];
+	}]];
+	[self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)saveCharacter
+{
+	[_character saveFromWebView:_content];
+	if ([self.presentingViewController isKindOfClass:[CharacterListController class]])
+	{
+		[(CharacterListController *)self.presentingViewController refreshData];
+	}
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if ([segue isKindOfClass:[DismissSegue class]])
+	{
+		[self saveCharacter];
+	}
 }
 
 

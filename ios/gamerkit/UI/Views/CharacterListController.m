@@ -17,8 +17,7 @@
 #import "SharedContentDataStore.h"
 #import "AppDelegate.h"
 #import "Base64.h"
-#import "DiceView.h"
-#import "PagesController.h"
+#import "CharacterViewController.h"
 
 @implementation CharacterListController
 
@@ -49,6 +48,8 @@ NSInteger comparator(id obj1, id obj2, void* context)
 
 - (void)viewDidLoad
 {
+	self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+	
 	DataManager *dm = [DataManager getDataManager];
 	if (dm)
 	{
@@ -60,30 +61,36 @@ NSInteger comparator(id obj1, id obj2, void* context)
 	}
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
 	return [systemKeys count];
 }
 
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (UICollectionReusableView*)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(nonnull NSIndexPath *)indexPath
 {
-	return [systemKeys objectAtIndex:section];
+	NSInteger systemIndex = indexPath.section;
+	Ruleset *rules = [[[DataManager getDataManager] systems] objectForKey:[systemKeys objectAtIndex:systemIndex]];
+	
+	SystemHeaderCell *cell = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"SystemHeader" forIndexPath:indexPath];
+	[cell setSystem:rules.displayName];
+	
+	return cell;
 }
 
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSInteger systemIndex = indexPath.section;
 	NSInteger charIndex = indexPath.row;
 	Ruleset *rules = [[[DataManager getDataManager] systems] objectForKey:[systemKeys objectAtIndex:systemIndex]];
 	
-	UITableViewCell *cell;
+	UICollectionViewCell *cell;
 	if (charIndex == rules.characters.count)
 	{
-		cell = [tableView dequeueReusableCellWithIdentifier:@"NewCharacter" forIndexPath:indexPath];
+		cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"NewCharacter" forIndexPath:indexPath];
 	}
 	else
 	{
-		CharacterCell *ccell = (CharacterCell *)[tableView dequeueReusableCellWithIdentifier:@"Character" forIndexPath:indexPath];
+		CharacterCell *ccell = (CharacterCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"Character" forIndexPath:indexPath];
 		
 		if (ccell != nil)
 		{
@@ -112,13 +119,13 @@ NSInteger comparator(id obj1, id obj2, void* context)
 	return cell;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 	Ruleset *rules = [[[DataManager getDataManager] systems] objectForKey:[systemKeys objectAtIndex:section]];
 	return rules.characters.count + 1;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
 	DataManager *dm = [DataManager getDataManager];
 	
@@ -128,13 +135,13 @@ NSInteger comparator(id obj1, id obj2, void* context)
 		if (indexPath.row < rules.characters.count)
 		{
 			Character *ch = [rules.characters objectAtIndex:indexPath.row];
-			[[PagesController getPages] addPageForCharacter:ch];
+			[self showCharacter:ch];
 		}
 		else
 		{ // new character
 			UIAlertController *picker = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 			UIPopoverPresentationController *pop = [picker popoverPresentationController];
-			pop.sourceView = [tableView cellForRowAtIndexPath:indexPath];
+			pop.sourceView = [collectionView cellForItemAtIndexPath:indexPath];
 			pop.sourceRect = pop.sourceView.bounds;
 			
 			NSEnumerator *en = [[rules characterTypes] objectEnumerator];
@@ -152,14 +159,22 @@ NSInteger comparator(id obj1, id obj2, void* context)
 		}
 	}
 	
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)showCharacter:(Character *)ch
 {
+	CharacterViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"CharacterView"];
+	if (cvc)
+	{
+		//cvc.delegate = self;
+		
+		[cvc setCharacter:ch];
+		[self presentViewController:cvc animated:YES completion:nil];
+	}
 }
 
-- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+/* - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	DataManager *dm = [DataManager getDataManager];
 	if (indexPath.section < systemKeys.count)
@@ -185,7 +200,7 @@ NSInteger comparator(id obj1, id obj2, void* context)
 		}
 	}
 	return @[];
-}
+} */
 
 - (void)createNewCharacterForSystem:(NSString*)system andType:(NSString*)ctype
 {
@@ -200,8 +215,9 @@ NSInteger comparator(id obj1, id obj2, void* context)
 			
 			if (ch)
 			{
-				[[PagesController getPages] addPageForCharacter:ch];
 				[self refreshData];
+				[self showCharacter:ch];
+				[ch saveToFile];
 			}
 		}
 	}
@@ -210,7 +226,7 @@ NSInteger comparator(id obj1, id obj2, void* context)
 - (void)copyRequestedForCharacter: (Character*)character
 {
 	Character *ch = [[Character alloc] initWithSharedData:[character dataForSharing]];
-	[[PagesController getPages] addPageForCharacter:ch];
+	[self showCharacter:ch];
 	[self refreshData];
 }
 
@@ -225,8 +241,7 @@ NSInteger comparator(id obj1, id obj2, void* context)
 - (void)refreshData
 {
 	[self getKeys];
-	if ([self.view isKindOfClass:[UICollectionView class]])
-	{ [(UICollectionView *)self.view reloadData]; }
+	[self.collectionView reloadData];
 }
 
 @end

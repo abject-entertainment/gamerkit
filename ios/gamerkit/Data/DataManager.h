@@ -33,7 +33,7 @@ typedef enum _PickTarget {
 @interface PackageData : NSObject
 @property (assign) NSString *tag;
 @property (assign) NSString *name;
-@property (assign) NSString *description;
+@property (assign) NSString *descr;
 @property (assign) NSString *storeId;
 @property (assign) NSString *packageURL;
 @property (assign) SKProduct *storeProduct;

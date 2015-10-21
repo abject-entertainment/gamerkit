@@ -127,15 +127,12 @@ PagesController *s_pages = nil;
 	CharacterViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"CharacterView"];
 	if (cvc)
 	{
-		cvc.delegate = self;
-		
 		// initialize with character.
 		[cvc setCharacter:character];
 		
 		[_otherPages addObject:cvc];
-		[self makeCurrentViewController:cvc];
 		
-		// close menu window
+		/* / close menu window
 		UISplitViewController *svc = [AppDelegate splitView];
 		if (svc.displayMode != UISplitViewControllerDisplayModeAllVisible)
 		{
@@ -144,12 +141,12 @@ PagesController *s_pages = nil;
 		else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 		{
 			[svc showDetailViewController:self sender:self];
-		}
+		} */
 	}
 }
 
 - (void)menuButtonTappedOnPageViewController:(PageViewController *)controller {
-	UISplitViewController *svc = [AppDelegate splitView];
+/*	UISplitViewController *svc = [AppDelegate splitView];
 	if (svc.displayMode != UISplitViewControllerDisplayModeAllVisible)
 	{
 		svc.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryOverlay;
@@ -157,7 +154,7 @@ PagesController *s_pages = nil;
 	else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 	{
 		[svc dismissViewControllerAnimated:YES completion:nil];
-	}
+	} */
 }
 
 - (void)closeRequestedByPageViewController:(PageViewController *)controller {
