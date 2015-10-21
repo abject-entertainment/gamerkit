@@ -170,6 +170,7 @@ NSInteger comparator(id obj1, id obj2, void* context)
 		//cvc.delegate = self;
 		
 		[cvc setCharacter:ch];
+		cvc.listController = self;
 		[self presentViewController:cvc animated:YES completion:nil];
 	}
 }

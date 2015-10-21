@@ -8,7 +8,6 @@
 
 #import "CharacterViewController.h"
 #import "Character.h"
-#import "CharacterListController.h"
 #import "DismissSegue.h"
 #import "Token.h"
 #import "DiceView.h"
@@ -150,7 +149,7 @@
 		
 	}]];
 	[alert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-		[_content stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"SetImageData(\"Token\", \"%@\");", [token imageDataBase64]]];
+		[_content stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"SetImageData(\"Token\", \"%@\");", [_character setToken:token]]];
 	}]];
 	[self presentViewController:alert animated:YES completion:nil];
 }
@@ -158,9 +157,9 @@
 - (void)saveCharacter
 {
 	[_character saveFromWebView:_content];
-	if ([self.presentingViewController isKindOfClass:[CharacterListController class]])
+	if (_listController)
 	{
-		[(CharacterListController *)self.presentingViewController refreshData];
+		[_listController refreshData];
 	}
 }
 

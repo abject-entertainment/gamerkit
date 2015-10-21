@@ -189,13 +189,6 @@
 	return self;
 }
 
-- (NSString*)imageDataBase64
-{
-	NSData *imgData = UIImageJPEGRepresentation(_image,0.85f);
-	NSString *base64Data = [NSString base64StringFromData:imgData length:imgData.length];
-	return base64Data;
-}
-
 - (void)writeToFile
 {
 	[self fullyLoad];
@@ -210,8 +203,10 @@
 		} while ([fm fileExistsAtPath:file]);
 	}
 	
-	NSString *base64Data = [self imageDataBase64];
-	NSUInteger cnt = base64Data.length;
+	NSData *imgData = UIImageJPEGRepresentation(_image,0.85f);
+	NSUInteger cnt = imgData.length;
+	NSString *base64Data = [NSString base64StringFromData:imgData length:cnt];
+	cnt = 3 * ((cnt + 2)/3);
 	
 	NSData *miniData = UIImagePNGRepresentation(miniImage);
 	NSUInteger mcnt = miniData.length;

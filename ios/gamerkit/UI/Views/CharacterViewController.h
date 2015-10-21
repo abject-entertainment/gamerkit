@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PageViewController.h"
+#import "CharacterListController.h"
 #import "TokenListController.h"
 
 @class Character;
@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) IBOutlet UIWebView* content;
 @property (nonatomic, strong) IBOutlet UIBarItem* titleText;
+
+@property (nonatomic, weak) CharacterListController* listController;
 
 @property (readonly) Character *character;
 - (void)setCharacter:(Character*)character;
