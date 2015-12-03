@@ -109,7 +109,7 @@ NSInteger comparator(id obj1, id obj2, void* context)
 					ccell.summary.text = [[rules.characterTypes objectForKey:ch.charType] displayName];
 					UIImage *imgData = ch.miniImage;
 					ccell.token.image = imgData;
-					ccell.data = ch;
+					ccell._contentObject = ch;
 				}
 			}
 		}
@@ -134,8 +134,8 @@ NSInteger comparator(id obj1, id obj2, void* context)
 		Ruleset *rules = [dm.systems objectForKey:[systemKeys objectAtIndex:indexPath.section]];
 		if (indexPath.row < rules.characters.count)
 		{
-			Character *ch = [rules.characters objectAtIndex:indexPath.row];
-			[self showCharacter:ch];
+			//Character *ch = [rules.characters objectAtIndex:indexPath.row];
+			//[self showCharacter:ch];
 		}
 		else
 		{ // new character
@@ -169,7 +169,7 @@ NSInteger comparator(id obj1, id obj2, void* context)
 	{
 		//cvc.delegate = self;
 		
-		[cvc setCharacter:ch];
+		[cvc setContentObject:ch];
 		cvc.listController = self;
 		[self presentViewController:cvc animated:YES completion:nil];
 	}

@@ -70,7 +70,8 @@
 #stats_attribs #AP .value_edit
 { width: 25px; margin-top: 2px; text-align: center; }
 
-#hp_stats
+#hp_stats,
+#saves
 { margin: 4px; border: 1px solid black; }
 
 .attribute.hp_4

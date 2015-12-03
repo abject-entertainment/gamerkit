@@ -1090,7 +1090,7 @@ function __add_die_roll(node, dice_string)
 			
 			if (!debug)
 			{
-				window.location.replace("gamerstoolkit://prepDieRoll?notation=" + prep_die_roll());
+				window.location.replace("gamerstoolkit://prepDieRoll?notation=" + encodeURIComponent(prep_die_roll()));
 			}
 		}
 	}
@@ -1167,7 +1167,7 @@ var HandleShake = function ()
 			else
 			{
 				window.location.replace("gamerstoolkit://dieRoll?notation=" + 
-				str);
+				encodeURIComponent(str));
 			}
 		}
 	}

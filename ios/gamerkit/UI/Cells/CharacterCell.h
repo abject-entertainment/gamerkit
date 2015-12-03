@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ContentCell.h"
 
 @class Character;
 
-@interface CharacterCell : UICollectionViewCell
+@interface CharacterCell : ContentCell
 
 @property (nonatomic,weak) IBOutlet UILabel *name;
 @property (nonatomic,weak) IBOutlet UIImageView *token;
 @property (nonatomic,weak) IBOutlet UILabel *summary;
-@property (nonatomic, weak) Character *data;
 
 @end

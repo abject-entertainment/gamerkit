@@ -7,7 +7,7 @@
 		<string>Play one of the most exciting and cinematic generic RPGs available!  Pinnacle Entertainment Group's Savage Worlds RPG is now officially supported in Gamers' Toolkit.</string>
 		<string>Savage Worlds</string>
 		<string>system</string>
-		<integer>1</integer>
+		<integer>2</integer>
 	</array>
 	<string>Systems/SVG10.rules</string>
 	<string>Sheets/SVG10-PC-FULL.sheet</string>

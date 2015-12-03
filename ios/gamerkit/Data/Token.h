@@ -23,7 +23,6 @@
 - (void)writeToFile;
 
 - (NSData*)dataForSharing;
-- (NSString*)imageDataBase64;
 + (NSString*)contentType;
 - (id)initWithSharedData:(NSData*)data;
 

@@ -55,37 +55,16 @@
 }
 
 - (IBAction)openPhotoLibrary
-{/*
-	if (photoLibrary == nil)
+{
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
 	{
-		photoLibrary = [[UIImagePickerController alloc] init];
+		UIImagePickerController *photoLibrary = [[UIImagePickerController alloc] init];
+		photoLibrary.modalPresentationStyle = UIModalPresentationCurrentContext;
+		photoLibrary.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+		photoLibrary.allowsEditing = true;
 		photoLibrary.delegate = self;
+		[self presentViewController:photoLibrary animated:YES completion:nil];
 	}
-	
-	if (photoLibrary)
-	{
-		photoLibrary.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-		if (bPad)
-		{
-			if (popover == nil)
-			{
-				popover = [[UIPopoverController alloc] initWithContentViewController:photoLibrary];
-			}
-			else
-			{
-				[popover setContentViewController:photoLibrary];
-			}
-			
-			if ([popover isPopoverVisible] == NO)
-			{
-				[popover presentPopoverFromRect:imageView.frame inView:tokenDetail.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-			}
-		}
-		else if (tokenDetail)
-		{
-			[tokenDetail presentViewController:photoLibrary animated:YES completion:nil];
-		}
-	} */
 }
 
 /*
@@ -138,35 +117,29 @@
 	}
 } */
 
-const float tokenSize = 128.0f;
-/* - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+const float tokenSize = 256.0f;
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-	if ([[info objectForKey: UIImagePickerControllerMediaType] caseInsensitiveCompare:(NSString*)kUTTypeImage] == NSOrderedSame)
+	UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
+	if (img == nil)
+	{ img = [info objectForKey:UIImagePickerControllerOriginalImage]; }
+	
+	if (img && _imageView)
 	{
-		UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
-		if (img == nil)
-		{ img = [info objectForKey:UIImagePickerControllerOriginalImage]; }
-		if (img && imageView)
-		{
-			UIGraphicsBeginImageContext(CGSizeMake(tokenSize, tokenSize));
-			[img drawInRect:CGRectMake(0,0,tokenSize,tokenSize)];
-			img = UIGraphicsGetImageFromCurrentImageContext();
-			imageView.image = img;
-			UIGraphicsEndImageContext();
-		}
+		UIGraphicsBeginImageContext(CGSizeMake(tokenSize, tokenSize));
+		[img drawInRect:CGRectMake(0,0,tokenSize,tokenSize)];
+		img = UIGraphicsGetImageFromCurrentImageContext();
+		_imageView.image = img;
+		UIGraphicsEndImageContext();
 	}
-	if (popover)
-	{
-//		CGSize sz = tokenDetail.view.frame.size;
-//		[popover setContentViewController:tokenDetail];
-//		popover.popoverContentSize = sz;
-		[popover dismissPopoverAnimated:YES];
-	}
-	else
-	{
-		[tokenDetail dismissViewControllerAnimated:YES completion:nil];
-	}
-} */
+	
+	[picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+	[picker dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (IBAction)flipHorizontal
 {
@@ -229,6 +202,8 @@ const float tokenSize = 128.0f;
 		_token.image = _imageView.image;
 	}
 	[_token writeToFile];
+	
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)revert

@@ -7,7 +7,7 @@
 		<string>Support for content compatible with the 4th edition Game System License as defined by Wizards of the Coast. Art by Chris Madden.</string>
 		<string>4th Edition Fantasy System Support</string>
 		<string>system</string>
-		<integer>4</integer>
+		<integer>5</integer>
 	</array>
 	<string>Systems/GSL40.rules</string>
 	<string>Systems/GSL40-PC-iplay4e.import</string>

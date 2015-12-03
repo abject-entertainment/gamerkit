@@ -20,7 +20,7 @@
 @class GriddedView;
 
 @interface MapsController : UICollectionViewController
-<UIImagePickerControllerDelegate,
+<UINavigationControllerDelegate, UIImagePickerControllerDelegate,
 ModalPickerDelegate, SharedContentDoneDelegate, UIScrollViewDelegate, UITextFieldDelegate> {
 	NSMutableArray *maps;
 	Map *currentMap;
@@ -38,7 +38,6 @@ ModalPickerDelegate, SharedContentDoneDelegate, UIScrollViewDelegate, UITextFiel
 @property (nonatomic) IBOutlet UITextField *mapName;
 @property (nonatomic) IBOutlet UIBarButtonItem *shareButton;
 @property (nonatomic) IBOutlet UIBarButtonItem *doneButton;
-@property (nonatomic) IBOutlet UIImagePickerController *photoLibrary;
 
 - (IBAction)newMap:(id)sender;
 - (IBAction)detailDone;

@@ -14,7 +14,7 @@
 			<string>Official support for the Hollow Earth Expedition RPG System.  This package also includes sample characters and tokens.</string>
 			<string>Hollow Earth Expedition</string>
 			<string>system</string>
-			<integer>3</integer>
+			<integer>4</integer>
 		</array>
 		
 		<string>Systems/HEX10.rules</string>

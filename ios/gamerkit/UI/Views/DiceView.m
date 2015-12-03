@@ -38,10 +38,8 @@
 	}	
 }
 
-- (void)layoutSubviews
+- (void)viewDidLoad
 {
-	[super layoutSubviews];
-	
 	NSMutableDictionary *prefs = [NSMutableDictionary dictionaryWithDictionary:[[DataManager getDataManager] getUserProperty:@"dice"]];
 
 	if (self.quickCount)

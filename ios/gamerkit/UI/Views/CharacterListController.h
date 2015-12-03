@@ -11,6 +11,7 @@
 #import "SharedContentController.h"
 #import "MessageUI/MFMailComposeViewController.h"
 #import "TokenEditController.h"
+#import "ContentListViewController.h"
 
 @class Character;
 @class Import;
@@ -24,7 +25,7 @@ typedef enum _CharacterPickTarget {
 	CP_MAX
 } CharacterPickTarget;
 
-@interface CharacterListController : UICollectionViewController <UICollectionViewDelegate, UICollectionViewDataSource> {
+@interface CharacterListController : ContentListViewController <UICollectionViewDelegate, UICollectionViewDataSource> {
 	NSArray *systemKeys;
 }
 

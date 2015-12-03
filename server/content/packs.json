@@ -1,0 +1,66 @@
+{
+	"Core": {
+		"name": "Core files",
+		"description": "Shared content files.  This package is necessary for the proper functionality of the application.",
+		"versions": [
+			{
+				"version": "3",
+				"appVersion": ">=2.0.0",
+				"description": "Updated to work with Gamers' Toolkit 2.0."
+			}
+		]
+	},
+	"GSL40": {
+		"name": "4th Edition Fantasy System Support",
+		"description": "Support for content compatible with the 4th edition Game System License as defined by Wizards of the Coast. Art by Chris Madden.",
+		"versions": [
+			{
+				"version": "5",
+				"appVersion": ">=2.0.0",
+				"description": "Updated to work with Gamers' Toolkit 2.0."
+			}
+		]
+	},
+	"OGL35": {
+		"name": "OGL 3.5 Support",
+		"description": "Support for fantasy RPGs that follow the version 3.5 OGL SRD as defined by Wizards of the Coast, including compatibility with its most popular implementations.",
+		"versions": [
+			{
+				"version": "3",
+				"appVersion": ">=2.0.0",
+				"description": "Updated to work with Gamers' Toolkit 2.0."
+			}
+		],
+		"store": {
+			"ios": "com.abject_entertainment.toolkit.OGL35"
+		}
+	},
+	"HEX10": {
+		"name": "Hollow Earth Expedition",
+		"description": "Official support for the Hollow Earth Expedition RPG System.  This package also includes sample characters and tokens.",
+		"versions": [
+			{
+				"version": "4",
+				"appVersion": ">=2.0.0",
+				"description": "Updated to work with Gamers' Toolkit 2.0."
+			}
+		],
+		"store": {
+			"ios": "com.abject_entertainment.toolkit.HEX10"
+		}
+	},
+	"SVG10": {
+		"name": "Savage Worlds",
+		"description": "Play one of the most exciting and cinematic generic RPGs available!  Pinnacle Entertainment Group's Savage Worlds RPG is now officially supported in Gamers' Toolkit.",
+		"versions": [
+			{
+				"version": "2",
+				"appVersion": ">=2.0.0",
+				"description": "Updated to work with Gamers' Toolkit 2.0."
+			}
+		],
+		"store": {
+			"ios": "com.abject_entertainment.toolkit.SVG10"
+		}
+	}
+}

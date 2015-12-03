@@ -29,7 +29,7 @@
 	_loaded = YES;
 	
 	if (_character)
-	{ [self setCharacter:_character]; }
+	{ [self setContentObject:_character]; }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,14 +37,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setCharacter:(Character *)character {
-	_character = character;
-	if (_loaded)
+-(void)setContentObject:(id)contentObject
+{
+	if ([contentObject isKindOfClass:Character.class])
 	{
-		_titleText.title = character.name;
-		NSString *html = [character HTMLString:character.editSheet];
-		NSLog(@"%@", html);
-		[self.content loadData:[html dataUsingEncoding:NSUTF8StringEncoding] MIMEType:@"application/xml" textEncodingName:@"utf8" baseURL:[character baseURL]];
+		[super setContentObject:contentObject];
+		_character = (Character*)contentObject;
+		if (_loaded)
+		{
+			_titleText.title = _character.name;
+			NSString *html = [_character HTMLString:_character.editSheet];
+			NSLog(@"%@", html);
+			[self.content loadData:[html dataUsingEncoding:NSUTF8StringEncoding] MIMEType:@"application/xml" textEncodingName:@"utf8" baseURL:[_character baseURL]];
+		}
 	}
 }
 
@@ -55,21 +60,23 @@
 	
 	for (NSString* part in parts) {
 		NSArray *pair = [part componentsSeparatedByString:@"="];
-		
+		NSString *key = pair[0];
+		NSString *value = pair[1];
+		value = [[value stringByReplacingOccurrencesOfString:@"+" withString:@" "] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		if (pair.count > 1)
 		{
-			id obj = [params objectForKey:pair[0]];
+			id obj = [params objectForKey:key];
 			if ([obj isKindOfClass:[NSMutableArray class]])
 			{
-				[(NSMutableArray*)obj addObject:pair[1]];
+				[(NSMutableArray*)obj addObject:value];
 			}
 			else if (obj)
 			{
-				[params setObject:[NSMutableArray arrayWithObjects:obj, pair[1], nil] forKey:pair[0]];
+				[params setObject:[NSMutableArray arrayWithObjects:obj, value, nil] forKey:key];
 			}
 			else
 			{
-				[params setObject:pair[1] forKey:pair[0]];
+				[params setObject:value forKey:key];
 			}
 		}
 	}
@@ -139,6 +146,10 @@
 - (void)displayRollResult:(NSString*)result
 {
 	UIAlertController *av = [UIAlertController alertControllerWithTitle:@"DiceRoll" message:[NSString stringWithFormat:@"Result: %@", result] preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+		[av dismissViewControllerAnimated:YES completion:nil];
+	}];
+	[av addAction:ok];
 	[self presentViewController:av animated:YES completion:nil];
 }
 

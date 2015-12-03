@@ -9,18 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "CharacterListController.h"
 #import "TokenListController.h"
+#import "ContentDetailViewController.h"
 
 @class Character;
 
-@interface CharacterViewController : UIViewController <TokenSelectionDelegate, UIWebViewDelegate>
+@interface CharacterViewController : ContentDetailViewController <TokenSelectionDelegate, UIWebViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UIWebView* content;
 @property (nonatomic, strong) IBOutlet UIBarItem* titleText;
 
 @property (nonatomic, weak) CharacterListController* listController;
-
-@property (readonly) Character *character;
-- (void)setCharacter:(Character*)character;
 
 - (IBAction)roll:(id)sender;
 

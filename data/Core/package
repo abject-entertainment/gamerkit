@@ -14,7 +14,7 @@
 			<string>Shared content files.  This package is necessary for the proper functionality of the application.</string>
 			<string>Core files</string>
 			<string>support</string>
-			<integer>2</integer>
+			<integer>3</integer>
 		</array>
 		
 		<string>Systems/charsheet.js</string>

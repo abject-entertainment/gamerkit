@@ -31,14 +31,14 @@ typedef enum _PickTarget {
 } PickTarget;
 
 @interface PackageData : NSObject
-@property (assign) NSString *tag;
-@property (assign) NSString *name;
-@property (assign) NSString *descr;
-@property (assign) NSString *storeId;
-@property (assign) NSString *packageURL;
-@property (assign) SKProduct *storeProduct;
-@property (assign) int installedVersion;
-@property (assign) int availableVersion;
+@property (nonatomic, strong) NSString *tag;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *descr;
+@property (nonatomic, strong) NSString *storeId;
+@property (nonatomic, strong) NSString *packageURL;
+@property (nonatomic, strong) SKProduct *storeProduct;
+@property (nonatomic, assign) int installedVersion;
+@property (nonatomic, assign) int availableVersion;
 @end
 
 @protocol PackageListener;

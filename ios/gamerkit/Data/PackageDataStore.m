@@ -13,14 +13,20 @@
 #import <StoreKit/SKPayment.h>
 #import <StoreKit/SKPaymentTransaction.h>
 #import <UIKit/UIAlertView.h>
+#import "PackageHeaderCell.h"
 
-static PackageDataStore *g_pds = nil;
+extern BOOL __DEBUG__mockData;
+
+@interface PackageDataStore()
+{
+	BOOL _firstView;
+}
+@end
 
 @implementation PackageDataStore
 
-#define SECTION_BUTTONS 0
-#define SECTION_AVAILABLE 1
-#define SECTION_INSTALLED 2
+#define SECTION_AVAILABLE 0
+#define SECTION_INSTALLED 1
 
 - (void)scanForPackages
 {
@@ -47,35 +53,41 @@ static PackageDataStore *g_pds = nil;
 	}
 }
 
-- (id)init 
+- (void)refresh
+{ [self.collectionView reloadData]; }
+
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-	if (g_pds)
+	if ((self = [super initWithCoder:aDecoder]))
 	{
-		self = g_pds;
-		return self;
-	}
-	
-	g_pds = self;
-	
-	downloadFile = nil;
-	downloadPath = nil;
-	
-	packages = nil;
-	[[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-	
-	DataManager *dm = [DataManager getDataManager];
-	if ((self = [super init]))
-	{
+		_firstView = NO;
+		downloadFile = nil;
+		downloadPath = nil;
+		
+		packages = nil;
+		[[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+		
+		DataManager *dm = [DataManager getDataManager];
 		if (dm)
 		{
 			if (dm.packageData == nil)
 			{
-				[self scanForPackages];
 				dm.packageData = self;
+				[self scanForPackages];
 			}
 		}
 	}
-	return dm.packageData;
+	return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	if (!_firstView)
+	{
+		_firstView = YES;
+		self.collectionView.contentInset = UIEdgeInsetsMake(20.0f, 0.0f, 60.0f, 0.0f);
+		[self storeRefresh];
+	}
 }
 
 - (void)dealloc
@@ -83,147 +95,49 @@ static PackageDataStore *g_pds = nil;
 	[[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-	_packageList = tableView;
-	
-	return 3;
+	return 2;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	_packageList = tableView;
+	NSUInteger section = indexPath.section;
+	NSUInteger row = indexPath.row;
+	DataManager *dm = [DataManager getDataManager];
 	
-	NSUInteger idx[2];
-	[indexPath getIndexes: idx];
-	
-	UITableViewCell *cell = nil;
-	
-	if (_storeButtons && idx[0] == SECTION_BUTTONS)
+	if (section == SECTION_INSTALLED) // installed
 	{
-		return _storeButtons;
-	}
-	else
-	{
-		cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PackageCell"];
-		if (cell == nil)
-		{
-			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"PackageCell"];
-		}
-	}
+		PackageCell *cell = (PackageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"InstalledPackage" forIndexPath:indexPath];
+
+		cell.name.text = [[dm.installedPackages objectAtIndex:row] objectAtIndex:2];
+		int iVer = [[[dm.installedPackages objectAtIndex:row] objectAtIndex:4] intValue];
+		int aVer = [[[dm.installedPackages objectAtIndex:row] objectAtIndex:5] intValue];
+		if (aVer > iVer)
+			cell.summary.text = @"Update Available!";
+		else
+			cell.summary.text = nil;
 		
-	if (cell != nil)
+		return cell;
+	}
+	else // available
 	{
-		DataManager *dm = [DataManager getDataManager];
+		PackageCell *cell = (PackageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"AvailablePackage" forIndexPath:indexPath];
+		PackageData *pdata = [dm.availablePackages objectAtIndex:row];
+		[cell setupForPackage:pdata withDelegate:self];
 		
-		if (idx[0] == SECTION_INSTALLED) // installed
-		{
-			if (dm.installedPackages.count == 0)
-			{
-				cell.textLabel.text = @"No packages installed";
-				cell.detailTextLabel.text = nil;
-				cell.accessoryType = UITableViewCellAccessoryNone;
-			}
-			else 
-			{
-				cell.textLabel.text = [[dm.installedPackages objectAtIndex:idx[1]] objectAtIndex:2];
-				int iVer = [[[dm.installedPackages objectAtIndex:idx[1]] objectAtIndex:4] intValue];
-				int aVer = [[[dm.installedPackages objectAtIndex:idx[1]] objectAtIndex:5] intValue];
-				if (aVer > iVer)
-					cell.detailTextLabel.text = @"Update Available!";
-				else
-					cell.detailTextLabel.text = nil;
-				cell.accessoryView = nil;
-				cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			}
-
-		}
-        else if (idx[0] == SECTION_BUTTONS) // coupon code
-        {
-            cell.textLabel.text = @"Enter Code";
-            cell.detailTextLabel.text = nil;
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
-		else // available
-		{
-			if (dm.availablePackages.count == 0)
-			{
-				cell.textLabel.text = @"No packages available";
-				cell.detailTextLabel.text = nil;
-				cell.accessoryView = nil;
-				cell.accessoryType = UITableViewCellAccessoryNone;
-			}
-			else
-			{
-				PackageData *pdata = [dm.availablePackages objectAtIndex:idx[1]];
-				if (pdata.storeId)
-				{
-					if (pdata.storeProduct)
-					{
-						cell.textLabel.text = pdata.storeProduct.localizedTitle;
-						NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-						[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
-						[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-						[numberFormatter setLocale:pdata.storeProduct.priceLocale];
-						cell.detailTextLabel.text = [numberFormatter stringFromNumber:pdata.storeProduct.price];
-						cell.accessoryView = nil;
-						cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-					}
-					else if ([pdata.storeId compare:@"!coming-soon"] == NSOrderedSame)
-					{
-						cell.textLabel.text = pdata.name;
-						cell.detailTextLabel.text = @"Coming Soon!";
-						cell.accessoryView = nil;
-						cell.accessoryType = UITableViewCellAccessoryNone;
-					}
-					else 
-					{
-						cell.textLabel.text = pdata.name;
-						cell.detailTextLabel.text = @"...";
-						cell.accessoryView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-						[(UIActivityIndicatorView*)cell.accessoryView startAnimating];
-					}
-				}
-				else
-				{
-					cell.textLabel.text = pdata.name;
-					cell.detailTextLabel.text = @"Free";
-					cell.accessoryView = nil;
-					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-				}
-			}
-		}
+		return cell;
 	}
-	
-	return cell;
 }
 
-- (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	NSUInteger idx[2];
-	[indexPath getIndexes: idx];
-	
-	if (idx[0] == SECTION_BUTTONS && _storeButtons)
-	{
-		return _storeButtons.frame.size.height;
-	}
-	return tableView.rowHeight;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	_packageList = tableView;
-	
 	DataManager *dm = [DataManager getDataManager];
 	if (section == SECTION_INSTALLED)
 	{
 		NSInteger cnt = dm.installedPackages.count;
 		return cnt;
 	}
-	else if (section == SECTION_BUTTONS)
-    {
-        return 1;
-    }
     else
     {
 		NSInteger cnt = dm.availablePackages.count;
@@ -232,65 +146,56 @@ static PackageDataStore *g_pds = nil;
 
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (UICollectionReusableView*)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-	_packageList = tableView;
+	if ([kind compare:UICollectionElementKindSectionHeader] == NSOrderedSame)
+	{
+		PackageHeaderCell* header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"PackageHeader" forIndexPath:indexPath];
+		
+		if (indexPath.section == SECTION_INSTALLED)
+		{
+			header.label.text = @"Installed Packages";
+			header.count.text = [NSString stringWithFormat:@"%ld", (long)[self collectionView:collectionView numberOfItemsInSection:SECTION_INSTALLED]];
+		}
+		else
+		{
+			header.label.text = @"Available Packages";
+			header.count.text = [NSString stringWithFormat:@"%ld", (long)[self collectionView:collectionView numberOfItemsInSection:SECTION_AVAILABLE]];
+		}
+		return header;
+	}
+	/*
+	else if ([kind compare:UICollectionElementKindSectionFooter] == NSOrderedSame)
+	{
+		return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"ButtonBar" forIndexPath:indexPath];
+	}
+	*/
 	
-	if (section == SECTION_INSTALLED) return @"Installed Packages";
-    else if (section == SECTION_BUTTONS) return nil;
-	else return @"Available Packages";
+	return nil;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
-{
-	_packageList = tableView;
-	
-	DataManager *dm = [DataManager getDataManager];
-	if (section == SECTION_INSTALLED)
-	{
-		if (dm.installedPackages.count == 0)
-			return @"No installed packages.";
-		else
-			return [NSString stringWithFormat:@"%lu installed packages.", (unsigned long)dm.installedPackages.count];
-	}
-	else if (section == SECTION_BUTTONS)
-    {
-        return nil;
-    }
-    else
-	{
-		if (dm.availablePackages.count == 0)
-			return @"No available packages.";
-		else
-			return [NSString stringWithFormat:@"%lu available packages.", (unsigned long)dm.availablePackages.count];
-	}
-}
-
+/*
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	_packageList = tableView;
-	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	if (!_productDetailView || !_storeView) return;
 	
 	DataManager *dm = [DataManager getDataManager];
 	
-	NSUInteger idx[2];
-	[indexPath getIndexes: idx];
-	
-	if (idx[0] == SECTION_INSTALLED) // installed
+	if (indexPath.section == SECTION_INSTALLED) // installed
 	{
-		if (idx[1] < dm.installedPackages.count)
+		if (indexPath.row < dm.installedPackages.count)
 		{
-			_productDetailView.title.text = [[dm.installedPackages objectAtIndex:idx[1]] objectAtIndex:2];
-			_productDetailView.description.text = [[dm.installedPackages objectAtIndex:idx[1]] objectAtIndex:1];
-			int iVer = [[[dm.installedPackages objectAtIndex:idx[1]] objectAtIndex:4] intValue];
-			int aVer = [[[dm.installedPackages objectAtIndex:idx[1]] objectAtIndex:5] intValue];
+			NSInteger row = indexPath.row;
+			_productDetailView.title.text = [[dm.installedPackages objectAtIndex:row] objectAtIndex:2];
+			_productDetailView.description.text = [[dm.installedPackages objectAtIndex:row] objectAtIndex:1];
+			int iVer = [[[dm.installedPackages objectAtIndex:row] objectAtIndex:4] intValue];
+			int aVer = [[[dm.installedPackages objectAtIndex:row] objectAtIndex:5] intValue];
 			[_productDetailView setButtonsInstalled:YES updatable:iVer < aVer];
 		}
 	}
-    else if (idx[0] == SECTION_BUTTONS) // coupon code
+    else if (indexPath.section == SECTION_BUTTONS) // coupon code
     {
         if (_codeEntryView)
         {
@@ -301,9 +206,9 @@ static PackageDataStore *g_pds = nil;
     }
 	else // available
 	{
-		if (idx[1] < dm.availablePackages.count)
+		if (indexPath.section < dm.availablePackages.count)
 		{
-			PackageData *pdata = [dm.availablePackages objectAtIndex:idx[1]];
+			PackageData *pdata = [dm.availablePackages objectAtIndex:indexPath.row];
 			if (pdata.name)
 			{
 				if (pdata.storeId && [pdata.storeId compare:@"!coming-soon"] == NSOrderedSame)
@@ -337,38 +242,29 @@ static PackageDataStore *g_pds = nil;
 		}
 	}
 	
-	_productDetailView.section = idx[0];
-	_productDetailView.row = idx[1];
+	_productDetailView.section = indexPath.section;
+	_productDetailView.row = indexPath.row;
 //	[productDetailView.title sizeToFit];
 //	[productDetailView.description sizeToFit];
 
 	_productDetailView.frame = CGRectMake(0, 0, _storeView.frame.size.width, _storeView.frame.size.height);
 	[_storeView addSubview:_productDetailView];
 }
+*/
 
-- (IBAction)storeRefresh
+- (void)storeRefresh
 {
 	[[DataManager getDataManager] checkForDownloadablePackages:nil];
-	[_packageList reloadData];
+	[self.collectionView reloadData];
 }
 
-- (IBAction)storeCodes
-{
-	if (_codeEntryView)
-	{
-		_codeEntryView.frame = CGRectMake(0, 0, _storeView.frame.size.width, _storeView.frame.size.height);
-		[_storeView addSubview:_codeEntryView];
-		return;
-	}
-}
-
-- (IBAction)storeRestore
+- (void)storeRestore
 {
 	[[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
 }
 
 - (void)submitCode
-{
+{ /*
     if (_codeField == nil)
 	{
 		return;
@@ -405,16 +301,7 @@ static PackageDataStore *g_pds = nil;
         }
         
         [[DataManager getDataManager] recheckDownloadablePackages];
-    }
-}
-
-- (void)cancelCodeEntry
-{
-    if (_codeSubmit) _codeSubmit.enabled = true;
-    if (_codeSpinner) [_codeSpinner stopAnimating];
-    if (_codeResponse) _codeResponse.hidden = true;
-    
-    [_codeEntryView removeFromSuperview];
+    } */
 }
 
 - (void)helper_downloadAndInstallPackage:(id)url
@@ -432,11 +319,6 @@ static PackageDataStore *g_pds = nil;
 	}
 	else
 	{
-		if (_productDetailView.downloadingOverlay)
-		{
-			_productDetailView.downloadingOverlay.hidden = NO;
-		}
-		
 		NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]
 												 cachePolicy:NSURLRequestUseProtocolCachePolicy
 											 timeoutInterval:60.0f];
@@ -472,11 +354,6 @@ static PackageDataStore *g_pds = nil;
 		downloadFile = nil;
 	}
 	
-	if (_productDetailView.downloadingOverlay)
-	{
-		_productDetailView.downloadingOverlay.hidden = YES;
-	}
-	
 	//TODO: show popup message
 }
 
@@ -497,13 +374,6 @@ static PackageDataStore *g_pds = nil;
 	downloadFile = nil;
 	downloadPath = nil;
 
-	if (_productDetailView.downloadingOverlay)
-	{
-		_productDetailView.downloadingOverlay.hidden = YES;
-	}
-	
-	[self productDetailCancel];
-	
 	if (downloadQueue && downloadQueue.count > 0)
 	{
 		NSString *url = [downloadQueue objectAtIndex:0];
@@ -513,6 +383,7 @@ static PackageDataStore *g_pds = nil;
 	}
 }
 
+/*
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 	DataManager *dm = [DataManager getDataManager];
@@ -524,8 +395,7 @@ static PackageDataStore *g_pds = nil;
 		else
 		{
 			// Don't delete content.
-			[dm uninstallPackage:_productDetailView.row deleteContent:NO];
-			[self productDetailCancel];
+//			[dm uninstallPackage:_productDetailView.row deleteContent:NO];
 		}
 
 	}
@@ -564,52 +434,37 @@ static PackageDataStore *g_pds = nil;
 
 	}
 }
+*/
 
-- (IBAction) productDetailCancel
+-(void)packageCell:(PackageCell *)cell didRequestPurchaseOfPackage:(PackageData *)pdata
 {
-	[_productDetailView removeFromSuperview];
-	_productDetailView.section = -1;
-	_productDetailView.row = -1;
-	
-	[_packageList reloadData];
-}
-
-- (IBAction) productDetailBuy
-{
-	DataManager *dm = [DataManager getDataManager];
-	
-	if (_productDetailView.row >= 0 && _productDetailView.row < dm.availablePackages.count)
+	if (pdata.storeId == nil || __DEBUG__mockData == YES)
 	{
-		PackageData *pdata = [dm.availablePackages objectAtIndex:_productDetailView.row];
-		if (pdata.storeId == nil)
+		DataManager *dm = [DataManager getDataManager];
+		
+		// download
+		if ([pdata.packageURL hasPrefix:@"http://"])
+			[self downloadAndInstallPackage: pdata.packageURL];
+		else
 		{
-			DataManager *dm = [DataManager getDataManager];
-			
-			// download
-			if ([pdata.packageURL hasPrefix:@"http://"])
-				[self downloadAndInstallPackage: pdata.packageURL];
-			else
-			{
-				NSString *url = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:pdata.packageURL];
-				[dm installPackageAtPath: url];
-				[self productDetailCancel];
-			}
-			
-			[_packageList reloadData];
+			NSString *url = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:pdata.packageURL];
+			[dm installPackageAtPath: url];
 		}
-		else if (pdata.storeProduct && [SKPaymentQueue canMakePayments])
-		{
-			// buy, then download
-			//[RPG_ToolkitAppDelegate sharedApp].purchasing += 1;
-			SKPayment *payment = [SKPayment paymentWithProduct:pdata.storeProduct];
-			if (payment)
-				[[SKPaymentQueue defaultQueue] addPayment:payment];
-		}
+		
+		[self.collectionView reloadData];
+	}
+	else if (pdata.storeProduct && [SKPaymentQueue canMakePayments])
+	{
+		// buy, then download
+		//[RPG_ToolkitAppDelegate sharedApp].purchasing += 1;
+		SKPayment *payment = [SKPayment paymentWithProduct:pdata.storeProduct];
+		if (payment)
+			[[SKPaymentQueue defaultQueue] addPayment:payment];
 	}
 }
 
 - (IBAction)productDetailUpdate
-{
+{ /*
 	DataManager *dm = [DataManager getDataManager];
 	
 	if (_productDetailView.row >= 0 && _productDetailView.row < dm.installedPackages.count)
@@ -629,11 +484,12 @@ static PackageDataStore *g_pds = nil;
 		}
 	}
 	
-	[_packageList reloadData];
+	[self.collectionView reloadData];
+	*/
 }
 
 - (IBAction)productDetailDelete
-{
+{ /*
 	DataManager *dm = [DataManager getDataManager];
 	
 	if (_productDetailView.row >= 0 && _productDetailView.row < dm.installedPackages.count)
@@ -661,7 +517,7 @@ static PackageDataStore *g_pds = nil;
 															otherButtonTitles:nil];
 			[actionSheet showInView:_productDetailView];
 		}
-	}
+	} */
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions

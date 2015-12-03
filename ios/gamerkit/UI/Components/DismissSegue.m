@@ -7,12 +7,19 @@
 //
 
 #import "DismissSegue.h"
+#import "ContentDetailViewController.h"
 
 @implementation DismissSegue
 
 - (void)perform {
 	UIViewController *sourceViewController = self.sourceViewController;
-	[sourceViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+	[sourceViewController.presentingViewController dismissViewControllerAnimated:YES completion:^()
+	 {
+		 if ([sourceViewController isKindOfClass:ContentDetailViewController.class])
+		 {
+			 [(ContentDetailViewController*)sourceViewController setContentObject:nil];
+		 }
+	 }];
 }
 
 @end

@@ -182,11 +182,13 @@
 					add_die_roll(a,"Death Save=1d20");
 					attribute("SecondWind", "Second Wind Used", TYPE_bool, "<xsl:apply-templates select="character/attribute[@name='SecondWind']" />", "footer_attr");
 				endblock();
-				attribute("SaveMods", "Saving Throw Mods", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='SaveMods']" />", "line_1");
-				attribute("Resist", "Resistances", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Resist']" />", "line_1");
-				line();
-					attribute("Conditions", "Conditional Modifiers", TYPE_text, "<xsl:apply-templates select="character/attribute[@name='Conditions']" />");
-				endline();
+				block_plain("saves");
+					attribute("SaveMods", "Saving Throw Mods", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='SaveMods']" />", "line_1");
+					attribute("Resist", "Resistances", TYPE_string, "<xsl:apply-templates select="character/attribute[@name='Resist']" />", "line_1");
+					line();
+						attribute("Conditions", "Conditional Modifiers", TYPE_text, "<xsl:apply-templates select="character/attribute[@name='Conditions']" />");
+						endline();
+				endblock();
 			endblock();
 		}
 

@@ -7,15 +7,6 @@
 		<meta name = "viewport" content = "width = device-width" />
         <link rel="stylesheet" type="text/css" href="../Systems/core.css" />
         <link rel="stylesheet" type="text/css" href="../Sheets/GSL40.css" />
-		<style>
-BODY, TD, LI, INPUT
-{
-	font-family: sans-serif;
-	font-size: 10pt;
-	margin: 0px;
-	border: 0px solid black;
-}
-		</style>
 	</head>
 	<body style="width: 320px">
 		<script type="text/javascript" src="../Systems/charsheet.js" />

@@ -10,6 +10,8 @@
 #import "DataManager.h"
 
 BOOL bPad = NO;
+BOOL __DEBUG__mockData = YES;
+
 NSString *packageString = nil;
 NSString *feedbackStats = nil;
 
@@ -35,7 +37,7 @@ AppDelegate *s_delegate = nil;
 	
 	
 	NSString *versionStr = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
-	packageString = [NSString stringWithFormat:@"__toolkit_package_list.php?v=%@&d=%@", versionStr,
+	packageString = [NSString stringWithFormat:@"%@/%@", versionStr,
 					  [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
 	
 	UIDevice *dev = [UIDevice currentDevice];

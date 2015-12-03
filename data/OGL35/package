@@ -7,7 +7,7 @@
 		<string>Support for fantasy RPGs that follow the version 3.5 OGL SRD as defined by Wizards of the Coast, including compatibility with its most popular implementations.</string>
 		<string>OGL 3.5 Support</string>
 		<string>system</string>
-		<integer>2</integer>
+		<integer>3</integer>
 	</array>
 	<string>Systems/OGL35.rules</string>
 	<string>Sheets/OGL35-PC-FULL.sheet</string>

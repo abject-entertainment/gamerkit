@@ -137,7 +137,7 @@ void ConfirmDirectory(NSFileManager *fm, NSString *dir)
 		_newPackagesFound = 0;
 		_packageDelegate = listener;
 
-		NSString *url = [NSString stringWithFormat:@"http://abject-entertainment.com/toolkit/%@", packageString];
+		NSString *url = [NSString stringWithFormat:@"http://benmac:9000/toolkit/v2/packlist/ios/%@", packageString];
 		
 		fprintf(stdout, "Want to download package list from: %s", [url UTF8String]);
 		NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
@@ -231,20 +231,26 @@ void ConfirmDirectory(NSFileManager *fm, NSString *dir)
 						attr = (const char *)xmlGetProp(curElem, (const xmlChar*)"id");
 						if (attr) pdata.tag = [NSString stringWithUTF8String:attr];
 						xmlFree((void*)attr);
+						
+						NSLog(@"%@ (v %d)", pdata.tag, pdata.availableVersion);
+						
 						xmlNodePtr subElem = curElem->children;
 						while (subElem)
 						{
 							if (strcasecmp((const char *)subElem->name, "name") == 0)
 							{
 								pdata.name = [NSString stringWithUTF8String:(const char *)subElem->children->content];
+								NSLog(@" - Name: %@", pdata.name);
 							}
 							else if (strcasecmp((const char *)subElem->name, "description") == 0)
 							{
 								pdata.descr = [NSString stringWithUTF8String:(const char *)subElem->children->content];
+								NSLog(@" - Description: %@", pdata.descr);
 							}
 							else if (strcasecmp((const char *)subElem->name, "package-url") == 0)
 							{
 								pdata.packageURL = [NSString stringWithUTF8String:(const char *)subElem->children->content];
+								NSLog(@" - URL: %@", pdata.packageURL);
 							}
 							subElem = subElem->next;
 						}
@@ -322,8 +328,8 @@ void ConfirmDirectory(NSFileManager *fm, NSString *dir)
 			[_packageDelegate packageListObtained:self];
 		}
 		
-		if (_packageData && [_packageData packageList])
-			[[_packageData packageList] reloadData];
+		if (_packageData)
+			[_packageData refresh];
 	}
 	
 	packageListRequestData = nil;
@@ -372,8 +378,8 @@ void ConfirmDirectory(NSFileManager *fm, NSString *dir)
 	if (_packageDelegate) [_packageDelegate packageListObtained:self];
 	//packageDelegate = nil;
 
-	if (_packageData && [_packageData packageList])
-		[[_packageData packageList] reloadData];
+	if (_packageData)
+		[_packageData refresh];
 
 	// save tracking data
 	[packageTracking writeToFile:packageTrackingFile atomically:YES];
@@ -654,6 +660,62 @@ void ConfirmDirectory(NSFileManager *fm, NSString *dir)
 	}
 }
 
+-(void) checkPackages {
+	NSFileManager *fm = [NSFileManager defaultManager];
+	NSBundle *appBundle = [NSBundle mainBundle];
+	
+	// gather .pack files from app bundle
+	NSString *rootPath = [appBundle bundlePath];
+	NSArray *paths = [fm contentsOfDirectoryAtPath:rootPath error:nil];
+	if (paths)
+	{
+		for (uint i = 0; i < paths.count; ++i)
+		{
+			NSString *packFile = paths[i];
+			if ([packFile hasSuffix:@".pack"])
+			{
+				BOOL install = NO;
+				
+				NSLog(@"Found file %@", packFile);
+				
+				// look for .package file and check modified dates
+				NSString *packageFile = [[_docsPath stringByAppendingPathComponent:@"Packages"] stringByAppendingPathComponent:[packFile stringByAppendingString:@"age"]];
+				if ([fm fileExistsAtPath:packageFile])
+				{
+					packFile = [rootPath stringByAppendingPathComponent:packFile];
+					
+					
+					NSDictionary *packAttrs = [fm attributesOfItemAtPath:packFile error:nil];
+					NSDictionary *packageAttrs = [fm attributesOfItemAtPath:packageFile error:nil];
+					
+					NSDate *packDate = [packAttrs objectForKey:NSFileCreationDate];
+					NSDate *packageDate = [packageAttrs objectForKey:NSFileCreationDate];
+					
+					// if .pack is newer, or .package file doesn't exist, install the .pack file
+					if ([packDate compare:packageDate] == NSOrderedDescending)
+					{
+						NSLog(@" - It is newer, so installing...");
+						install = YES;
+					}
+				}
+				else
+				{
+					NSLog(@" - It is not installed, so installing...");
+					install = YES;
+				}
+				
+				if (install)
+				{
+					[self installPackageAtPath:packFile];
+					NSLog(@" - Installed.");
+				}
+			}
+		}
+	}
+	
+	
+}
+
 -(void) checkForFirstRunSetup {
 	NSString *filePath = nil;
 	NSFileManager *fm = nil;
@@ -683,35 +745,17 @@ void ConfirmDirectory(NSFileManager *fm, NSString *dir)
 	
 	filePath = [_docsPath stringByAppendingPathComponent:@"user.plist"];
 	
-#if TARGET_IPHONE_SIMULATOR
-	if (true)
-#else
 	if (![fm fileExistsAtPath:filePath])
-#endif
 	{
 		fprintf(stdout, "checkForFirstRunSetup: Preference data not found.  Creating initial data.\n");
 		
 		[fm copyItemAtPath:[[appBundle bundlePath] stringByAppendingPathComponent:@"user.plist"] toPath:filePath error:nil];
-		
-		NSArray *paths = [fm contentsOfDirectoryAtPath:[appBundle bundlePath] error:nil];
-		if (paths)
-		{
-			for (int i = 0; i < paths.count; ++i)
-			{
-				if ([[paths objectAtIndex:i] hasSuffix:@".pack"])
-				{
-					[self installPackageAtPath:[[appBundle bundlePath] stringByAppendingPathComponent:[paths objectAtIndex:i]]];
-				}
-			}
-		}
 	}
 	else
 	{
 		fprintf(stdout, "checkForFirstRunSetup: Preference data found.  Wahoo.\n");
-		
-		// always reinstall Core.pack, so it is always up to date.
-		[self installPackageAtPath:[[appBundle bundlePath] stringByAppendingPathComponent:@"Core.pack"]];
 	}
+	[self checkPackages];
 	
 	userProps = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
 	userPropsPath = filePath;

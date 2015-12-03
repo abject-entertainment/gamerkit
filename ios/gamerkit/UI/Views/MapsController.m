@@ -92,27 +92,14 @@
 
 - (IBAction)pickImage:(id)sender
 {
-	if (_photoLibrary == nil)
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
 	{
-		_photoLibrary = [[UIImagePickerController alloc] init];
-		_photoLibrary.delegate = self;
-	}
-	
-	/*if (bPad)
-	{
-		if (popover == nil)
-		{
-			CGSize sz = photoLibrary.view.frame.size;
-			popover = [[UIPopoverController alloc] initWithContentViewController:photoLibrary];
-			popover.popoverContentSize = sz;
-		}
-		
-		[popover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-	}
-	else if (self.presentedViewController == mapDetail && photoLibrary) */
-	{
-		_photoLibrary.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-		[_mapDetail presentViewController:_photoLibrary animated:YES completion:NULL];
+		UIImagePickerController *photoLibrary = [[UIImagePickerController alloc] init];
+		photoLibrary.modalPresentationStyle = UIModalPresentationCurrentContext;
+		photoLibrary.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+		//photoLibrary.allowsEditing = true;
+		photoLibrary.delegate = self;
+		[self presentViewController:photoLibrary animated:YES completion:nil];
 	}
 }
 
