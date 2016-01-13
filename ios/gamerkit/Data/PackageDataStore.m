@@ -113,10 +113,10 @@ extern BOOL __DEBUG__mockData;
 		cell.name.text = [[dm.installedPackages objectAtIndex:row] objectAtIndex:2];
 		int iVer = [[[dm.installedPackages objectAtIndex:row] objectAtIndex:4] intValue];
 		int aVer = [[[dm.installedPackages objectAtIndex:row] objectAtIndex:5] intValue];
-		if (aVer > iVer)
-			cell.summary.text = @"Update Available!";
-		else
-			cell.summary.text = nil;
+		if (cell.update)
+        {
+            cell.update.hidden = aVer <= iVer;
+        }
 		
 		return cell;
 	}
@@ -443,7 +443,7 @@ extern BOOL __DEBUG__mockData;
 		DataManager *dm = [DataManager getDataManager];
 		
 		// download
-		if ([pdata.packageURL hasPrefix:@"http://"])
+        if ([pdata.packageURL hasPrefix:@"http://"] || [pdata.packageURL hasPrefix:@"https://"])
 			[self downloadAndInstallPackage: pdata.packageURL];
 		else
 		{

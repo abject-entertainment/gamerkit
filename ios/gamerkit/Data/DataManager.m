@@ -137,7 +137,7 @@ void ConfirmDirectory(NSFileManager *fm, NSString *dir)
 		_newPackagesFound = 0;
 		_packageDelegate = listener;
 
-		NSString *url = [NSString stringWithFormat:@"http://benmac:9000/toolkit/v2/packlist/ios/%@", packageString];
+		NSString *url = [NSString stringWithFormat:@"http://benmac.local:9000/toolkit/v2/packlist/ios/%@", packageString];
 		
 		fprintf(stdout, "Want to download package list from: %s", [url UTF8String]);
 		NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]

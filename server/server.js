@@ -4,7 +4,10 @@ var express = require("express");
 
 var content = express();
 var contentRoot = "/files"
-content.use(contentRoot, express.static(__dirname + "/../content/files"));
+
+console.log("content hosted from: " + __dirname + "/content/files");
+
+content.use(contentRoot, express.static(__dirname + "/content/files"));
 contentRoot = ":8000" + contentRoot;
 content.listen(8000);
 

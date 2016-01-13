@@ -48,7 +48,7 @@ NSInteger comparator(id obj1, id obj2, void* context)
 
 - (void)viewDidLoad
 {
-	self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+	self.collectionView.contentInset = UIEdgeInsetsMake(20, 0, 40, 0);
 	
 	DataManager *dm = [DataManager getDataManager];
 	if (dm)
