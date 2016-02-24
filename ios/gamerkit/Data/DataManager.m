@@ -39,6 +39,13 @@ extern NSString *packageString;
 }
 @end
 
+@interface DataManager()
+{
+	NSMutableArray *_productCodeListConsumers;
+}
+
+@end
+
 @implementation DataManager
 
 /*
@@ -63,7 +70,7 @@ extern NSString *packageString;
 
 static DataManager *g_DataManager = nil;
 
--(id) init {
+-(instancetype) init {
 	if (g_DataManager)
 	{
 		self = g_DataManager;
@@ -88,11 +95,8 @@ static DataManager *g_DataManager = nil;
 	_docsPath = [paths objectAtIndex:0];
 	_tempPath = NSTemporaryDirectory();
 	
-	// Make sure shareable classes are registered.
-	[ShareableContent registerClass:[Character class] forContentType:[Character contentType]];
-	[ShareableContent registerClass:[Token class] forContentType:[Token contentType]];
-	[ShareableContent registerClass:[Map class] forContentType:[Map contentType]];
-
+	_productCodeListConsumers = [NSMutableArray array];
+	
 	g_DataManager = self;
 	
 	return self;
@@ -543,19 +547,19 @@ void ConfirmDirectory(NSFileManager *fm, NSString *dir)
 							else if ([curFile hasSuffix:@".char"])
 							{
 								fprintf(stdout, "Loading character %s.\n", [filePath UTF8String]);
-								Character *character = [[Character alloc] initWithFileAtPath:filePath fully:NO];
+								Character *character = [[Character alloc] initWithFileAtPath:filePath];
 								[[self rulesetForName:character.system] addCharacter:character];
 							}
 							else if ([curFile hasSuffix:@".token"] && _tokenData)
 							{
 								fprintf(stdout, "Loading token %s.\n", [filePath UTF8String]);
-								Token *t = [[Token alloc] initWithFileAtPath:filePath fully:NO];
+								Token *t = [[Token alloc] initWithFileAtPath:filePath];
 								[_tokenData addToken:t];
 							}
 							else if ([curFile hasSuffix:@".map"] && _mapsData)
 							{
 								fprintf(stdout, "Loading map %s.\n", [filePath UTF8String]);
-								Map *t = [[Map alloc] initWithFileAtPath:filePath fully:NO];
+								Map *t = [[Map alloc] initWithFileAtPath:filePath];
 								[_mapsData addMap:t];
 							}
 						}
@@ -853,7 +857,7 @@ void ConfirmDirectory(NSFileManager *fm, NSString *dir)
 			if (filePath && [filePath hasSuffix:@".char"])
 			{
 				fprintf(stdout, "Loading character %s.\n", [filePath UTF8String]);
-				Character *character = [[Character alloc] initWithFileAtPath:[path stringByAppendingPathComponent:filePath] fully:NO];
+				Character *character = [[Character alloc] initWithFileAtPath:[path stringByAppendingPathComponent:filePath]];
 				[[self rulesetForName:character.system] addCharacter:character];
 			}
 		}
@@ -1097,6 +1101,34 @@ void ConfirmDirectory(NSFileManager *fm, NSString *dir)
 {
 	if (popoverController == pickerContainer)
 		[ModalPicker cancelModalPicker];
+}
+
+- (void)submitProductCode:(NSString *)code withCallback:(void (^)(NSString *))callback
+{
+#warning <<AE>> TODO
+}
+
+// ProductCodeListProvider
+- (void)addProductCodeListConsumer:(id<ProductCodeListConsumer>)consumer
+{
+	if ([_productCodeListConsumers indexOfObject:consumer] == NSNotFound)
+	{
+		[_productCodeListConsumers addObject:consumer];
+	
+//		if (_productCodeList)
+//		{
+//			[consumer receiveProductCodes:_productCodeList];
+//		}
+//		else
+//		{
+//			[self getProductCodeList];
+//		}
+	}
+}
+
+- (void)removeProductCodeListConsumer:(id<ProductCodeListConsumer>)consumer
+{
+	[_productCodeListConsumers removeObject:consumer];
 }
 
 @end

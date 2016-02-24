@@ -10,6 +10,6 @@
 
 @interface TokenCell : UICollectionViewCell
 
-@property (nonatomic,weak) IBOutlet UIImageView *image;
+@property (nonatomic,strong) IBOutlet UIImageView *image;
 
 @end

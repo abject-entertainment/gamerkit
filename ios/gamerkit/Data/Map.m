@@ -36,24 +36,6 @@
 
 - (void)setImage:(UIImage*)newImage { _image = newImage; [self createMiniImage]; }
 
-- (void)unload
-{
-	if (bFullyLoaded)
-	{
-		_image = nil;
-		bFullyLoaded = NO;
-	}
-}
-
-- (void)fullyLoad
-{
-	if (!bFullyLoaded && self.path)
-	{
-		Map *_self = [self initWithFileAtPath:self.path fully:YES];
-		_self->bFullyLoaded = YES;
-	}
-}
-
 - (id)init
 {
 	self = [super init];
@@ -61,12 +43,11 @@
 	{
 		self.image = nil;
 		self.name = nil;
-		bFullyLoaded = NO;
 	}
 	return self;
 }
 
-- (id)initWithFileAtPath:(NSString*)inPath fully:(BOOL)fullLoad
+- (id)initWithFileAtPath:(NSString*)inPath
 {
 	self = [self init];
 	_path = inPath;
@@ -107,30 +88,27 @@
 			if (_gridScale <= 0.0f) _gridScale = 1.0f;
 			xmlFree((void*)prop);
 
-			if (fullLoad || version < 2)
+			prop = (const char *)xmlGetProp(curElem, (const xmlChar*)"img-size");
+			if (prop)
 			{
-				prop = (const char *)xmlGetProp(curElem, (const xmlChar*)"img-size");
-				if (prop)
+				int cnt = atoi(prop);
+				xmlFree((void*)prop);
+				
+				if (cnt > 0)
 				{
-					int cnt = atoi(prop);
-					xmlFree((void*)prop);
+					// first child is text node
+					prop = (const char *)curElem->children->content;
 					
-					if (cnt > 0)
+					if (prop && cnt)
 					{
-						// first child is text node
-						prop = (const char *)curElem->children->content;
+						NSData *imgData = [NSData base64DataFromString:prop];
 						
-						if (prop && cnt)
+						if (imgData.length == cnt)
 						{
-							NSData *imgData = [NSData base64DataFromString:prop];
-							
-							if (imgData.length == cnt)
-							{
-								_image = [[UIImage alloc] initWithData:imgData];
-							}
-							else {
-								fprintf(stdout, "Base64 decode: expeded %d bytes, got %lu.\n", cnt, (unsigned long)imgData.length);
-							}
+							_image = [[UIImage alloc] initWithData:imgData];
+						}
+						else {
+							fprintf(stdout, "Base64 decode: expeded %d bytes, got %lu.\n", cnt, (unsigned long)imgData.length);
 						}
 					}
 				}
@@ -175,10 +153,6 @@
 			else
 			{
 				[self createMiniImage];
-				if (!fullLoad)
-				{
-					[self unload];
-				}
 			}
 		}
 		xmlFreeDoc(doc);
@@ -188,7 +162,6 @@
 
 - (void)writeToFile
 {
-	[self fullyLoad];
 	if (_path == nil)
 	{
 		NSFileManager *fm = [NSFileManager defaultManager];

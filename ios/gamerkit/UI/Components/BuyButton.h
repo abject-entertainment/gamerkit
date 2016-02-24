@@ -23,7 +23,7 @@
 @interface BuyButton : UIButton
 
 @property (nonatomic, weak) SKProduct *product;
-@property (nonatomic, strong) IBOutlet NSObject<BuyButtonDelegate> *delegate;
+@property (nonatomic, weak) IBOutlet NSObject<BuyButtonDelegate> *delegate;
 
 - (void)deactivate;
 

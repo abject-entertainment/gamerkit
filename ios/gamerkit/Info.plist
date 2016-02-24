@@ -4,6 +4,39 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeIconFiles</key>
+			<array/>
+			<key>CFBundleTypeName</key>
+			<string>Character</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.abject-entertainment.toolkit.character</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeIconFiles</key>
+			<array/>
+			<key>CFBundleTypeName</key>
+			<string>Token</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.abject-entertainment.toolkit.token</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeIconFiles</key>
+			<array/>
+			<key>CFBundleTypeName</key>
+			<string>Map</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.abject-entertainment.toolkit.map</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -58,6 +91,63 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Gamers' Toolkit Character</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.abject-entertainment.toolkit.character</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>gtchar</string>
+					<string>GTCHAR</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Gamers' Toolkit Token</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.abject-entertainment.toolkit.token</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>gttoken</string>
+					<string>GTTOKEN</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Gamers' Toolkit Map</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.abject-entertainment.toolkit.map</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>gtmap</string>
+					<string>GTMAP</string>
+				</array>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>

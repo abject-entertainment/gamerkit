@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ContentCell.h"
 
-@interface ContentListViewController : UICollectionViewController <ContentCellDelegate>
+@interface ContentListViewController : UICollectionViewController <ContentCellDelegate, UIGestureRecognizerDelegate>
 
--(id)getContentObjectForCell:(ContentCell *)cell;
--(id)createNewContentObject;
+-(id)contentObjectForCell:(ContentCell *)cell;
+-(void)deleteContentForCell:(ContentCell *)cell;
 
 @end

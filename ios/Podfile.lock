@@ -1,0 +1,13 @@
+PODS:
+  - BNHtmlPdfKit (0.4.2)
+  - LNERadialMenu (1.0)
+
+DEPENDENCIES:
+  - BNHtmlPdfKit (~> 0.4)
+  - LNERadialMenu (~> 1.0)
+
+SPEC CHECKSUMS:
+  BNHtmlPdfKit: f62aeccf09475e491a6ea3ad949e47f49a5c55a5
+  LNERadialMenu: ba00b4502e4c2269abb1c1dc5e096fbc4f58e2e8
+
+COCOAPODS: 0.39.0

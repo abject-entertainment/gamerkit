@@ -10,7 +10,7 @@
 
 @interface NewsViewController : UIViewController <UIWebViewDelegate>
 
-@property (nonatomic, strong) IBOutlet UIWebView *content;
+@property (nonatomic, weak) IBOutlet UIWebView *content;
 
 - (IBAction)goHome:(id)sender;
 - (IBAction)goToFeedback:(id)sender;

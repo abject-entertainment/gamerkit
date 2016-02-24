@@ -18,17 +18,17 @@
 	NSMutableArray *availableButtons;
 }
 
-@property (nonatomic, assign) IBOutlet UILabel *title;
-@property (nonatomic, assign) IBOutlet UITextView *description;
-@property (nonatomic, assign) IBOutlet UIToolbar *buttonBar;
-@property (nonatomic, assign) IBOutlet UIBarButtonItem *cancelButton;
-@property (nonatomic, assign) IBOutlet UIBarButtonItem *downloadButton;
-@property (nonatomic, assign) IBOutlet UIBarButtonItem *updateButton;
-@property (nonatomic, assign) IBOutlet UIBarButtonItem *deleteButton;
-@property (nonatomic, assign) IBOutlet UIView *downloadingOverlay;
+@property (nonatomic, strong) IBOutlet UILabel *title;
+@property (nonatomic, strong) IBOutlet UITextView *description;
+@property (nonatomic, strong) IBOutlet UIToolbar *buttonBar;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *downloadButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *updateButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *deleteButton;
+@property (nonatomic, strong) IBOutlet UIView *downloadingOverlay;
 
-@property (assign) NSInteger section;
-@property (assign) NSInteger row;
+@property (nonatomic, assign) NSInteger section;
+@property (nonatomic, assign) NSInteger row;
 
 - (void)setButtonsInstalled:(BOOL)installed updatable:(BOOL)updatable;
 

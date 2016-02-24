@@ -61,7 +61,7 @@
 	{
 		if ([file hasSuffix: @".token"])
 		{
-			Token *t = [[Token alloc] initWithFileAtPath:[path stringByAppendingPathComponent:file] fully:NO];
+			Token *t = [[Token alloc] initWithFileAtPath:[path stringByAppendingPathComponent:file]];
 			if (t)
 			{
 				[_tokens addObject:t];
@@ -112,7 +112,6 @@
 	{
 		Token *token = [_tokens objectAtIndex:indexPath.row];
 		TokenCell *tcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Token" forIndexPath:indexPath];
-		[token fullyLoad];
 		[tcell.image setImage:token.image];
 		cell = tcell;
 	}

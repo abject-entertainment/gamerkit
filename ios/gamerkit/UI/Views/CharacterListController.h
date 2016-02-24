@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "ModalPicker.h"
-#import "SharedContentController.h"
 #import "MessageUI/MFMailComposeViewController.h"
 #import "TokenEditController.h"
 #import "ContentListViewController.h"

@@ -8,14 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ModalPicker.h"
-#import "SharedContentController.h"
 #import "TokenListController.h"
 
 @class Token;
 
 @interface TokenEditController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) id<TokenSelectionDelegate> selectionDelegate;
 
 - (IBAction)openPhotoLibrary;

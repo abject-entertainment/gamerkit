@@ -1,21 +1,99 @@
 <html>
 	<head>
 		<link href="core.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript">
+			function acceptMessageURL(url)
+			{
+				if (url)
+				{
+					$.ajax({
+						url: url,
+						dataType: "html",
+						success: acceptMessageText,
+						error: function ()
+						{
+						   acceptMessageText("Message of the Day failed to load.  Check your internet connection.<br /><br /><a href='javascript:acceptMessageUrl(\"" + url + "\");'>Retry</a>");
+						}
+					});
+				}
+			}
+
+			function acceptMessageText(message)
+			{
+				$("#message-of-the-day").append($(message));
+				
+				/*
+				var e = document.getElementById("message-of-the-day");
+				if (typeof(message) === "string")
+				{
+					e.innerHTML = message;
+				}
+				else
+				{
+					while (e.firstChild)
+					{ e.removeChild(e.firstChild); }
+					e.appendChild(message);
+				}
+				*/
+			}
+        </script>
 		<style>
-html, body, h1, h5 { margin:0px; padding:0px; }
-iframe { border: 1px solid black; }
+			DIV: {
+				display: inline-block;
+			}
+		
+			BODY: {
+				margin: 0;
+				padding: 0;
+			}
+		
+			#header {
+				position: fixed;
+				top: 0;
+				height: 100px;
+				left: 0;
+				right: 0;
+				background-color: lightgray;
+				border-bottom: 2px outset;
+			}
+		
+			#footer {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				height: 20px;
+				padding-top: 10px;
+				text-align: center;
+				background-color: lightgray;
+				border-top: 2px outset;
+				font-size: 10px;
+			}
+		
+			#body {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				padding-top: 120px;
+				padding-bottom: 50px;
+				padding-left: 20px;
+				padding-right: 20px;
+				overflow-y: auto;
+			}
 		</style>
 	</head>
-	<body>
-		<div style="display:inline-block; width:100%;">
-			<center>
-				<div style="height: 20%">
-					<h5>Welcome to</h5>
-					<h1>Gamers' Toolkit</h1>
-					<h5>Message of the Day</h5>
-				</div>
-				<iframe src="http://abject-entertainment.com/toolkit/motd-iphone.html" style="width:100%; height: 80%"/>
-			</center>
+	<body onload="javascript:acceptMessageURL();">
+		<div id="header">
+			<h1>Gamers' Toolkit</h1>
+		</div>
+		<div id="body">
+			Loading Message of the Day...
+		</div>
+		<div id="footer">
+			Gamers' Toolkit is &copy; 2010-2016 by Abject Entertainment.
 		</div>
 	</body
 </html>

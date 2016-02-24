@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ShareableContent.h"
+#import "ContentObject.h"
 
-@interface Map : ShareableContent
+@interface Map : ContentObject
 
 @property (nonatomic) NSString *name;
 @property (nonatomic, strong, setter=setImage:) UIImage *image;
@@ -18,7 +18,7 @@
 @property (nonatomic) CGFloat gridScale;
 @property (nonatomic, readonly) NSString *path;
 
-- (id)initWithFileAtPath:(NSString*)path fully:(BOOL)fullLoad;
+- (id)initWithFileAtPath:(NSString*)path;
 
 - (void)writeToFile;
 

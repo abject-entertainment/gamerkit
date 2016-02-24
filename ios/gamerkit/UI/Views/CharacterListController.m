@@ -14,10 +14,10 @@
 #import "Import.h"
 #import "DataManager.h"
 #import "CharacterDefinition.h"
-#import "SharedContentDataStore.h"
 #import "AppDelegate.h"
 #import "Base64.h"
 #import "CharacterViewController.h"
+#import "CircleImageView.h"
 
 @implementation CharacterListController
 
@@ -48,6 +48,8 @@ NSInteger comparator(id obj1, id obj2, void* context)
 
 - (void)viewDidLoad
 {
+	[super viewDidLoad];
+	
 	self.collectionView.contentInset = UIEdgeInsetsMake(20, 0, 40, 0);
 	
 	DataManager *dm = [DataManager getDataManager];
@@ -231,18 +233,29 @@ NSInteger comparator(id obj1, id obj2, void* context)
 	[self refreshData];
 }
 
-- (void)shareRequestedForCharacter: (Character*)character
+- (void)deleteContentForCell:(ContentCell *)cell
 {
-}
-
-- (void)deleteRequestedForCharacter: (Character*)character
-{
+	NSIndexPath *path = [self.collectionView indexPathForCell:cell];
+	if (path)
+	{
+		Ruleset *rules = [[[DataManager getDataManager] systems] objectForKey:[systemKeys objectAtIndex:path.section]];
+		[rules deleteCharacter:[cell getContentObject]];
+	}
 }
 
 - (void)refreshData
 {
 	[self getKeys];
 	[self.collectionView reloadData];
+}
+
+- (UIView *)viewForContextMenuForCell:(ContentCell *)cell
+{
+	if ([cell isKindOfClass:CharacterCell.class])
+	{
+		return [[CircleImageView alloc] initWithImage:((CharacterCell*)cell).token.image];
+	}
+	return nil;
 }
 
 @end

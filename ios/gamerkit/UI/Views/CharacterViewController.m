@@ -30,6 +30,11 @@
 	
 	if (_character)
 	{ [self setContentObject:_character]; }
+	
+}
+
+- (BOOL)prefersStatusBarHidden {
+	return YES;
 }
 
 - (void)didReceiveMemoryWarning {

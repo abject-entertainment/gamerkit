@@ -10,7 +10,7 @@
 
 @interface MapCell : UICollectionViewCell
 
-@property (nonatomic,weak) IBOutlet UIImageView *image;
-@property (nonatomic,weak) IBOutlet UILabel *name;
+@property (nonatomic,strong) IBOutlet UIImageView *image;
+@property (nonatomic,strong) IBOutlet UILabel *name;
 
 @end

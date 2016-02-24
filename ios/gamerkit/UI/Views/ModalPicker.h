@@ -27,7 +27,7 @@
 	NSArray *last_results;
 }
 
-@property (nonatomic, assign) IBOutlet UIPickerView *picker;
+@property (nonatomic, weak) IBOutlet UIPickerView *picker;
 @property (nonatomic, readonly) UIPopoverController *popover;
 
 - (IBAction)done;

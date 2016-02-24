@@ -41,7 +41,6 @@
 - (void)setToken:(Token *)token
 {
 	_token = token;
-	[_token fullyLoad];
 	if (_imageView)
 	{
 		_imageView.image = _token.image;

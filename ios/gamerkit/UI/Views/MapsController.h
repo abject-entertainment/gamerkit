@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Map.h"
-#import "SharedContentController.h"
 #import "ModalPicker.h"
 
 @protocol MapSelectionDelegate
@@ -21,7 +20,7 @@
 
 @interface MapsController : UICollectionViewController
 <UINavigationControllerDelegate, UIImagePickerControllerDelegate,
-ModalPickerDelegate, SharedContentDoneDelegate, UIScrollViewDelegate, UITextFieldDelegate> {
+ModalPickerDelegate, UIScrollViewDelegate, UITextFieldDelegate> {
 	NSMutableArray *maps;
 	Map *currentMap;
 
@@ -31,13 +30,13 @@ ModalPickerDelegate, SharedContentDoneDelegate, UIScrollViewDelegate, UITextFiel
 	UIBarButtonItem *cachedButton;
 }
 
-@property (nonatomic) IBOutlet UITableView *mapList;
+@property (nonatomic, weak) IBOutlet UITableView *mapList;
 
-@property (nonatomic) IBOutlet UIViewController *mapDetail;
-@property (nonatomic) IBOutlet GriddedView *mapGrid;
-@property (nonatomic) IBOutlet UITextField *mapName;
-@property (nonatomic) IBOutlet UIBarButtonItem *shareButton;
-@property (nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (nonatomic, weak) IBOutlet UIViewController *mapDetail;
+@property (nonatomic, weak) IBOutlet GriddedView *mapGrid;
+@property (nonatomic, weak) IBOutlet UITextField *mapName;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *shareButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *doneButton;
 
 - (IBAction)newMap:(id)sender;
 - (IBAction)detailDone;
@@ -49,8 +48,6 @@ ModalPickerDelegate, SharedContentDoneDelegate, UIScrollViewDelegate, UITextFiel
 
 - (BOOL)modalPicker:(ModalPicker*)picker donePicking:(NSArray*)results;
 - (void)modalPicker:(ModalPicker*)picker selectionChanged:(NSInteger) newIndex forColumn:(NSInteger)column;
-
-- (void)sharedContentDone:(SharedContentController*)controller;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;
 

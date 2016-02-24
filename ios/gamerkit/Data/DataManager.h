@@ -12,6 +12,10 @@
 #import "ModalPicker.h"
 #import "ZipArchive.h"
 
+@protocol ProductCodeListConsumer <NSObject>
+- (void)receiveProductCodes:(NSArray *)list;
+@end
+
 @class Ruleset;
 @class CharacterListController;
 @class PackageDataStore;
@@ -80,7 +84,7 @@ typedef enum _PickTarget {
 @property (nonatomic, readonly) NSString *tempPath;
 @property (nonatomic, assign) NSObject<PackageListener> *packageDelegate;
 
--(id) init;
+-(instancetype) init;
 -(void) checkForDownloadablePackages:(NSObject<PackageListener>*)listener;
 -(void) recheckDownloadablePackages;
 -(void) checkForFirstRunSetup;
@@ -116,6 +120,14 @@ typedef enum _PickTarget {
 
 - (id)getUserProperty:(NSString*)name;
 - (BOOL)setUserProperty:(NSString*)name value:(id)value;
+
+- (void) submitProductCode:(NSString *)code withCallback:(void (^)(NSString*))callback;
+
+// consumers
+#warning <<AE>> Move all the data consumption to this pattern
+- (void) addProductCodeListConsumer:(id<ProductCodeListConsumer>)consumer;
+- (void) removeProductCodeListConsumer:(id<ProductCodeListConsumer>)consumer;
+
 @end
 
 @protocol PackageListener

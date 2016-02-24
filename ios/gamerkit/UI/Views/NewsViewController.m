@@ -30,11 +30,7 @@ extern BOOL bPad;
 {
 	DataManager *dm = [DataManager getDataManager];
 	
-	NSString *newsPage = nil;
-	if (bPad)
-		newsPage = @"Systems/start-ipad.html";
-	else
-		newsPage = @"Systems/start.html";
+	NSString *newsPage = @"Systems/start.html";
 	
 	NSString *startPage = [dm.docsPath stringByAppendingPathComponent:newsPage];
 	[self.content loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:startPage]]];
@@ -42,7 +38,12 @@ extern BOOL bPad;
 
 - (IBAction)goToFeedback:(id)sender
 {
-#warning <<AE>> Implement feeback here.
+	DataManager *dm = [DataManager getDataManager];
+	
+	NSString *feedbackPage = @"Systems/feedback.html";
+	
+	NSString *startPage = [dm.docsPath stringByAppendingPathComponent:feedbackPage];
+	[self.content loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:startPage]]];
 }
 
 - (void)didReceiveMemoryWarning {

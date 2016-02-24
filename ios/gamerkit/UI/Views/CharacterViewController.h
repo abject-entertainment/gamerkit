@@ -15,8 +15,8 @@
 
 @interface CharacterViewController : ContentDetailViewController <TokenSelectionDelegate, UIWebViewDelegate>
 
-@property (nonatomic, strong) IBOutlet UIWebView* content;
-@property (nonatomic, strong) IBOutlet UIBarItem* titleText;
+@property (nonatomic, weak) IBOutlet UIWebView* content;
+@property (nonatomic, weak) IBOutlet UIBarItem* titleText;
 
 @property (nonatomic, weak) CharacterListController* listController;
 

@@ -35,7 +35,7 @@
 		{
 			if ([file hasSuffix: @".map"])
 			{
-				Map *m = [[Map alloc] initWithFileAtPath:[path stringByAppendingPathComponent:file] fully:NO];
+				Map *m = [[Map alloc] initWithFileAtPath:[path stringByAppendingPathComponent:file]];
 				if (m)
 				{
 					[maps addObject:m];
@@ -63,9 +63,6 @@
 	currentMap.gridScale = _mapGrid.gridScale;
 	
 	[currentMap writeToFile];
-	
-	if (![currentMap isShared])
-		[currentMap unload];
 	
 	if (![maps containsObject:currentMap])
 		[maps addObject:currentMap];
@@ -107,19 +104,7 @@
 {
 	if (currentMap)
 	{
-		if ([currentMap isShared])
-		{
-			[currentMap stopSharing];
-		}
-		else 
-		{
-			[currentMap startSharing:currentMap.name];
-		}
-		
-		if (_shareButton)
-		{
-			((UIBarButtonItem*)sender).title = [currentMap isShared]?@"Stop Sharing":@"Share";
-		}
+		[currentMap share:self];
 	}
 }
 
@@ -174,7 +159,6 @@
 		if (m && _mapDetail)
 		{
 			currentMap = m;
-			[currentMap fullyLoad];
 			[self formatMapImage:m.image];
 			if (_mapGrid)
 			{
@@ -182,7 +166,6 @@
 				_mapGrid.gridScale = m.gridScale;
 			}
 			if (_mapName) _mapName.text = m.name;
-			if (_shareButton) _shareButton.title = [m isShared]?@"Stop Sharing":@"Share";
 
 			[self showMapDetail];
 		}
@@ -277,13 +260,6 @@
 
 - (void)modalPicker:(ModalPicker *)picker isDoneHiding:(BOOL)animated fromResults:(NSArray *)results
 {
-}
-
-- (void)sharedContentDone:(SharedContentController*)controller
-{
-	if (self.presentedViewController && [self.presentedViewController isKindOfClass:[SharedContentController class]])
-		[self dismissViewControllerAnimated:YES completion:NULL];
-	if (_mapList) [_mapList reloadData];
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
