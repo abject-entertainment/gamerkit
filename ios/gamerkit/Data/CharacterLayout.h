@@ -14,7 +14,7 @@
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, copy) NSString* charType;
 @property (nonatomic, copy) NSString* displayName;
-@property (nonatomic, readonly) NSMutableDictionary* file;
+@property (nonatomic, copy) NSString* file;
 
 - (id)init;
 

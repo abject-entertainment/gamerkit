@@ -7,7 +7,7 @@
 //
 
 #import "DiceView.h"
-#import "DataManager.h"
+#import "PreferencesManager.h"
 
 //extern BOOL bPad;
 
@@ -40,7 +40,7 @@
 
 - (void)viewDidLoad
 {
-	NSMutableDictionary *prefs = [NSMutableDictionary dictionaryWithDictionary:[[DataManager getDataManager] getUserProperty:@"dice"]];
+	NSMutableDictionary *prefs = [[[PreferencesManager preferencesManager] getPreferenceForKey:@"dice"] mutableCopy];
 
 	if (self.quickCount)
 	{
@@ -283,10 +283,10 @@ void doRoll(int count, int sides, int drop, bool bDropLow, int rerollMin, int re
 	
 	if (save)
 	{
-		NSMutableDictionary *prefs = [NSMutableDictionary dictionaryWithDictionary:[[DataManager getDataManager] getUserProperty:@"dice"]];
+		NSMutableDictionary *prefs = [[[PreferencesManager preferencesManager] getPreferenceForKey:@"dice"] mutableCopy];
 		[prefs setValue:nStr forKey:@"notation"];
 		[prefs setValue:resultsStr forKey:@"results"];
-		[[DataManager getDataManager] setUserProperty:@"dice" value:prefs];
+		[[PreferencesManager preferencesManager] setPreference:prefs forKey:@"dice"];
 	}
 	
 	return resultsStr;
@@ -311,11 +311,11 @@ void doRoll(int count, int sides, int drop, bool bDropLow, int rerollMin, int re
 		
 		self.results.text = resultStr;
 
-        NSMutableDictionary *prefs = [NSMutableDictionary dictionaryWithDictionary:[[DataManager getDataManager] getUserProperty:@"dice"]];
+        NSMutableDictionary *prefs = [[[PreferencesManager preferencesManager] getPreferenceForKey:@"dice"] mutableCopy];
 		[prefs setValue:[NSNumber numberWithLong:self.quickCount.selectedSegmentIndex] forKey:@"quickCount"];
 		[prefs setValue:[NSNumber numberWithLong:self.quickSides.selectedSegmentIndex] forKey:@"quickSides"];
 		[prefs setValue:self.results.text forKey:@"results"];
-		[[DataManager getDataManager] setUserProperty:@"dice" value:prefs];
+		[[PreferencesManager preferencesManager] setPreference:prefs forKey:@"dice"];
 	}
 }
 

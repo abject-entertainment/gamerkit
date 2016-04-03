@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <BNHtmlPdfKit/BNHtmlPdfKit.h>
 
 @class XMLDataContent;
-@class XMLDataTransform;
 
 typedef enum : NSUInteger {
 	ContentObjectActionDefault,
@@ -24,44 +22,28 @@ typedef enum : NSUInteger {
 	ContentObjectActionMAX
 } ContentObjectAction;
 
+@class ContentTransform;
+@class ContentTransformResult;
 
-
-@interface ContentTransformResult : NSObject
-
-@property (nonatomic, readonly, assign) ContentObjectAction action;
-@property (nonatomic, readonly, assign) BOOL succeeded;
-
-// preview
-@property (nonatomic, readonly, copy) NSString *title;
-@property (nonatomic, readonly, copy) NSString *subtitle;
-@property (nonatomic, readonly, strong) UIImage *image;
-
-// webview, readonlywebview
-@property (nonatomic, readonly, copy) NSString *html;
-
-// share, exporttopdf
-@property (nonatomic, readonly, strong) NSURL *file;
-
-// print
-@property (nonatomic, readonly, strong) UIPrintFormatter *printFormatter;
-
-@end
-
-
-
-@interface ContentObject : NSObject<UIActivityItemSource, BNHtmlPdfKitDelegate>
+@interface ContentObject : NSObject<UIActivityItemSource>
 
 - (instancetype)initWithFile:(NSString*)fileName;
 
 @property (nonatomic, copy, readonly) NSString *fileName;
 @property (nonatomic, strong, readonly) XMLDataContent *data;
-@property (nonatomic, copy, readonly) BOOL dataIsLoaded;
+@property (nonatomic, assign, readonly) BOOL dataIsLoaded;
+
+@property (nonatomic, copy, readonly) NSString *contentPath;
 
 - (void)loadData;
 - (void)unloadData;
+- (void)saveFile;
 
-- (void)setTransform:(XMLDataTransform*)transform forAction:(ContentObjectAction)action;
-- (ContentTransformResult *)transformForAction:(ContentObjectAction)action;
+- (ContentTransformResult *)getPreview;
+
+- (void)setTransform:(ContentTransform*)transform forAction:(ContentObjectAction)action;
+- (ContentTransformResult *)applyTransformForAction:(ContentObjectAction)action;
+- (ContentTransformResult *)applyTransform:(ContentTransform*)transform forAction:(ContentObjectAction)action;
 
 - (void)shareFromViewController:(UIViewController*)viewController;
 

@@ -17,7 +17,7 @@
 	_name = nil;
 	_charType = nil;
 	_displayName = nil;
-	_file = [[NSMutableDictionary alloc] initWithCapacity:2];
+	_file = nil;
 	
 	return self;
 }

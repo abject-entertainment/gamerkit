@@ -17,15 +17,15 @@
 			<integer>3</integer>
 		</array>
 		
-		<string>Systems/charsheet.js</string>
-		<string>Systems/core.css</string>
-		<string>Systems/style/*</string>
-		<string>Systems/start.html</string>
-		<string>Systems/feedback.html</string>
-		<string>Systems/ui.js</string>
-		<string>Systems/ui.css</string>
-		<string>Systems/dice.js</string>
-		<string>Systems/dice.css</string>
-		<string>Systems/animate.js</string>
+		<string>Core/displaychar.js</string>
+
+		<string>Core/charsheet.js</string>
+		<string>Core/charsheet.css</string>
+		<string>Core/dice.js</string>
+		<string>Core/dice.css</string>
+
+		<string>Core/style/*</string>
+		<string>Core/start.html</string>
+		<string>Core/feedback.html</string>
 	</array>
 </plist>

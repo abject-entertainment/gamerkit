@@ -24,6 +24,8 @@ ROLL can be:
 <ROLL>(+|-)<ROLL> = Add (or subtract) the values of two rolls.
 These can chain.
 
+/(\+\s*|-\s*)?(([0-9]*)d([0-9]+|u|f|c)(k[0-9]+|k[0-9]+l|d[0-9]+|r[0-9]+)?|[0-9]+)/gi
+
 */
 
 var die_roller_debug = (typeof(debug)==='undefined')?false:debug;
@@ -512,9 +514,9 @@ DiceRoller.prototype.displayRoll = function(result, node)
 
 DiceRoller.prototype.displayResult = function(result, node, formatting)
 {
-	var ui = null;
-	if (format === 'iphone') { ui = new Popup("DIE ROLL", {x:0,y:40,w:320,h:150},{x:160,y:190}); }
-	else if (format === 'ipad') { ui = new Popup("DIE ROLL", {x:100,y:100,w:400,h:200},{x:300,y:200}); }
+	var ui = popup;
+	//if (format === 'iphone') { ui = new Popup("DIE ROLL", {x:0,y:40,w:320,h:150},{x:160,y:190}); }
+	//else if (format === 'ipad') { ui = new Popup("DIE ROLL", {x:100,y:100,w:400,h:200},{x:300,y:200}); }
 	for (var i = 0; i < result.length; ++i)
 	{
 		var node = document.createElement("DIV");
@@ -538,12 +540,89 @@ DiceRoller.prototype.displayResult = function(result, node, formatting)
 			title.innerHTML = result[i].notation;
 		}
 		
-		ui.inner.appendChild(node);
+		ui.show(node);
 	}
 }
 
 var Dice = new DiceRoller();
 Dice.shuffleDeck(DiceRoller.standard_cards);
+
+var __namedRolls = [];
+function addNamedRolls(rolls)
+{
+	__namedRolls = __namedRolls.concat(rolls);
+}
+
+function addDiceRollAnchors(inString)
+{
+	var rolls = findDiceRolls(inString);
+
+	for (var r = 0; r < __namedRolls.length; ++r)
+	{
+		for (var n = 0; n < __namedRolls[r].names.length; ++n)
+		{
+			var name = __namedRolls[r].names[n];
+			var idx = inString.indexOf(name);
+			if (idx >= 0)
+			{
+				rolls.push({
+					text: name,
+					notation: __namedRolls[r].notation(),
+					start: idx,
+					end: idx + name.length
+				});
+				break;
+			}
+		}
+	}
+
+	rolls.sort(function sortRolls(a, b) { return b.start - a.start; });
+
+	for (var i = 0; i < rolls.length; ++i)
+	{
+		inString = inString.substr(0, rolls[i].start) +
+			"<a class=\"inline-dice-roll\" href=\"javascript:rollDice('" + rolls[i].notation + "', ['" + rolls[i].text + "']);\">" +
+			inString.substring(rolls[i].start, rolls[i].end) + "</a>" +
+			inString.substr(rolls[i].end);
+	}
+
+	return inString;
+}
+
+function findDiceRolls(inString)
+{
+	//           (  3   )d(      6     )(           k2                   ) (     +    )((      ) (            )(         repeat                 )   +2   )
+	var regex = /([0-9]*)d([0-9]+|u|f|c)(k[0-9]+|k[0-9]+l|d[0-9]+|r[0-9]+)?(\+\s*|-\s*)(([0-9]*)d([0-9]+|u|f|c)(k[0-9]+|k[0-9]+l|d[0-9]+|r[0-9]+)?|[0-9]+)/gi;
+
+	var offset = 0;
+	var results = [];
+
+	var curResult = null;
+	var matches = null;
+	while (matches = regex.exec(inString))
+	{
+		if (curResult == null || // first match...
+			(matches.index > curResult.end && inString.substr(curResult.end, matches.index).trim() != "")) // something in between this and the last...
+			
+		{
+			curResult = {
+				text: matches[0],
+				notation: matches[0],
+				start: matches.index,
+				end: matches.index + matches[0].length
+			};
+			results.push(curResult);
+		}
+		else
+		{
+			curResult.text += matches[0];
+			curResult.notation += matches[0];
+			curResult.end += matches[0].length;
+		}
+	}
+
+	return results;
+}
 
 function rollDice(notation,formatting)
 {

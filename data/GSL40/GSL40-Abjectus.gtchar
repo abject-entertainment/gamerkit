@@ -1,0 +1,325 @@
+<character system="GSL40" display-name="Abjectus" type="PC">
+	<Player></Player>
+	<Name>Abjectus</Name>
+	<Level>3</Level>
+	<Class>Fighter</Class>
+	<Paragon></Paragon>
+	<Epic></Epic>
+	<XP>2250</XP>
+	<Race>Human</Race>
+	<Size>Medium</Size>
+	<Age></Age>
+	<Gender></Gender>
+	<Height></Height>
+	<Weight></Weight>
+	<Align>Good</Align>
+	<Deity></Deity>
+	<Company></Company>
+	<Str>20</Str>
+	<Dex>10</Dex>
+	<Con>14</Con>
+	<Int>10</Int>
+	<Wis>11</Wis>
+	<Cha>8</Cha>
+	<AC>20</AC>
+	<Fort>20</Fort>
+	<Ref>15</Ref>
+	<Will>13</Will>
+	<Init>1</Init>
+	<Speed>5</Speed>
+	<AP>1</AP>
+	<MaxHP>46</MaxHP>
+	<CurHP></CurHP>
+	<TempHP></TempHP>
+	<Surges>11</Surges>
+	<CurSurges></CurSurges>
+	<SecondWind>false</SecondWind>
+	<DeathSave></DeathSave>
+	<SaveMods></SaveMods>
+	<Resist></Resist>
+	<Conditions></Conditions>
+	<RaceFeatures>
+		<item>Bonus Feat</item>
+		<item>Bonus Skill</item>
+		<item>Bonus At-Will Power</item>
+		<item>Human Defense Bonuses</item>
+	</RaceFeatures>
+	<ClassFeatures>
+		<item>Combat Challenge</item>
+		<item>Combat Superiority</item>
+		<item>Fighter Talents</item>
+		<item>Battlerager Vigor</item>
+	</ClassFeatures>
+	<ParagonFeatures>
+	</ParagonFeatures>
+	<EpicFeatures>
+	</EpicFeatures>
+	<Languages>
+		<item>Common</item>
+		<item>Draconic</item>
+	</Languages>
+	<Feats>
+		<item>Toughness</item>
+		<item>Weapon Expertise (Axe)</item>
+		<item>Improved Vigor</item>
+	</Feats>
+	<Skills>
+		<item>
+			<name>Acrobatics</name>
+			<bonus>-2</bonus>
+			<trained>false</trained>
+			<attribute>Dex</attribute>
+		</item>
+		<item>
+			<name>Arcana</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Int</attribute>
+		</item>
+		<item>
+			<name>Athletics</name>
+			<bonus>8</bonus>
+			<trained>true</trained>
+			<attribute>Str</attribute>
+		</item>
+		<item>
+			<name>Bluff</name>
+			<bonus>2</bonus>
+			<trained>false</trained>
+			<attribute>Cha</attribute>
+		</item>
+		<item>
+			<name>Diplomacy</name>
+			<bonus>2</bonus>
+			<trained>false</trained>
+			<attribute>Cha</attribute>
+		</item>
+		<item>
+			<name>Dungeoneering</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Wis</attribute>
+		</item>
+		<item>
+			<name>Endurance</name>
+			<bonus>5</bonus>
+			<trained>true</trained>
+			<attribute>Con</attribute>
+		</item>
+		<item>
+			<name>Heal</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Wis</attribute>
+		</item>
+		<item>
+			<name>History</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Int</attribute>
+		</item>
+		<item>
+			<name>Insight</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Wis</attribute>
+		</item>
+		<item>
+			<name>Intimidate</name>
+			<bonus>5</bonus>
+			<trained>true</trained>
+			<attribute>Cha</attribute>
+		</item>
+		<item>
+			<name>Nature</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Wis</attribute>
+		</item>
+		<item>
+			<name>Perception</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Wis</attribute>
+		</item>
+		<item>
+			<name>Religion</name>
+			<bonus>1</bonus>
+			<trained>false</trained>
+			<attribute>Int</attribute>
+		</item>
+		<item>
+			<name>Stealth</name>
+			<bonus>-2</bonus>
+			<trained>false</trained>
+			<attribute>Dex</attribute>
+		</item>
+		<item>
+			<name>Streetwise</name>
+			<bonus>5</bonus>
+			<trained>true</trained>
+			<attribute>Cha</attribute>
+		</item>
+		<item>
+			<name>Thievery</name>
+			<bonus>-2</bonus>
+			<trained>false</trained>
+			<attribute>Dex</attribute>
+		</item>
+	</Skills>
+	<Powers>
+		<item>
+			<name>Melee Basic Attack</name>
+			<keywords></keywords>
+			<use-type>AtWill</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Battlecrazed Battleaxe +1: Strength vs. AC, Damage: 1d10+6.\nBattleaxe: Strength vs. AC, Damage: 1d10+5.\n</effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Ranged Basic Attack</name>
+			<keywords></keywords>
+			<use-type>AtWill</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Crushing Surge</name>
+			<keywords></keywords>
+			<use-type>AtWill</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Battlecrazed Battleaxe +1: Strength vs. AC, Damage: 1d10+6.\nBattleaxe: Strength vs. AC, Damage: 1d10+5.\n</effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Combat Challenge</name>
+			<keywords></keywords>
+			<use-type>AtWill</use-type>
+			<action-type></action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Brash Strike</name>
+			<keywords></keywords>
+			<use-type>AtWill</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Battlecrazed Battleaxe +1: Strength vs. AC, Damage: 1d10+8.\nBattleaxe: Strength vs. AC, Damage: 1d10+7.\n</effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Sure Strike</name>
+			<keywords></keywords>
+			<use-type>AtWill</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Battlecrazed Battleaxe +1: Strength vs. AC, Damage: 1d10+1.\nBattleaxe: Strength vs. AC, Damage: 1d10.\n</effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Bell Ringer</name>
+			<keywords></keywords>
+			<use-type>Encounter</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Battlecrazed Battleaxe +1: Strength vs. Fortitude, Damage: 0+2.\nBattleaxe: Strength vs. Fortitude, Damage: 0+2.\n</effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Get Over Here</name>
+			<keywords></keywords>
+			<use-type>Encounter</use-type>
+			<action-type>Move</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Dance of Steel</name>
+			<keywords></keywords>
+			<use-type>Encounter</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Battlecrazed Battleaxe +1: Strength vs. AC, Damage: 2d10+6.\nBattleaxe: Strength vs. AC, Damage: 2d10+5.\n</effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Second Wind</name>
+			<keywords></keywords>
+			<use-type>Encounter</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Action Point</name>
+			<keywords></keywords>
+			<use-type>Encounter</use-type>
+			<action-type>Free</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect></effect>
+			<used>false</used>
+		</item>
+		<item>
+			<name>Knee Breaker</name>
+			<keywords></keywords>
+			<use-type>Daily</use-type>
+			<action-type>Standard</action-type>
+			<category>Utility</category>
+			<target></target>
+			<range></range>
+			<effect>Battlecrazed Battleaxe +1: Strength vs. AC, Damage: 2d10+8.\nBattleaxe: Strength vs. AC, Damage: 2d10+7.\n</effect>
+			<used>false</used>
+		</item>
+	</Powers>
+	<MagicItems>
+		<item>Amulet of Physical Resolve +1</item>
+		<item>Chainmail, Skald's Armor +1</item>
+		<item>Battleaxe, Battlecrazed Weapon +1</item>
+	</MagicItems>
+	<MIUsed></MIUsed>
+	<Rituals>
+	</Rituals>
+	<Allies></Allies>
+	<Equipment>
+		<item>Heavy Shield</item>
+		<item>Adventurer's Kit</item>
+		<item>Battleaxe</item>
+		<item>Chainmail</item>
+	</Equipment>
+	<Personality></Personality>
+	<Appearance></Appearance>
+	<Background></Background>
+	<Wealth></Wealth>
+	<Notes></Notes>
+	<Token>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</Token>
+</character>

@@ -7,7 +7,7 @@
 //
 
 #import "NewCharacterConfigViewController.h"
-#import "DataManager.h"
+#import "ContentManager.h"
 
 @implementation NewCharacterConfigViewController
 
@@ -19,7 +19,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return [DataManager getDataManager]
+	return [DataManager contentManager]
 }
 */
 

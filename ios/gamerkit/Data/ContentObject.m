@@ -7,59 +7,9 @@
 //
 
 #import "ContentObject.h"
-#import "XMLDataLayout.h"
-
-@implementation ContentTransformResult
-
-- (instancetype)initWithXMLDataLayoutResult:(NSDictionary*)result
-{
-	self = [self init];
-	if (self)
-	{
-		_action = [[result objectForKey:kXMLTransformKeyAction] unsignedIntegerValue];
-		if ([[result objectForKey:kXMLTransformKeySucceeded] boolValue] == NO)
-		{
-			_succeeded = NO;
-		}
-		else
-		{
-			if (_action == ContentObjectActionPreview)
-			{
-				_title = [[result objectForKey:kXMLTransformKeyTitle] stringValue];
-				_subtitle = [[result objectForKey:kXMLTransformKeySubtitle] stringValue];
-				_image = [result objectForKey:kXMLTransformKeyImage];
-			}
-			else if (_action == ContentObjectActionShare ||
-					 _action == ContentObjectActionExportToPDF)
-			{
-				_file = [result objectForKey:kXMLTransformKeyFile];
-			}
-			else if (_action == ContentObjectActionWebView ||
-					 _action == ContentObjectActionReadOnlyWebView)
-			{
-				_html = [[result objectForKey:kXMLTransformKeyHTML] stringValue];
-			}
-			else if (_action == ContentObjectActionPrint)
-			{
-				_printFormatter = [result objectForKey:kXMLTransformKeyPrintFormatter];
-			}
-		}
-	}
-	return self;
-}
-
-- (instancetype)initWithFailureForAction:(ContentObjectAction)action
-{
-	self = [self init];
-	if (self)
-	{
-		_action = action;
-		_succeeded = NO;
-	}
-	return self;
-}
-
-@end
+#import "ContentTransform.h"
+#import "ContentTransformResult.h"
+#import "XMLDataContent.h"
 
 @interface ContentObject()
 {
@@ -67,6 +17,7 @@
 	__block NSData *_expectedPdfData;
 	
 	NSMutableArray *_transforms;
+	ContentTransformResult *_preview;
 }
 @end
 
@@ -85,6 +36,8 @@
 		{
 			[_transforms addObject:[NSNull null]];
 		}
+		
+		[self setTransform:[ContentTransform defaultTransform] forAction:ContentObjectActionDefault];
 	}
 	return self;
 }
@@ -105,6 +58,7 @@
 
 - (void)loadData
 {
+	if (_data) return;
 	if (_fileName)
 	{
 		_data = [[XMLDataContent alloc] initWithFileAtPath:_fileName];
@@ -116,56 +70,104 @@
 	_data = nil;
 }
 
-- (void)setTransform:(XMLDataTransform*)transform forAction:(ContentObjectAction)action
+- (NSString *)contentPath
+{ return @"Media"; }
+
+- (void)saveFile
+{
+	if (_fileName == nil)
+	{
+		NSString *format = [NSString stringWithFormat:@"%@/%%08X", self.contentPath];
+		
+		NSFileManager *fm = [NSFileManager defaultManager];
+		NSString *fileName = nil;
+		
+		do
+		{
+			fileName = [NSString stringWithFormat:format, random()];
+		} while ([fm fileExistsAtPath:fileName]);
+		
+		_fileName = fileName;
+	}
+
+	[_data saveToFile:_fileName];
+}
+
+- (ContentTransformResult *)getPreview
+{
+	if (_preview == nil)
+	{
+		BOOL unload = _data == nil;
+		[self loadData];
+		_preview = [self applyTransformForAction:ContentObjectActionPreview];
+		if (unload)
+		{	[self unloadData]; }
+	}
+	
+	return _preview;
+}
+
+- (void)refreshPreview
+{
+	_preview = nil;
+	[self getPreview];
+}
+
+- (void)setTransform:(ContentTransform*)transform forAction:(ContentObjectAction)action
 {
 	if (transform)
-	{ _transforms[action] = layout; }
+	{ _transforms[action] = transform; }
 	else
 	{ _transforms[action] = [NSNull null]; }
 }
 
-- (ContentTransformResult *)layoutForAction:(ContentObjectAction)action
+- (ContentTransformResult *)applyTransformForAction:(ContentObjectAction)action
 {
-	XMLDataTransform *xform = nil;
+	ContentTransform *xform = nil;
 	
 	id obj = _transforms[action];
 	if (obj == [NSNull null])
 	{ obj = _transforms[ContentObjectActionDefault]; }
 	if (obj != [NSNull null])
-	{ xform = (XMLDataTransform*)obj; }
+	{ xform = (ContentTransform*)obj; }
 	
-	NSDictionary *result;
-	if (xform)
+	return [self applyTransform:xform forAction:action];
+}
+
+- (ContentTransformResult *)applyTransform:(ContentTransform *)transform forAction:(ContentObjectAction)action
+{
+	if (_data == nil)
+	{ [self loadData]; }
+	
+	ContentTransformResult *result;
+	if (transform)
 	{
 		switch (action)
 		{
 			case ContentObjectActionWebView:
-				result = [xform transformContentForWebView:_data readOnly:NO];
+				result = [transform transformContentForWebView:self readOnly:NO];
 				break;
 			case ContentObjectActionReadOnlyWebView:
-				result = [xform transformContentForWebView:_data readOnly:YES];
+				result = [transform transformContentForWebView:self readOnly:YES];
 				break;
 			case ContentObjectActionPreview:
-				result = [xform transformContentForPreview:_data];
+				result = [transform transformContentForPreview:self];
 				break;
 			case ContentObjectActionShare:
-				result = [xform transformContentForSharing:_data];
+				result = [transform transformContentForSharing:self];
 				break;
 			case ContentObjectActionPrint:
-				result = [xform transformContentForPrinting:_data];
+				result = [transform transformContentForPrinting:self];
 				break;
 			case ContentObjectActionExportToPDF:
-				result = [xform transformContentForExportToPDF:_data];
+				result = [transform transformContentForExportToPDF:self];
 				break;
 			default:
-				result = nil;
+				result = [[ContentTransformResult alloc] initWithAction:action];
 		}
 	}
 	
-	if (result)
-	{ return [[ContentTransformResult alloc] initWithXMLDataLayoutResult:result]; }
-	else
-	{ return [[ContentTransformResult alloc] initWithFailureForAction:action]; }
+	return result;
 }
 
 - (void)shareFromViewController:(UIViewController *)viewController
@@ -193,74 +195,48 @@
 
 - (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
 {
-	return [self placeholderImage];
+	return [NSURL URLWithString:self.fileName];
 }
 
 - (NSString *)activityViewController:(UIActivityViewController *)activityViewController subjectForActivityType:(NSString *)activityType
 {
-	if ([activityType compare:UIActivityTypeAirDrop] == NSOrderedSame)
+	ContentTransformResult *result = [self applyTransformForAction:ContentObjectActionPreview];
+	if (result.succeeded)
 	{
-		return [self placeholderName];
+		return result.title;
 	}
-	return [self placeholderName];
+	return nil;
 }
 
 - (NSString *)activityViewController:(UIActivityViewController *)activityViewController dataTypeIdentifierForActivityType:(NSString *)activityType
 {
-	if ([activityType compare:UIActivityTypeAirDrop] == NSOrderedSame)
-	{
-		return [NSString stringWithFormat:@"com.abject-entertainment.toolkit.%@", [self contentType]];
-	}
-	else if ([activityType compare:UIActivityTypeOpenInIBooks] == NSOrderedSame)
-	{
-		return @"com.adobe.pdf";
-	}
+	// Not using NSData objects.
 	return nil;
 }
 
 - (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
 {
+	ContentTransformResult *result = nil;
 	if ([activityType compare:UIActivityTypeAirDrop] == NSOrderedSame)
 	{ // air drop!
-		return [self dataForSharing];
+		result = [self applyTransformForAction:ContentObjectActionShare];
+		if (result && result.succeeded)
+		{ return result.file; }
 	}
 	else if ([activityType compare:UIActivityTypePrint] == NSOrderedSame)
 	{
-		return [[UIMarkupTextPrintFormatter alloc] initWithMarkupText:[self htmlForPrinting]];
+		result = [self applyTransformForAction:ContentObjectActionPrint];
+		if (result && result.succeeded)
+		{ return result.printFormatter; }
 	}
 	else if ([activityType compare:UIActivityTypeOpenInIBooks] == NSOrderedSame)
 	{
-		BNHtmlPdfKit *toPdf = [[BNHtmlPdfKit alloc] initWithPageSize:[BNHtmlPdfKit defaultPageSize]];
-		toPdf.delegate = self;
-		
-		_expectedPdfData = nil;
-		_pdfSemaphore = dispatch_semaphore_create(0);
-		
-		NSString *html = [self htmlForPrinting];
-		[toPdf saveHtmlAsPdf:html];
-		
-		dispatch_semaphore_wait(_pdfSemaphore, DISPATCH_TIME_FOREVER);
-		_pdfSemaphore = nil;
-		
-		NSData *pdfData = _expectedPdfData;
-		_expectedPdfData = nil;
-		
-		return pdfData;
+		result = [self applyTransformForAction:ContentObjectActionExportToPDF];
+		if (result && result.succeeded)
+		{ return result.file; }
 	}
 	
 	return nil;
-}
-
-- (void)htmlPdfKit:(BNHtmlPdfKit *)htmlPdfKit didFailWithError:(NSError *)error
-{
-	_expectedPdfData = nil;
-	dispatch_semaphore_signal(_pdfSemaphore);
-}
-
-- (void)htmlPdfKit:(BNHtmlPdfKit *)htmlPdfKit didSavePdfData:(NSData *)data
-{
-	_expectedPdfData = data;
-	dispatch_semaphore_signal(_pdfSemaphore);
 }
 
 @end

@@ -10,18 +10,18 @@
 
 @class XMLDataContent;
 
-const NSString* kXMLTransformKeyAction = @"action";
-const NSString* kXMLTransformKeySucceeded = @"succeeded";
-const NSString* kXMLTransformKeyTitle = @"title";
-const NSString* kXMLTransformKeySubtitle = @"subtitle";
-const NSString* kXMLTransformKeyImage = @"image";
-const NSString* kXMLTransformKeyHTML = @"html";
-const NSString* kXMLTransformKeyFile = @"file";
-const NSString* kXMLTransformKeyPrintFormatter = @"print";
+#define kXMLTransformKeyAction @"action"
+#define kXMLTransformKeySucceeded @"succeeded"
+#define kXMLTransformKeyTitle @"title"
+#define kXMLTransformKeySubtitle @"subtitle"
+#define kXMLTransformKeyImage @"image"
+#define kXMLTransformKeyHTML @"html"
+#define kXMLTransformKeyFile @"file"
+#define kXMLTransformKeyPrintFormatter @"print"
 
 @interface XMLDataTransform : NSObject
 
-+ (XMLDataTransform *)defaultLayout;
++ (XMLDataTransform *)defaultTransform;
 
 - (NSDictionary *)transformContentForPreview:(XMLDataContent*)content;
 - (NSDictionary *)transformContentForSharing:(XMLDataContent*)content;

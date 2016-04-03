@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Jh0-LC-i94">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Jh0-LC-i94">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -269,7 +269,6 @@
                                 <connections>
                                     <outlet property="name" destination="6SX-sT-5kS" id="SXX-pC-IJ0"/>
                                     <outlet property="token" destination="U2p-Xb-6k8" id="FN5-Sy-Zxc"/>
-                                    <segue destination="zXw-K3-ta2" kind="custom" customClass="ContentDetailSegue" id="iI3-HT-fCb"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NewCharacter" id="xm5-QU-6U7">
@@ -1269,13 +1268,6 @@ Multiple rolls can be made at once by using a comma-separated list.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jaU-V0-QMK">
-                                <rect key="frame" x="4" y="0.0" width="600" height="556"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="delegate" destination="zXw-K3-ta2" id="3ea-YG-OCh"/>
-                                </connections>
-                            </webView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DAU-NV-7jC">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1300,17 +1292,10 @@ Multiple rolls can be made at once by using a comma-separated list.</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cxE-hn-h1j" firstAttribute="top" secondItem="DAU-NV-7jC" secondAttribute="bottom" id="2ZU-kk-ofv"/>
-                            <constraint firstItem="jaU-V0-QMK" firstAttribute="top" secondItem="0Ui-J6-O49" secondAttribute="topMargin" id="EIc-0g-cxS"/>
-                            <constraint firstItem="jaU-V0-QMK" firstAttribute="leading" secondItem="0Ui-J6-O49" secondAttribute="leadingMargin" constant="-16" id="RSJ-sF-jLu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DAU-NV-7jC" secondAttribute="trailing" constant="-20" id="WMm-8F-GEW"/>
                             <constraint firstItem="DAU-NV-7jC" firstAttribute="leading" secondItem="0Ui-J6-O49" secondAttribute="leadingMargin" constant="-20" id="ceg-gN-j1j"/>
-                            <constraint firstItem="DAU-NV-7jC" firstAttribute="top" secondItem="jaU-V0-QMK" secondAttribute="bottom" id="jcX-57-hZJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="jaU-V0-QMK" secondAttribute="trailing" constant="-24" id="piJ-n5-8b9"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="content" destination="jaU-V0-QMK" id="Qw5-TP-0J5"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUD-U0-EYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1326,9 +1311,8 @@ Multiple rolls can be made at once by using a comma-separated list.</string>
         <image name="shop" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VAa-NE-b2Q"/>
-        <segue reference="iI3-HT-fCb"/>
-        <segue reference="XYs-UL-cJb"/>
         <segue reference="KrO-7d-Ap2"/>
+        <segue reference="XYs-UL-cJb"/>
+        <segue reference="VAa-NE-b2Q"/>
     </inferredMetricsTieBreakers>
 </document>

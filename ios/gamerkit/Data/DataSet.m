@@ -13,6 +13,10 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
+@interface Ruleset (friend_DataSet)
+- (Attribute*)loadAttribute:(xmlNodePtr)element withUid:(int)uid;
+@end
+
 @implementation DataSet
 @synthesize name, elements;
 

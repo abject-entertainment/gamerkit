@@ -17,17 +17,15 @@
 	Ruleset *rules;
 }
 
-@property (readonly, nonatomic, retain) NSString* name;
-@property (readonly, nonatomic, retain) NSString* displayName;
-@property (readonly, nonatomic, retain) NSArray* attributeSet;
-@property (readonly, nonatomic) NSMutableDictionary* sheets;
+@property (readonly, nonatomic, copy) NSString* name;
+@property (readonly, nonatomic, copy) NSString* displayName;
+@property (readonly, nonatomic, copy) NSArray* attributeSet;
 
-@property (nonatomic, retain) NSString *createSheet;
-@property (nonatomic, retain) NSString *editSheet;
-@property (nonatomic, retain) NSString *trackSheet;
+@property (readonly, nonatomic, copy) CharacterLayout *printSheet;
+@property (readonly, nonatomic, copy) CharacterLayout *editSheet;
+@property (readonly, nonatomic, copy) CharacterLayout *viewSheet;
 
 - (id)initWithXmlNode:(void*)node andRuleset:(Ruleset*)rules;
-- (void)addSheet:(CharacterLayout*)sheet;
 
 - (Attribute*)attributeForName:(NSString*)name;
 

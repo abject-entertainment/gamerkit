@@ -1,0 +1,129 @@
+{
+	"en": {
+		"Player": "Player",
+		"Name": "Character Name",
+		"Level": "Level",
+		"Class": "Class",
+		"Paragon": "Paragon Path",
+		"Epic": "Epic Destiny",
+		"XP": "Experience (XP)",
+		"next_level": "XP for next level",
+		"Race": "Race",
+		"Size": "Size",
+		"Age": "Age",
+		"Gender": "Gender",
+		"Height": "Height",
+		"Weight": "Weight",
+		"Align": "Alignment",
+		"Deity": "Deity",
+		"Company": "Company",
+
+		"abilities": "Abilities and Skills",
+		"ability_misc": "Misc.",
+
+		"Str": "Strength",
+		"Str_help": "Strength measures your physical power.",
+		"Dex": "Dexterity",
+		"Dex_help": "Dexterity measures coordination, agility, and balance.",
+		"Con": "Constitution",
+		"Con_help": "Constitution measures health, stamina, and vital force.",
+		"Int": "Intelligence",
+		"Int_help": "Intelligence measures how well you learn and reason.",
+		"Wis": "Wisdom",
+		"Wis_help": "Wisdom measures common sense, self-discipline, and empathy.",
+		"Cha": "Charisma",
+		"Cha_help": "Charisma measures force of personality and leadership.",
+
+		"combat": "Combat Statistics",
+		"defenses": "Defenses",
+
+		"AC": "Armor Class (AC)",
+		"AC_help": "AC measures how hard it is to physically land an attack on you.",
+		"Fort": "Fortitude",
+		"Fort_help": "Fortitude measures your toughness and resilience.",
+		"Ref": "Reflex",
+		"Ref_help": "Reflex measures your ability to deflect or dodge attacks.",
+		"Will": "Will",
+		"Will_help": "Will measures your strength of will and self-discipline.",
+
+		"Init": "Initiative",
+		"Init_help": "Roll initiative to determine the turn order in combat.",
+
+		"Speed": "Speed",
+		"Speed_help": "Your speed is the number of squares you can move with a move action.",
+
+		"AP": "AP",
+
+		"MaxHP": "Hit Points",
+		"HP_help": "Your hit points measure the damage you can take before falling unconscious. Your bloodied value is half of your hit points (rounded down).",
+		"bloodied": "Bloodied",
+		"CurHP": "Current Hit Points",
+		"TempHP": "Temporary Hit Points",
+
+		"Surges": "Surges Per Day",
+		"SurgeValue": "Healing Surge Value",
+		"CurSurges": "Surges Remaining",
+		"Surge_help": "When you spend a healing surge, you regain hit points equal to your healing surge value, which is one-quarter of your hit points (rounded down).",
+
+		"SecondWind": "Second Wind",
+		"DeathSave": "Death Saving Throw",
+		"SaveMods": "Saving Throw Modifiers",
+		"Resist": "Resistances",
+		"Conditions": "Conditions",
+		"Languages": "Languages",
+
+		"Skills": "Skills",
+		"Skills_trained": "Trained",
+
+		"Powers": "Powers",
+		"UseType_AtWill": "At-Will",
+		"UseType_Encounter": "Encounter",
+		"UseType_Daily": "Daily",
+		"UseType_MagicItem": "Magic Item",
+
+		"power_keywords": "Keywords",
+		
+		"power_action_type": "Action",
+		"ActionType_Standard": "Standard Action",
+		"ActionType_Move": "Move Action",
+		"ActionType_Free": "Free Action",
+		"ActionType_Interrupt": "Immediate Interrupt",
+		"ActionType_Reaction": "Immediate Reaction",
+		"ActionType_Minor": "Minor Action",
+		"ActionType_None": "No Action",
+
+		"power_category": "Category",
+		"power_target": "Target",
+		"power_range": "Range",
+		"power_effect": "Effect",
+		"power_attack_bonus": "Attack Bonus",
+		"power_damage_roll": "Damager Roll",
+
+		"feats_rituals": "Feats & Rituals",
+		"Feats": "Feats",
+		"feat_item": "Feat: ",
+		"Rituals": "Rituals",
+		"ritual_item": "Ritual: ",
+
+		"features": "Powers & Features",
+		"RaceFeatures": "Race Features",
+		"ClassFeatures": "Class Features",
+		"ParagonFeatures": "Paragon Features",
+		"EpicFeatures": "Epic Features",
+
+		"Equipment": "Equipment",
+		"MagicItems": "Magic Items",
+		"MIUsed": "Magic Item Power Used",
+		"equip_magic": "Equipment & Magic Items",
+		"Allies": "Allies",
+
+		"details": "Details",
+		"Personality": "Personality",
+		"Appearance": "Appearance",
+		"Background": "Background",
+		"Wealth": "Wealth",
+		"Notes": "Notes",
+
+		"DieRolls": "DieRolls"
+	}
+}

@@ -12,18 +12,13 @@
 #import "PackageCell.h"
 
 @interface PackageDataStore : UICollectionViewController
-<SKPaymentTransactionObserver, PackageCellDelegate> {
+{
 	NSMutableDictionary *packages;
-	
-	NSFileHandle *downloadFile;
-	NSString *downloadPath;
-	NSMutableArray *downloadQueue;
 }
 
 - (void) storeRefresh;
 - (void) storeRestore;
 
-- (void)downloadAndInstallPackage:(NSString *)urlString;
 - (void)refresh;
 
 @end

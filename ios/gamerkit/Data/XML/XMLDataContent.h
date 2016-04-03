@@ -15,6 +15,8 @@
 @property (nonatomic, readonly) BOOL dirty;
 @property (nonatomic, readonly) BOOL valid;
 
+- (NSInteger)dataVersion;
+
 - (instancetype)initWithXmlString:(NSString *)xml;
 - (instancetype)initWithData:(NSData *)data;
 - (instancetype)initWithFileAtPath:(NSString *)filepath;
@@ -27,5 +29,6 @@
 - (BOOL)setImage:(UIImage*)value atPath:(const NSString*)xpath;
 
 - (void)saveToFile:(NSString *)filepath;
+- (NSString*)saveToString;
 
 @end

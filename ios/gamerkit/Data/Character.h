@@ -21,9 +21,8 @@
 @property (nonatomic, readonly, copy) NSString *name;
 @property (nonatomic, readonly, copy) NSString *system;
 @property (nonatomic, readonly, copy) NSString *charType;
-@property (nonatomic, readonly, strong) UIImage *miniImage;
 @property (nonatomic) UIImage *token;
 
-- (id)initForSystem:(NSString*)system andType:(NSString*)type;
+- (instancetype)initForSystem:(NSString*)system andType:(NSString*)type;
 
 @end

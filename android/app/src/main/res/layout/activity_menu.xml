@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.abject_entertainment.toolkit.MenuActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:id="@+id/buttonContainer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true" >
+
+        <ImageButton
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:id="@+id/buttonDice"
+            android:layout_below="@+id/webView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/dice"
+            android:maxHeight="64dp"
+            android:maxWidth="64dp"
+            android:minHeight="64dp"
+            android:minWidth="64dp"
+            android:contentDescription="@string/title_activity_dice" />
+
+        <ImageButton
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:id="@+id/buttonChars"
+            android:background="@drawable/characters"
+            android:contentDescription="@string/title_activity_chars" />
+
+        <ImageButton
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:id="@+id/buttonMaps"
+            android:background="@drawable/maps"
+            android:contextClickable="false"
+            android:contentDescription="@string/title_activity_maps" />
+
+        <ImageButton
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:id="@+id/buttonShop"
+            android:background="@drawable/shop"
+            android:contentDescription="@string/title_activity_shop" />
+    </LinearLayout>
+
+    <WebView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/webView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/buttonContainer" />
+
+</RelativeLayout>

@@ -7,12 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "DataManager.h"
+#import "ContentManager.h"
+#import "PackageManager.h"
 
-BOOL bPad = NO;
 BOOL __DEBUG__mockData = YES;
 
-NSString *packageString = nil;
 NSString *feedbackStats = nil;
 
 AppDelegate *s_delegate = nil;
@@ -29,21 +28,14 @@ AppDelegate *s_delegate = nil;
 	
 	s_delegate = self;
 	
-	DataManager *dataManager = [DataManager getDataManager];
-	[dataManager checkForFirstRunSetup];
-	[dataManager loadData];
-	
-	bPad = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
-	
-	
 	NSString *versionStr = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
-	packageString = [NSString stringWithFormat:@"%@/%@", versionStr,
-					  [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
 	
 	UIDevice *dev = [UIDevice currentDevice];
 	feedbackStats = [NSString stringWithFormat:@"GTv%@-%@-%@", versionStr, dev.model, dev.systemVersion];
 	
-	// Override point for customization after application launch.
+	// instantiate managers
+	__unused ContentManager *cm = [ContentManager contentManager];
+	__unused PackageManager *pm = [PackageManager packageManager];
 	
 	return YES;
 }

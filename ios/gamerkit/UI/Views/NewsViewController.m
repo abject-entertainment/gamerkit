@@ -7,9 +7,7 @@
 //
 
 #import "NewsViewController.h"
-#import "DataManager.h"
-
-extern BOOL bPad;
+#import "ContentManager.h"
 
 @interface NewsViewController ()
 
@@ -28,21 +26,23 @@ extern BOOL bPad;
 
 - (IBAction)goHome:(id)sender
 {
-	DataManager *dm = [DataManager getDataManager];
+	NSString *newsPage = @"Core/start.html";
 	
-	NSString *newsPage = @"Systems/start.html";
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *docsPath = [paths objectAtIndex:0];
 	
-	NSString *startPage = [dm.docsPath stringByAppendingPathComponent:newsPage];
+	NSString *startPage = [docsPath stringByAppendingPathComponent:newsPage];
 	[self.content loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:startPage]]];
 }
 
 - (IBAction)goToFeedback:(id)sender
 {
-	DataManager *dm = [DataManager getDataManager];
+	NSString *feedbackPage = @"Core/feedback.html";
 	
-	NSString *feedbackPage = @"Systems/feedback.html";
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *docsPath = [paths objectAtIndex:0];
 	
-	NSString *startPage = [dm.docsPath stringByAppendingPathComponent:feedbackPage];
+	NSString *startPage = [docsPath stringByAppendingPathComponent:feedbackPage];
 	[self.content loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:startPage]]];
 }
 

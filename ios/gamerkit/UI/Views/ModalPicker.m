@@ -8,8 +8,6 @@
 
 #import "ModalPicker.h"
 
-extern BOOL bPad;
-
 static ModalPicker *g_ModalPicker = NULL;
 
 @implementation ModalPicker
@@ -22,7 +20,7 @@ static ModalPicker *g_ModalPicker = NULL;
 }
 
 - (void) setupModalPickerWithDelegate:(NSObject<ModalPickerDelegate>*)inDelegate withColumns:(NSInteger)inNumCols {
-	if (bPad && _popover == nil)
+	if (_popover == nil)
 	{
 		CGSize sz = self.view.frame.size;
 		_popover = [[UIPopoverController alloc] initWithContentViewController:self];

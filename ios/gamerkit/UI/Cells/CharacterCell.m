@@ -7,6 +7,8 @@
 //
 
 #import "CharacterCell.h"
+#import "ContentObject.h"
+#import "ContentTransformResult.h"
 
 @implementation CharacterCell
 
@@ -15,6 +17,13 @@
 	if (self) {
 	}
 	return self;
+}
+
+- (void)setupForPreview:(ContentTransformResult *)preview
+{
+	_name.text = preview.title;
+	_summary.text = preview.subtitle;
+	_token.image = preview.image;
 }
 
 @end

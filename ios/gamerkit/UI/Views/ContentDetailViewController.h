@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class ContentObject;
+
 @interface ContentDetailViewController : UIViewController
 
--(void)setContentObject:(id)contentObject;
+-(void)setContentObject:(ContentObject *)contentObject;
 
 @end

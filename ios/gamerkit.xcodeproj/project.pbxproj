@@ -19,6 +19,9 @@
 		DC0C25471B04574F0042E33C /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = DC0C25421B04574F0042E33C /* zip.c */; };
 		DC0C254A1B045F760042E33C /* CharacterListController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0C25491B045F760042E33C /* CharacterListController.m */; };
 		DC18B44D1BF17C6300826953 /* PackageHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC18B44C1BF17C6300826953 /* PackageHeaderCell.m */; };
+		DC19AEAE1C7E7A1A00B19D84 /* XMLCharacterUpgrader.m in Sources */ = {isa = PBXBuildFile; fileRef = DC19AEAD1C7E7A1A00B19D84 /* XMLCharacterUpgrader.m */; };
+		DC19AEB11C7FAAF200B19D84 /* PackageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC19AEB01C7FAAF200B19D84 /* PackageManager.m */; };
+		DC19AEB41C84D42400B19D84 /* PreferencesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC19AEB31C84D42400B19D84 /* PreferencesManager.m */; };
 		DC22DE411C7CB848002C7FBB /* RadialMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DC22DE401C7CB848002C7FBB /* RadialMenuButton.m */; };
 		DC22DE481C7E0322002C7FBB /* XMLDataContent.m in Sources */ = {isa = PBXBuildFile; fileRef = DC22DE471C7E0322002C7FBB /* XMLDataContent.m */; };
 		DC22DE4B1C7E0347002C7FBB /* XMLDataTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = DC22DE4A1C7E0347002C7FBB /* XMLDataTransform.m */; };
@@ -49,8 +52,12 @@
 		DC96DBCA1C003CF700A3096B /* BuyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DC96DBC91C003CF700A3096B /* BuyButton.m */; };
 		DC9DCEFB1B0D79EA00F1CDE3 /* Core.pack in Resources */ = {isa = PBXBuildFile; fileRef = DC9DCEFA1B0D79EA00F1CDE3 /* Core.pack */; };
 		DC9DCEFD1B0D7B0A00F1CDE3 /* GSL40.pack in Resources */ = {isa = PBXBuildFile; fileRef = DC9DCEFC1B0D7B0A00F1CDE3 /* GSL40.pack */; };
+		DCB25C091CAEB69F0014C52F /* ContentTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB25C081CAEB69F0014C52F /* ContentTransform.m */; };
+		DCB25C0C1CAED9F70014C52F /* ContentTransformResult.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB25C0B1CAED9F70014C52F /* ContentTransformResult.m */; };
+		DCB25C101CAEE0EC0014C52F /* CharacterTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB25C0F1CAEE0EC0014C52F /* CharacterTransform.m */; };
+		DCB25C131CAEF6BD0014C52F /* ContentJSContext.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB25C121CAEF6BD0014C52F /* ContentJSContext.m */; };
 		DCC6AC3B1AF1CB99005D713D /* DiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC6AC3A1AF1CB99005D713D /* DiceView.m */; };
-		DCC6AC421AF1FB95005D713D /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC6AC3F1AF1FB95005D713D /* DataManager.m */; };
+		DCC6AC421AF1FB95005D713D /* ContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC6AC3F1AF1FB95005D713D /* ContentManager.m */; };
 		DCC6AC431AF1FB95005D713D /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = DCC6AC411AF1FB95005D713D /* ZipArchive.mm */; };
 		DCC6AC461AF1FF9F005D713D /* ModalPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC6AC451AF1FF9F005D713D /* ModalPicker.m */; };
 		DCC6AC4D1AF2013E005D713D /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC6AC481AF2013E005D713D /* Character.m */; };
@@ -112,6 +119,12 @@
 		DC0C25491B045F760042E33C /* CharacterListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CharacterListController.m; path = UI/Views/CharacterListController.m; sourceTree = "<group>"; };
 		DC18B44B1BF17C6200826953 /* PackageHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageHeaderCell.h; sourceTree = "<group>"; };
 		DC18B44C1BF17C6300826953 /* PackageHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageHeaderCell.m; sourceTree = "<group>"; };
+		DC19AEAC1C7E7A1A00B19D84 /* XMLCharacterUpgrader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLCharacterUpgrader.h; sourceTree = "<group>"; };
+		DC19AEAD1C7E7A1A00B19D84 /* XMLCharacterUpgrader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLCharacterUpgrader.m; sourceTree = "<group>"; };
+		DC19AEAF1C7FAAF200B19D84 /* PackageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageManager.h; sourceTree = "<group>"; };
+		DC19AEB01C7FAAF200B19D84 /* PackageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageManager.m; sourceTree = "<group>"; };
+		DC19AEB21C84D42400B19D84 /* PreferencesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesManager.h; sourceTree = "<group>"; };
+		DC19AEB31C84D42400B19D84 /* PreferencesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesManager.m; sourceTree = "<group>"; };
 		DC22DE3F1C7CB848002C7FBB /* RadialMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadialMenuButton.h; path = UI/Components/RadialMenuButton.h; sourceTree = "<group>"; };
 		DC22DE401C7CB848002C7FBB /* RadialMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RadialMenuButton.m; path = UI/Components/RadialMenuButton.m; sourceTree = "<group>"; };
 		DC22DE461C7E0322002C7FBB /* XMLDataContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDataContent.h; sourceTree = "<group>"; };
@@ -169,10 +182,18 @@
 		DC96DBC91C003CF700A3096B /* BuyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BuyButton.m; path = UI/Components/BuyButton.m; sourceTree = "<group>"; };
 		DC9DCEFA1B0D79EA00F1CDE3 /* Core.pack */ = {isa = PBXFileReference; lastKnownFileType = file; name = Core.pack; path = ../data/Core.pack; sourceTree = "<group>"; };
 		DC9DCEFC1B0D7B0A00F1CDE3 /* GSL40.pack */ = {isa = PBXFileReference; lastKnownFileType = file; name = GSL40.pack; path = ../data/GSL40.pack; sourceTree = "<group>"; };
+		DCB25C071CAEB69F0014C52F /* ContentTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentTransform.h; sourceTree = "<group>"; };
+		DCB25C081CAEB69F0014C52F /* ContentTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentTransform.m; sourceTree = "<group>"; };
+		DCB25C0A1CAED9F70014C52F /* ContentTransformResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentTransformResult.h; sourceTree = "<group>"; };
+		DCB25C0B1CAED9F70014C52F /* ContentTransformResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentTransformResult.m; sourceTree = "<group>"; };
+		DCB25C0E1CAEE0EC0014C52F /* CharacterTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterTransform.h; sourceTree = "<group>"; };
+		DCB25C0F1CAEE0EC0014C52F /* CharacterTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterTransform.m; sourceTree = "<group>"; };
+		DCB25C111CAEF6BD0014C52F /* ContentJSContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentJSContext.h; sourceTree = "<group>"; };
+		DCB25C121CAEF6BD0014C52F /* ContentJSContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentJSContext.m; sourceTree = "<group>"; };
 		DCC6AC391AF1CB99005D713D /* DiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiceView.h; path = UI/Views/DiceView.h; sourceTree = "<group>"; };
 		DCC6AC3A1AF1CB99005D713D /* DiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiceView.m; path = UI/Views/DiceView.m; sourceTree = "<group>"; };
-		DCC6AC3E1AF1FB95005D713D /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
-		DCC6AC3F1AF1FB95005D713D /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		DCC6AC3E1AF1FB95005D713D /* ContentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentManager.h; sourceTree = "<group>"; };
+		DCC6AC3F1AF1FB95005D713D /* ContentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentManager.m; sourceTree = "<group>"; };
 		DCC6AC401AF1FB95005D713D /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
 		DCC6AC411AF1FB95005D713D /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
 		DCC6AC441AF1FF9F005D713D /* ModalPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalPicker.h; path = UI/Views/ModalPicker.h; sourceTree = "<group>"; };
@@ -292,6 +313,8 @@
 			children = (
 				DC22DE4D1C7E600C002C7FBB /* XMLCharacterTransform.h */,
 				DC22DE4E1C7E600C002C7FBB /* XMLCharacterTransform.m */,
+				DC19AEAC1C7E7A1A00B19D84 /* XMLCharacterUpgrader.h */,
+				DC19AEAD1C7E7A1A00B19D84 /* XMLCharacterUpgrader.m */,
 			);
 			path = Transforms;
 			sourceTree = "<group>";
@@ -430,6 +453,19 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		DCB25C0D1CAEE01C0014C52F /* Transforms */ = {
+			isa = PBXGroup;
+			children = (
+				DCB25C071CAEB69F0014C52F /* ContentTransform.h */,
+				DCB25C081CAEB69F0014C52F /* ContentTransform.m */,
+				DCB25C0A1CAED9F70014C52F /* ContentTransformResult.h */,
+				DCB25C0B1CAED9F70014C52F /* ContentTransformResult.m */,
+				DCB25C0E1CAEE0EC0014C52F /* CharacterTransform.h */,
+				DCB25C0F1CAEE0EC0014C52F /* CharacterTransform.m */,
+			);
+			path = Transforms;
+			sourceTree = "<group>";
+		};
 		DCC6AC3C1AF1CBA6005D713D /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,10 +538,17 @@
 				DCC6AC4A1AF2013E005D713D /* Ruleset.m */,
 				DCC6AC4B1AF2013E005D713D /* ContentObject.h */,
 				DCC6AC4C1AF2013E005D713D /* ContentObject.m */,
-				DCC6AC3E1AF1FB95005D713D /* DataManager.h */,
-				DCC6AC3F1AF1FB95005D713D /* DataManager.m */,
+				DCC6AC3E1AF1FB95005D713D /* ContentManager.h */,
+				DCC6AC3F1AF1FB95005D713D /* ContentManager.m */,
 				DCC6AC401AF1FB95005D713D /* ZipArchive.h */,
 				DCC6AC411AF1FB95005D713D /* ZipArchive.mm */,
+				DC19AEAF1C7FAAF200B19D84 /* PackageManager.h */,
+				DC19AEB01C7FAAF200B19D84 /* PackageManager.m */,
+				DC19AEB21C84D42400B19D84 /* PreferencesManager.h */,
+				DC19AEB31C84D42400B19D84 /* PreferencesManager.m */,
+				DCB25C0D1CAEE01C0014C52F /* Transforms */,
+				DCB25C111CAEF6BD0014C52F /* ContentJSContext.h */,
+				DCB25C121CAEF6BD0014C52F /* ContentJSContext.m */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -692,10 +735,13 @@
 			files = (
 				DC7159D41AE8B9190090118C /* MapCell.m in Sources */,
 				DC7159AA1AE808CD0090118C /* MasterViewController.m in Sources */,
+				DC19AEB11C7FAAF200B19D84 /* PackageManager.m in Sources */,
 				DCC6AC731AF27218005D713D /* DataSet.m in Sources */,
 				DCF1D9DA1BFAE4C6003505FA /* ShopViewController.m in Sources */,
 				DCC6AC741AF27218005D713D /* Import.m in Sources */,
+				DCB25C091CAEB69F0014C52F /* ContentTransform.m in Sources */,
 				DC22DE411C7CB848002C7FBB /* RadialMenuButton.m in Sources */,
+				DC19AEAE1C7E7A1A00B19D84 /* XMLCharacterUpgrader.m in Sources */,
 				DC82F0521BDEEB590054DA31 /* PackageCell.m in Sources */,
 				DC0C25341B0441290042E33C /* PackageDataStore.m in Sources */,
 				DCC6AC721AF27218005D713D /* CharacterLayout.m in Sources */,
@@ -723,6 +769,7 @@
 				DC282F791C7BD16600E8D12E /* ProductCodeViewController.m in Sources */,
 				DC6D1F181B59554D004854E6 /* LocalDataSource.m in Sources */,
 				DCFFC8A21B1FF8D800AC543D /* ContentListingCell.m in Sources */,
+				DCB25C0C1CAED9F70014C52F /* ContentTransformResult.m in Sources */,
 				DCFFC8951B1630D500AC543D /* CharacterViewController.m in Sources */,
 				DCC6AC4F1AF2013E005D713D /* ContentObject.m in Sources */,
 				DCC6AC5B1AF203BA005D713D /* MapsController.m in Sources */,
@@ -741,10 +788,13 @@
 				DCC6AC3B1AF1CB99005D713D /* DiceView.m in Sources */,
 				DC7159D71AE8BC000090118C /* TokenCell.m in Sources */,
 				DC27546B1BCCB68900676477 /* CircleImageView.m in Sources */,
-				DCC6AC421AF1FB95005D713D /* DataManager.m in Sources */,
+				DCC6AC421AF1FB95005D713D /* ContentManager.m in Sources */,
+				DCB25C131CAEF6BD0014C52F /* ContentJSContext.m in Sources */,
+				DCB25C101CAEE0EC0014C52F /* CharacterTransform.m in Sources */,
 				DC0C25371B04423B0042E33C /* ProductDetailView.m in Sources */,
 				DC0C25471B04574F0042E33C /* zip.c in Sources */,
 				DCC6AC4D1AF2013E005D713D /* Character.m in Sources */,
+				DC19AEB41C84D42400B19D84 /* PreferencesManager.m in Sources */,
 				DCFFC89F1B1A80CE00AC543D /* SystemHeaderCell.m in Sources */,
 				DC7818951BED3A4E00515680 /* ContentDetailSegue.m in Sources */,
 				DC78189E1BEE839B00515680 /* ContentCell.m in Sources */,
@@ -879,7 +929,6 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"${SDK_DIR}/usr/include/libxml2",
-					"${SDK_DIR}/usr/include/libxslt",
 				);
 				INFOPLIST_FILE = gamerkit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -901,7 +950,6 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"${SDK_DIR}/usr/include/libxml2",
-					"${SDK_DIR}/usr/include/libxslt",
 				);
 				INFOPLIST_FILE = gamerkit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

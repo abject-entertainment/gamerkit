@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "ContentCell.h"
 
+@class ContentTransformResult;
+
 @interface CharacterCell : ContentCell
 
 @property (nonatomic,strong) IBOutlet UILabel *name;
 @property (nonatomic,strong) IBOutlet UIImageView *token;
 @property (nonatomic,strong) IBOutlet UILabel *summary;
+
+- (void)setupForPreview:(ContentTransformResult*)preview;
 
 @end

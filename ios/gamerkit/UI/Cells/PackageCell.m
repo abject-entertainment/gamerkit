@@ -7,7 +7,7 @@
 //
 
 #import "PackageCell.h"
-#import "DataManager.h"
+#import "PackageManager.h"
 
 @interface PackageCell()
 {
@@ -60,7 +60,7 @@
 		if (_price)
 		{
 			_price.delegate = self;
-			_price.product = pdata.storeProduct;
+			_price.product = pdata;
 		}
 	}
 }

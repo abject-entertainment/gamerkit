@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DataManager.h"
+#import "PackageManager.h"
 
 @interface ProductCodeListController : UIViewController <ProductCodeListConsumer, UITableViewDataSource, UITableViewDelegate>
 

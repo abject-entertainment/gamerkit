@@ -8,7 +8,7 @@
 
 #import "TokenEditController.h"
 #import "Token.h"
-#import "DataManager.h"
+#import "ContentManager.h"
 #import "DismissSegue.h"
 
 @interface TokenEditController()
@@ -200,7 +200,7 @@ const float tokenSize = 256.0f;
 	{
 		_token.image = _imageView.image;
 	}
-	[_token writeToFile];
+	[_token saveFile];
 	
 	[self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -7,6 +7,8 @@
 //
 
 #import "CharacterViewController.h"
+#import "ContentManager.h"
+#import "ContentTransformResult.h"
 #import "Character.h"
 #import "DismissSegue.h"
 #import "Token.h"
@@ -26,6 +28,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	if (_content == nil)
+	{
+		_content = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44)];
+		[self.view addSubview:_content];
+	}
+	
 	_loaded = YES;
 	
 	if (_character)
@@ -42,7 +50,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)setContentObject:(id)contentObject
+-(void)setContentObject:(ContentObject *)contentObject
 {
 	if ([contentObject isKindOfClass:Character.class])
 	{
@@ -50,10 +58,22 @@
 		_character = (Character*)contentObject;
 		if (_loaded)
 		{
-			_titleText.title = _character.name;
-			NSString *html = [_character HTMLString:_character.editSheet];
-			NSLog(@"%@", html);
-			[self.content loadData:[html dataUsingEncoding:NSUTF8StringEncoding] MIMEType:@"application/xml" textEncodingName:@"utf8" baseURL:[_character baseURL]];
+			ContentTransformResult *result = [_character applyTransformForAction:ContentObjectActionWebView];
+			if (result.succeeded)
+			{
+				NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+				NSString *docsPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Core"];
+				NSString *tempFile = [docsPath stringByAppendingPathComponent:@".GTCHARTEMP.html"];
+				
+				[result.html writeToFile:tempFile atomically:YES encoding:NSUTF8StringEncoding error:nil];
+				
+				[self.content loadFileURL:[NSURL fileURLWithPath:tempFile] allowingReadAccessToURL:[NSURL fileURLWithPath:docsPath]];
+				
+				//NSLog(@"%@", html);
+				//NSURL *baseURL = [[ContentManager contentManager] baseURLForDisplayOfCharacter:_character];
+				//NSLog(@"BASE URL: %@", [baseURL absoluteString]);
+				//[self.content loadHTMLString:result.html baseURL:baseURL];
+			}
 		}
 	}
 }
@@ -88,56 +108,9 @@
 	return params;
 }
 
-- (BOOL)webView:(UIWebView *)inWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+-(void)contextIsRequestingNewToken:(ContentJSContext *)context
 {
-	BOOL result = YES;
-	if ([request.URL.scheme caseInsensitiveCompare:@"gamerstoolkit"] == NSOrderedSame)
-	{
-		NSString *method = request.URL.host;
-		NSDictionary *params = [self parseURLQueryString:request.URL.query];
-
-		if ([method caseInsensitiveCompare:@"chooseToken"] == NSOrderedSame)
-		{
-			// choose token
-			[TokenListController selectTokenForDelegate:self];
-		}
-		else if ([method caseInsensitiveCompare:@"prepDieRoll"] == NSOrderedSame)
-		{
-			NSString *notation = [params objectForKey:@"notation"];
-			if (notation)
-			{
-				_cachedRollNotation = notation;
-			}
-		}
-		else if ([method caseInsensitiveCompare:@"dieRoll"] == NSOrderedSame)
-		{
-			NSString *notation = [params objectForKey:@"notation"];
-			if (notation)
-			{
-				NSString *result = [DiceView doNotationRoll:notation];
-				[self displayRollResult:result];
-			}
-		}
-		else
-		{
-			NSLog(@"Unrecognized method invocation: '%@'", method);
-		}
-		
-		result = NO;
-	}
-	else if ([request.URL.scheme caseInsensitiveCompare:@"http"] == NSOrderedSame ||
-			 [request.URL.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame ||
-			 [request.URL.scheme caseInsensitiveCompare:@"file"] == NSOrderedSame)
-	{
-		result = YES;
-	}
-	else if ([[UIApplication sharedApplication] canOpenURL:request.URL])
-	{
-		[[UIApplication sharedApplication] openURL:request.URL];
-		result = NO;
-	}
-	
-	return result;
+	[TokenListController selectTokenForDelegate:self];
 }
 
 - (IBAction)roll:(id)sender
@@ -165,14 +138,14 @@
 		
 	}]];
 	[alert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-		[_content stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"SetImageData(\"Token\", \"%@\");", [_character setToken:token]]];
+		[[ContentJSContext contentContext] provideToken:token];
 	}]];
 	[self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)saveCharacter
 {
-	[_character saveFromWebView:_content];
+#warning <<AE>> Implement save character
 	if (_listController)
 	{
 		[_listController refreshData];

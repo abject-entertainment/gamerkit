@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Gamers\' Toolkit</string>
+
+    <string name="title_activity_dice">Dice Roller</string>
+    <string name="dice_notation">Enter Notation</string>
+    <string name="dice_roll">Roll</string>
+    <string name="dice_results">Results</string>
+    <string name="dice_quick_roll">Quick Roll</string>
+    <string name="dice_roll_notation">Roll %s</string>
+
+    <string name="title_activity_chars">Character List</string>
+    <string name="title_activity_maps">Map List</string>
+    <string name="title_activity_shop">Package Store</string>
+</resources>

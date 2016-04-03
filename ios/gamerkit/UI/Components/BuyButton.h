@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <StoreKit/SKProduct.h>
 
 @class BuyButton;
+@class PackageData;
 
 @protocol BuyButtonDelegate
 
@@ -22,7 +22,7 @@
 
 @interface BuyButton : UIButton
 
-@property (nonatomic, weak) SKProduct *product;
+@property (nonatomic, weak) PackageData *product;
 @property (nonatomic, weak) IBOutlet NSObject<BuyButtonDelegate> *delegate;
 
 - (void)deactivate;

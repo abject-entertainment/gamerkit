@@ -97,7 +97,7 @@
 	id content = [cell getContentObject];
 	if ([content isKindOfClass:ContentObject.class])
 	{
-		[(ContentObject *)content share:self];
+		[(ContentObject *)content shareFromViewController:self];
 	}
 }
 

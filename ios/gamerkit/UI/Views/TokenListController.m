@@ -7,15 +7,15 @@
 //
 
 #import "TokenListController.h"
-#import "DataManager.h"
+#import "ContentManager.h"
 #import "Token.h"
 #import "TokenEditController.h"
 #import "TokenCell.h"
 #import "DismissSegue.h"
 
-@interface TokenListController ()
+@interface TokenListController () <TokenConsumer>
 {
-	NSMutableArray *_tokens;
+	NSMutableOrderedSet *_tokens;
 	UILongPressGestureRecognizer *_editRecognizer;
 	UIViewController<TokenSelectionDelegate> *_selectionDelegate;
 }
@@ -44,32 +44,26 @@
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Do any additional setup after loading the view.
-	NSFileManager *fm = [NSFileManager defaultManager];
-	DataManager *dm = [DataManager getDataManager];
-	NSString *path = [dm.docsPath stringByAppendingPathComponent:@"Media"];
-	
-	if (![fm fileExistsAtPath:path])
-		[fm createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
-	
-	NSArray *files = [fm contentsOfDirectoryAtPath:path error:nil];
-	NSEnumerator *enumerator = [files objectEnumerator];
-	NSString *file;
-	
-	_tokens = [NSMutableArray arrayWithCapacity:files.count];
-	while ((file = [enumerator nextObject]))
-	{
-		if ([file hasSuffix: @".token"])
-		{
-			Token *t = [[Token alloc] initWithFileAtPath:[path stringByAppendingPathComponent:file]];
-			if (t)
-			{
-				[_tokens addObject:t];
-			}
-		}
-	}
+	_tokens = [NSMutableOrderedSet orderedSet];
 	
 	_editRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showEditMenu)];
+}
+
+- (void)tokenAdded:(Token *)token
+{
+	[_tokens addObject:token];
+	[self.collectionView reloadData];
+}
+
+- (void)tokenRemoved:(Token *)token
+{
+	[_tokens removeObject:token];
+	[self.collectionView reloadData];
+}
+
+- (void)tokenUpdated:(Token *)token
+{
+	[self.collectionView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -181,9 +175,7 @@
 	NSIndexPath *path = [self.collectionView indexPathForItemAtPoint:touchLoc];
 	if (path && path.row < _tokens.count)
 	{
-		Token *token = (Token*)[_tokens objectAtIndex:path.row];
-		
-		UIAlertController *alert = [UIAlertController alertControllerWithTitle:token.name message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+		UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Token" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 		
 		[alert addAction:[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 			

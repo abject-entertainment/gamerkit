@@ -27,7 +27,7 @@
 	
 	_codes = nil;
 	
-	[[DataManager getDataManager] addProductCodeListConsumer:self];
+	[[PackageManager packageManager] addProductCodeListConsumer:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,7 +87,7 @@
 {
 	if ([segue isKindOfClass:DismissSegue.class])
 	{
-		[[DataManager getDataManager] removeProductCodeListConsumer: self];
+		[[PackageManager packageManager] removeProductCodeListConsumer: self];
 	}
 }
 

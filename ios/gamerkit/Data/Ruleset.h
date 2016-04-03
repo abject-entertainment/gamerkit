@@ -15,66 +15,37 @@
  5. Rule sets for running encounters.
  */
 
-#import <Foundation/Foundation.h>
+#import "ContentObject.h"
 
+@class Character;
 @class DataSet;
-#import "Attribute.h"
+@class Attribute;
 @class CharacterDefinition;
 @class CharacterLayout;
 @class EncounterElement;
 @class OptionSet;
 
-#include <libxml/parser.h>
-
-@class Character;
-
-@interface Ruleset : NSObject {
-	NSMutableDictionary *dataSets;
-	NSMutableDictionary *attributesByName;
-	NSMutableDictionary *attributesById;
-	
-	NSMutableDictionary *_characterTypes;
-	NSMutableDictionary *_characterSheets;
-	NSMutableDictionary *_imports;
-	
-	NSMutableArray *supplementFiles;
-}
+@interface Ruleset : ContentObject
 
 @property (nonatomic, readonly, copy) NSString *name;
 @property (nonatomic, readonly, copy) NSString *displayName;
-@property (nonatomic, readonly, copy) NSString *file;
 
-@property (nonatomic, readonly, retain) NSDictionary* characterTypes;
-@property (nonatomic, readonly, retain) NSDictionary* characterSheets;
+@property (nonatomic, readonly, strong) NSDictionary<NSString*,CharacterDefinition*>* characterTypes;
+@property (nonatomic, readonly, strong) NSDictionary<NSString*,CharacterLayout*>* characterSheets;
 
-@property (nonatomic, retain) NSMutableArray* characters;
-@property (nonatomic, readonly, retain) NSDictionary* imports;
+@property (nonatomic, readonly, strong) NSMutableArray* characters;
+@property (nonatomic, readonly, strong) NSDictionary* imports;
 
 - (id)initWithName:(NSString*)name andDisplayName:(NSString*)displayName;
-- (id)initWithFileAtPath:(NSString*)path;
 
 - (bool)load;
 - (void)unload;
 - (void)loadSupplementFromFile:(NSString*)path;
 
-- (AttributeRef)attributeRefForName:(NSString*)inName;
 - (Attribute*)attributeForName:(NSString*)inName;
-- (Attribute*)attributeForRef:(AttributeRef)ref;
 - (DataSet*)dataSetForName:(NSString*)inName;
-- (CharacterDefinition*)characterDefinitionForName:(NSString*)inName;
-
-// root type load functions
-- (DataSet *)loadDataSet:(xmlNode*)element;
-- (Attribute *)loadAttribute:(xmlNode*)element withUid:(int)inUid;
-- (CharacterDefinition *)loadCharacterDefinition:(xmlNode*)element;
-- (CharacterLayout *)loadCharacterLayout:(xmlNode*)element withDocsPath:(NSString*)docsPath;
-- (EncounterElement *)loadEncounterElement:(xmlNode*)element;
-
-// sub-type load functions
-- (AttributeRef)loadAttributeRef:(xmlNode*)element;
-- (OptionSet *)loadOptionSet:(xmlNode*)firstElement;
 
 - (void)addCharacter:(Character*)c;
 - (void)deleteCharacter:(Character*)c;
-- (void)deleteThisSystemAndItsContent:(BOOL)shouldDeleteContent;
+
 @end

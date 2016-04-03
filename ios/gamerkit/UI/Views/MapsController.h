@@ -19,22 +19,11 @@
 @class GriddedView;
 
 @interface MapsController : UICollectionViewController
-<UINavigationControllerDelegate, UIImagePickerControllerDelegate,
-ModalPickerDelegate, UIScrollViewDelegate, UITextFieldDelegate> {
-	NSMutableArray *maps;
-	Map *currentMap;
-
-	UIPopoverController *popover;
-	UIViewController *cachedVC;
-	id<UITabBarControllerDelegate> cachedDel;
-	UIBarButtonItem *cachedButton;
-}
-
+<UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *mapList;
 
 @property (nonatomic, weak) IBOutlet UIViewController *mapDetail;
 @property (nonatomic, weak) IBOutlet GriddedView *mapGrid;
-@property (nonatomic, weak) IBOutlet UITextField *mapName;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *shareButton;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *doneButton;
 
@@ -45,9 +34,6 @@ ModalPickerDelegate, UIScrollViewDelegate, UITextFieldDelegate> {
 - (IBAction)toggleEditGrid:(id)sender;
 
 - (void)addMap:(Map*)map;
-
-- (BOOL)modalPicker:(ModalPicker*)picker donePicking:(NSArray*)results;
-- (void)modalPicker:(ModalPicker*)picker selectionChanged:(NSInteger) newIndex forColumn:(NSInteger)column;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;
 

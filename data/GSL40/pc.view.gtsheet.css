@@ -1,0 +1,491 @@
+DIV {
+	display: inline-block;
+	box-sizing: border-box;
+	font-family: sans-serif;
+	font-size: 12px;
+}
+
+BODY {
+	margin: 0;
+	min-width: 320px;
+}
+
+.block {
+	display: block;
+}
+
+.block-title {
+	display: block;
+	color: white;
+	background-color: #204560;
+	padding: 5px;
+	font-size: 16px;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.attribute {
+	display: block;
+	margin-bottom: 5px;
+	position: relative;
+}
+
+.attribute .help {
+	font-size: 8px;
+	font-style: italic;
+	display: block;
+	padding-left: 30px;
+}
+
+.attribute.list {
+	margin-bottom: 0;
+}
+
+.attribute.list .item {
+	display: block;
+	border-bottom: 1px solid lightgray;
+	padding-left: 5px;
+	height: 15px;
+}
+
+.block.ability {
+	display: block;
+	padding: 10px;
+	padding-bottom: 0;
+	position: relative;
+}
+
+.block.ability .ability-name {
+	padding: 5px;
+	padding-left: 30px;
+	display: block;
+	color: white;
+	background-color: #204560;
+}
+
+.block.ability .ability-score {
+	position: absolute;
+	top: 4px;
+	left: 0;
+	width: 35px;
+	height: 35px;
+	padding-top: 10px;
+	border: 1px solid black;
+	background-color: white;
+	border-radius: 50%;
+	text-align: center;
+}
+
+.block.ability .ability-misc {
+	position: absolute;
+	top: 12px;
+	right: 45px;
+	width: 40px;
+	padding-top: 3px;
+	height: 20px;
+	border: 1px solid black;
+	font-size: 12px;
+	color: lightgray;
+	background-color: white;
+	text-align: center;
+}
+
+.block.ability .ability-bonus {
+	position: absolute;
+	top: 12px;
+	right: 0px;
+	width: 40px;
+	height: 20px;
+	border: 1px solid black;
+	background-color: white;
+	text-align: center;
+	padding-top: 2px;
+}
+
+.block.ability .ability-bonus-label {
+	position: absolute;
+	top: 16px;
+	right: 42px;
+	color: white;
+}
+
+.block.ability .ability-help {
+	font-size: 8px;
+	font-style: italic;
+	display: block;
+	padding-left: 25px;
+}
+
+#header {
+	display: block;
+	position: relative;
+	margin: 10px;
+	height: 128px;
+}
+
+#Token {
+	position: absolute;
+	top: 28px;
+	height: 100px;
+	width: 100px;
+	left: 0;
+}
+
+#vitals {
+	position: absolute;
+	top: 28px;
+	left: 100px;
+	bottom: 0;
+	right: -10px;
+	overflow-x: auto;
+}
+
+#vitals .attribute .label {
+	float: left;
+	border-bottom: 1px solid white;
+	margin-right: 5px;
+}
+
+#vitals .attribute .value {
+	display: block;
+	border-bottom: 1px solid lightgray;
+	height: 15px;
+}
+
+#vitals .attribute .extra {
+	color: gray;
+	font-size: 12px;
+	position: absolute;
+	right: 5px;
+	top: 0;
+}
+
+#header #Name.attribute {
+	border: 1px solid lightgray;
+	position: relative;
+	height: 24px;
+	padding: 4px;
+}
+
+#header #Name.attribute .label {
+	color: lightgray;
+	position: absolute;
+	bottom: 0;
+	right: 5;
+	font-size: 10px;
+	font-style: italic;
+}
+
+#header #Name.attribute .value {
+	border: 0;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.skill.item {
+	position: relative;
+	display: block;
+	height: 20px;
+}
+
+.skill.item .skill-name {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.skill.item .skill-stats {
+	position: absolute;
+	right: -10px;
+	top: 0;
+	width: 40px;
+	text-align: center;
+	border: 1px solid gray;
+}
+
+.skill.item .skill-trained {
+	position: absolute;
+	top: -4px;
+	right: 40px;
+	font-size: 10px;
+}
+
+.skill.item .skill-trained .checkbox {
+	font-size: 18px;
+}
+
+#Init.block.ability,
+#Speed.block.ability {
+	display: inline-block;
+	width: 49%;
+	padding-right: 0;
+	float: left;
+}
+
+#Init.block.ability .ability-name {
+	width: 125%;
+}
+
+#defenses.block {
+	background-color: #b0c4de;
+	clear: both;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+
+#defenses.block .block-title,
+.attribute.list .block-title {
+	display: block;
+	background-color: transparent;
+	color: #204560;
+	padding: 5px;
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+#combat.block .attribute .label {
+	padding-left: 25px;
+}
+
+#combat.block .attribute .value {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: 1px solid black;
+	width: 40px;
+	text-align: center;
+}
+
+#temps.block {
+	position: relative;
+	border: 1px solid black;
+	height: 100px;
+}
+
+#temps.block #CurHP.attribute .label {
+	display: block;
+	color: #204560;
+	padding: 5px;
+	font-size: 16px;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+#temps.block #CurHP.attribute .value {
+	position: inherit;
+	border: 0;
+	height: 100%;
+	width: 100%;
+	font-size: 25px;
+}
+
+#temps.block #TempHP.attribute,
+#temps.block #CurSurges.attribute {
+	position: absolute;
+	bottom: 0;
+	height: 35px;
+	width: 50%;
+}
+
+#temps.block #TempHP.attribute {
+	left: 0;
+}
+
+#temps.block #CurSurges.attribute {
+	right: 0;
+}
+
+#temps.block #TempHP.attribute .label,
+#temps.block #CurSurges.attribute .label {
+	display: block;
+	font-size: 10px;
+	font-style: italic;
+	padding: 0;
+	text-align: center;
+}
+
+#temps.block #TempHP.attribute .value,
+#temps.block #CurSurges.attribute .value {
+	position: relative;
+	border: 0;
+	width: 100%;
+	font-size: 16px;
+	text-align: center;
+}
+
+#Powers.list .item {
+	height: 22px;
+	padding-top: 2px;
+	position: relative;
+	border-color: white;
+}
+
+#Powers.list .item:after {
+	content: "\1f50e";
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+#Powers.list .AtWill.item INPUT[type="checkbox"] {
+	visibility: hidden;
+}
+
+.power-card {
+	display: none;
+	background-color: rgba(0,0,0,0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 9;
+}
+
+.power-card .card {
+	display: block;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 2.5in;
+	height: 3.5in;
+	margin-top: -1.75in;
+	margin-left: -1.25in;
+	background-color: white;
+	z-index: 10;
+}
+
+#Powers.list .item.AtWill { background-color: palegreen; }
+.power-card .card.AtWill { border-color: #407040; }
+.power-card .card.AtWill .attribute { border-color: #407040; }
+.power-card .card.AtWill .power-title { background-color: #407040; }
+
+#Powers.list .item.Encounter { background-color: pink; }
+.power-card .card.Encounter { border-color: #802020; }
+.power-card .card.Encounter .attribute { border-color: #802020; }
+.power-card .card.Encounter .power-title { background-color: #802020; }
+
+#Powers.list .item.Daily { background-color: lightgray; }
+.power-card .card.Daily { border-color: #404040; }
+.power-card .card.Daily .attribute { border-color: #404040; }
+.power-card .card.Daily .power-title { background-color: #404040; }
+
+#Powers.list .item.MagicItem { background-color: bisque; }
+.power-card .card.MagicItem { border-color: #DA6523; }
+.power-card .card.MagicItem .attribute { border-color: #DA6523; }
+.power-card .card.MagicItem .power-title { background-color: #DA6523; }
+
+#Powers.list .item.MagicItem INPUT[type="checkbox"] { visibility: hidden; }
+
+.power-card .attribute {
+	height: 14px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.power-card .attribute .label {
+	font-weight: bold;
+}
+
+.power-card .power-title {
+	display: block;
+	height: 24px;
+	position: relative;
+}
+
+.power-card .power-name {
+	font-size: 16px;
+	padding-top: 3px;
+	color: white;
+	padding-left: 10px;
+}
+
+.power-card .power-title .power-category {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 12px;
+	padding-top: 3px;
+	color: white;
+	padding-right: 10px;
+}
+
+.power-card .power-keywords {
+	display: block;
+	font-weight: bold;
+}
+
+.power-card .power-action-type,
+.power-card .power-range {
+	display: inline-block;
+	width: 50%;
+	float: left;
+}
+
+.power-card .power-target {
+	clear: both;
+}
+
+.power-card .attribute.power-effect {
+	height: auto;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	background: linear-gradient(to right, #cad6ab, #ffffff);
+}
+
+.power-card .attribute.power-effect .label,
+.power-card .attribute.power-effect .value {
+	display: inline;
+}
+
+.power-card .attribute.power-effect .value {
+	white-space: pre-wrap;
+}
+
+#MIUsed {
+	background-color: lightgray;
+	padding-left: 5px;
+}
+
+#combat.block #DeathSave.attribute .label,
+#combat.block #SaveMods.attribute .label,
+#combat.block #Resist.attribute .label,
+#combat.block #Conditions.attribute .label,
+#misc.block .attribute .label {
+	display: block;
+	color: #204560;
+	padding-top: 5px;
+	font-size: 12px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding-left: 0;
+}
+
+#combat.block #DeathSave.attribute .widget {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+#combat.block #SaveMods.attribute .value,
+#combat.block #Resist.attribute .value,
+#combat.block #Conditions.attribute .value,
+#misc.block .attribute .value {
+	position: inherit;
+	width: inherit;
+	display: block;
+	height: 32px;
+	overflow-y: auto;
+	border: 1px solid lightgray;
+	padding: 5px;
+}
+
+#misc.block #Notes.attribute .value {
+	height: 100px;
+}
+
+

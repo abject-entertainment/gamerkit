@@ -13,7 +13,7 @@
 
 NSString *sanitizeContentString(NSString *string);
 NSString *getContentFromNode(xmlNodePtr node);
-const xmlChar *toXmlStr(NSString *nsStr);
+const xmlChar *toXmlStr(const NSString *nsStr);
 NSString *toNSString(const xmlChar *xmlStr);
 
 @interface XMLDataContent()
@@ -57,22 +57,40 @@ NSString *toNSString(const xmlChar *xmlStr);
 	{ xmlFreeDoc(_xmlDoc); }
 }
 
+- (void)touch
+{ _dirty = YES; }
+
 - (BOOL)valid
 { return _xmlDoc != nil; }
+
+- (xmlDocPtr)xmlDoc
+{ return _xmlDoc; }
+
+- (NSInteger)dataVersion
+{
+	NSString *version = [self valueAtPath:@"/@version"];
+	if (version)
+	{ return [version integerValue]; }
+	return 1;
+}
 
 - (NSString*)valueAtPath:(const NSString*)xpath
 {
 	NSString *found = nil;
 	
 	xmlXPathObjectPtr result = xmlXPathEvalExpression(toXmlStr(xpath), _xPath);
-	if (!xmlXPathNodeSetIsEmpty(result->nodesetval))
+	if (result)
 	{
-		xmlChar *value = xmlNodeListGetString(_xmlDoc, result->nodesetval->nodeTab[0]->xmlChildrenNode, 1);
-		found = toNSString(value);
-		xmlFree(value);
+		if (!xmlXPathNodeSetIsEmpty(result->nodesetval))
+		{
+			xmlChar *value = xmlNodeListGetString(_xmlDoc, result->nodesetval->nodeTab[0]->xmlChildrenNode, 1);
+			found = toNSString(value);
+			xmlFree(value);
+		}
+		
+		xmlXPathFreeObject(result);
 	}
 	
-	xmlXPathFreeObject(result);
 	return found;
 }
 
@@ -100,6 +118,7 @@ NSString *toNSString(const xmlChar *xmlStr);
 	{
 		xmlNodeSetContent(result->nodesetval->nodeTab[0], toXmlStr(value));
 		found = YES;
+		[self touch];
 	}
 	
 	xmlXPathFreeObject(result);
@@ -115,6 +134,35 @@ NSString *toNSString(const xmlChar *xmlStr);
 - (void)saveToFile:(NSString *)filepath
 {
 	xmlSaveFile([filepath UTF8String], _xmlDoc);
+	_dirty = NO;
+}
+
+- (NSString*)saveToString
+{
+	/*
+	xmlOutputBufferPtr ob = xmlAllocOutputBuffer(NULL);
+	xmlSaveFileTo(ob, _xmlDoc, NULL);
+
+	const xmlChar *result = xmlOutputBufferGetContent(ob);
+	NSString *output = [NSString stringWithUTF8String:(const char *)result];
+	
+	xmlFree((void*)result);
+	xmlOutputBufferClose(ob);
+	
+	return output;
+	 */
+	
+	xmlChar *s;
+	int size;
+	
+	xmlDocDumpMemory(_xmlDoc, &s, &size);
+	if (s)
+	{
+		NSString *result = [NSString stringWithUTF8String:(const char *)s];
+		xmlFree(s);
+		return result;
+	}
+	return nil;
 }
 
 @end
@@ -185,7 +233,7 @@ NSString *getValueFromNode(xmlNodePtr node)
 	return @"";
 }
 
-const xmlChar *toXmlStr(NSString *nsStr)
+const xmlChar *toXmlStr(const NSString *nsStr)
 {
 	return (const xmlChar*)[nsStr UTF8String];
 }

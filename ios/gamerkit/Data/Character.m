@@ -7,79 +7,75 @@
 //
 
 #import "Character.h"
-#import "Import.h"
-#import "CharacterDefinition.h"
-#import "DataManager.h"
-#import "CharacterListController.h"
-#import "Attribute.h"
-#import "DataSet.h"
+#import "ContentManager.h"
+#import "ContentTransformResult.h"
 #import "Ruleset.h"
-#import "Token.h"
+#import "CharacterTransform.h"
 
 #import "XMLDataContent.h"
+#import "XMLCharacterUpgrader.h"
 
-static const NSString *kXPath_Character_Name = @"/attribute[@name=\"Name\"]";
-static const NSString *kXPath_Character_System = @"/@system";
-static const NSString *kXPath_Character_Type = @"/@type";
-static const NSString *kXPath_Character_Token = @"/attribute[@name=\"Token\"]";
+extern uint miniTokenSize;
+
+extern const NSString *kXPath_Character_Name;
+extern const NSString *kXPath_Character_System;
+extern const NSString *kXPath_Character_Type;
+extern const NSString *kXPath_Character_Token;
+
+@interface Character()
+{
+}
+@end
 
 @implementation Character
 
 - (NSString*)name
-{ return [self.data valueAtPath:kXPath_Character_Name]; }
-
-- (NSString*)system
-{ return [self.data valueAtPath:kXPath_Character_System]; }
-
-- (NSString*)charType
-{ return [self.data valueAtPath:kXPath_Character_Type]; }
+{ return [self getPreview].title; }
 
 - (UIImage*)token
-{ return [self.data imageAtPath:kXPath_Character_Token]; }
+{ return [self getPreview].image; }
 
 - (void)setToken:(UIImage *)token
 { [self.data setImage:token atPath:kXPath_Character_Token]; }
 
-- (void)createMiniImage
-{
-	_miniImage = nil;
-	
-	UIImage *img = self.token;
-	if (img)
-	{
-		UIGraphicsBeginImageContext(CGSizeMake(miniSize, miniSize));
-		[img drawInRect:CGRectMake(0,0,miniSize,miniSize)];
-		img = UIGraphicsGetImageFromCurrentImageContext();
-		_miniImage = img;
-		UIGraphicsEndImageContext();
-	}
-}
+- (NSString*)contentPath
+{ return @"Characters"; }
 
-- (id)initForSystem:(NSString*)inSystem andType:(NSString*)inType{
+- (instancetype)initForSystem:(NSString*)inSystem andType:(NSString*)inType{
 	self = [super init];
-	if (self) {
-		Ruleset *rules = [[DataManager getDataManager] rulesetForName:inSystem];
+	if (self)
+	{
+		Ruleset *rules = [[ContentManager contentManager] systemForId:inSystem];
 		if (rules)
 		{
 			[rules addCharacter:self];
 		}
-		
 	}
 	return self;
 }
 
-- (NSString *)generateFileName {
-	NSFileManager *fm = [NSFileManager defaultManager];
-	NSString *path = [[DataManager getDataManager] docsPath];
-	path = [path stringByAppendingPathComponent:@"Characters/%08x.char"];
-	NSString *fileName = nil;
-	
-	do
+- (instancetype)initWithFile:(NSString *)fileName
+{
+	self = [super initWithFile:fileName];
+	if (self)
 	{
-		fileName = [NSString stringWithFormat:path, random()];
-	} while ([fm fileExistsAtPath:fileName]);
-	
-	return fileName;
+		[self setTransform:[CharacterTransform defaultTransform] forAction:ContentObjectActionDefault];
+		
+		[self loadData];
+		
+		if ([XMLCharacterUpgrader upgradeCharacterData:self.data])
+		{
+			NSLog(@"Upgraded character \"%@\" to v2", self.name);
+			//NSLog(@"%@", [self.data saveToString]);
+			[self saveFile];
+		}
+		
+		_system = [self.data valueAtPath:kXPath_Character_System];
+		_charType = [self.data valueAtPath:kXPath_Character_Type];
+		
+		[self unloadData];
+	}
+	return self;
 }
 
 @end

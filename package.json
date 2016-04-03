@@ -1,0 +1,13 @@
+{
+  "name": "gamerkit",
+  "dependencies": {
+    "browserify": "^13.0.0",
+    "handlebars": "^4.0.5",
+    "jslint": "^0.9.6",
+    "jszip": "^2.6.0",
+    "plist": "^1.2.0",
+    "uglify-js": "^2.6.2",
+    "uglifycss": "0.0.20",
+    "xmldom": "^0.1.22"
+  }
+}

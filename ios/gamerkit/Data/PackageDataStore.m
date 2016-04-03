@@ -7,7 +7,7 @@
 //
 
 #import "PackageDataStore.h"
-#import "DataManager.h"
+#import "PackageManager.h"
 #import "AppDelegate.h"
 #import <StoreKit/SKProduct.h>
 #import <StoreKit/SKPayment.h>
@@ -17,9 +17,12 @@
 
 extern BOOL __DEBUG__mockData;
 
-@interface PackageDataStore()
+@interface PackageDataStore() <PackageListConsumer, PackageCellDelegate>
 {
 	BOOL _firstView;
+	
+	NSMutableArray *_installedPackages;
+	NSMutableArray *_availablePackages;
 }
 @end
 
@@ -53,6 +56,37 @@ extern BOOL __DEBUG__mockData;
 	}
 }
 
+- (void)installedPackageFound:(PackageData *)package
+{
+	if (![_installedPackages containsObject:package])
+	{
+		[_installedPackages addObject:package];
+		[self refresh];
+	}
+}
+
+- (void)installedPackageLost:(PackageData *)package
+{
+	[_installedPackages removeObject:package];
+	[self refresh];
+}
+
+- (void)availablePackageFound:(PackageData *)package
+{
+	if (![_availablePackages containsObject:package])
+	{
+		[_availablePackages addObject:package];
+		[self refresh];
+	}
+}
+
+- (void)availablePackageLost:(PackageData *)package
+{
+	[_availablePackages removeObject:package];
+	[self refresh];
+}
+
+
 - (void)refresh
 { [self.collectionView reloadData]; }
 
@@ -61,20 +95,17 @@ extern BOOL __DEBUG__mockData;
 	if ((self = [super initWithCoder:aDecoder]))
 	{
 		_firstView = NO;
-		downloadFile = nil;
-		downloadPath = nil;
 		
 		packages = nil;
-		[[SKPaymentQueue defaultQueue] addTransactionObserver:self];
 		
-		DataManager *dm = [DataManager getDataManager];
-		if (dm)
+		_installedPackages = [NSMutableArray array];
+		_availablePackages = [NSMutableArray array];
+		
+		PackageManager *pm = [PackageManager packageManager];
+		if (pm)
 		{
-			if (dm.packageData == nil)
-			{
-				dm.packageData = self;
-				[self scanForPackages];
-			}
+			[pm addPackageListConsumer:self];
+			[self scanForPackages];
 		}
 	}
 	return self;
@@ -92,7 +123,6 @@ extern BOOL __DEBUG__mockData;
 
 - (void)dealloc
 {
-	[[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -104,15 +134,15 @@ extern BOOL __DEBUG__mockData;
 {
 	NSUInteger section = indexPath.section;
 	NSUInteger row = indexPath.row;
-	DataManager *dm = [DataManager getDataManager];
 	
 	if (section == SECTION_INSTALLED) // installed
 	{
 		PackageCell *cell = (PackageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"InstalledPackage" forIndexPath:indexPath];
 
-		cell.name.text = [[dm.installedPackages objectAtIndex:row] objectAtIndex:2];
-		int iVer = [[[dm.installedPackages objectAtIndex:row] objectAtIndex:4] intValue];
-		int aVer = [[[dm.installedPackages objectAtIndex:row] objectAtIndex:5] intValue];
+		PackageData *pdata = _installedPackages[row];
+		cell.name.text = pdata.name;
+		int iVer = pdata.installedVersion;
+		int aVer = pdata.availableVersion;
 		if (cell.update)
         {
             cell.update.hidden = aVer <= iVer;
@@ -123,7 +153,7 @@ extern BOOL __DEBUG__mockData;
 	else // available
 	{
 		PackageCell *cell = (PackageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"AvailablePackage" forIndexPath:indexPath];
-		PackageData *pdata = [dm.availablePackages objectAtIndex:row];
+		PackageData *pdata = [_availablePackages objectAtIndex:row];
 		[cell setupForPackage:pdata withDelegate:self];
 		
 		return cell;
@@ -132,15 +162,15 @@ extern BOOL __DEBUG__mockData;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	DataManager *dm = [DataManager getDataManager];
+	PackageManager *pm = [PackageManager packageManager];
 	if (section == SECTION_INSTALLED)
 	{
-		NSInteger cnt = dm.installedPackages.count;
+		NSInteger cnt = pm.installedPackages.count;
 		return cnt;
 	}
     else
     {
-		NSInteger cnt = dm.availablePackages.count;
+		NSInteger cnt = pm.availablePackages.count;
 		return cnt;
 	}
 
@@ -181,17 +211,17 @@ extern BOOL __DEBUG__mockData;
 	
 	if (!_productDetailView || !_storeView) return;
 	
-	DataManager *dm = [DataManager getDataManager];
+	PackageManager *pm = [PackageManager packageManager];
 	
 	if (indexPath.section == SECTION_INSTALLED) // installed
 	{
-		if (indexPath.row < dm.installedPackages.count)
+		if (indexPath.row < pm.installedPackages.count)
 		{
 			NSInteger row = indexPath.row;
-			_productDetailView.title.text = [[dm.installedPackages objectAtIndex:row] objectAtIndex:2];
-			_productDetailView.description.text = [[dm.installedPackages objectAtIndex:row] objectAtIndex:1];
-			int iVer = [[[dm.installedPackages objectAtIndex:row] objectAtIndex:4] intValue];
-			int aVer = [[[dm.installedPackages objectAtIndex:row] objectAtIndex:5] intValue];
+			_productDetailView.title.text = [[pm.installedPackages objectAtIndex:row] objectAtIndex:2];
+			_productDetailView.description.text = [[pm.installedPackages objectAtIndex:row] objectAtIndex:1];
+			int iVer = [[[pm.installedPackages objectAtIndex:row] objectAtIndex:4] intValue];
+			int aVer = [[[pm.installedPackages objectAtIndex:row] objectAtIndex:5] intValue];
 			[_productDetailView setButtonsInstalled:YES updatable:iVer < aVer];
 		}
 	}
@@ -206,9 +236,9 @@ extern BOOL __DEBUG__mockData;
     }
 	else // available
 	{
-		if (indexPath.section < dm.availablePackages.count)
+		if (indexPath.section < pm.availablePackages.count)
 		{
-			PackageData *pdata = [dm.availablePackages objectAtIndex:indexPath.row];
+			PackageData *pdata = [pm.availablePackages objectAtIndex:indexPath.row];
 			if (pdata.name)
 			{
 				if (pdata.storeId && [pdata.storeId compare:@"!coming-soon"] == NSOrderedSame)
@@ -254,7 +284,7 @@ extern BOOL __DEBUG__mockData;
 
 - (void)storeRefresh
 {
-	[[DataManager getDataManager] checkForDownloadablePackages:nil];
+	[[PackageManager packageManager] refreshPackageList];
 	[self.collectionView reloadData];
 }
 
@@ -300,93 +330,15 @@ extern BOOL __DEBUG__mockData;
             _codeResponse.hidden = false;
         }
         
-        [[DataManager getDataManager] recheckDownloadablePackages];
+        [[DataManager contentManager] recheckDownloadablePackages];
     } */
 }
 
-- (void)helper_downloadAndInstallPackage:(id)url
-{ if ([url isKindOfClass:[NSString class]]) [self downloadAndInstallPackage:(NSString*)url]; }
-- (void)downloadAndInstallPackage:(NSString *)urlString
-{
-	if (downloadFile)
-	{
-		if (urlString)
-		{
-			if (downloadQueue == nil) downloadQueue = [[NSMutableArray alloc] initWithCapacity:2];
-			
-			[downloadQueue addObject:urlString];
-		}
-	}
-	else
-	{
-		NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]
-												 cachePolicy:NSURLRequestUseProtocolCachePolicy
-											 timeoutInterval:60.0f];
-		if ([NSURLConnection canHandleRequest:request])
-		{
-			downloadPath = [NSTemporaryDirectory() stringByAppendingPathComponent:
-							[urlString substringFromIndex:[urlString rangeOfString:@"/" options:NSBackwardsSearch].location+1]];
-			[[NSFileManager defaultManager] createFileAtPath:downloadPath contents:nil attributes:nil];
-			downloadFile = [NSFileHandle fileHandleForWritingAtPath:downloadPath];
-			
-			if (downloadFile)
-			{
-				NSURLConnection *conn = [NSURLConnection connectionWithRequest:request delegate:self];
-				[conn start];
-			}
-		}
-		else 
-		{
-			fprintf(stdout, "Cannot handle file request.\n");
-			//TODO: show popup message
-		}
-	}
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-	fprintf(stdout, "Cannot download package file: %s\n", [error.description UTF8String]);
-	
-	if (downloadFile)
-	{
-		[downloadFile closeFile];
-		[[NSFileManager defaultManager] removeItemAtPath:downloadPath error:nil];
-		downloadFile = nil;
-	}
-	
-	//TODO: show popup message
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-	if (downloadFile)
-		[downloadFile writeData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-	if (downloadFile)
-		[downloadFile closeFile];
-	
-	[[DataManager getDataManager] installPackageAtPath:downloadPath];
-	
-	[[NSFileManager defaultManager] removeItemAtPath:downloadPath error:nil];
-	downloadFile = nil;
-	downloadPath = nil;
-
-	if (downloadQueue && downloadQueue.count > 0)
-	{
-		NSString *url = [downloadQueue objectAtIndex:0];
-		[downloadQueue removeObjectAtIndex: 0];
-		[[NSRunLoop mainRunLoop] performSelector:@selector(helper_downloadAndInstallPackage:) 
-		target:self argument:url order:0 modes:[NSArray arrayWithObject: NSDefaultRunLoopMode]];
-	}
-}
 
 /*
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	DataManager *dm = [DataManager getDataManager];
+	PackageManager *pm = [PackageManager packageManager];
 	if (buttonIndex == actionSheet.cancelButtonIndex)
 	{
 		if ([actionSheet.title compare:@"Are you sure?"] == NSOrderedSame)
@@ -395,7 +347,7 @@ extern BOOL __DEBUG__mockData;
 		else
 		{
 			// Don't delete content.
-//			[dm uninstallPackage:_productDetailView.row deleteContent:NO];
+//			[pm uninstallPackage:_productDetailView.row deleteContent:NO];
 		}
 
 	}
@@ -405,9 +357,9 @@ extern BOOL __DEBUG__mockData;
 		if ([actionSheet.title compare:@"Are you sure?"] == NSOrderedSame)
 		{
 			// check to see if this is a system
-			if (_productDetailView.row >= 0 && _productDetailView.row < dm.installedPackages.count)
+			if (_productDetailView.row >= 0 && _productDetailView.row < pm.installedPackages.count)
 			{
-				NSArray *pdata = [dm.installedPackages objectAtIndex:_productDetailView.row];
+				NSArray *pdata = [pm.installedPackages objectAtIndex:_productDetailView.row];
 				if (pdata && pdata.count > 2 && [[pdata objectAtIndex:3] compare:@"system" options:NSCaseInsensitiveSearch] == NSOrderedSame)
 				{
 					UIActionSheet *nextActionSheet = [[UIActionSheet alloc] initWithTitle:@"Also delete content (characters, etc.) for this system?"
@@ -420,7 +372,7 @@ extern BOOL __DEBUG__mockData;
 				else
 				{
 					// just delete the package
-					[dm uninstallPackage:_productDetailView.row deleteContent:NO];
+					[pm uninstallPackage:_productDetailView.row deleteContent:NO];
 					[self productDetailCancel];
 				}
 			}
@@ -428,7 +380,7 @@ extern BOOL __DEBUG__mockData;
 		else
 		{
 			// should delete content
-			[dm uninstallPackage:_productDetailView.row deleteContent:YES];
+			[pm uninstallPackage:_productDetailView.row deleteContent:YES];
 			[self productDetailCancel];
 		}
 
@@ -438,39 +390,17 @@ extern BOOL __DEBUG__mockData;
 
 -(void)packageCell:(PackageCell *)cell didRequestPurchaseOfPackage:(PackageData *)pdata
 {
-	if (pdata.storeId == nil || __DEBUG__mockData == YES)
-	{
-		DataManager *dm = [DataManager getDataManager];
-		
-		// download
-        if ([pdata.packageURL hasPrefix:@"http://"] || [pdata.packageURL hasPrefix:@"https://"])
-			[self downloadAndInstallPackage: pdata.packageURL];
-		else
-		{
-			NSString *url = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:pdata.packageURL];
-			[dm installPackageAtPath: url];
-		}
-		
-		[self.collectionView reloadData];
-	}
-	else if (pdata.storeProduct && [SKPaymentQueue canMakePayments])
-	{
-		// buy, then download
-		//[RPG_ToolkitAppDelegate sharedApp].purchasing += 1;
-		SKPayment *payment = [SKPayment paymentWithProduct:pdata.storeProduct];
-		if (payment)
-			[[SKPaymentQueue defaultQueue] addPayment:payment];
-	}
+	[[PackageManager packageManager] purchaseRequestedForPackage:pdata];
 }
 
 - (IBAction)productDetailUpdate
 { /*
-	DataManager *dm = [DataManager getDataManager];
+	PackageManager *pm = [PackageManager packageManager];
 	
-	if (_productDetailView.row >= 0 && _productDetailView.row < dm.installedPackages.count)
+	if (_productDetailView.row >= 0 && _productDetailView.row < pm.installedPackages.count)
 	{
-		NSArray *pdata = [dm.installedPackages objectAtIndex:_productDetailView.row];
-		DataManager *dm = [DataManager getDataManager];
+		NSArray *pdata = [pm.installedPackages objectAtIndex:_productDetailView.row];
+		PackageManager *pm = [PackageManager packageManager];
 		
 		// download
 		NSString *surl = [pdata objectAtIndex:6];
@@ -479,7 +409,7 @@ extern BOOL __DEBUG__mockData;
 		else
 		{
 			NSString *url = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:surl];
-			[dm installPackageAtPath: url];
+			[pm installPackageAtPath: url];
 			[self productDetailCancel];
 		}
 	}
@@ -490,11 +420,11 @@ extern BOOL __DEBUG__mockData;
 
 - (IBAction)productDetailDelete
 { /*
-	DataManager *dm = [DataManager getDataManager];
+	PackageManager *pm = [PackageManager packageManager];
 	
-	if (_productDetailView.row >= 0 && _productDetailView.row < dm.installedPackages.count)
+	if (_productDetailView.row >= 0 && _productDetailView.row < pm.installedPackages.count)
 	{
-		NSString *pkgId = [[dm.installedPackages objectAtIndex:_productDetailView.row] objectAtIndex:0];
+		NSString *pkgId = [[pm.installedPackages objectAtIndex:_productDetailView.row] objectAtIndex:0];
 		if ([pkgId caseInsensitiveCompare:@"Core"] == NSOrderedSame)
 		{
 			// can't delete core
@@ -518,51 +448,6 @@ extern BOOL __DEBUG__mockData;
 			[actionSheet showInView:_productDetailView];
 		}
 	} */
-}
-
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
-{
-	for (int i = 0; i < transactions.count; ++i)
-	{
-		SKPaymentTransaction *trans = [transactions objectAtIndex:i];
-		switch (trans.transactionState)
-		{
-			case SKPaymentTransactionStateFailed:
-#warning <<AE>> Error case not implemented for purchasing
-				//TODO show error
-				break;
-			case SKPaymentTransactionStatePurchasing:
-				//Nothing here?
-				break;
-			case SKPaymentTransactionStatePurchased:
-				fprintf(stdout, "SKPaymentTransactionStatePurchased\n");
-			case SKPaymentTransactionStateRestored:
-			{
-				if (trans.transactionState == SKPaymentTransactionStateRestored)
-					fprintf(stdout, "SKPaymentTransactionStateRestored\n");
-					
-				DataManager *dm = [DataManager getDataManager];
-				for (int p = 0; p < dm.availablePackages.count; ++p)
-				{
-					PackageData *pdata = [dm.availablePackages objectAtIndex:p];
-					if (pdata.storeProduct && [pdata.storeProduct.productIdentifier compare:trans.payment.productIdentifier] == NSOrderedSame)
-					{
-						[self downloadAndInstallPackage: pdata.packageURL];
-						break;
-					}
-				}
-				//[RPG_ToolkitAppDelegate sharedApp].purchasing -= 1;
-				break;
-			}
-			case SKPaymentTransactionStateDeferred:
-#warning <<AE>> Make sure there isn't something to do for the deferred purchase state.
-				//TODO do something here?
-				break;
-		}
-		
-		if (trans.transactionState != SKPaymentTransactionStatePurchasing)
-			[queue finishTransaction:trans];
-	}
 }
 									  
 @end

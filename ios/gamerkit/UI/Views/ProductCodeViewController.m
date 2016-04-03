@@ -7,7 +7,7 @@
 //
 
 #import "ProductCodeViewController.h"
-#import "DataManager.h"
+#import "PackageManager.h"
 
 @interface ProductCodeViewController ()
 
@@ -48,14 +48,14 @@
 	NSString *code = self.codeEntryField.text;
 	
 	// submit code
-	[[DataManager getDataManager] submitProductCode:code withCallback:^(NSString *result) {
+	[[PackageManager packageManager] submitProductCode:code withCallback:^(NSString *message) {
 		[self.spinner stopAnimating];
 		self.doneButton.enabled = YES;
 		self.listButton.enabled = YES;
 		self.submitButton.enabled = YES;
 		self.codeEntryField.enabled = YES;
 		
-		self.messageView.text = result;
+		self.messageView.text = message;
 	}];
 }
 

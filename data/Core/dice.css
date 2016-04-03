@@ -1,13 +1,29 @@
 .die_result_block
 {
 	position: relative;
+	width: 100%;
 	padding: 20px;
+	padding-top: 28px;
 	padding-bottom: 0px;
 }
 
 .die_title
 {
-	background-color: aliceblue;
+	position: absolute;
+    top: 0;
+    background-color: #B4D6EF;
+    left: 0;
+    right: 0;
+    height: 26px;
+    padding-left: 20px;
+    padding-top: 3px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.die_result_block:first-child .die_title {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .die_sub_result
@@ -56,7 +72,6 @@
 
 .die_constant
 {
-	width: 64px;
 	height: 64px;
 	text-align: center;
 	margin-right: 12px;
@@ -70,9 +85,9 @@
 	position: relative;
 	font-size: 32px;
 	font-weight: bold;
-	font-color: black;
+	color: black;
 	width: 64px;
-	height: 50px;
+	height: 64px;
 	padding-top: 14px;
 	text-align: center;
 	margin-right: 12px;

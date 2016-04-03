@@ -24,10 +24,7 @@ typedef enum _CharacterPickTarget {
 	CP_MAX
 } CharacterPickTarget;
 
-@interface CharacterListController : ContentListViewController <UICollectionViewDelegate, UICollectionViewDataSource> {
-	NSArray *systemKeys;
-}
-
+@interface CharacterListController : ContentListViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 - (void)refreshData;
 
 @end

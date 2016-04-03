@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #import "CharacterListController.h"
 #import "TokenListController.h"
 #import "ContentDetailViewController.h"
+#import "ContentJSContext.h"
 
 @class Character;
 
-@interface CharacterViewController : ContentDetailViewController <TokenSelectionDelegate, UIWebViewDelegate>
+@interface CharacterViewController : ContentDetailViewController <TokenSelectionDelegate, TokenRequestDelegate>
 
-@property (nonatomic, weak) IBOutlet UIWebView* content;
-@property (nonatomic, weak) IBOutlet UIBarItem* titleText;
+@property (nonatomic, strong) IBOutlet WKWebView* content;
 
 @property (nonatomic, weak) CharacterListController* listController;
 

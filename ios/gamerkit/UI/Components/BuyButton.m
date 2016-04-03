@@ -7,6 +7,7 @@
 //
 
 #import "BuyButton.h"
+#import "PackageManager.h"
 
 @interface BuyButton()
 {
@@ -42,16 +43,12 @@
 	return self;
 }
 
-- (void)setProduct:(SKProduct *)product
+- (void)setProduct:(PackageData *)product
 {
 	_product = product;
-	if (_product)
+	if (_product.price)
 	{
-		NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-		[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
-		[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-		[numberFormatter setLocale:_product.priceLocale];
-		_priceLabel = [numberFormatter stringFromNumber:_product.price];
+		_priceLabel = _product.price;
 		_confirmLabel = @"Buy";
 		
 		self.enabled = YES;
