@@ -19,4 +19,4 @@ Here is what still needs to be done to have a finished app again:
 * Get the Maps functionality working again.
 * Finish the package server rewrite to include a database of what a user (by device or by other id) already owns, as well as support for promotion code redemption.
 * General UI cleanup and polish, as well as bug fixing.
-
+* Probably a bunch of other stuff I've forgotten or not thought of yet.
