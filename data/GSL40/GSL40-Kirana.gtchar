@@ -175,156 +175,184 @@
 		<item>
 			<name>Melee Basic Attack</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Longsword: Strength vs. AC, Damage: 1d8.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Ranged Basic Attack</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Hellish Rebuke</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>War Song Strike</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Longsword: Charisma vs. AC, Damage: 1d8+5.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Guiding Strike</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Longsword: Charisma vs. AC, Damage: 1d8+5.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Ray of Frost</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Majestic Word</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Minor</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Minor</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Words of Friendship</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Minor</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Minor</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Blunder</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Implement, Wand: Charisma vs. Will, Damage: 1d6+5.\nMaster's Wand of Ray of Frost +1: Charisma vs. Will, Damage: 1d6+6.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Dissonant Strain</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Implement, Wand: Charisma vs. Will, Damage: 2d6+5.\nMaster's Wand of Ray of Frost +1: Charisma vs. Will, Damage: 2d6+6.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Second Wind</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Action Point</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Free</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Free</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Verse of Triumph</name>
 			<keywords></keywords>
-			<use-type>Daily</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Daily</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Longsword: Charisma vs. AC, Damage: 2d8+5.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Hunter's Tune</name>
 			<keywords></keywords>
-			<use-type>Daily</use-type>
-			<action-type>Minor</action-type>
+			<usetype>Daily</usetype>
+			<actiontype>Minor</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 	</Powers>
 	<MagicItems>

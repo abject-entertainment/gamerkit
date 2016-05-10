@@ -198,7 +198,7 @@ typedef enum : NSUInteger {
 	{
 		//cvc.delegate = self;
 		
-		[cvc setContentObject:ch];
+		[cvc displayCharacter:ch withAction:ContentObjectActionReadOnlyWebView];
 		cvc.listController = self;
 		[self presentViewController:cvc animated:YES completion:nil];
 	}

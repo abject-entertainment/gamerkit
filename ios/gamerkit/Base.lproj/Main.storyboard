@@ -1281,9 +1281,15 @@ Multiple rolls can be made at once by using a comma-separated list.</string>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="jSW-s4-N8g"/>
-                                    <barButtonItem title="Roll" id="wvd-X4-GJa">
+                                    <barButtonItem systemItem="action" id="WiD-ee-Lpf">
                                         <connections>
-                                            <action selector="roll:" destination="zXw-K3-ta2" id="2Wb-71-5P2"/>
+                                            <action selector="characterActions:" destination="zXw-K3-ta2" id="psU-Hg-JsJ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="1Pk-u5-Dps"/>
+                                    <barButtonItem title="Edit" id="wvd-X4-GJa">
+                                        <connections>
+                                            <action selector="toggleEdit:" destination="zXw-K3-ta2" id="IzF-Ua-SpX"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -1296,6 +1302,9 @@ Multiple rolls can be made at once by using a comma-separated list.</string>
                             <constraint firstItem="DAU-NV-7jC" firstAttribute="leading" secondItem="0Ui-J6-O49" secondAttribute="leadingMargin" constant="-20" id="ceg-gN-j1j"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="toggleButton" destination="wvd-X4-GJa" id="H0Z-3a-Vhb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUD-U0-EYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

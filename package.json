@@ -5,6 +5,8 @@
     "handlebars": "^4.0.5",
     "jslint": "^0.9.6",
     "jszip": "^2.6.0",
+    "knockout": "^3.4.0",
+    "mustache": "^2.2.1",
     "plist": "^1.2.0",
     "uglify-js": "^2.6.2",
     "uglifycss": "0.0.20",

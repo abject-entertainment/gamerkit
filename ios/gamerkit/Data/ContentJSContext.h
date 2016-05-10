@@ -13,12 +13,6 @@
 @class Token;
 @class ContentJSContext;
 
-@protocol TokenRequestDelegate <NSObject>
-
-- (void)contextIsRequestingNewToken:(ContentJSContext*)context;
-
-@end
-
 @interface ContentJSContext : NSObject
 
 + (ContentJSContext*)contentContext;
@@ -26,8 +20,5 @@
 - (NSString*)generateHTMLForCharacter:(Character*)character withAction:(ContentObjectAction)action;
 
 - (NSDictionary*)getPreviewData:(ContentObject*)object;
-
-@property (nonatomic, weak) NSObject<TokenRequestDelegate> *tokenRequestDelegate;
-- (void)provideToken:(Token*)token;
 
 @end

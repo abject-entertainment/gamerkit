@@ -172,123 +172,145 @@
 		<item>
 			<name>Melee Basic Attack</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Longsword: Strength vs. AC, Damage: 1d8+5.\nScalebane Longsword +1: Strength vs. AC, Damage: 1d8+6.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Ranged Basic Attack</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Longbow: Dexterity vs. AC, Damage: 1d10+3.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Hunter's Quarry</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Minor</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Minor</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Twin Strike</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Longsword: Strength vs. AC (melee; main weapon and off-hand weapon) or Dexterity vs. AC (ranged), two attacks, Damage: 1d8+1.\nScalebane Longsword +1: Strength vs. AC (melee; main weapon and off-hand weapon) or Dexterity vs. AC (ranged), two attacks, Damage: 1d8+2.\nLongbow: Dexterity vs. AC (ranged), two attacks, Damage: 1d10.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Hit and Run</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Longsword: Strength vs. AC, Damage: 1d8+5.\nScalebane Longsword +1: Strength vs. AC, Damage: 1d8+6.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Elven Accuracy</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Free</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Free</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Dire Wolverine Strike</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Longsword: Strength vs. AC, Damage: 1d8+5.\nScalebane Longsword +1: Strength vs. AC, Damage: 1d8+6.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Yield Ground</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Interrupt</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Interrupt</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Second Wind</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Action Point</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Free</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Free</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Jaws of the Wolf</name>
 			<keywords></keywords>
-			<use-type>Daily</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Daily</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Longsword: Strength vs. AC (main weapon and off-hand weapon), two attacks, Damage: 2d8+5.\nScalebane Longsword +1: Strength vs. AC (main weapon and off-hand weapon), two attacks, Damage: 2d8+6.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 	</Powers>
 	<MagicItems>

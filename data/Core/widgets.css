@@ -98,6 +98,17 @@ A.inline-dice-roll {
 	z-index: 100;
 }
 
+.popup .popup-done {
+	position: absolute;
+	bottom: -28px;
+	right: 0;
+	text-transform: uppercase;
+	color: white;
+	font-size: 18px;
+	pointer-events: none;
+}
+
+
 @media screen and (min-width: 750px)
 {
 	.popup {

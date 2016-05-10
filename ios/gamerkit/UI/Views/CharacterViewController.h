@@ -11,16 +11,20 @@
 #import "CharacterListController.h"
 #import "TokenListController.h"
 #import "ContentDetailViewController.h"
-#import "ContentJSContext.h"
+#import "ContentObject.h"
 
 @class Character;
 
-@interface CharacterViewController : ContentDetailViewController <TokenSelectionDelegate, TokenRequestDelegate>
+@interface CharacterViewController : ContentDetailViewController <TokenSelectionDelegate, WKScriptMessageHandler>
 
-@property (nonatomic, strong) IBOutlet WKWebView* content;
+@property (nonatomic, strong) WKWebView* content;
 
 @property (nonatomic, weak) CharacterListController* listController;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *toggleButton;
 
-- (IBAction)roll:(id)sender;
+- (IBAction)toggleEdit:(id)sender;
+- (IBAction)characterActions:(id)sender;
+
+- (void)displayCharacter:(Character *)character withAction:(ContentObjectAction)action;
 
 @end

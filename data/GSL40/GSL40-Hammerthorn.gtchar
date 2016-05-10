@@ -172,134 +172,158 @@
 		<item>
 			<name>Melee Basic Attack</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Luckblade Greatsword +1: Strength vs. AC, Damage: 1d10+2.\nGreatsword: Strength vs. AC, Damage: 1d10+1.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Ranged Basic Attack</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Radiant Vengeance</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Holy Symbol: Wisdom vs. Reflex, Damage: 1d8+5.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Overwhelming Strike</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Luckblade Greatsword +1: Wisdom vs. AC, Damage: 1d10+7.\nGreatsword: Wisdom vs. AC, Damage: 1d10+6.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Abjure Undead</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Holy Symbol: Wisdom vs. Will, Damage: 3d10+5.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Divine Guidance</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type></action-type>
+			<usetype>Encounter</usetype>
+			<actiontype></actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Oath of Enmity</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Minor</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Minor</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Angelic Alacrity</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Luckblade Greatsword +1: Wisdom vs. AC, Damage: 2d10+7.\nGreatsword: Wisdom vs. AC, Damage: 2d10+6.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Second Wind</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Minor</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Minor</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Action Point</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Free</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Free</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Aspect of Might</name>
 			<keywords></keywords>
-			<use-type>Daily</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Daily</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Luckblade Greatsword +1: Wisdom vs. AC, Damage: 3d10+7.\nGreatsword: Wisdom vs. AC, Damage: 3d10+6.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Blessing of Vengeance</name>
 			<keywords></keywords>
-			<use-type>Daily</use-type>
-			<action-type>Free</action-type>
+			<usetype>Daily</usetype>
+			<actiontype>Free</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 	</Powers>
 	<MagicItems>

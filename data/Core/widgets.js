@@ -28,6 +28,8 @@ var widgetConstructors = {
 				{
 					if (mouseWidget === node)
 					{
+						event.preventDefault();
+
 						var delta = event.pageX - mouseX;
 						//console.log("delta", delta)
 						if (delta <= -step)
@@ -47,8 +49,9 @@ var widgetConstructors = {
 
 		function setPips()
 		{
-			var value = parseInt(node.getAttribute("data-value"));
-			pips_container.innerHTML = Array(value+1).join(onPip) + Array(max-value+1).join(offPip);
+			var value = parseInt(node.getAttribute("data-value") || 0);
+			pips_container.innerHTML = " " + Array(value+1).join(onPip + " ") + Array(max-value+1).join(offPip + " ");
+			node.dispatchEvent(new Event('change'));
 		}
 
 		function decrease(event)
@@ -208,7 +211,6 @@ var widgetConstructors = {
 
 		var canvas = document.createElement('DIV');
 		canvas.className = "pages-canvas";
-		canvas.style.paddingLeft = "10px";
 
 		var children = [];
 
@@ -242,8 +244,15 @@ var widgetConstructors = {
 		node.addEventListener('click', function _tokenChange()
 		{
 			expectingToken = node;
-			requestNewToken();
+			if (typeof(requestNewToken) == "function")
+				{ requestNewToken(); }
+			else if (window.webkit && window.webkit.messageHandlers.gamerkit)
+				{ window.webkit.messageHandlers["gamerkit.char.requestNewToken"].postMessage(); }
 		});
+	},
+	'field': function FieldWidget(node)
+	{
+		node.setAttribute("contenteditable", "true");
 	}
 }
 
@@ -257,18 +266,24 @@ function updateExpectedToken(newImage)
 }
 
 
-function createWidgets()
+function init_widgets()
 {
-	if ('characterSheetReady' in window)
-		{ characterSheetReady(); }
-
-	var popup = document.createElement("DIV");
-	popup.className = 'popup-screen';
+	var popup = document.getElementById('charsheet-popup');
+	if (popup == null)
+	{
+		popup = document.createElement("DIV");
+		popup.className = 'popup-screen';
+		document.body.appendChild(popup);
+	}
 	popup.style.display = "none";
 
-	popup.inner = document.createElement("DIV");
-	popup.inner.className = 'popup';
-	popup.appendChild(popup.inner);
+	popup.inner = document.getElementById('popup-inner');
+	if (popup.inner == null)
+	{
+		popup.inner = document.createElement("DIV");
+		popup.inner.className = 'popup';
+		popup.appendChild(popup.inner);
+	}
 
 	popup.inner.addEventListener('click', function consume(event)
 		{ event.stopPropagation(); });
@@ -282,12 +297,11 @@ function createWidgets()
 			popup.style.display = "none";
 		}
 
-		popup.inner.appendChild(contents);
+		popup.inner.insertBefore(contents, popup.inner.firstChild);
 		popup.addEventListener('click', close);
 		popup.style.display = "block";
 	}
 
-	document.body.appendChild(popup);
 	window.popup = popup;
 
 	// set up document-wide mouse events
@@ -322,24 +336,5 @@ function createWidgets()
 			widgetConstructors[w](node);
 		}
 	});
-
-	if ('rollDice' in window)
-	{
-		var rolls = document.body.querySelectorAll("[data-roll]");
-		Array.prototype.forEach.call(rolls, function setupRoll(node)
-		{
-			node.addEventListener('click', function clickRoll()
-			{
-				var notation = node.getAttribute('data-roll').replace("*", parseInt(node.innerHTML));
-				rollDice(notation);
-			});
-		});
-
-		rolls = document.body.querySelectorAll("[data-has-dice-rolls]");
-		Array.prototype.forEach.call(rolls, function anchorRolls(node)
-		{
-			node.innerHTML = addDiceRollAnchors(node.innerHTML);
-		});
-	}
 }
 

@@ -149,6 +149,8 @@ BODY {
 
 #vitals .attribute .value {
 	display: block;
+	border: 0;
+	padding: 0;
 	border-bottom: 1px solid lightgray;
 	height: 15px;
 }

@@ -7,7 +7,35 @@ DIV {
 
 BODY {
 	margin: 0;
-	min-width: 320px;
+	width: 7.5in;
+}
+
+.column {
+	float: left;
+	width: 50%;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#vitals .column {
+	width: 33%;
+	padding-left: 10px;
+	padding-right: 0px;
+}
+
+#vitals .column:last-of-type {
+	padding-right: 10px;
+}
+
+#column-container .column#abilities,
+#column-container .column#combat {
+	height: 8.45in;
+	overflow: hidden;
+}
+#column-container .column#features,
+#column-container .column#misc {
+	height: 10in;
+	overflow: hidden;
 }
 
 .block {
@@ -335,49 +363,37 @@ BODY {
 	visibility: hidden;
 }
 
-.power-card {
-	display: none;
-	background-color: rgba(0,0,0,0.5);
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	z-index: 9;
+.power-cards {
+	padding-top: 1px;
+	padding-left: 1px;
 }
-
-.power-card .card {
-	display: block;
-	position: fixed;
-	top: 50%;
-	left: 50%;
+.power-card {
+	display: inline-block;
+	margin: 0;
 	width: 2.5in;
 	height: 3.5in;
-	margin-top: -1.75in;
-	margin-left: -1.25in;
 	background-color: white;
-	z-index: 10;
+	float: left;
+	border: 1px solid black;
+	margin-top: -1px;
+	margin-left: -1px;
 }
 
 #Powers.list .item.AtWill { background-color: palegreen; }
-.power-card .card.AtWill { border-color: #407040; }
-.power-card .card.AtWill .attribute { border-color: #407040; }
-.power-card .card.AtWill .power-title { background-color: #407040; }
+.power-card.AtWill .attribute { border-color: #407040; }
+.power-card.AtWill .power-title { background-color: #407040; }
 
 #Powers.list .item.Encounter { background-color: pink; }
-.power-card .card.Encounter { border-color: #802020; }
-.power-card .card.Encounter .attribute { border-color: #802020; }
-.power-card .card.Encounter .power-title { background-color: #802020; }
+.power-card.Encounter .attribute { border-color: #802020; }
+.power-card.Encounter .power-title { background-color: #802020; }
 
 #Powers.list .item.Daily { background-color: lightgray; }
-.power-card .card.Daily { border-color: #404040; }
-.power-card .card.Daily .attribute { border-color: #404040; }
-.power-card .card.Daily .power-title { background-color: #404040; }
+.power-card.Daily .attribute { border-color: #404040; }
+.power-card.Daily .power-title { background-color: #404040; }
 
 #Powers.list .item.MagicItem { background-color: bisque; }
-.power-card .card.MagicItem { border-color: #DA6523; }
-.power-card .card.MagicItem .attribute { border-color: #DA6523; }
-.power-card .card.MagicItem .power-title { background-color: #DA6523; }
+.power-card.MagicItem .attribute { border-color: #DA6523; }
+.power-card.MagicItem .power-title { background-color: #DA6523; }
 
 #Powers.list .item.MagicItem INPUT[type="checkbox"] { visibility: hidden; }
 

@@ -105,7 +105,8 @@
 		"Rituals": "Rituals",
 		"ritual_item": "Ritual: ",
 
-		"features": "Powers & Features",
+		"powers_features": "Other Abilities",
+		"features": "Features",
 		"RaceFeatures": "Race Features",
 		"ClassFeatures": "Class Features",
 		"ParagonFeatures": "Paragon Features",
@@ -124,6 +125,8 @@
 		"Wealth": "Wealth",
 		"Notes": "Notes",
 
-		"DieRolls": "DieRolls"
+		"DieRolls": "DieRolls",
+
+		"done": "Done"
 	}
 }

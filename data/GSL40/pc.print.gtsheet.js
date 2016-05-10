@@ -71,10 +71,10 @@ function generateHTML(data)
 		return xp.toString();
 	}};
 
-	var template = "\t\t<style>\n" + includeText("./pc.view.gtsheet.css") + 
-		"\n\t\t</style>\n" + includeText("./pc.view.gtsheet.mustache");
+	var template = "\t\t<style>\n" + includeText("./pc.print.gtsheet.css") + 
+		"\n\t\t</style>\n" + includeText("./pc.print.gtsheet.mustache");
 
-	return generateStaticHTML(template, data, ["dice","widgets"]);
+	return generateStaticHTML(template, data, []);
 }
 
 module.exports.generateHTML = generateHTML;

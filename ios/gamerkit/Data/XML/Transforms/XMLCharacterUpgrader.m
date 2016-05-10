@@ -35,7 +35,7 @@ void upgradeV1toV2(XMLDataContent *data);
 			upgradeV1toV2(data);
 		}
 		
-		xmlSetProp(data.xmlDoc->children, (const xmlChar *)"version", (const xmlChar *)[[[NSNumber numberWithLong:version] stringValue] UTF8String]);
+		xmlSetProp(data.xmlDoc->children, (const xmlChar *)"version", (const xmlChar *)[[[NSNumber numberWithLong:kCurrentVersion] stringValue] UTF8String]);
 		
 		return YES;
 	}
@@ -52,6 +52,8 @@ void upgradeV1toV2(XMLDataContent *data)
 	// doc children points to root node
 	xmlNodePtr child = xml->children->children;
 	
+	NSString *system = [data valueAtPath:@"/@system"];
+	
 	while (child)
 	{
 		if (strcasecmp((const char *)child->name, "attribute") == 0)
@@ -64,6 +66,12 @@ void upgradeV1toV2(XMLDataContent *data)
 				{
 					xmlNodeSetName(child, attr->children->content);
 					xmlRemoveProp(attr);
+					
+					if (strcasecmp((const char *)child->name, "Powers") &&
+						[system compare:@"GSL40"] == NSOrderedSame)
+					{
+#warning <<AE>> Remove hyphens from node names in powers for GSL40
+					}
 					break;
 				}
 				attr = attr->next;
@@ -72,9 +80,9 @@ void upgradeV1toV2(XMLDataContent *data)
 		child = child->next;
 	}
 	
-	if ([[data valueAtPath:@"/@system"] compare:@"HEX10"] == 0)
+	if ([system compare:@"HEX10"] == NSOrderedSame)
 	{
-		// need to take specialties and make them children of the skill
+#warning <<AE>> Fix up skill specialties to be nested in HEX10
 	}
 }
 

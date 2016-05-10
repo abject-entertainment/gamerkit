@@ -19,10 +19,11 @@
 		
 		<string>Core/displaychar.js</string>
 
-		<string>Core/charsheet.js</string>
-		<string>Core/charsheet.css</string>
 		<string>Core/dice.js</string>
 		<string>Core/dice.css</string>
+		<string>Core/widgets.js</string>
+		<string>Core/widgets.css</string>
+		<string>Core/dynamic.js</string>
 
 		<string>Core/style/*</string>
 		<string>Core/start.html</string>

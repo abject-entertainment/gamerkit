@@ -2,6 +2,7 @@
 function generateHTML(data)
 {
 	data.strings = selectLanguage(includeObject("./strings.json"));
+	data.attributes = [ "Str", "Con", "Dex", "Int", "Wis", "Cha" ];
 
 	data.fn_string = function () { return function stringHelper(text, render)
 	{
@@ -20,8 +21,10 @@ function generateHTML(data)
 	{
 		var markup = '<div class="block ability"><div class="ability-name" id="' + text + 
 			'_label">' + data.strings[text] + '</div><div class="ability-score" id="' + text +
-			'">' + data.character[text] + '</div><div class="ability-misc">' + data.strings.ability_misc + 
-			'</div><div class="ability-bonus calculated" id="' + text + '_bonus" data-roll="1d20+*">' +
+			'" data-widget="field" data-bind="divtext: ' + text + '">' + data.character[text] + 
+			'</div><div class="ability-misc">' + data.strings.ability_misc + 
+			'</div><div class="ability-bonus calculated" id="' + text + 
+			'_bonus" data-bind="text: Math.floor(' + text + '())-5">' +
 			data.fn_ability_bonus()(data.character[text]) + '</div><div class="ability-help">' +
 			data.strings[text + "_help"] + '</div>';
 		
@@ -32,7 +35,7 @@ function generateHTML(data)
 				markup += '<div class="skill item" id="' + skill.name + '"><div class="skill-name">' +
 					skill.name + '</div><div class="skill-trained"><span class="checkbox">' +
 					(skill.trained?'&#x2611;':'&#x2610;') + 
-					'</span> Trained</div><div class="skill-stats" data-roll="1d20+*">' +
+					'</span> Trained</div><div class="skill-stats">' +
 					skill.bonus + '</div></div>';
 			}
 		});
@@ -54,27 +57,10 @@ function generateHTML(data)
 		return this[text].join(", ");
 	}};
 
-	data.fn_next_level = function () { return function nextLevelHelper(text, render)
-	{
-		var cur = parseInt(render(text));
-		if (isNaN(cur))
-			{ return "1000"; }
+	var template = "\t\t<style>\n" + includeText("./pc.edit.gtsheet.css") + 
+		"\n\t\t</style>\n" + includeText("./pc.edit.gtsheet.mustache");
 
-		var level = 1;
-		var xp = 0;
-
-		while (cur >= 0)
-		{
-			xp += level * 1000;
-			cur -= (level++) * 1000;
-		}
-		return xp.toString();
-	}};
-
-	var template = "\t\t<style>\n" + includeText("./pc.view.gtsheet.css") + 
-		"\n\t\t</style>\n" + includeText("./pc.view.gtsheet.mustache");
-
-	return generateStaticHTML(template, data, ["dice","widgets"]);
+	return generateStaticHTML(template, data, ["widgets", "dynamic"]);
 }
 
 module.exports.generateHTML = generateHTML;

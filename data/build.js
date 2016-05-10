@@ -10,7 +10,8 @@ b.uglify = false;
 
 // needs browserify
 b.browserify = [
-	"Core/displaychar.js"
+	"Core/displaychar.js",
+	"Core/dynamic.js"
 ];
 
 // Build packages

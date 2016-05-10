@@ -724,7 +724,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../data/Core\nzip -FS -r ../Core.pack *\ncd ../GSL40\nzip -FS -r ../GSL40.pack *\ncd ../WOD20\nzip -FS -r ../WOD20.pack *\ncd ../OGL35\nzip -FS -r ../OGL35.pack *\ncd ../HEX10\nzip -FS -r ../HEX10.pack *\ncd ../SVG10\nzip -FS -r ../SVG10.pack *";
+			shellScript = "cd ../data\nnode build\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

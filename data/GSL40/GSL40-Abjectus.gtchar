@@ -171,134 +171,158 @@
 		<item>
 			<name>Melee Basic Attack</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Battlecrazed Battleaxe +1: Strength vs. AC, Damage: 1d10+6.\nBattleaxe: Strength vs. AC, Damage: 1d10+5.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Ranged Basic Attack</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Crushing Surge</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Battlecrazed Battleaxe +1: Strength vs. AC, Damage: 1d10+6.\nBattleaxe: Strength vs. AC, Damage: 1d10+5.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Combat Challenge</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type></action-type>
+			<usetype>AtWill</usetype>
+			<actiontype></actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Brash Strike</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Battlecrazed Battleaxe +1: Strength vs. AC, Damage: 1d10+8.\nBattleaxe: Strength vs. AC, Damage: 1d10+7.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Sure Strike</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Battlecrazed Battleaxe +1: Strength vs. AC, Damage: 1d10+1.\nBattleaxe: Strength vs. AC, Damage: 1d10.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Bell Ringer</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Battlecrazed Battleaxe +1: Strength vs. Fortitude, Damage: 0+2.\nBattleaxe: Strength vs. Fortitude, Damage: 0+2.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Get Over Here</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Move</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Move</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Dance of Steel</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Battlecrazed Battleaxe +1: Strength vs. AC, Damage: 2d10+6.\nBattleaxe: Strength vs. AC, Damage: 2d10+5.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Second Wind</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Action Point</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Free</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Free</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Knee Breaker</name>
 			<keywords></keywords>
-			<use-type>Daily</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Daily</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Battlecrazed Battleaxe +1: Strength vs. AC, Damage: 2d10+8.\nBattleaxe: Strength vs. AC, Damage: 2d10+7.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 	</Powers>
 	<MagicItems>

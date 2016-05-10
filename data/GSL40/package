@@ -11,6 +11,8 @@
 		</array>
 		<string>GSL40/GSL40.gtsystem</string>
 		<string>GSL40/pc.view.gtsheet</string>
+		<string>GSL40/pc.edit.gtsheet</string>
+		<string>GSL40/pc.print.gtsheet</string>
 		<string>Characters/GSL40-Abjectus.gtchar</string>
 		<string>Characters/GSL40-Kirana.gtchar</string>
 		<string>Characters/GSL40-Hammerthorn.gtchar</string>

@@ -13,15 +13,20 @@
 #import "DismissSegue.h"
 #import "Token.h"
 #import "DiceView.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 
 @interface CharacterViewController ()
 {
 	Character *_character;
+	ContentObjectAction _currentAction;
 	BOOL _loaded;
 	NSString *_cachedRollNotation;
 }
 
 @end
+
+#define NEW_TOKEN_HANDLER @"gamerkit.char.requestNewToken"
+#define SAVE_HANDLER @"gamerkit.char.requestSave"
 
 @implementation CharacterViewController
 
@@ -30,15 +35,30 @@
 	
 	if (_content == nil)
 	{
-		_content = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44)];
+		WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+		config.userContentController = [[WKUserContentController alloc] init];
+		
+		_content = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44) configuration:config];
 		[self.view addSubview:_content];
+		
+		[config.userContentController addScriptMessageHandler:self name:NEW_TOKEN_HANDLER];
+		[config.userContentController addScriptMessageHandler:self name:SAVE_HANDLER];
+		
+		if (_character)
+		{ [self displayCharacter:_character withAction:_currentAction]; }
 	}
 	
 	_loaded = YES;
-	
-	if (_character)
-	{ [self setContentObject:_character]; }
-	
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	if (_content)
+	{
+		[_content.configuration.userContentController removeScriptMessageHandlerForName:NEW_TOKEN_HANDLER];
+		[_content.configuration.userContentController removeScriptMessageHandlerForName:SAVE_HANDLER];
+		_content = nil;
+	}
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -56,24 +76,38 @@
 	{
 		[super setContentObject:contentObject];
 		_character = (Character*)contentObject;
-		if (_loaded)
+	}
+}
+
+- (void)displayCharacter:(Character *)character withAction:(ContentObjectAction)action
+{
+	[self setContentObject:character];
+	_currentAction = action;
+
+	if (_content)
+	{
+		if (_toggleButton)
 		{
-			ContentTransformResult *result = [_character applyTransformForAction:ContentObjectActionWebView];
-			if (result.succeeded)
+			if (_currentAction == ContentObjectActionWebView)
 			{
-				NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-				NSString *docsPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Core"];
-				NSString *tempFile = [docsPath stringByAppendingPathComponent:@".GTCHARTEMP.html"];
-				
-				[result.html writeToFile:tempFile atomically:YES encoding:NSUTF8StringEncoding error:nil];
-				
-				[self.content loadFileURL:[NSURL fileURLWithPath:tempFile] allowingReadAccessToURL:[NSURL fileURLWithPath:docsPath]];
-				
-				//NSLog(@"%@", html);
-				//NSURL *baseURL = [[ContentManager contentManager] baseURLForDisplayOfCharacter:_character];
-				//NSLog(@"BASE URL: %@", [baseURL absoluteString]);
-				//[self.content loadHTMLString:result.html baseURL:baseURL];
+				[_toggleButton setTitle:@"Play"];
 			}
+			else
+			{
+				[_toggleButton setTitle:@"Edit"];
+			}
+		}
+		
+		ContentTransformResult *result = [_character applyTransformForAction:action];
+		if (result.succeeded)
+		{
+			NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+			NSString *docsPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Core"];
+			NSString *tempFile = [docsPath stringByAppendingPathComponent:@".GTCHARTEMP.html"];
+			
+			[result.html writeToFile:tempFile atomically:YES encoding:NSUTF8StringEncoding error:nil];
+			
+			[self.content loadFileURL:[NSURL fileURLWithPath:tempFile] allowingReadAccessToURL:[NSURL fileURLWithPath:docsPath]];
 		}
 	}
 }
@@ -108,29 +142,6 @@
 	return params;
 }
 
--(void)contextIsRequestingNewToken:(ContentJSContext *)context
-{
-	[TokenListController selectTokenForDelegate:self];
-}
-
-- (IBAction)roll:(id)sender
-{
-	if (_cachedRollNotation)
-	{
-		[self displayRollResult:[DiceView doNotationRoll:_cachedRollNotation]];
-	}
-}
-
-- (void)displayRollResult:(NSString*)result
-{
-	UIAlertController *av = [UIAlertController alertControllerWithTitle:@"DiceRoll" message:[NSString stringWithFormat:@"Result: %@", result] preferredStyle:UIAlertControllerStyleAlert];
-	UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-		[av dismissViewControllerAnimated:YES completion:nil];
-	}];
-	[av addAction:ok];
-	[self presentViewController:av animated:YES completion:nil];
-}
-
 - (void)tokenWasSelected:(Token *)token
 {
 	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Change Token" message:@"Are you sure you want to change this character's token?" preferredStyle:UIAlertControllerStyleAlert];
@@ -138,9 +149,27 @@
 		
 	}]];
 	[alert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-		[[ContentJSContext contentContext] provideToken:token];
+		NSData *data = UIImageJPEGRepresentation(token.image, 0.85f);
+		NSString *base64data = [data base64EncodedStringWithOptions:NSDataBase64Encoding76CharacterLineLength | NSDataBase64EncodingEndLineWithLineFeed];
+		[_content evaluateJavaScript:[NSString stringWithFormat:@"updateExpectedToken(\"%@\");", base64data] completionHandler:nil];
 	}]];
 	[self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)toggleEdit:(id)sender
+{
+	if (_currentAction == ContentObjectActionWebView)
+	{
+		[self displayCharacter:_character withAction:ContentObjectActionReadOnlyWebView];
+	}
+	else
+	{
+		[self displayCharacter:_character withAction:ContentObjectActionWebView];
+	}
+}
+
+- (void)characterActions:(id)sender
+{
 }
 
 - (void)saveCharacter
@@ -160,5 +189,16 @@
 	}
 }
 
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+	if ([message.name compare:NEW_TOKEN_HANDLER] == NSOrderedSame)
+	{
+		[TokenListController selectTokenForDelegate:self];
+	}
+	else if ([message.name compare:SAVE_HANDLER] == NSOrderedSame)
+	{
+#warning <<AE>> Implement save character
+	}
+}
 
 @end

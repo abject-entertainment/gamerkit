@@ -13,6 +13,11 @@ global.loadSheetModule = function loadSheetScript(systemName, sheetFile)
 	return fs.readFileSync(path.join(__dirname, "..", systemName, sheetFile + '.js'), 'utf8');
 }
 
+global.getPreferredLanguages = function getPreferredLanguages()
+{
+	return ["en"];
+}
+
 // needed to display character in test case (not needed after package build)
 var curRoot = "";
 global.includeObject = function includeObject(file)

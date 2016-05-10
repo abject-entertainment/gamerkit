@@ -167,112 +167,132 @@
 		<item>
 			<name>Melee Basic Attack</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Implement, Staff: Strength vs. AC, Damage: 1d8+1.\nStaff of the War Mage +1: Strength vs. AC, Damage: 1d8+2.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Ranged Basic Attack</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Chaos Bolt</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Implement, Staff: Charisma vs. Will, Damage: 1d10+7.\nStaff of the War Mage +1: Charisma vs. Will, Damage: 1d10+8.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Burning Spray</name>
 			<keywords></keywords>
-			<use-type>AtWill</use-type>
-			<action-type>Standard</action-type>
+			<usetype>AtWill</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Implement, Staff: Charisma vs. Reflex, Damage: 1d8+7.\nStaff of the War Mage +1: Charisma vs. Reflex, Damage: 1d8+8.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Furious Assault</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Free</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Free</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Bedeviling Burst</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Implement, Staff: Charisma vs. Will, Damage: 1d10+7.\nStaff of the War Mage +1: Charisma vs. Will, Damage: 1d10+8.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Unseen Aid</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Minor</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Minor</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Second Wind</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Action Point</name>
 			<keywords></keywords>
-			<use-type>Encounter</use-type>
-			<action-type>Free</action-type>
+			<usetype>Encounter</usetype>
+			<actiontype>Free</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect></effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 		<item>
 			<name>Dazzling Ray</name>
 			<keywords></keywords>
-			<use-type>Daily</use-type>
-			<action-type>Standard</action-type>
+			<usetype>Daily</usetype>
+			<actiontype>Standard</actiontype>
 			<category>Utility</category>
 			<target></target>
 			<range></range>
 			<effect>Implement, Staff: Charisma vs. Will, Damage: 6d6+7.\nStaff of the War Mage +1: Charisma vs. Will, Damage: 6d6+8.\n</effect>
 			<used>false</used>
+			<attackbonus></attackbonus>
+			<damageroll></damageroll>
 		</item>
 	</Powers>
 	<MagicItems>

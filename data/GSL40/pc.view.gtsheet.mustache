@@ -1,0 +1,313 @@
+
+<script type="text/javascript">
+	function characterSheetReady()
+	{
+		function basicRoll(bonus)
+		{ return "1d20+" + parseInt(bonus); }
+		addNamedRolls([
+			{ names: ["{{strings.Str}}", "Str"], notation: basicRoll.bind(undefined, "{{#fn_ability_bonus}}{{character.Str}}{{/fn_ability_bonus}}") },
+			{ names: ["{{strings.Dex}}", "Dex"], notation: basicRoll.bind(undefined, "{{#fn_ability_bonus}}{{character.Dex}}{{/fn_ability_bonus}}") },
+			{ names: ["{{strings.Con}}", "Con"], notation: basicRoll.bind(undefined, "{{#fn_ability_bonus}}{{character.Con}}{{/fn_ability_bonus}}") },
+			{ names: ["{{strings.Int}}", "Int"], notation: basicRoll.bind(undefined, "{{#fn_ability_bonus}}{{character.Int}}{{/fn_ability_bonus}}") },
+			{ names: ["{{strings.Wis}}", "Wis"], notation: basicRoll.bind(undefined, "{{#fn_ability_bonus}}{{character.Wis}}{{/fn_ability_bonus}}") },
+			{ names: ["{{strings.Cha}}", "Cha"], notation: basicRoll.bind(undefined, "{{#fn_ability_bonus}}{{character.Cha}}{{/fn_ability_bonus}}") },
+		]);
+	}
+
+	var currentCard = null;
+	var currentCardPlace = null;
+	function showPowerCard(power) 
+	{
+		var card = power.nextElementSibling;
+		document.body.appendChild(card);
+		card.style.display='block';
+		currentCardPlace = power;
+		currentCard = card;
+	}
+
+	function hidePowerCard(power, event)
+	{
+		if (event.target == currentCard)
+		{
+			currentCard.style.display="none";
+			currentCardPlace.parentNode.insertBefore(currentCard, currentCardPlace.nextSibling);
+			currentCard = currentCardParent = null;
+		}
+	}
+</script>
+
+{{#character}}
+<div id="header">
+	<img data-widget="token" id="Token" src="data:image/jpeg;base64,{{Token}}" />
+	<div class="attribute" id="Name">
+		<div class="label">{{strings.Name}}</div>
+		<div class="value">{{Name}}</div>
+	</div>
+	<!-- vitals -->
+	<div data-widget="pages" data-min-width="200" id="vitals">
+		<div class="column">
+			<div class="attribute" id="Level">
+				<div class="label">{{strings.Level}}: </div>
+				<div class="value">{{Level}}</div>
+			</div>
+			<div class="attribute" id="Class">
+				<div class="label">{{strings.Class}}: </div>
+				<div class="value">{{Class}}</div>
+			</div>
+			<div class="attribute" id="Race">
+				<div class="label">{{strings.Race}}: </div>
+				<div class="value">{{Race}}</div>
+			</div>
+			<div class="attribute" id="Align">
+				<div class="label">{{strings.Align}}: </div>
+				<div class="value">{{Align}}</div>
+			</div>
+			<div class="attribute" id="XP">
+				<div class="label">{{strings.XP}}: </div>
+				<div class="value">{{XP}}</div>
+				<div class="extra">/ {{#fn_next_level}}{{XP}}{{/fn_next_level}}</div>
+			</div>
+		</div>
+
+		<div class="column">
+			<div class="attribute" id="Size">
+				<div class="label">{{strings.Size}}: </div>
+				<div class="value">{{Size}}</div>
+			</div>
+			<div class="attribute" id="Age">
+				<div class="label">{{strings.Age}}: </div>
+				<div class="value">{{Age}}</div>
+			</div>
+			<div class="attribute" id="Height">
+				<div class="label">{{strings.Height}}: </div>
+				<div class="value">{{Height}}</div>
+			</div>
+			<div class="attribute" id="Weight">
+				<div class="label">{{strings.Weight}}: </div>
+				<div class="value">{{Weight}}</div>
+			</div>
+			<div class="attribute" id="Gender">
+				<div class="label">{{strings.Gender}}: </div>
+				<div class="value">{{Gender}}</div>
+			</div>
+		</div>
+
+		<div class="column">
+			<div class="attribute" id="Player">
+				<div class="label">{{strings.Player}}</div>
+				<div class="value">{{Player}}</div>
+			</div>
+			<div class="attribute" id="Paragon">
+				<div class="label">{{strings.Paragon}}: </div>
+				<div class="value">{{Paragon}}</div>
+			</div>
+			<div class="attribute" id="Epic">
+				<div class="label">{{strings.Epic}}: </div>
+				<div class="value">{{Epic}}</div>
+			</div>
+			<div class="attribute" id="Deity">
+				<div class="label">{{strings.Deity}}: </div>
+				<div class="value">{{Deity}}</div>
+			</div>
+			<div class="attribute" id="Company">
+				<div class="label">{{strings.Company}}: </div>
+				<div class="value">{{Company}}</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="column-container" data-widget="pages" data-min-width="240">
+	<div class="block column">
+		<div class="block" id="abilities">
+			<div class="block-title">{{strings.abilities}}</div>
+			{{#fn_ability_scores}}Str{{/fn_ability_scores}}
+			{{#fn_ability_scores}}Dex{{/fn_ability_scores}}
+			{{#fn_ability_scores}}Con{{/fn_ability_scores}}
+			{{#fn_ability_scores}}Int{{/fn_ability_scores}}
+			{{#fn_ability_scores}}Wis{{/fn_ability_scores}}
+			{{#fn_ability_scores}}Cha{{/fn_ability_scores}}
+		</div>
+	</div>
+	<div class="block column">
+		<div class="block" id="combat">
+			<div class="block-title">{{strings.combat}}</div>
+
+			<div class="block ability" id="Init">
+				<div class="ability-name">{{strings.Init}}</div>
+				<div class="ability-score">{{Init}}</div>
+				<div class="ability-help">{{strings.Init_help}}</div>
+			</div>
+			<div class="block ability" id="Speed">
+				<div class="ability-name">{{strings.Speed}}</div>
+				<div class="ability-score">{{Speed}}</div>
+				<div class="ability-help">{{strings.Speed_help}}</div>
+			</div>
+
+			<div class="block" id="defenses">
+				<div class="block-title">{{strings.defenses}}</div>
+				<div class="block ability" id="AC">
+					<div class="ability-name">{{strings.AC}}</div>
+					<div class="ability-score">{{AC}}</div>
+					<div class="ability-help">{{strings.AC_help}}</div>
+				</div>
+				<div class="block ability" id="Fort">
+					<div class="ability-name">{{strings.Fort}}</div>
+					<div class="ability-score">{{Fort}}</div>
+					<div class="ability-help">{{strings.Fort_help}}</div>
+				</div>
+				<div class="block ability" id="Ref">
+					<div class="ability-name">{{strings.Ref}}</div>
+					<div class="ability-score">{{Ref}}</div>
+					<div class="ability-help">{{strings.Ref_help}}</div>
+				</div>
+				<div class="block ability" id="Will">
+					<div class="ability-name">{{strings.Will}}</div>
+					<div class="ability-score">{{Will}}</div>
+					<div class="ability-help">{{strings.Will_help}}</div>
+				</div>
+			</div>
+
+			<div class="block ability" id="HP">
+				<div class="ability-name">{{strings.MaxHP}}</div>
+				<div class="ability-score" id="MaxHP">{{MaxHP}}</div>
+				<div class="ability-bonus-label">{{strings.bloodied}}</div>
+				<div class="ability-bonus">{{#fn_half}}{{MaxHP}}{{/fn_half}}</div>
+				<div class="ability-help">{{strings.HP_help}}</div>
+			</div>
+			<div class="attribute">
+				<div class="label">{{strings.SurgeValue}}</div>
+				<div class="value">{{#fn_quarter}}{{MaxHP}}{{/fn_quarter}}</div>
+			</div>
+			<div class="attribute" id="Surges">
+				<div class="label">{{strings.Surges}}</div>
+				<div class="value">{{Surges}}</div>
+				<div class="help">{{strings.Surge_help}}</div>
+			</div>
+			<div class="block" id="temps">
+				<div class="attribute" id="CurHP">
+					<div class="label">{{strings.CurHP}}</div>
+					<div class="value" data-widget="spinner" data-max="{{MaxHP}}" data-value="{{#CurHP}}{{CurHP}}{{/CurHP}}{{^CurHP}}{{MaxHP}}{{/CurHP}}">&nbsp;</div>
+				</div>
+				<div class="attribute" id="TempHP">
+					<div class="label">{{strings.TempHP}}</div>
+					<div class="value" data-widget="spinner" data-value="{{#TempHP}}{{TempHP}}{{/TempHP}}{{^TempHP}}0{{/TempHP}}">&nbsp;</div>
+				</div>
+				<div class="attribute" id="CurSurges">
+					<div class="label">{{strings.CurSurges}}</div>
+					<div class="value" data-widget="spinner" data-max="{{Surges}}" data-value="{{#CurSurges}}{{CurSurges}}{{/CurSurges}}{{^CurSurges}}{{Surges}}{{/CurSurges}}">&nbsp;</div>
+				</div>
+			</div>
+			<div class="attribute" id="DeathSave">
+				<div class="label">{{strings.DeathSave}}</div>
+				<div class="widget" data-widget="pips" data-value="{{#DeathSave}}{{DeathSave}}{{/DeathSave}}{{^DeathSave}}0{{/DeathSave}}" data-max="3"></div>
+			</div>
+			<div class="attribute" id="SaveMods">
+				<div class="label">{{strings.SaveMods}}</div>
+				<div class="value">{{SaveMods}}</div>
+			</div>
+			<div class="attribute" id="Resist">
+				<div class="label">{{strings.Resist}}</div>
+				<div class="value">{{Resist}}</div>
+			</div>
+			<div class="attribute" id="Conditions">
+				<div class="label">{{strings.Conditions}}</div>
+				<div class="value">{{Conditions}}</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="block column">
+		<div class="block" id="features">
+			<div class="block-title">{{strings.powers_features}}</div>
+			<div class="attribute list" id="Powers">
+				<div class="block-title">{{strings.Powers}}</div>
+				{{#Powers}}
+				<div class="item {{use-type}}" onclick="javascript:showPowerCard(this);"><input type="checkbox" {{#used}}checked{{/used}} onclick="javascript:event.stopPropagation();" />{{name}}</div>
+				<div class="power-card" onclick="javascript:hidePowerCard(this, event);">
+					<div class="card {{use-type}}">
+						<div class="power-title">
+							<div class="power-name">{{name}}</div>
+							<div class="power-category">{{category}}</div>
+						</div>
+						<div class="attribute power-keywords">{{#fn_string}}UseType_{{use-type}}{{/fn_string}}{{#keywords}} &#x25c6; {{keywords}}{{/keywords}}</div>
+						<div class="attribute power-action-type">
+							{{#fn_string}}ActionType_{{action-type}}{{/fn_string}}
+						</div>
+						<div class="attribute power-range">{{range}}</div>
+						<div class="attribute power-target">
+							<div class="label">{{strings.power_target}}:</div>
+							<div class="value">{{target}}</div>
+						</div>
+						<div class="attribute power-attack-bonus">
+							<div class="label">{{strings.power_attack_bonus}}:</div>
+							<div class="value">{{attack-bonus}} {{strings.versus}} {{damage-roll}}</div>
+						</div>
+						<div class="attribute power-effect">
+							<div class="label">{{strings.power_effect}}:</div>
+							<div class="value" data-has-dice-rolls>{{effect}}</div>
+						</div>
+						<div class="card-done">{{strings.done}}</div>
+					</div>
+				</div>
+				{{/Powers}}
+				<div class="attribute" id="MIUsed">
+					<input class="value" type="checkbox" {{#MIUsed}}checked{{/MIUsed}} />
+					<div class="label">{{strings.MIUsed}}</div>
+				</div>
+			</div>
+			<div class="attribute list">
+				<div class="block-title">{{strings.feats_rituals}}</div>
+				{{#Feats}}<div class="item">{{strings.feat_item}} {{.}}</div>{{/Feats}}
+				{{#Rituals}}<div class="item">{{strings.ritual_item}} {{.}}</div>{{/Rituals}}
+			</div>
+			<div class="attribute list">
+				<div class="block-title">{{strings.features}}</div>
+				{{#RaceFeatures}}<div class="item">{{Race}}: {{.}}</div>{{/RaceFeatures}}
+				{{#ClassFeatures}}<div class="item">{{Class}}: {{.}}</div>{{/ClassFeatures}}
+				{{#ParagonFeatures}}<div class="item">{{Paragon}}: {{.}}</div>{{/ParagonFeatures}}
+				{{#EpicFeatures}}<div class="item">{{Epic}}: {{.}}</div>{{/EpicFeatures}}
+			</div>
+			<div class="attribute list" id="Languages">
+				<div class="block-title">{{strings.Languages}}</div>
+				<div class="item">{{#fn_list}}Languages{{/fn_list}}</div>
+			</div>
+		</div>
+	</div>
+	<div class="block column">
+		<div class="block" id="misc">
+			<div class="block-title">{{strings.details}}</div>
+			<div class="attribute list">
+				<div class="block-title">{{strings.equip_magic}}</div>
+				{{#Equipment}}<div class="item">{{.}}</div>{{/Equipment}}
+				{{#MagicItems}}<div class="item">{{.}}</div>{{/MagicItems}}
+			</div>
+			<div class="attribute" id="Allies">
+				<div class="label">{{strings.Allies}}</div>
+				<div class="value">{{Allies}}</div>
+			</div>
+			<div class="attribute" id="Personality">
+				<div class="label">{{strings.Personality}}</div>
+				<div class="value">{{Personality}}</div>
+			</div>
+			<div class="attribute" id="Appearance">
+				<div class="label">{{strings.Appearance}}</div>
+				<div class="value">{{Appearance}}</div>
+			</div>
+			<div class="attribute" id="Background">
+				<div class="label">{{strings.Background}}</div>
+				<div class="value">{{Background}}</div>
+			</div>
+			<div class="attribute" id="Wealth">
+				<div class="label">{{strings.Wealth}}</div>
+				<div class="value">{{Wealth}}</div>
+			</div>
+			<div class="attribute" id="Notes">
+				<div class="label">{{strings.Notes}}</div>
+				<div class="value">{{Notes}}</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{/character}}

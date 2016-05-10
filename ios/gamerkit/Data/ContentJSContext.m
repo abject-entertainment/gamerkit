@@ -50,8 +50,6 @@
 		}];
 		NSString *contentScript = [docs stringByAppendingPathComponent:@"Core/displaychar.js"];
 		
-		__weak ContentJSContext *this = self;
-		
 		// set up globals for file access
 		_js[@"loadSystemXML"] = ^(NSString *systemName)
 		{
@@ -67,12 +65,9 @@
 			return contents;
 		};
 		
-		_js[@"requestNewToken"] = ^()
+		_js[@"getPreferredLanguages"] = ^()
 		{
-			if (this.tokenRequestDelegate != nil)
-			{
-				[this.tokenRequestDelegate contextIsRequestingNewToken:this];
-			}
+			return [NSLocale preferredLanguages];
 		};
 		
 		[_js evaluateScript:@"var window=this;"];
@@ -92,7 +87,7 @@
 	
 	NSString *actionString = @[[NSNull null],		// ContentObjectActionDefault
 							   [NSNull null],		// ContentObjectActionPreview
-							   @"view",				// ContentObjectActionWebView
+							   @"edit",				// ContentObjectActionWebView
 							   @"view",				// ContentObjectActionReadOnlyWebView
 							   [NSNull null],		// ContentObjectActionShare
 							   @"print",			// ContentObjectActionPrint
@@ -118,14 +113,6 @@
 				};
 	}
 	return nil;
-}
-
-- (void)provideToken:(Token *)token
-{
-	NSData *data = UIImageJPEGRepresentation(token.image, 0.85f);
-	NSString *base64data = [data base64EncodedStringWithOptions:NSDataBase64Encoding76CharacterLineLength | NSDataBase64EncodingEndLineWithLineFeed];
-	
-	[_js[@"updateExpectedToken"] callWithArguments:@[base64data]];
 }
 
 @end

@@ -1,0 +1,328 @@
+
+<script type="text/javascript">
+	function characterSheetReady()
+	{}
+
+	var currentCard = null;
+	var currentCardPlace = null;
+	function showPowerCard(power) 
+	{
+		var card = power.nextElementSibling;
+		document.body.appendChild(card);
+		card.style.display='block';
+		currentCardPlace = power;
+		currentCard = card;
+	}
+
+	function hidePowerCard(power, event)
+	{
+		if (event.target == currentCard)
+		{
+			currentCard.style.display="none";
+			currentCardPlace.parentNode.insertBefore(currentCard, currentCardPlace.nextSibling);
+			currentCard = currentCardParent = null;
+		}
+	}
+</script>
+
+{{#character}}
+<div id="header">
+	<img data-widget="token" id="Token" src="data:image/jpeg;base64,{{Token}}" />
+	<div class="attribute" id="Name">
+		<div class="label">{{strings.Name}}</div>
+		<div class="value" data-widget="field" data-bind="divtext: Name"></div>
+	</div>
+	<!-- vitals -->
+	<div data-widget="pages" data-min-width="200" id="vitals">
+		<div class="column">
+			<div class="attribute" id="Level">
+				<div class="label">{{strings.Level}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Level"></div>
+			</div>
+			<div class="attribute" id="Class">
+				<div class="label">{{strings.Class}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Class"></div>
+			</div>
+			<div class="attribute" id="Race">
+				<div class="label">{{strings.Race}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Race"></div>
+			</div>
+			<div class="attribute" id="Align">
+				<div class="label">{{strings.Align}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Align"></div>
+			</div>
+			<div class="attribute" id="XP">
+				<div class="label">{{strings.XP}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: XP"></div>
+				<div class="extra">/ {{next_level XP}}</div>
+			</div>
+		</div>
+
+		<div class="column">
+			<div class="attribute" id="Size">
+				<div class="label">{{strings.Size}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Size"></div>
+			</div>
+			<div class="attribute" id="Age">
+				<div class="label">{{strings.Age}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Age"></div>
+			</div>
+			<div class="attribute" id="Height">
+				<div class="label">{{strings.Height}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Height"></div>
+			</div>
+			<div class="attribute" id="Weight">
+				<div class="label">{{strings.Weight}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Weight"></div>
+			</div>
+			<div class="attribute" id="Gender">
+				<div class="label">{{strings.Gender}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Gender"></div>
+			</div>
+		</div>
+
+		<div class="column">
+			<div class="attribute" id="Player">
+				<div class="label">{{strings.Player}}</div>
+				<div class="value" data-widget="field" data-bind="divtext: Player"></div>
+			</div>
+			<div class="attribute" id="Paragon">
+				<div class="label">{{strings.Paragon}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Paragon"></div>
+			</div>
+			<div class="attribute" id="Epic">
+				<div class="label">{{strings.Epic}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Epic"></div>
+			</div>
+			<div class="attribute" id="Deity">
+				<div class="label">{{strings.Deity}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Deity"></div>
+			</div>
+			<div class="attribute" id="Company">
+				<div class="label">{{strings.Company}}: </div>
+				<div class="value" data-widget="field" data-bind="divtext: Company"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="column-container" data-widget="pages" data-min-width="240">
+	<div class="block column">
+		<div class="block" id="abilities">
+			<div class="block-title">{{strings.abilities}}</div>
+			<div class="block ability"><div class="ability-name" id="Str_label">{{strings.Str}}</div>
+			<div class="ability-score" id="Str" data-widget="field" data-bind="divtext: Str">{{Str}}</div>
+			<div class="ability-misc">{{strings.ability_misc}}</div>
+			<div class="ability-bonus calculated" id="Str_bonus" data-bind="text: Math.floor(Str()/2)-5">{{#fn_ability_bonus}}{{Str}}{{/fn_ability_bonus}}</div>
+			<div class="ability-help">{{strings.Str_help}}</div>
+
+			<div data-bind="foreach: Skills">
+				<!-- ko if: attribute() == 'Str' -->
+				<div class="skill item">
+					<div class="skill-name" data-widget="field" data-bind="divtext: name"></div>
+					<div class="skill-trained"><input type="checkbox" data-bind="value: trained" /> {{strings.Skills_trained}}</div>
+					<div class="skill-stats" data-widget="field" data-bind="bonus"></div>
+				</div>
+				<!-- /ko -->
+			</div>
+		</div>
+	</div>
+	<div class="block column">
+		<div class="block" id="combat">
+			<div class="block-title">{{strings.combat}}</div>
+
+			<div class="block ability" id="Init">
+				<div class="ability-name">{{strings.Init}}</div>
+				<div class="ability-score" data-widget="field" data-bind="divtext: Init"></div>
+				<div class="ability-help">{{strings.Init_help}}</div>
+			</div>
+			<div class="block ability" id="Speed">
+				<div class="ability-name">{{strings.Speed}}</div>
+				<div class="ability-score" data-widget="field" data-bind="divtext: Speed"></div>
+				<div class="ability-help">{{strings.Speed_help}}</div>
+			</div>
+
+			<div class="block" id="defenses">
+				<div class="block-title">{{strings.defenses}}</div>
+				<div class="block ability" id="AC">
+					<div class="ability-name">{{strings.AC}}</div>
+					<div class="ability-score" data-widget="field" data-bind="divtext: AC"></div>
+					<div class="ability-help">{{strings.AC_help}}</div>
+				</div>
+				<div class="block ability" id="Fort">
+					<div class="ability-name">{{strings.Fort}}</div>
+					<div class="ability-score" data-widget="field" data-bind="divtext: Fort"></div>
+					<div class="ability-help">{{strings.Fort_help}}</div>
+				</div>
+				<div class="block ability" id="Ref">
+					<div class="ability-name">{{strings.Ref}}</div>
+					<div class="ability-score" data-widget="field" data-bind="divtext: Ref"></div>
+					<div class="ability-help">{{strings.Ref_help}}</div>
+				</div>
+				<div class="block ability" id="Will">
+					<div class="ability-name">{{strings.Will}}</div>
+					<div class="ability-score" data-widget="field" data-bind="divtext: Will"></div>
+					<div class="ability-help">{{strings.Will_help}}</div>
+				</div>
+			</div>
+
+			<div class="block ability" id="HP">
+				<div class="ability-name">{{strings.MaxHP}}</div>
+				<div class="ability-score" id="MaxHP" data-widget="field" data-bind="divtext: MaxHP"></div>
+				<div class="ability-bonus-label">{{strings.bloodied}}</div>
+				<div class="ability-bonus" data-bind="text: Math.floor(MaxHP() / 2)"></div>
+				<div class="ability-help">{{strings.HP_help}}</div>
+			</div>
+			<div class="attribute">
+				<div class="label">{{strings.SurgeValue}}</div>
+				<div class="value" data-bind="text: Math.floor(MaxHP() / 4)"> </div>
+			</div>
+			<div class="attribute" id="Surges">
+				<div class="label">{{strings.Surges}}</div>
+				<div class="value" data-widget="field" data-bind="divtext: Surges"></div>
+				<div class="help">{{strings.Surge_help}}</div>
+			</div>
+			<div class="block" id="temps">
+				<div class="attribute" id="CurHP">
+					<div class="label">{{strings.CurHP}}</div>
+					<div class="value" data-widget="field" data-bind="divtext: CurHP"></div>
+				</div>
+				<div class="attribute" id="TempHP">
+					<div class="label">{{strings.TempHP}}</div>
+					<div class="value" data-widget="field" data-bind="divtext: TempHP"></div>
+				</div>
+				<div class="attribute" id="CurSurges">
+					<div class="label">{{strings.CurSurges}}</div>
+					<div class="value" data-widget="field" data-bind="divtext: CurSurges"></div>
+				</div>
+			</div>
+			<div class="attribute" id="DeathSave">
+				<div class="label">{{strings.DeathSave}}</div>
+				<div class="widget" data-widget="pips" data-value="{{#DeathSave}}{{DeathSave}}{{/DeathSave}}{{^DeathSave}}0{{/DeathSave}}" data-max="3" data-bind="attr: { 'data-value': DeathSave }"></div>
+			</div>
+			<div class="attribute" id="SaveMods">
+				<div class="label">{{strings.SaveMods}}</div>
+				<div class="value" data-widget="field" data-bind="divtext: SaveMods"></div>
+			</div>
+			<div class="attribute" id="Resist">
+				<div class="label">{{strings.Resist}}</div>
+				<div class="value" data-widget="field" data-bind="divtext: Resist"></div>
+			</div>
+			<div class="attribute" id="Conditions">
+				<div class="label">{{strings.Conditions}}</div>
+				<div class="value" data-widget="field" data-bind="divtext: Conditions"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="block column">
+		<div class="block" id="features">
+			<div class="block-title">{{strings.features}}</div>
+			<div class="attribute list" id="Powers">
+				<div class="block-title">{{strings.Powers}}</div>
+
+				<div class="block" data-bind="foreach: Powers">
+					<div class="item" onclick="javascript:showPowerCard(this);" data-bind="css:usetype"><input type="checkbox" data-bind="checked:used" onclick="javascript:event.stopPropagation();" /><div data-bind="text: name"></div></div>
+					<div class="power-card" onclick="javascript:hidePowerCard(this, event);">
+						<div class="card" data-bind="css:usetype">
+							<div class="power-title">
+								<div class="power-name" data-bind="divtext: name"></div>
+								<div class="power-category" data-bind="divtext: category"></div>
+							</div>
+							<div class="attribute power-keywords">
+								<select data-bind="value: usetype">
+									<option value="AtWill">{{strings.UseType_AtWill}}</option>
+									<option value="Encounter">{{strings.UseType_Encounter}}</option>
+									<option value="Daily">{{strings.UseType_Daily}}</option>
+									<option value="MagicItem">{{strings.UseType_MagicItem}}</option>
+								</select> &#x25c6; <div data-widget="field" data-bind="divtext: keywords"></div>
+							</div>
+							<div class="attribute power-action-type">
+								<select data-bind="value: actiontype">
+									<option value="None">{{strings.ActionType_None}}</option>
+									<option value="Standard">{{strings.ActionType_Standard}}</option>
+									<option value="Move">{{strings.ActionType_Move}}</option>
+									<option value="Minor">{{strings.ActionType_Minor}}</option>
+									<option value="Free">{{strings.ActionType_Free}}</option>
+									<option value="Interrupt">{{strings.ActionType_Interrupt}}</option>
+									<option value="Reaction">{{strings.ActionType_Reaction}}</option>
+								</select>
+							</div>
+							<div class="attribute power-range" data-widget="field" data-bind="divtext: range"></div>
+							<div class="attribute power-target">
+								<div class="label">{{strings.power_target}}:</div>
+								<div class="value" data-widget="field" data-bind="divtext: target"></div>
+							</div>
+							<div class="attribute power-attack-bonus">
+								<div class="label">{{strings.power_attack_bonus}}:</div>
+								<div class="bonus" data-widget="field" data-bind="divtext: attackbonus"></div> {{strings.versus}} <div class="damage" data-widget="field" data-bind="divtext: damageroll"></div>
+							</div>
+							<div class="attribute power-effect">
+								<div class="label">{{strings.power_effect}}:</div>
+								<div class="value" data-widget="field" data-bind="divtext: effect"></div>
+							</div>
+							<div class="card-done">{{strings.done}}</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="attribute" id="MIUsed">
+					<input class="value" type="checkbox" {{#MIUsed}}checked{{/MIUsed}} />
+					<div class="label">{{strings.MIUsed}}</div>
+				</div>
+			</div>
+			<div class="attribute list">
+				<div class="block-title">{{strings.feats_rituals}}</div>
+				{{#Feats}}<div class="item">{{strings.feat_item}} {{.}}</div>{{/Feats}}
+				{{#Rituals}}<div class="item">{{strings.ritual_item}} {{.}}</div>{{/Rituals}}
+			</div>
+			<div class="attribute list">
+				<div class="block-title">{{strings.features}}</div>
+				{{#RaceFeatures}}<div class="item">{{Race}} {{.}}</div>{{/RaceFeatures}}
+				{{#ClassFeatures}}<div class="item">{{Class}} {{.}}</div>{{/ClassFeatures}}
+				{{#ParagonFeatures}}<div class="item">{{Paragon}} {{.}}</div>{{/ParagonFeatures}}
+				{{#EpicFeatures}}<div class="item">{{Epic}} {{.}}</div>{{/EpicFeatures}}
+			</div>
+			<div class="attribute list" id="Languages">
+				<div class="block-title">{{strings.Languages}}</div>
+				<div class="item">{{#fn_list}}Languages{{/fn_list}}</div>
+			</div>
+		</div>
+	</div>
+	<div class="block column">
+		<div class="block" id="misc">
+			<div class="block-title">{{strings.details}}</div>
+			<div class="attribute list">
+				<div class="block-title">{{strings.equip_magic}}</div>
+				{{#Equipment}}<div class="item">{{.}}</div>{{/Equipment}}
+				{{#MagicItems}}<div class="item">{{.}}</div>{{/MagicItems}}
+			</div>
+			<div class="attribute" id="Allies">
+				<div class="label">{{strings.Allies}}</div>
+				<div class="value" data-widget="field" data-bind="divtext: Allies"></div>
+			</div>
+			<div class="attribute" id="Personality">
+				<div class="label">{{strings.Personality}}</div>
+				<div class="value" data-widget="field" data-bind="divtext: Personality"></div>
+			</div>
+			<div class="attribute" id="Appearance">
+				<div class="label">{{strings.Appearance}}</div>
+				<div class="value" data-widget="field" data-bind="divtext: Appearance"></div>
+			</div>
+			<div class="attribute" id="Background">
+				<div class="label">{{strings.Background}}</div>
+				<div class="value" data-widget="field" data-bind="divtext: Background"></div>
+			</div>
+			<div class="attribute" id="Wealth">
+				<div class="label">{{strings.Wealth}}</div>
+				<div class="value" data-widget="field" data-bind="divtext: Wealth"></div>
+			</div>
+			<div class="attribute" id="Notes">
+				<div class="label">{{strings.Notes}}</div>
+				<div class="value" data-widget="field" data-bind="divtext: Notes"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{/character}}

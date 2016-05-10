@@ -633,3 +633,22 @@ function rollDice(notation,formatting)
 	
 	Dice.displayResult(rolled, document.getElementById("dice_block"), formatting);
 }
+
+function init_dice()
+{
+	var rolls = document.body.querySelectorAll("[data-roll]");
+	Array.prototype.forEach.call(rolls, function setupRoll(node)
+	{
+		node.addEventListener('click', function clickRoll()
+		{
+			var notation = node.getAttribute('data-roll').replace("*", parseInt(node.innerHTML));
+			rollDice(notation);
+		});
+	});
+
+	rolls = document.body.querySelectorAll("[data-has-dice-rolls]");
+	Array.prototype.forEach.call(rolls, function anchorRolls(node)
+	{
+		node.innerHTML = addDiceRollAnchors(node.innerHTML);
+	});
+}
